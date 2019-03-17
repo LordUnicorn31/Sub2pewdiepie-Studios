@@ -4,12 +4,9 @@
 
 # Street fighter 2
 
-We are recreating the famous game Street Fighter 2
+We are recreating the famous game Street Fighter 2: The Wprld Warrior
 
-Sub to Pewdiepie to help fight T-series
-https://www.youtube.com/user/pewdiepie
-
-Lolis are LIT
+Click the Wiki window for more details!
 
 
 
