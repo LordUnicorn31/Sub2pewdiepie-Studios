@@ -6,10 +6,7 @@
 
 We are recreating the famous game Street Fighter 2
 
-Sub to Pewdiepie to help fight T-series
-https://www.youtube.com/user/pewdiepie
-
-Lolis are LIT
+Click the Wiki window for more details!
 
 
 
