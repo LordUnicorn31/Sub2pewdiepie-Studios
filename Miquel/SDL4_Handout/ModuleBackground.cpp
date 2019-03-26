@@ -79,7 +79,7 @@ update_status ModuleBackground::Update()
 		ship.y = shipYpos1;
 		shipmovement = 0;
 	}
-	App->render->Blit(graphics, 192, 79, &(girl.GetCurrentFrame()), 0.75f);
+	App->render->Blit(graphics, 192, 100, &(girl.GetCurrentFrame()), 0.75f);
 	// TODO 2: Draw the ship from the sprite sheet with some parallax effect
 	// TODO 3: Animate the girl on the ship (see the sprite sheet)
 	
