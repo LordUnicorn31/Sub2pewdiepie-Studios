@@ -4,7 +4,9 @@
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
-
+#include "ModuleFadeToBlack.h"
+#include "ModuleSceneHonda.h"
+#include "ModuleSceneKen.h"
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
 ModulePlayer::ModulePlayer()
@@ -28,14 +30,6 @@ ModulePlayer::ModulePlayer()
 	forward.PushBack({352, 128, 54, 91});
 	forward.PushBack({432, 131, 50, 89});
 	forward.speed = 0.1f;
-
-	// TODO 4: Make ryu walk backwards with the correct animations
-	backward.PushBack({ 432, 131, 50, 89 });
-	backward.PushBack({ 352, 128, 54, 91 });
-	backward.PushBack({ 259, 128, 63, 90 });
-	backward.PushBack({ 162, 128, 64, 92 });
-	backward.PushBack({ 78, 131, 60, 88 });
-	backward.speed = 0.1f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -62,10 +56,10 @@ update_status ModulePlayer::Update()
 		current_animation = &forward;
 		position.x += speed;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_A] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
 	{
-		current_animation = &backward;
-		position.x -= speed;
+		if (App->scene_ken->IsEnabled() == true)
+			App->fade->FadeToBlack(App->scene_ken, App->scene_honda);
 	}
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
