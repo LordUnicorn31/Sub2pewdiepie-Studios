@@ -1,3 +1,6 @@
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
 #include <math.h>
 #include "Globals.h"
 #include "Application.h"
@@ -38,17 +41,18 @@ update_status ModuleFadeToBlack::Update()
 			if(now >= total_time)
 			{
 				// TODO 3: enable / disable the modules received when FadeToBlacks() gets called
-				moduleoff.Disable();
-				moduleon.Enable();
+				moduleoff->Disable();
+				moduleon->Enable();
 				// ---
 				total_time += total_time;
 				start_time = SDL_GetTicks();
-				current_step = fade_step::fade_from_black;
+				current_step = fade_step::fade_from_black;		
 			}
 		} break;
 
 		case fade_step::fade_from_black:
 		{
+			
 			normalized = 1.0f - normalized;
 
 			if(now >= total_time)
@@ -67,8 +71,8 @@ update_status ModuleFadeToBlack::Update()
 bool ModuleFadeToBlack::FadeToBlack(Module* module_off, Module* module_on, float time)
 {
 	bool ret = false;
-	moduleoff = *module_off;
-	moduleon = *module_on;
+	moduleoff = module_off;
+	moduleon = module_on;
 	if(current_step == fade_step::none)
 	{
 		current_step = fade_step::fade_to_black;

@@ -1,5 +1,10 @@
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
 #ifndef __MODULE_H__
 #define __MODULE_H__
+
+
 
 class Module
 {
@@ -31,8 +36,8 @@ public:
 	{
 		// TODO 0: Call CleanUp() for disabling a module
 		if (enabled = true) {
-			CleanUp();
 			enabled = false;
+			CleanUp();
 		}
 	}
 };

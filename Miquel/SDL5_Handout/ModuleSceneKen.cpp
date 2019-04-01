@@ -1,9 +1,14 @@
+#define _CRTDBG_MAP_ALLOC
 #include "Globals.h"
 #include "Application.h"
-#include "ModuleTextures.h"
+#include "ModuleWindow.h"
 #include "ModuleRender.h"
+#include "ModuleInput.h"
+#include "ModuleTextures.h"
 #include "ModuleSceneKen.h"
+#include "ModuleSceneHonda.h"
 #include "ModulePlayer.h"
+#include "ModuleFadeToBlack.h"
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
 ModuleSceneKen::ModuleSceneKen()
@@ -54,7 +59,13 @@ bool ModuleSceneKen::Start()
 	graphics = App->textures->Load("ken_stage.png");
 
 	// TODO 1: Enable (and properly disable) the player module
-	App->player->Enable();
+	if (ModuleSceneKen::IsEnabled() == true) {
+		App->scene_ken->Enable();
+		App->player->Enable();
+	}
+	else {
+		App->player->Disable();
+	}
 	return true;
 }
 
@@ -90,6 +101,13 @@ update_status ModuleSceneKen::Update()
 	App->render->Blit(graphics, 0, 170, &ground);
 
 	// TODO 2: make so pressing SPACE the HONDA stage is loaded
-
+	/*if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
+	{
+		if (App->scene_ken->IsEnabled() == true)
+			App->fade->FadeToBlack(App->scene_ken, App->scene_honda);
+			
+	}*/
+	if (App->player->position.x > 300)
+		App->fade->FadeToBlack(App->scene_ken, App->scene_honda);
 	return UPDATE_CONTINUE;
 }

@@ -1,9 +1,18 @@
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleSceneHonda.h"
+#include "ModuleSceneKen.h"
+#include "ModuleCongratsScreen.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
+#include "Module.h"
+#include "Application.h"
+#include "ModuleFadeToBlack.h"
+#include "ModuleInput.h"
 // Reference at https://youtu.be/6OlenbCC4WI?t=382
 
 ModuleSceneHonda::ModuleSceneHonda()
@@ -36,9 +45,16 @@ bool ModuleSceneHonda::Start()
 	LOG("Loading background assets");
 	bool ret = true;
 	graphics = App->textures->Load("honda_stage2.png");
-
+	App->player->position.x = 100;
 	// TODO 1: Enable (and properly disable) the player module
-	App->player->Enable();
+	if (ModuleSceneHonda::IsEnabled() == true) {
+		App->scene_honda->Enable();
+		App->player->Enable();
+	}
+	else {
+	
+		App->player->Disable();
+	}
 	return ret;
 }
 
@@ -47,7 +63,7 @@ bool ModuleSceneHonda::CleanUp()
 {
 	// TODO 5: Remove all memory leaks
 	LOG("Unloading honda stage");
-
+	_CrtDumpMemoryLeaks();
 	return true;
 }
 
@@ -63,6 +79,13 @@ update_status ModuleSceneHonda::Update()
 	App->render->Blit(graphics, 0, -16, &roof, 0.75f);
 
 	// TODO 2: make so pressing SPACE the KEN stage is loaded
-
+	/*if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
+	{
+		
+		if (App->scene_honda->IsEnabled() == true)
+			App->fade->FadeToBlack(App->scene_honda, App->scene_ken);
+	}*/
+	if (App->player->position.x > 300)
+		App->fade->FadeToBlack(App->scene_honda, App->congratsscreen);
 	return UPDATE_CONTINUE;
 }

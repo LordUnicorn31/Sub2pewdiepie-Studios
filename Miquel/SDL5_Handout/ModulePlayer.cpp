@@ -56,11 +56,7 @@ update_status ModulePlayer::Update()
 		current_animation = &forward;
 		position.x += speed;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
-	{
-		if (App->scene_ken->IsEnabled() == true)
-			App->fade->FadeToBlack(App->scene_ken, App->scene_honda);
-	}
+	
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
 

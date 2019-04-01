@@ -15,8 +15,8 @@ public:
 	bool FadeToBlack(Module* module_off, Module* module_on, float time = 2.0f);
 
 private:
-	Module moduleoff;
-	Module moduleon;
+	Module * moduleoff;
+	Module * moduleon;
 	enum fade_step
 	{
 		none,

@@ -5,6 +5,8 @@
 #include "ModuleTextures.h"
 #include "ModuleSceneKen.h"
 #include "ModuleSceneHonda.h"
+#include "ModuleWelcomeScreen.h"
+#include "ModuleCongratsScreen.h"
 #include "ModulePlayer.h"
 #include "ModuleFadeToBlack.h"
 
@@ -18,6 +20,8 @@ Application::Application()
 	modules[5] = scene_ken = new ModuleSceneKen();
 	modules[6] = player = new ModulePlayer();
 	modules[7] = fade = new ModuleFadeToBlack();
+	modules[8] = welcomescreen = new ModuleWelcomeScreen();
+	modules[9] = congratsscreen = new ModuleCongratsScreen();
 }	
 
 Application::~Application()
@@ -34,7 +38,8 @@ bool Application::Init()
 	player->Disable();
 	// Disable the map that you do not start with
 	scene_honda->Disable();
-
+	scene_ken->Disable();
+	congratsscreen->Disable();
 	for(int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();
 

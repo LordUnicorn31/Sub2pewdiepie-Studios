@@ -56,6 +56,12 @@
     <ClInclude Include="ModuleSceneKen.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleWelcomeScreen.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleCongratsScreen.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -89,6 +95,12 @@
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleSceneKen.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleWelcomeScreen.cpp">
+      <Filter>Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleCongratsScreen.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>
