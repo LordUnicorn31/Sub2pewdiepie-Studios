@@ -5,7 +5,7 @@
 #include "ModulePlayer.h"
 #include "ModuleSceneSpace.h"
 #include "ModuleIntroScene.h"
-#include "SDL_mixer/include/SDL_mixer.h"
+//#include "SDL_mixer/include/SDL_mixer.h"
 #include "SDL/include/SDL.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
@@ -20,10 +20,10 @@ ModuleIntroScene::~ModuleIntroScene()
 bool ModuleIntroScene::Start()
 {
 	LOG("Loading space scene");
-	Mix_Init(MIX_INIT_OGG);
+	/*Mix_Init(MIX_INIT_OGG);
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
 	intromusic = Mix_LoadMUS("rtype/intro.ogg");
-	Mix_PlayMusic(intromusic, -1);
+	Mix_PlayMusic(intromusic, -1);*/
 	background = App->textures->Load("rtype/intro.png");
 
 	App->player->Enable();
@@ -38,8 +38,8 @@ bool ModuleIntroScene::CleanUp()
 
 	App->textures->Unload(background);
 	App->player->Disable();
-	Mix_CloseAudio();
-	Mix_Quit();
+	/*Mix_CloseAudio();
+	Mix_Quit();*/
 	return true;
 }
 

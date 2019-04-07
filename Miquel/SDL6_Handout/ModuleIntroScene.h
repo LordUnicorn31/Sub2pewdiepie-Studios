@@ -2,7 +2,7 @@
 #define __MODULEINTROSCENE_H__
 
 #include "Module.h"
-#include "SDL_mixer/include/SDL_mixer.h"
+//#include "SDL_mixer/include/SDL_mixer.h"
 #include "SDL/include/SDL.h"
 
 struct SDL_Texture;
@@ -19,7 +19,7 @@ public:
 
 public:
 
-	_Mix_Music* intromusic = nullptr;
+	//_Mix_Music* intromusic = nullptr;
 	SDL_Texture* background = nullptr;
 	SDL_Texture* stars = nullptr;
 };
