@@ -33,9 +33,11 @@ update_status ModuleInput::PreUpdate()
 	SDL_PumpEvents();
 
 	keyboard = SDL_GetKeyboardState(NULL);
-
+	//mouse = SDL_GetMouseState(NULL, NULL);
+	
 	if(keyboard[SDL_SCANCODE_ESCAPE])
 		return update_status::UPDATE_STOP;
+	SDL_GetMouseState(&mPosX, &mPosY);
 
 	return update_status::UPDATE_CONTINUE;
 }

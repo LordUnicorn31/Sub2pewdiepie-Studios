@@ -87,7 +87,7 @@ bool ModuleRender::CleanUp()
 }
 
 // Blit to screen
-bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed)
+bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed, bool isFlipped)
 {
 	bool ret = true;
 	SDL_Rect rect;
@@ -106,8 +106,11 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section, f
 
 	rect.w *= SCREEN_SIZE;
 	rect.h *= SCREEN_SIZE;
+	SDL_RendererFlip flip = SDL_FLIP_NONE;
+	if (isFlipped == true)
+		flip = SDL_FLIP_HORIZONTAL;
 
-	if(SDL_RenderCopy(renderer, texture, section, &rect) != 0)
+	if(SDL_RenderCopyEx(renderer, texture, section, &rect, NULL, NULL, flip) != 0)
 	{
 		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
 		ret = false;

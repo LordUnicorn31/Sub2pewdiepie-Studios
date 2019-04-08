@@ -6,6 +6,7 @@
 #include "SDL\include\SDL_scancode.h"
 
 typedef unsigned char Uint8;
+//typedef unsigned char Uint32;
 
 class ModuleInput : public Module
 {
@@ -20,6 +21,9 @@ public:
 
 public:
 	const Uint8 *keyboard = nullptr;
+	//Uint32 mouse;
+	int mPosX;
+	int mPosY;
 };
 
 #endif // __ModuleInput_H__
