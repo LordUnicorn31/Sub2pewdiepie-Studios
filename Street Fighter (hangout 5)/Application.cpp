@@ -10,6 +10,7 @@
 #include "ModulePlayer.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleParticles.h"
+#include "ModuleAudio.h"
 
 Application::Application()
 {
@@ -24,6 +25,7 @@ Application::Application()
 	modules[8] = welcomescreen = new ModuleWelcomeScreen();
 	modules[9] = congratsscreen = new ModuleCongratsScreen();
 	modules[10] = particles = new ModuleParticles();
+	modules[11] = audio = new ModuleAudio();
 }	
 
 Application::~Application()
