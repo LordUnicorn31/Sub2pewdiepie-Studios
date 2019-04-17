@@ -16,12 +16,17 @@ public:
 
 	bool Start();
 	update_status Update();
+	void OnCollision(Collider*, Collider*);
 
 public:
 
 	Animation* current_animation = &idle;
 	SDL_Texture* graphics = nullptr;
 	bool lookingright;
+
+	//colliders
+	Collider* playercollider = nullptr;
+
 
 	Animation idle;
 	//movement

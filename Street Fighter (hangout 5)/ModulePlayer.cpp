@@ -7,13 +7,17 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleSceneHonda.h"
 #include "ModuleSceneKen.h"
+#include "ModuleCongratsScreen.h"
 #include "ModuleParticles.h"
+#include "ModuleCollision.h"
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
 ModulePlayer::ModulePlayer()
 {
 	position.x = 100;
 	position.y = 220;
+
+	////////////////playercollider = App->collision->AddCollider({ 0, 0, 60, 90 }, COLLIDER_PLAYER1, App->player);
 
 	// idle animation (arcade sprite sheet)
 	idle.PushBack({7, 14, 60, 90});
@@ -152,7 +156,7 @@ update_status ModulePlayer::Update()
 	//turning.Reset();
 
 	current_animation = &idle;
-	current_animation = &high_jump_punch;
+	//current_animation = &high_jump_punch;
 	playerRotation(nullptr);
 	int speed = 1;
 
@@ -191,6 +195,9 @@ update_status ModulePlayer::Update()
 			
 	}
 
+	////////////////playercollider->rect.x = App->player->position.x;
+	////////////////playercollider->rect.y = App->player->position.y;
+
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
 	if (App->player->lookingright == false)
@@ -200,4 +207,11 @@ update_status ModulePlayer::Update()
 
 	
 	return UPDATE_CONTINUE;
+}
+
+void ModulePlayer::OnCollision(Collider*, Collider*) {
+	if (App->scene_ken->IsEnabled() == true)
+	App->fade->FadeToBlack(App->scene_ken, App->scene_honda);
+	if (App->scene_honda->IsEnabled() == true)
+	App->fade->FadeToBlack(App->scene_honda, App->congratsscreen);
 }

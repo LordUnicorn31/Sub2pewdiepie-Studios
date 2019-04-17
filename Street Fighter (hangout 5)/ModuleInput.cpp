@@ -5,6 +5,8 @@
 
 ModuleInput::ModuleInput() : Module()
 {
+	for (uint i = 0; i < MAX_KEYS; ++i)
+		keyboardstates[i] = KEY_IDLE;
 }
 
 // Destructor
@@ -34,7 +36,24 @@ update_status ModuleInput::PreUpdate()
 
 	keyboard = SDL_GetKeyboardState(NULL);
 	//mouse = SDL_GetMouseState(NULL, NULL);
-	
+	for (int i = 0; i < MAX_KEYS; ++i)
+	{
+		if (keyboard[i] == 1)
+		{
+			if (keyboardstates[i] == KEY_IDLE)
+				keyboardstates[i] = KEY_DOWN;
+			else
+				keyboardstates[i] = KEY_REPEAT;
+		}
+		else
+		{
+			if (keyboardstates[i] == KEY_REPEAT || keyboard[i] == KEY_DOWN)
+				keyboardstates[i] = KEY_UP;
+			else
+				keyboardstates[i] = KEY_IDLE;
+		}
+	}
+
 	if(keyboard[SDL_SCANCODE_ESCAPE])
 		return update_status::UPDATE_STOP;
 	SDL_GetMouseState(&mPosX, &mPosY);

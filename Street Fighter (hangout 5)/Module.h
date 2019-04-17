@@ -4,7 +4,7 @@
 #ifndef __MODULE_H__
 #define __MODULE_H__
 
-
+struct Collider;
 
 class Module
 {
@@ -40,6 +40,8 @@ public:
 			CleanUp();
 		}
 	}
+
+	virtual void OnCollision(Collider*, Collider*) {};
 };
 
 #endif // __MODULE_H__
