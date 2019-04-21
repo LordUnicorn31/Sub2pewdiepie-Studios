@@ -27,7 +27,7 @@ bool ModuleParticles::Start()
 	hadouken.anim.PushBack({549,1564,57,30});
 	hadouken.life = 1400;
 	hadouken.anim.loop = false;
-	hadouken.speed.create(4, 0);
+	hadouken.speed.x = 4;
 	return true;
 }
 
