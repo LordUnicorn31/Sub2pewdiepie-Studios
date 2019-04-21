@@ -30,6 +30,7 @@ public:
 	Animation jump_air;
 	Animation jump_fall;
 	Animation kick;
+	Animation large_kick;
 	bool a;
 	bool b;
 	bool aaa;
@@ -38,6 +39,7 @@ public:
 	bool ddd;
 	bool eee;
 	bool fff;
+	bool ggg;
 	Uint32 start_time;
 	Uint32 current_time;
 	Uint32 final_time;

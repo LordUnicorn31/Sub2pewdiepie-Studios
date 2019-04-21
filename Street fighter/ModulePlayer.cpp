@@ -66,6 +66,14 @@ ModulePlayer::ModulePlayer()
 	kick.PushBack({775,266,117,93});
 	kick.speed = 0.1f;
 
+	//large kick
+	large_kick.PushBack({15,397,62,91});
+	large_kick.PushBack({98,393,96,95});
+	large_kick.PushBack({210,393,122,95});
+	large_kick.PushBack({350,410,104,78});
+	large_kick.PushBack({480,406,67,83});
+	large_kick.speed = 0.1f;
+
 	//hadouken
 	hadouken.PushBack({36,1544,72,92});
 	hadouken.PushBack({137,1550,82,84});
@@ -164,6 +172,13 @@ update_status ModulePlayer::Update()
 			final_time = current_time + 561;
 			kick.Reset();
 		}
+		else if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN) {
+			ggg = true;
+			a = false;
+			b = false;
+			final_time = current_time + 930;
+			large_kick.Reset();
+		}
 		else {
 			current_animation = &idle;
 		}
@@ -253,6 +268,20 @@ update_status ModulePlayer::Update()
 		else {
 			current_animation = &idle;
 			fff = false;
+			a = true;
+			b = true;
+		}
+	}
+	//large kick
+	if (ggg) {
+		if (current_time < final_time) {
+			if (current_animation != &large_kick) {
+				current_animation = &large_kick;
+			}
+		}
+		else {
+			current_animation = &idle;
+			ggg = false;
 			a = true;
 			b = true;
 		}
