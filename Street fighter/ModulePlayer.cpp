@@ -127,17 +127,18 @@ update_status ModulePlayer::Update()
 				backward.Reset();
 				current_animation = &backward;
 			}
-			if (current_animation == &backward) {
-				position.x -= speed;
-			}
+			position.x -= speed;
 		}
 		else if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
 		{
-			position.x += speed;
 			if (current_animation != &forward) {
 				forward.Reset();
 				current_animation = &forward;
 			}
+			position.x += speed;
+		}
+		else {
+			current_animation = &idle;
 		}
 	}
 	if (b) {
@@ -180,7 +181,9 @@ update_status ModulePlayer::Update()
 			large_kick.Reset();
 		}
 		else {
-			current_animation = &idle;
+			if (current_animation != &backward&&current_animation != &forward) {
+				current_animation = &idle;
+			}
 		}
 	}
 
