@@ -184,6 +184,7 @@ update_status ModulePlayer::Update()
 		}
 	}
 
+	//hadouken
 	if (aaa) {
 		if (current_time < final_time) {
 			if (current_animation != &hadouken) {
@@ -199,6 +200,7 @@ update_status ModulePlayer::Update()
 		}
 	}
 
+	//short punch
 	if (bbb) {
 		if (current_time < final_time) {
 			if (current_animation != &short_punch) {
