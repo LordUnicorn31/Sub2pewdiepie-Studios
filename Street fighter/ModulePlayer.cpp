@@ -51,6 +51,9 @@ ModulePlayer::ModulePlayer()
 	jump_air.PushBack({326,812,49,88});
 	jump_fall.PushBack({396,812,50,88});
 	jump_fall.PushBack({463,819,57,109});
+	jump_fall.loop = false;
+	jump_floor.loop = false;
+	jump_air.loop = false;
 	jump_floor.speed = 0.1f;
 	jump_air.speed = 0.1f;
 	jump_fall.speed = 0.1f;
@@ -58,12 +61,14 @@ ModulePlayer::ModulePlayer()
 	//short punch
 	short_punch.PushBack({ 14,270,85,93 });
 	short_punch.PushBack({ 107,270,110,93 });
+	short_punch.loop = false;
 	short_punch.speed = 0.1f;
 
 	//kick
 	kick.PushBack({605,268,62,95});
 	kick.PushBack({687,266,68,93});
 	kick.PushBack({775,266,117,93});
+	kick.loop = false;
 	kick.speed = 0.1f;
 
 	//large kick
@@ -72,6 +77,7 @@ ModulePlayer::ModulePlayer()
 	large_kick.PushBack({210,393,122,95});
 	large_kick.PushBack({350,410,104,78});
 	large_kick.PushBack({480,406,67,83});
+	large_kick.loop = false;
 	large_kick.speed = 0.1f;
 
 	//hadouken
@@ -79,6 +85,7 @@ ModulePlayer::ModulePlayer()
 	hadouken.PushBack({137,1550,82,84});
 	hadouken.PushBack({243,1552,92,83});
 	hadouken.PushBack({356,1557,108,79});
+	hadouken.loop = false;
 	hadouken.speed = 0.1f;
 
 	a = true;
