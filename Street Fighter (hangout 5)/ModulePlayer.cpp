@@ -17,8 +17,6 @@ ModulePlayer::ModulePlayer()
 	position.x = 100;
 	position.y = 220;
 
-	////////////////playercollider = App->collision->AddCollider({ 0, 0, 60, 90 }, COLLIDER_PLAYER1, App->player);
-
 	// idle animation (arcade sprite sheet)
 	idle.PushBack({7, 14, 60, 90});
 	idle.PushBack({95, 15, 60, 89});
@@ -146,7 +144,10 @@ bool ModulePlayer::Start()
 	LOG("Loading player textures");
 	bool ret = true;
 	graphics = App->textures->Load("ryu.png"); // arcade version
+	playercollider = App->collision->AddCollider({ 0, 0, 60, 90}, COLLIDER_PLAYER1, App->player);
+	player2collider = App->collision->AddCollider({ 0, 0, 60, 90 }, COLLIDER_PLAYER2, App->player2);
 	lookingright = false;
+
 	return ret;
 }
 
@@ -155,63 +156,98 @@ update_status ModulePlayer::Update()
 {
 	//turning.Reset();
 
-	current_animation = &idle;
+	App->player->current_animation_player = &idle;
+	App->player2->current_animation_player2 = &idle;
 	//current_animation = &high_jump_punch;
-	playerRotation(nullptr);
+	//playerRotation(nullptr);
 	int speed = 1;
 
 	if (App->input->keyboard[SDL_SCANCODE_D] == 1)
 	{
-		current_animation = &forward;
-		position.x += speed;
+		App->player->current_animation_player = &forward;
+		App->player->position.x += speed;
 	}
 	if (App->input->keyboard[SDL_SCANCODE_A] == 1)
 	{
-		current_animation = &backward;
-		position.x -= speed;
+		App->player->current_animation_player = &backward;
+		App->player->position.x -= speed;
+	}
+	if (App->input->keyboard[SDL_SCANCODE_J] == 1)
+	{
+		App->player2->current_animation_player2 = &forward;
+		App->player2->position.x += speed;
+	}
+	if (App->input->keyboard[SDL_SCANCODE_L] == 1)
+	{
+		App->player2->current_animation_player2 = &backward;
+		App->player2->position.x -= speed;
 	}
 
-	if (App->player->position.x < App->input->mPosX && lookingright == false) { //TURN LEFT TO RIGHT
-		
-		current_animation = &turning;
-		if (current_animation->Finished() == true) 
+	if (App->player->position.x < App->player2->position.x && App->player->lookingright == false) { //TURN LEFT TO RIGHT PLAYER 1
+		App->player->current_animation_player = &turning;
+		if (App->player->current_animation_player->Finished() == true) 
 		{
 			//turning.speed = 0.1f;
-			lookingright = true;
-			turning.Reset();
+			App->player->lookingright = true;
+			App->player->turning.Reset();
 		}
-			
-
 	}
-	else if (App->player->position.x > App->input->mPosX && lookingright == true) { //TURN RIGHT TO LEFT
-		
-		current_animation = &turning;
-		if (current_animation->Finished() == true) 
+	else if (App->player->position.x > App->player2->position.x && App->player->lookingright == true) { //TURN RIGHT TO LEFT PLAYER 1
+		App->player->current_animation_player = &turning;
+		if (App->player->current_animation_player->Finished() == true) 
 		{
 			//turning.speed = 0.1f;
-			lookingright = false;
-			turning.Reset();
+			App->player->lookingright = false;
+			App->player->turning.Reset();
 		}
 			
 	}
+	if (App->player2->position.x < App->player->position.x && App->player2->lookingright == false) { //TURN LEFT TO RIGHT PLAYER 2
+		App->player2->current_animation_player2 = &turning;
+		if (App->player2->current_animation_player2->Finished() == true)
+		{
+			//turning.speed = 0.1f;
+			App->player2->lookingright = true;
+			App->player2->turning.Reset();
+		}
+	}
+	else if (App->player2->position.x > App->player->position.x && App->player2->lookingright == true) { //TURN RIGHT TO LEFT PLAYER 2
+		App->player2->current_animation_player2 = &turning;
+		if (App->player2->current_animation_player2->Finished() == true)
+		{
+			//turning.speed = 0.1f;
+			App->player2->lookingright = false;
+			App->player2->turning.Reset();
+		}
 
-	////////////////playercollider->rect.x = App->player->position.x;
-	////////////////playercollider->rect.y = App->player->position.y;
+	}
 
+	playercollider->rect.x = App->player->position.x;
+	playercollider->rect.y = App->player->position.y - 90;
+	player2collider->rect.x = App->player2->position.x;
+	player2collider->rect.y = App->player2->position.y - 90;
 	// Draw everything --------------------------------------
-	SDL_Rect r = current_animation->GetCurrentFrame();
-	if (App->player->lookingright == false)
-		App->render->Blit(graphics, position.x, position.y - r.h, &r, 1.0f, true);
-	else
-		App->render->Blit(graphics, position.x, position.y - r.h, &r, 1.0f, false);
+	SDL_Rect r1 = current_animation_player->GetCurrentFrame();
+	//SDL_Rect r2 = current_animation_player2->GetCurrentFrame();
 
+	if (App->player->lookingright == false)
+		App->render->Blit(graphics, App->player->position.x, App->player->position.y - r1.h, &r1, 1.0f, true);
+	else
+		App->render->Blit(graphics, App->player->position.x, App->player->position.y - r1.h, &r1, 1.0f, false);
+
+	/*if (App->player2->lookingright == false)
+		App->render->Blit(graphics, App->player2->position.x, App->player2->position.y - r2.h, &r2, 1.0f, true);
+	else
+		App->render->Blit(graphics, App->player2->position.x, App->player2->position.y - r2.h, &r2, 1.0f, false);*/
 	
 	return UPDATE_CONTINUE;
 }
 
 void ModulePlayer::OnCollision(Collider*, Collider*) {
-	if (App->scene_ken->IsEnabled() == true)
+
+
+	/*if (App->scene_ken->IsEnabled() == true)
 	App->fade->FadeToBlack(App->scene_ken, App->scene_honda);
 	if (App->scene_honda->IsEnabled() == true)
-	App->fade->FadeToBlack(App->scene_honda, App->congratsscreen);
+	App->fade->FadeToBlack(App->scene_honda, App->congratsscreen);*/
 }

@@ -28,6 +28,7 @@ Application::Application()
 	modules[10] = particles = new ModuleParticles();
 	modules[11] = audio = new ModuleAudio();
 	modules[12] = collision = new ModuleCollision();
+	modules[13] = player2 = new ModulePlayer();
 }	
 
 Application::~Application()
@@ -42,6 +43,7 @@ bool Application::Init()
 
 	// Player will be enabled on the first update of a new scene
 	player->Disable();
+	player2->Disable();
 	// Disable the map that you do not start with
 	scene_honda->Disable();
 	scene_ken->Disable();

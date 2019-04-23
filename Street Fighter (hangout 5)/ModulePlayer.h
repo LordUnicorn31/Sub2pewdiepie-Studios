@@ -20,13 +20,14 @@ public:
 
 public:
 
-	Animation* current_animation = &idle;
+	Animation* current_animation_player = &idle;
+	Animation* current_animation_player2 = &idle;
 	SDL_Texture* graphics = nullptr;
 	bool lookingright;
 
 	//colliders
 	Collider* playercollider = nullptr;
-
+	Collider* player2collider = nullptr;
 
 	Animation idle;
 	//movement
@@ -53,7 +54,7 @@ public:
 	//
 	iPoint position;
 
-	void playerRotation(ModulePlayer *foe) {
+	/*void playerRotation(ModulePlayer *foe) {
 		if (foe == nullptr)
 			return;
 		if (this->position.x < foe->position.x && lookingright == false) { //TURN LEFT TO RIGHT
@@ -66,7 +67,7 @@ public:
 			if (current_animation->Finished() == true)
 				lookingright = false;
 		}
-	}
+	}*/
 };
 
 #endif

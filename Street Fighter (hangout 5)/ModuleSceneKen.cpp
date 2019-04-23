@@ -62,9 +62,11 @@ bool ModuleSceneKen::Start()
 	if (ModuleSceneKen::IsEnabled() == true) {
 		App->scene_ken->Enable();
 		App->player->Enable();
+		App->player2->Enable();
 	}
 	else {
 		App->player->Disable();
+		App->player2->Disable();
 	}
 	return true;
 }
