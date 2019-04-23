@@ -20,14 +20,14 @@ public:
 
 public:
 
-	Animation* current_animation_player = &idle;
-	Animation* current_animation_player2 = &idle;
+	Animation* current_animation = &idle;
+	//Animation* current_animation_player2 = &idle;
 	SDL_Texture* graphics = nullptr;
 	bool lookingright;
 
 	//colliders
 	Collider* playercollider = nullptr;
-	Collider* player2collider = nullptr;
+	//Collider* player2collider = nullptr;
 
 	Animation idle;
 	//movement
@@ -44,7 +44,6 @@ public:
 			Animation low_jump_punch;
 			Animation high_jump_punch;
 			
-
 	//kicks
 	Animation lowmid_kick;
 	Animation high_kick;
@@ -52,7 +51,32 @@ public:
 		Animation high_close_kick;
 			//Animation jump_kick;
 	//
-	iPoint position;
+	//Animations player2
+	//
+
+	Animation idle2;
+	//movement
+	Animation forward2;
+	Animation backward2;
+	Animation turning2;
+	Animation jump2;
+	Animation jump_frontflip2;
+	//punches
+	Animation lowpunch2;
+	Animation midhigh_punch2;
+		Animation low_close_punch2;
+		Animation high_close_punch2;
+			Animation low_jump_punch2;
+			Animation high_jump_punch2;
+			
+	//kicks
+	Animation lowmid_kick2;
+	Animation high_kick2;
+		Animation low_close_kick2;
+		Animation high_close_kick2;
+			//Animation jump_kick2;
+	//
+	fPoint position;
 
 	/*void playerRotation(ModulePlayer *foe) {
 		if (foe == nullptr)

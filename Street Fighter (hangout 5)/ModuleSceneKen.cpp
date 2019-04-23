@@ -41,6 +41,7 @@ ModuleSceneKen::ModuleSceneKen()
 	girl.PushBack({624, 16, 32, 56});
 	girl.PushBack({624, 80, 32, 56});
 	girl.PushBack({624, 144, 32, 56});
+	girl.PushBack({ 624, 80, 32, 56 });
 	girl.speed = 0.05f;
 
 	// for moving the foreground
