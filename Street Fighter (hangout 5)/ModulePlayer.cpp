@@ -395,8 +395,10 @@ update_status ModulePlayer::Update()
 void ModulePlayer::OnCollision(Collider*c1, Collider*c2) {
 
 	if (c1 == playercollider && App->fade->IsFading() == false) {
-		App->fade->FadeToBlack(App->scene_ken, App->congratsscreen);
-
+		if(App->player->position.x<App->player2->position.x)
+			App->player2->position.x += 1;
+		else
+			App->player2->position.x -= 1;
 	}
 	/*if (App->scene_ken->IsEnabled() == true)
 	App->fade->FadeToBlack(App->scene_ken, App->scene_honda);
