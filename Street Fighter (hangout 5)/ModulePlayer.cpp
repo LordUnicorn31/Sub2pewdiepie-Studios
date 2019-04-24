@@ -252,10 +252,12 @@ bool ModulePlayer::Start()
 	LOG("Loading player textures");
 	bool ret = true;
 	graphics = App->textures->Load("ryu.png"); // arcade version
-	lowattack = App->audio->Load("Street Fighter Attack moves\\lowattack.wav");
-	App->player->position.x = 100;
+	midattack = App->audio->Load("Street Fighter Attack moves\\midattack.wav");
+	midpunchhit = App->audio->Load("Street Fighter Attack moves\\midpunchhit.wav");
+	midkickhit = App->audio->Load("Street Fighter Attack moves\\midkickhit.wav");
+	App->player->position.x = 0;
 	App->player->position.y = 220;
-	App->player2->position.x = 250;
+	App->player2->position.x = 100;
 	App->player2->position.y = 220;
 	App->player->playercollider = App->collision->AddCollider({ 0, 0, 60, 90}, COLLIDER_PLAYER1, App->player);
 	App->player2->playercollider = App->collision->AddCollider({ 0, 0, 60, 90 }, COLLIDER_PLAYER2, App->player2);
@@ -268,7 +270,7 @@ bool ModulePlayer::Start()
 update_status ModulePlayer::Update()
 {
 	//turning.Reset();
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN == 1)
+	if (App->input->keyboard[SDL_SCANCODE_N] == KEY_DOWN == 1)
 		App->audio->Play(lowattack, 0);
 	App->player->current_animation = &idle;
 	App->player2->current_animation = &idle2;
@@ -330,6 +332,14 @@ update_status ModulePlayer::Update()
 		else
 			App->player2->position.x -= speed;
 	}
+	if (hadoukenable < 101)
+	App->player->hadoukenable += 1;
+	if (App->input->keyboard[SDL_SCANCODE_1] == 1 && KEY_DOWN == 1)
+		if (App->player->hadoukenable > 100) {
+			App->particles->AddParticle(App->particles->hadouken, App->player->position.x, App->player->position.y - 200, 0); 
+			App->player->hadoukenable = 0;
+		}
+	
 	//de moment aixo em dona errors aixi que ##comment
 	/*if (App->player->position.x < App->player2->position.x && App->player->lookingright == false) { //TURN LEFT TO RIGHT PLAYER 1
 		App->player->current_animation = &turning;

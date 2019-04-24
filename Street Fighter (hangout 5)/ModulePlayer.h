@@ -26,7 +26,7 @@ public:
 	//Animation* current_animation_player2 = &idle;
 	SDL_Texture* graphics = nullptr;
 	bool lookingright;
-
+	int hadoukenable = 0;
 	//colliders
 	Collider* playercollider = nullptr;
 	//Collider* player2collider = nullptr;
@@ -95,20 +95,21 @@ public:
 				lookingright = false;
 		}
 	}*/
+	//Audios
 	Mix_Chunk* lowattack = nullptr;			//punch or kick that you miss (you don't hit anything)
-	Mix_Chunk* midattack = nullptr;			//punch or kick that you miss (you don't hit anything)
+	Mix_Chunk* midattack = nullptr;			//punch or kick that you miss (you don't hit anything)	// needed
 	Mix_Chunk* highattackpunch = nullptr;	//high punch that you miss (you don't hit anything)
 	Mix_Chunk* highattackkick = nullptr;	//high kick that you miss (you don't hit anything)
 
-	Mix_Chunk* lowpunchhit = nullptr;
-	Mix_Chunk* midpunchhit = nullptr;
-	Mix_Chunk* highpunchhit = nullptr;
+	Mix_Chunk* lowpunchhit = nullptr;		//triggers when low punch collides with enemy
+	Mix_Chunk* midpunchhit = nullptr;		//triggers when mid punch collides with enemy			//needed
+	Mix_Chunk* highpunchhit = nullptr;		//triggers when high punch collides with enemy
 
-	Mix_Chunk* lowkickhit = nullptr;
-	Mix_Chunk* midkickhit = nullptr;
-	Mix_Chunk* highkickhit = nullptr;
+	Mix_Chunk* lowkickhit = nullptr;		//triggers when low kick collides with enemy
+	Mix_Chunk* midkickhit = nullptr;		//triggers when mid kick collides with enemy			//needed
+	Mix_Chunk* highkickhit = nullptr;		//triggers when high kick collides with enemy
 
-	Mix_Chunk* hadoukenhit = nullptr;
+	Mix_Chunk* hadoukenhit = nullptr;		//triggers when hadouken collider hits the enemy (so i think it should go to Particles.h maybe, idk)
 };
 
 #endif

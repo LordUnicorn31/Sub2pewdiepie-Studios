@@ -4,6 +4,7 @@
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
 #include "SDL/include/SDL.h"
+#include "ModulePlayer.h"
 
 ModuleRender::ModuleRender() : Module()
 {
@@ -62,6 +63,7 @@ update_status ModuleRender::Update()
 
 	if(App->input->keyboard[SDL_SCANCODE_RIGHT] == 1)
 		camera.x -= speed;
+	//camera.x = (-App->player->position.x - App->player2->position.x) / 2;
 
 	return update_status::UPDATE_CONTINUE;
 }

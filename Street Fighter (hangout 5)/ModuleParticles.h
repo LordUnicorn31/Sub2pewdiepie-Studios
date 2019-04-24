@@ -9,12 +9,13 @@
 #define MAX_ACTIVE_PARTICLES 100
 
 struct SDL_Texture;
-
+struct Mix_Chunk;
 struct Particle
 {
 	Collider* collider = nullptr;
 	Animation anim;
-	uint fx = 0;
+	//uint fx = 0;
+	Mix_Chunk* sfx = nullptr;
 	iPoint position;
 	iPoint speed;
 	Uint32 born = 0;
@@ -38,16 +39,18 @@ public:
 	bool CleanUp();
 
 	void AddParticle(const Particle& particle, int x, int y, Uint32 delay = 0);
+	Particle hadouken;
+	Mix_Chunk* hadoukenhit = nullptr;
 
 private:
-
+	
 	SDL_Texture* graphics = nullptr;
 	Particle* active[MAX_ACTIVE_PARTICLES];
 	uint last_particle = 0;
 
 public:
-	Particle hadouken;
 	void OnCollision(Collider*, Collider*);
 };
+
 
 #endif // __MODULEPARTICLES_H__
