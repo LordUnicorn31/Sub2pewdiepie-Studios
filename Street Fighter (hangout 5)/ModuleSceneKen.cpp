@@ -71,9 +71,9 @@ bool ModuleSceneKen::CleanUp()
 update_status ModuleSceneKen::Update()
 {
 	// Draw everything --------------------------------------
-	App->render->Blit(graphics, 0, 0, &sky, 0.75f);
-	App->render->Blit(graphics, 290, 39, &castle,0.1f);
-	App->render->Blit(graphics, 0, 0, &background, 0.75f);
+	App->render->Blit(graphics, 0, 0, &sky,0.75);
+	App->render->Blit(graphics, 290, 39, &castle,0.92f);
+	App->render->Blit(graphics, 0, 0, &background, 0.92f);
 	App->render->Blit(graphics, 0, 176, &ground);
 
 
