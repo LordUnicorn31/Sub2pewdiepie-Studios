@@ -400,3 +400,8 @@ void ModulePlayer::OnCollision(Collider*, Collider*) {
 	if (App->scene_honda->IsEnabled() == true)
 	App->fade->FadeToBlack(App->scene_honda, App->congratsscreen);*/
 }
+
+bool ModulePlayer::CleanUp() {
+	App->textures->Unload(graphics);
+	return true;
+}
