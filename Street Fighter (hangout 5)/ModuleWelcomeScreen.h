@@ -2,10 +2,10 @@
 #define __MODULEWELCOMESCENE_H__
 
 #include "Module.h"
-#include "Animation.h"
 #include "Globals.h"
 
 struct SDL_Texture;
+struct Mix_Chunk;
 
 class ModuleWelcomeScreen : public Module
 {
@@ -20,11 +20,8 @@ public:
 public:
 
 	SDL_Texture* graphics = nullptr;
-	SDL_Rect ground;
-	SDL_Rect roof;
-	SDL_Rect foreground;
+	//Mix_Chunk *audio=nullptr;
 	SDL_Rect background;
-	Animation water;
 };
 
 #endif // __MODULEWELCOMESCENE_H__

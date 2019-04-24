@@ -4,7 +4,6 @@
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
 #include "ModuleSceneKen.h"
-#include "ModuleSceneHonda.h"
 #include "ModuleWelcomeScreen.h"
 #include "ModuleCongratsScreen.h"
 #include "ModulePlayer.h"
@@ -19,16 +18,15 @@ Application::Application()
 	modules[1] = render = new ModuleRender();
 	modules[2] = input = new ModuleInput();
 	modules[3] = textures = new ModuleTextures();
-	modules[4] = scene_honda = new ModuleSceneHonda();
-	modules[5] = scene_ken = new ModuleSceneKen();
-	modules[6] = player = new ModulePlayer();
-	modules[7] = fade = new ModuleFadeToBlack();
-	modules[8] = welcomescreen = new ModuleWelcomeScreen();
-	modules[9] = congratsscreen = new ModuleCongratsScreen();
-	modules[10] = particles = new ModuleParticles();
-	modules[11] = audio = new ModuleAudio();
-	modules[12] = collision = new ModuleCollision();
-	modules[13] = player2 = new ModulePlayer();
+	modules[4] = scene_ken = new ModuleSceneKen();
+	modules[5] = player = new ModulePlayer();
+	modules[6] = fade = new ModuleFadeToBlack();
+	modules[7] = welcomescreen = new ModuleWelcomeScreen();
+	modules[8] = congratsscreen = new ModuleCongratsScreen();
+	modules[9] = particles = new ModuleParticles();
+	modules[10] = audio = new ModuleAudio();
+	modules[11] = collision = new ModuleCollision();
+	modules[12] = player2 = new ModulePlayer();
 }	
 
 Application::~Application()
@@ -41,11 +39,8 @@ bool Application::Init()
 {
 	bool ret = true;
 
-	// Player will be enabled on the first update of a new scene
 	player->Disable();
 	player2->Disable();
-	// Disable the map that you do not start with
-	scene_honda->Disable();
 	scene_ken->Disable();
 	congratsscreen->Disable();
 	for(int i = 0; i < NUM_MODULES && ret == true; ++i)
