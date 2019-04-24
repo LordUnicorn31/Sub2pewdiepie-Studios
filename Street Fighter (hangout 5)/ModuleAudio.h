@@ -1,30 +1,29 @@
-#ifndef __MODULEAUDIO_H__
-#define __MODULEAUDIO_H__
+#ifndef __ModuleAudio_H__
+#define __ModuleAudio_H__
 
 #include "Module.h"
-#include "Animation.h"
 #include "Globals.h"
 
-struct SDL_Texture;
 
-class ModuleAudio : public Module
-{
+#define MAX_AUDIOS 50
+
+struct Mix_Chunk;
+
+class ModuleAudio :public Module {
 public:
 	ModuleAudio();
-	~ModuleAudio();
+	~ModuleAudio() {};
 
-	bool Start();
-	update_status Update();
+	bool Init();
 	bool CleanUp();
+	Mix_Chunk* const Load(const char* path);
+	void Play(Mix_Chunk* audio, int times);
+	bool Unload(Mix_Chunk * audio);
+
+
 
 public:
+	Mix_Chunk* audios[MAX_AUDIOS];
 
-	/*SDL_Texture* graphics = nullptr;
-	SDL_Rect ground;
-	SDL_Rect roof;
-	SDL_Rect foreground;
-	SDL_Rect background;
-	Animation water;*/
 };
-
-#endif // __MODULEAUDIO_H__
+#endif // __ModuleAudio_H__

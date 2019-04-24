@@ -29,8 +29,8 @@ public:
 	Collider* playercollider = nullptr;
 	//Collider* player2collider = nullptr;
 
-	Animation idle;
 	//movement
+	Animation idle;
 	Animation forward;
 	Animation backward;
 	Animation turning;
@@ -78,6 +78,8 @@ public:
 	//
 	fPoint position;
 
+
+	//Mix_Chunk* 
 	/*void playerRotation(ModulePlayer *foe) {
 		if (foe == nullptr)
 			return;

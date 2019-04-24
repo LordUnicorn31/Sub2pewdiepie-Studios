@@ -1,6 +1,7 @@
 #define _CRTDBG_MAP_ALLOC
 #include <stdlib.h>
 #include <crtdbg.h>
+#include "Globals.h"
 #ifndef __MODULE_H__
 #define __MODULE_H__
 

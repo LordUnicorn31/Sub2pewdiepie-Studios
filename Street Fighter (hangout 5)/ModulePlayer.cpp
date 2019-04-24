@@ -10,6 +10,7 @@
 #include "ModuleCongratsScreen.h"
 #include "ModuleParticles.h"
 #include "ModuleCollision.h"
+#include "ModuleAudio.h"
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
 ModulePlayer::ModulePlayer()

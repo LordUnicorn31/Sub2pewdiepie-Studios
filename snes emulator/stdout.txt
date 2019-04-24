@@ -1,0 +1,15 @@
+Saving	config file	C:\Users\miquelqg\Desktop\snes emulator\snes9x.conf
+Sound buffer size: 8200 (2050 samples)
+Found ROM file header (and ignored it).
+Unable to find msu file C:\Users\miquelqg\Desktop\snes emulator\Patches\Street Fighter II - The World Warrior (U) [!].msu1.
+Unable to find msu file C:\Users\miquelqg\Desktop\snes emulator\Patches\Street Fighter II - The World Warrior (U) [!].msu1.
+Map_LoROMMap
+"Street Fighter 2" [checksum ok] LoROM, 16Mbits, ROM, NTSC, SRAM:0Kbits, ID:n  4, CRC32:BC3DCD9D
+Unable to find msu file C:\Users\miquelqg\Desktop\snes emulator\Patches\Street Fighter II - The World Warrior (U) [!].msu1.
+Sound buffer size: 8200 (2050 samples)
+Saving	config file	C:\Users\miquelqg\Desktop\snes emulator\snes9x.conf
+Saving	config file	C:\Users\miquelqg\Desktop\snes emulator\snes9x.conf
+Saving	config file	C:\Users\miquelqg\Desktop\snes emulator\snes9x.conf
+Saving	config file	C:\Users\miquelqg\Desktop\snes emulator\snes9x.conf
+Saving	config file	C:\Users\miquelqg\Desktop\snes emulator\snes9x.conf
+Saving	config file	C:\Users\miquelqg\Desktop\snes emulator\snes9x.conf

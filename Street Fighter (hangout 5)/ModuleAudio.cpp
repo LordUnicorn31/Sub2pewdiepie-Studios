@@ -1,82 +1,82 @@
-#define _CRTDBG_MAP_ALLOC
-#include <stdlib.h>
-#include <crtdbg.h>
-#include "Globals.h"
-#include "Application.h"
-#include "ModuleSceneHonda.h"
-#include "ModuleSceneKen.h"
-#include "ModuleCongratsScreen.h"
-#include "ModuleTextures.h"
-#include "ModuleRender.h"
-#include "ModulePlayer.h"
-#include "Module.h"
-#include "Application.h"
-#include "ModuleFadeToBlack.h"
-#include "ModuleInput.h"
 #include "ModuleAudio.h"
-// Reference at https://youtu.be/6OlenbCC4WI?t=382
-
-ModuleAudio::ModuleAudio()
-{
-	/*// ground
-	ground = { 8, 376, 848, 64 };
-
-	// roof
-	roof = { 91, 7, 765, 49 };
-
-	// foreground
-	foreground = { 164, 66, 336, 51 };
-
-	// Background / sky
-	background = { 120, 128, 671, 199 };
-
-	// flag animation
-	water.PushBack({ 8, 447, 283, 9 });
-	water.PushBack({ 296, 447, 283, 12 });
-	water.PushBack({ 588, 447, 283, 18 });
-	water.speed = 0.02f;*/
-}
-
-ModuleAudio::~ModuleAudio()
-{}
-
-// Load assets
-bool ModuleAudio::Start()
-{
-	LOG("Loading background assets");
+#include "Application.h"
+#include "Globals.h"
+#include "ModuleInput.h"
+#include "SDL/include/SDL.h"
+#include "SDL_mixer/include/SDL_mixer.h"
+#pragma comment (lib,"SDL_Mixer/libx86/SDL2_Mixer.lib")
+bool ModuleAudio::Init() {
 	bool ret = true;
-	//graphics = App->textures->Load("honda_stage2.png");// fer algo similar amb el audio
+	int flags = MIX_INIT_OGG;
+	int initted = Mix_Init(flags);
+	if (flags&&initted != flags) {
+		ret = false;
+		LOG("Error initialazing audio module: %s", Mix_GetError());
+	}
+	else {
+		LOG("Audio module initialized");
+		if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 1024) != 0) {
+			LOG("Error opening audio: %s", Mix_GetError());
+			ret = false;
+		}
+		else
+			LOG("Audio opened");
+	}
 	return ret;
 }
-
-// Load assets
-bool ModuleAudio::CleanUp()
-{
-	// TODO 5: Remove all memory leaks
-	LOG("Unloading honda stage");
-	_CrtDumpMemoryLeaks();
+ModuleAudio::ModuleAudio() {
+	for (uint i = 0; i < MAX_AUDIOS; ++i) {
+		audios[i] = nullptr;
+	}
+}
+bool ModuleAudio::CleanUp() {
+	for (uint i = 0; i < MAX_AUDIOS; ++i) {
+		if (audios[i] != nullptr) {
+			Mix_FreeChunk(audios[i]);
+		}
+	}
+	Mix_CloseAudio();
+	Mix_Quit();
 	return true;
 }
 
-// Update: draw background
-update_status ModuleAudio::Update()
-{
-	// Draw everything --------------------------------------	
-	//App->render->Blit(graphics, 0, 160, &ground);
-	//App->render->Blit(graphics, 50, -15, &background, 0.75f); // back of the room
-
-	//App->render->Blit(graphics, 280, 125, &foreground);
-	//App->render->Blit(graphics, 305, 136, &(water.GetCurrentFrame())); // water animation
-	//App->render->Blit(graphics, 0, -16, &roof, 0.75f);
-
-	// TODO 2: make so pressing SPACE the KEN stage is loaded
-	/*if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
-	{
-
-		if (App->scene_honda->IsEnabled() == true)
-			App->fade->FadeToBlack(App->scene_honda, App->scene_ken);
-	}*/
-	//if (App->player->position.x > 300)
-	//	App->fade->FadeToBlack(App->scene_honda, App->congratsscreen);
-	return UPDATE_CONTINUE;
+Mix_Chunk* const ModuleAudio::Load(const char* path) {
+	for (uint i = 0; i < MAX_AUDIOS; ++i) {
+		if (audios[i] == nullptr) {
+			audios[i] = Mix_LoadWAV(path);
+			if (audios[i] == NULL) {
+				LOG("Error loading the audio:%s", Mix_GetError());
+				return nullptr;
+			}
+			else
+				return audios[i];
+		}
+	}
+	return nullptr;
 }
+//times=-1 for infinit play
+void ModuleAudio::Play(Mix_Chunk* audio, int times) {
+	Mix_PlayChannel(-1, audio, times);
+}
+bool ModuleAudio::Unload(Mix_Chunk*audio) {
+	bool ret = false;
+	if (audio != nullptr)
+	{
+		LOG("Unloading Audio");
+		for (int i = 0; i < MAX_AUDIOS; ++i)
+		{
+			if (audios[i] == audio)
+			{
+				if (App->input->keyboard[SDL_SCANCODE_ESCAPE] != 1) {
+					Mix_FreeChunk(audio);
+				}
+				audios[i] = nullptr;
+				ret = true;
+				break;
+			}
+		}
+	}
+	return ret;
+}
+
+//update_status 
