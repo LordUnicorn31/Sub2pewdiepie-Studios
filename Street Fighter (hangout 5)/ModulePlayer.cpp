@@ -401,6 +401,7 @@ void ModulePlayer::OnCollision(Collider*c1, Collider*c2) {
 		else
 			App->player2->position.x -= 2;
 	}
+	//player 2 empuja player 1
 	if (c1 == player2collider && App->fade->IsFading() == false) {
 		if (App->player2->position.x < App->player->position.x)
 			App->player->position.x += 2;
