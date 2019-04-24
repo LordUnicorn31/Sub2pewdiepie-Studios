@@ -417,5 +417,11 @@ void ModulePlayer::OnCollision(Collider*c1, Collider*c2) {
 bool ModulePlayer::CleanUp() {
 	App->textures->Unload(graphics);
 	App->audio->Unload(lowattack);
+	if (playercollider!=nullptr) {
+		playercollider->to_delete = true;
+	}
+	if (player2collider!=nullptr) {
+		player2collider->to_delete = true;
+	}
 	return true;
 }
