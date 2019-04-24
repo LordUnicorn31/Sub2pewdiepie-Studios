@@ -12,6 +12,7 @@ struct SDL_Texture;
 
 struct Particle
 {
+	Collider* collider = nullptr;
 	Animation anim;
 	uint fx = 0;
 	iPoint position;
@@ -23,6 +24,7 @@ struct Particle
 	Particle();
 	Particle(const Particle& p);
 	bool Update();
+	
 };
 
 class ModuleParticles : public Module
@@ -44,8 +46,8 @@ private:
 	uint last_particle = 0;
 
 public:
-
-	Particle explosion;
+	Particle hadouken;
+	void OnCollision(Collider*, Collider*);
 };
 
 #endif // __MODULEPARTICLES_H__
