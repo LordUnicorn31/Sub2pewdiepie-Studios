@@ -33,16 +33,11 @@ ModuleSceneKen::ModuleSceneKen()
 	background.w = 622;
 	background.h = 193;
 
+	//castle
 	castle.x = 744;
 	castle.y = 215;
 	castle.w = 138;
 	castle.h = 73;
-
-
-
-	// for moving the foreground
-	foreground_pos = 0;
-	forward = true;
 }
 
 ModuleSceneKen::~ModuleSceneKen()
@@ -76,9 +71,9 @@ bool ModuleSceneKen::CleanUp()
 update_status ModuleSceneKen::Update()
 {
 	// Draw everything --------------------------------------
-	App->render->Blit(graphics, 0, 0, &sky, 0.75f);
-	App->render->Blit(graphics, 280, 39, &castle);
-	App->render->Blit(graphics, 0, 0, &background, 0.75f);
+	App->render->Blit(graphics, 0, 0, &sky,0.75);
+	App->render->Blit(graphics, 290, 39, &castle,0.92f);
+	App->render->Blit(graphics, 0, 0, &background, 0.92f);
 	App->render->Blit(graphics, 0, 176, &ground);
 
 
