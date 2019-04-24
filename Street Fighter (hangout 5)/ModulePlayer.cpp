@@ -253,6 +253,7 @@ bool ModulePlayer::Start()
 	LOG("Loading player textures");
 	bool ret = true;
 	graphics = App->textures->Load("ryu.png"); // arcade version
+	App->audio->lowattack = App->audio->Load("Street Fighter Attack moves\\lowattack.wav");
 	App->player->position.x = 100;
 	App->player->position.y = 220;
 	App->player2->position.x = 250;
@@ -268,7 +269,8 @@ bool ModulePlayer::Start()
 update_status ModulePlayer::Update()
 {
 	//turning.Reset();
-
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN == 1)
+		App->audio->Play(App->audio->lowattack, 0);
 	App->player->current_animation = &idle;
 	App->player2->current_animation = &idle2;
 	//current_animation = &high_jump_punch;

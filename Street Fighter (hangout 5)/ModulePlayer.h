@@ -78,7 +78,6 @@ public:
 	//
 	fPoint position;
 
-
 	//Mix_Chunk* 
 	/*void playerRotation(ModulePlayer *foe) {
 		if (foe == nullptr)
