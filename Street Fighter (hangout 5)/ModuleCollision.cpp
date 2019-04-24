@@ -104,7 +104,7 @@ void ModuleCollision::DebugDraw()
 	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN)
 		debug = !debug;
 
-	if (debug == true)
+	if (debug == false)
 		return;
 
 	Uint8 alpha = 140;

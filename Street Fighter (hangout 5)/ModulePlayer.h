@@ -29,7 +29,7 @@ public:
 
 	//colliders
 	Collider* playercollider = nullptr;
-	//Collider* player2collider = nullptr;
+	Collider* player2collider = nullptr;
 
 	//movement
 	Animation idle;

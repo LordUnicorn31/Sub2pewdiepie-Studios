@@ -258,7 +258,7 @@ bool ModulePlayer::Start()
 	App->player2->position.x = 250;
 	App->player2->position.y = 220;
 	App->player->playercollider = App->collision->AddCollider({ 0, 0, 60, 90}, COLLIDER_PLAYER1, App->player);
-	App->player2->playercollider = App->collision->AddCollider({ 0, 0, 60, 90 }, COLLIDER_PLAYER2, App->player2);
+	App->player2->player2collider = App->collision->AddCollider({ 0, 0, 60, 90 }, COLLIDER_PLAYER2, App->player2);
 	lookingright = false;
 
 	return ret;
@@ -371,8 +371,8 @@ update_status ModulePlayer::Update()
 
 	App->player->playercollider->rect.x = App->player->position.x;
 	App->player->playercollider->rect.y = App->player->position.y - 90;
-	App->player2->playercollider->rect.x = App->player2->position.x;
-	App->player2->playercollider->rect.y = App->player2->position.y - 90;
+	App->player2->player2collider->rect.x = App->player2->position.x;
+	App->player2->player2collider->rect.y = App->player2->position.y - 90;
 	//player2collider->rect.x = App->player2->position.x;
 	//player2collider->rect.y = App->player2->position.y - 90;
 	// Draw everything --------------------------------------
@@ -395,10 +395,17 @@ update_status ModulePlayer::Update()
 void ModulePlayer::OnCollision(Collider*c1, Collider*c2) {
 
 	if (c1 == playercollider && App->fade->IsFading() == false) {
+		//player 1 empuja player 2
 		if(App->player->position.x<App->player2->position.x)
-			App->player2->position.x += 1;
+			App->player2->position.x += 2;
 		else
-			App->player2->position.x -= 1;
+			App->player2->position.x -= 2;
+	}
+	if (c1 == player2collider && App->fade->IsFading() == false) {
+		if (App->player2->position.x < App->player->position.x)
+			App->player->position.x += 2;
+		else
+			App->player->position.x -= 2;
 	}
 	/*if (App->scene_ken->IsEnabled() == true)
 	App->fade->FadeToBlack(App->scene_ken, App->scene_honda);
