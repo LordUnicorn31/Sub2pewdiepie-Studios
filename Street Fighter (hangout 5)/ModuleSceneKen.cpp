@@ -9,6 +9,7 @@
 #include "ModulePlayer.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleCongratsScreen.h"
+#include "ModuleAudio.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -53,6 +54,8 @@ bool ModuleSceneKen::Start()
 	LOG("Loading ken scene");
 
 	graphics = App->textures->Load("scene_ryu.png");
+	music = App->audio->Load("Ryu_stage.ogg");
+	App->audio->Play(music, -1);
 	App->player->Enable();
 	App->player2->Enable();
 	return true;
@@ -65,6 +68,7 @@ bool ModuleSceneKen::CleanUp()
 	App->textures->Unload(graphics);
 	App->player->Disable();
 	App->player2->Disable();
+	App->audio->Unload(music);
 	return true;
 }
 

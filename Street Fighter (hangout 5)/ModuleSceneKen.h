@@ -6,6 +6,7 @@
 #include "Globals.h"
 
 struct SDL_Texture;
+struct Mix_Chunk;
 
 class ModuleSceneKen : public Module
 {
@@ -20,6 +21,7 @@ public:
 public:
 
 	SDL_Texture* graphics = nullptr;
+	Mix_Chunk* music = nullptr;
 	SDL_Rect ground;
 	SDL_Rect sky;
 	SDL_Rect background;
