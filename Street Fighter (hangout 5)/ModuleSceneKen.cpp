@@ -14,35 +14,23 @@
 ModuleSceneKen::ModuleSceneKen()
 {
 	// ground
-	ground.x = 8;
-	ground.y = 391;
-	ground.w = 896;
-	ground.h = 72;
-
-	// foreground
-	foreground.x = 8;
-	foreground.y = 24;
-	foreground.w = 521;
-	foreground.h = 181;
+	ground.x = 0;
+	ground.y = 400;
+	ground.w = 622;
+	ground.h = 48;
 
 	// Background / sky
-	background.x = 72;
-	background.y = 208;
-	background.w = 768;
-	background.h = 176;
+	sky.x = 0;
+	sky.y = 0;
+	sky.w = 622;
+	sky.h = 113;
 
-	// flag animation
-	flag.PushBack({848, 208, 40, 40});
-	flag.PushBack({848, 256, 40, 40});
-	flag.PushBack({848, 304, 40, 40});
-	flag.speed = 0.08f;
+	//background
+	background.x = 0;
+	background.y = 184;
+	background.w = 622;
+	background.h = 193;
 
-	// Girl Animation
-	girl.PushBack({624, 16, 32, 56});
-	girl.PushBack({624, 80, 32, 56});
-	girl.PushBack({624, 144, 32, 56});
-	girl.PushBack({ 624, 80, 32, 56 });
-	girl.speed = 0.05f;
 
 	// for moving the foreground
 	foreground_pos = 0;
@@ -56,8 +44,8 @@ ModuleSceneKen::~ModuleSceneKen()
 bool ModuleSceneKen::Start()
 {
 	LOG("Loading ken scene");
-	
-	graphics = App->textures->Load("ken_stage.png");
+
+	graphics = App->textures->Load("scene_ryu.png");
 
 	// TODO 1: Enable (and properly disable) the player module
 	if (ModuleSceneKen::IsEnabled() == true) {
@@ -84,23 +72,19 @@ bool ModuleSceneKen::CleanUp()
 update_status ModuleSceneKen::Update()
 {
 	// Calculate boat Y position -----------------------------
-	if(foreground_pos < -6.0f)
+	if (foreground_pos < -6.0f)
 		forward = false;
-	else if(foreground_pos > 0.0f)
+	else if (foreground_pos > 0.0f)
 		forward = true;
-	
-	if(forward)
+
+	if (forward)
 		foreground_pos -= 0.02f;
 	else
 		foreground_pos += 0.02f;
 
 	// Draw everything --------------------------------------
+	App->render->Blit(graphics, 0, 0, &sky, 0.75f);
 	App->render->Blit(graphics, 0, 0, &background, 0.75f); // sea and sky
-	App->render->Blit(graphics, 560, 8, &(flag.GetCurrentFrame()), 0.75f); // flag animation
-
-	App->render->Blit(graphics, 0, (int)foreground_pos, &foreground, 0.92f);
-	App->render->Blit(graphics, 192, 104 + (int)foreground_pos, &(girl.GetCurrentFrame()), 0.92f); // girl animation
-	
 	App->render->Blit(graphics, 0, 170, &ground);
 
 	// TODO 2: make so pressing SPACE the HONDA stage is loaded
@@ -108,7 +92,7 @@ update_status ModuleSceneKen::Update()
 	{
 		if (App->scene_ken->IsEnabled() == true)
 			App->fade->FadeToBlack(App->scene_ken, App->scene_honda);
-			
+
 	}*/
 	if (App->player->position.x > 300)
 		App->fade->FadeToBlack(App->scene_ken, App->scene_honda);

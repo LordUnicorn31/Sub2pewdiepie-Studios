@@ -18,13 +18,11 @@ public:
 	bool CleanUp();
 
 public:
-	
+
 	SDL_Texture* graphics = nullptr;
 	SDL_Rect ground;
-	SDL_Rect foreground;
+	SDL_Rect sky;
 	SDL_Rect background;
-	Animation flag;
-	Animation girl;
 
 	float foreground_pos;
 	bool forward;
