@@ -54,7 +54,7 @@ bool ModuleSceneKen::Start()
 	LOG("Loading ken scene");
 
 	graphics = App->textures->Load("scene_ryu.png");
-	music = App->audio->Load("Ryu_stage.ogg");
+	music = App->audio->Load("05 Ryu.ogg");
 	App->audio->Play(music, -1);
 	App->player->Enable();
 	App->player2->Enable();
