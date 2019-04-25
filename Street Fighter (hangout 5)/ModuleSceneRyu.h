@@ -1,5 +1,5 @@
-#ifndef __MODULESCENEKEN_H__
-#define __MODULESCENEKEN_H__
+#ifndef __MODULESCENERYU_H__
+#define __MODULESCENERYU_H__
 
 #include "Module.h"
 #include "Animation.h"
@@ -8,11 +8,11 @@
 struct SDL_Texture;
 struct Mix_Chunk;
 
-class ModuleSceneKen : public Module
+class ModuleSceneRyu : public Module
 {
 public:
-	ModuleSceneKen();
-	~ModuleSceneKen();
+	ModuleSceneRyu();
+	~ModuleSceneRyu();
 
 	bool Start();
 	update_status Update();
@@ -28,4 +28,4 @@ public:
 	SDL_Rect castle;
 };
 
-#endif // __MODULESCENEKEN_H__
+#endif // __MODULESCENERYU_H__

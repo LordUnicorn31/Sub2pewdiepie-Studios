@@ -3,7 +3,7 @@
 #include <crtdbg.h>
 #include "Globals.h"
 #include "Application.h"
-#include "ModuleSceneKen.h"
+#include "ModuleSceneRyu.h"
 #include "ModuleWelcomeScreen.h"
 #include "ModuleCongratsScreen.h"
 #include "ModuleTextures.h"
