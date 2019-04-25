@@ -259,8 +259,8 @@ bool ModulePlayer::Start()
 	App->player->position.y = 220;
 	App->player2->position.x = 100;
 	App->player2->position.y = 220;
-	App->player->playercollider = App->collision->AddCollider({ 0, 0, 60, 90}, COLLIDER_PLAYER1, App->player);
-	App->player2->player2collider = App->collision->AddCollider({ 0, 0, 60, 90 }, COLLIDER_PLAYER2, App->player2);
+	App->player->playercollider = App->collision->AddCollider({ 0, 0, 50, 90}, COLLIDER_PLAYER1, App->player);
+	App->player2->playercollider = App->collision->AddCollider({ 0, 0, 50, 90 }, COLLIDER_PLAYER2, App->player2);
 	lookingright = false;
 
 	return ret;
@@ -287,9 +287,9 @@ update_status ModulePlayer::Update()
 	else
 		App->player2->lookingright = false;
 
-	if (App->input->keyboard[SDL_SCANCODE_D] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_D] == 1 && App->player->position.x < SCREEN_WIDTH - 60)
 	{
-		if (App->player->position.x < App->player2->position.x) // App->player->lookingright = true
+		if (App->player->position.x < App->player2->position.x ) // App->player->lookingright = true
 			App->player->current_animation = &forward;
 		else
 			App->player->current_animation = &backward;
@@ -299,7 +299,7 @@ update_status ModulePlayer::Update()
 		else
 			App->player->position.x += speed / 1.5f;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_A] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_A] == 1 && App->player->position.x > 1)
 	{
 		if (App->player->position.x < App->player2->position.x) // App->player->lookingright = true
 			App->player->current_animation = &backward;
@@ -310,7 +310,7 @@ update_status ModulePlayer::Update()
 		else
 			App->player->position.x -= speed;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_L] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == 1 && App->player2->position.x < SCREEN_WIDTH - 60)
 	{
 		if (App->player2->position.x < App->player->position.x) // App->player2->lookingright = true
 			App->player2->current_animation = &forward2;
@@ -321,7 +321,7 @@ update_status ModulePlayer::Update()
 		else
 			App->player2->position.x += speed / 1.5f;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_J] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_LEFT] == 1 && App->player2->position.x > 1)
 	{
 		if (App->player2->position.x < App->player->position.x) // App->player2->lookingright = true
 			App->player2->current_animation = &backward2;
@@ -332,7 +332,7 @@ update_status ModulePlayer::Update()
 		else
 			App->player2->position.x -= speed;
 	}
-	if (hadoukenable < 101)
+	if (App->player->hadoukenable < 101)
 	App->player->hadoukenable += 1;
 	if (App->input->keyboard[SDL_SCANCODE_1] == 1 && KEY_DOWN == 1)
 		if (App->player->hadoukenable > 100) {
@@ -341,7 +341,7 @@ update_status ModulePlayer::Update()
 		}
 	
 	//de moment aixo em dona errors aixi que ##comment
-	/*if (App->player->position.x < App->player2->position.x && App->player->lookingright == false) { //TURN LEFT TO RIGHT PLAYER 1
+	if (App->player->position.x < App->player2->position.x && App->player->lookingright == false) { //TURN LEFT TO RIGHT PLAYER 1
 		App->player->current_animation = &turning;
 		if (App->player->current_animation->Finished() == true) 
 		{
@@ -377,12 +377,17 @@ update_status ModulePlayer::Update()
 			App->player2->lookingright = false;
 			App->player2->turning.Reset();
 		}
-	}*/
-
+	}
+	if (App->player->lookingright == true)
 	App->player->playercollider->rect.x = App->player->position.x;
+	else
+	App->player->playercollider->rect.x = App->player->position.x +10;
 	App->player->playercollider->rect.y = App->player->position.y - 90;
-	App->player2->player2collider->rect.x = App->player2->position.x;
-	App->player2->player2collider->rect.y = App->player2->position.y - 90;
+	if (App->player2->lookingright == true)
+		App->player2->playercollider->rect.x = App->player2->position.x;
+	else
+	App->player2->playercollider->rect.x = App->player2->position.x + 10;
+	App->player2->playercollider->rect.y = App->player2->position.y - 90;
 	//player2collider->rect.x = App->player2->position.x;
 	//player2collider->rect.y = App->player2->position.y - 90;
 	// Draw everything --------------------------------------
@@ -404,7 +409,7 @@ update_status ModulePlayer::Update()
 
 void ModulePlayer::OnCollision(Collider*c1, Collider*c2) {
 
-	if (c1 == playercollider && App->fade->IsFading() == false) {
+	if (c1 == App->player->playercollider && App->fade->IsFading() == false) {
 		//player 1 empuja player 2
 		if(App->player->position.x<App->player2->position.x)
 			App->player2->position.x += 2;
@@ -412,7 +417,7 @@ void ModulePlayer::OnCollision(Collider*c1, Collider*c2) {
 			App->player2->position.x -= 2;
 	}
 	//player 2 empuja player 1
-	if (c1 == player2collider && App->fade->IsFading() == false) {
+	if (c1 == App->player2->playercollider && App->fade->IsFading() == false) {
 		if (App->player2->position.x < App->player->position.x)
 			App->player->position.x += 2;
 		else
@@ -427,11 +432,11 @@ void ModulePlayer::OnCollision(Collider*c1, Collider*c2) {
 bool ModulePlayer::CleanUp() {
 	App->textures->Unload(graphics);
 	App->audio->Unload(lowattack);
-	if (playercollider!=nullptr) {
-		playercollider->to_delete = true;
+	if (App->player->playercollider!=nullptr) {
+		App->player->playercollider->to_delete = true;
 	}
-	if (player2collider!=nullptr) {
-		player2collider->to_delete = true;
+	if (App->player2->playercollider!=nullptr) {
+		App->player2->playercollider->to_delete = true;
 	}
 	return true;
 }

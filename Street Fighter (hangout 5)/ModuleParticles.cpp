@@ -28,6 +28,7 @@ bool ModuleParticles::Start()
 	hadouken.life = 1000;
 	hadouken.anim.speed = 0.2f;
 	hadouken.sfx = hadoukenhit;
+	//hadouken.collider = App->collision->AddCollider({ 0, 0, 20, 20}, )
 	//hadouken.anim.loop = false;
 	hadouken.speed.x = 4;
 

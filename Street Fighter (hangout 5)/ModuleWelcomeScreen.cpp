@@ -50,7 +50,7 @@ bool ModuleWelcomeScreen::CleanUp()
 update_status ModuleWelcomeScreen::Update()
 {
 	App->render->Blit(graphics, -150, -45, &background, 0.75f); // back of the room
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN == 1)
 	{
 		App->audio->Play(mainmenutoscenesound, 0);
 		App->fade->FadeToBlack(App->welcomescreen, App->scene_ken,1);
