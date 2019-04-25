@@ -6,7 +6,7 @@
 ModuleInput::ModuleInput() : Module()
 {
 	for (uint i = 0; i < MAX_KEYS; ++i)
-		keyboardstates[i] = KEY_IDLE;
+		keyboard[i] = KEY_IDLE;
 }
 
 // Destructor
@@ -33,24 +33,23 @@ bool ModuleInput::Init()
 update_status ModuleInput::PreUpdate()
 {
 	SDL_PumpEvents();
-
-	keyboard = SDL_GetKeyboardState(NULL);
+	const Uint8 *keyboardstates = SDL_GetKeyboardState(NULL);
 	//mouse = SDL_GetMouseState(NULL, NULL);
 	for (int i = 0; i < MAX_KEYS; ++i)
 	{
-		if (keyboard[i] == 1)
+		if (keyboardstates[i] == 1)
 		{
-			if (keyboardstates[i] == KEY_IDLE)
-				keyboardstates[i] = KEY_DOWN;
+			if (keyboard[i] == KEY_IDLE)
+				keyboard[i] = KEY_DOWN;
 			else
-				keyboardstates[i] = KEY_REPEAT;
+				keyboard[i] = KEY_REPEAT;
 		}
 		else
 		{
-			if (keyboardstates[i] == KEY_REPEAT || keyboard[i] == KEY_DOWN)
-				keyboardstates[i] = KEY_UP;
+			if (keyboard[i] == KEY_REPEAT || keyboard[i] == KEY_DOWN)
+				keyboard[i] = KEY_UP;
 			else
-				keyboardstates[i] = KEY_IDLE;
+				keyboard[i] = KEY_IDLE;
 		}
 	}
 
