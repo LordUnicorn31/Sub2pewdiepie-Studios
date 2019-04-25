@@ -269,6 +269,8 @@ bool ModulePlayer::Start()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
+	forwarding = false;
+	backwarding = false;
 	//App->player->jumpingidle = true;
 	//turning.Reset();
 	if (App->input->keyboard[SDL_SCANCODE_N] == KEY_STATE::KEY_DOWN)
@@ -365,16 +367,17 @@ update_status ModulePlayer::Update()
 			App->player->hadoukenable = 0;
 		}
 	
-	if (App->input->keyboard[SDL_SCANCODE_W] == 1/* && !(App->player->jumpingidle == true || App->player->jumpingright == true || App->player->jumpingleft == true)*/) {
+	if (App->input->keyboard[SDL_SCANCODE_2] == KEY_STATE::KEY_REPEAT/* && !(App->player->jumpingidle == true || App->player->jumpingright == true || App->player->jumpingleft == true)*/) {
 		//jump.Reset();
-		App->player->jumpingidle == true;
+		jumpingidle == true;
+		LOG("uWu");
 		App->player->vely = 10.0f;
 
 
 	}
 
 	if (App->player->jumpingidle == true)
-		App->player->position.y += App->player->vely;
+		App->player->position.y -= App->player->vely;
 	//if playerposition.y <= groundY && (jumpingright/left/idle) then jumpingleft, idle, right to false
 
 	//if jumping left position -= speed
