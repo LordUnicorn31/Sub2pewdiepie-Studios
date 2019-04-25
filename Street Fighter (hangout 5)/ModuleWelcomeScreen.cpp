@@ -31,7 +31,7 @@ bool ModuleWelcomeScreen::Start()
 	graphics = App->textures->Load("honda_stage3.png");
 	mainmenumusic = App->audio->Load("02 The World Warrior.ogg");
 	mainmenutoscenesound = App->audio->Load("IntroToScene.wav");
-	App->audio->Play(mainmenumusic, 0);
+	App->audio->Play(mainmenumusic, -1);
 	return ret;
 }
 
