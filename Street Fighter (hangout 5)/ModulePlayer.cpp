@@ -269,6 +269,7 @@ bool ModulePlayer::Start()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
+	//App->player->jumpingidle = true;
 	//turning.Reset();
 	if (App->input->keyboard[SDL_SCANCODE_N] == KEY_STATE::KEY_DOWN)
 		App->audio->Play(lowattack, 0);
@@ -358,12 +359,28 @@ update_status ModulePlayer::Update()
 	}
 	if (App->player->hadoukenable < 101)
 	App->player->hadoukenable += 1;
-	if (App->input->keyboard[SDL_SCANCODE_1] == KEY_STATE::KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_1] == KEY_STATE::KEY_DOWN && !(App->player->jumpingidle == true || App->player->jumpingright == true || App->player->jumpingleft == true))
 		if (App->player->hadoukenable > 100) {
 			App->particles->AddParticle(App->particles->hadouken, App->player->position.x, App->player->position.y - 90, 0); 
 			App->player->hadoukenable = 0;
 		}
-	//if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN &&)
+	
+	if (App->input->keyboard[SDL_SCANCODE_W] == 1/* && !(App->player->jumpingidle == true || App->player->jumpingright == true || App->player->jumpingleft == true)*/) {
+		//jump.Reset();
+		App->player->jumpingidle == true;
+		App->player->vely = 10.0f;
+
+
+	}
+
+	if (App->player->jumpingidle == true)
+		App->player->position.y += App->player->vely;
+	//if playerposition.y <= groundY && (jumpingright/left/idle) then jumpingleft, idle, right to false
+
+	//if jumping left position -= speed
+	//if jumping right position += speed
+
+
 	//de moment aixo em dona errors aixi que ##comment 
 	/*if (App->player->position.x < App->player2->position.x && App->player->lookingright == false) { //TURN LEFT TO RIGHT PLAYER 1
 		App->player->current_animation = &turning;

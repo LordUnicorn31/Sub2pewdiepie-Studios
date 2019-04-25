@@ -21,7 +21,8 @@ public:
 	void OnCollision(Collider*, Collider*);
 
 public:
-
+	float vely = 0.0f;
+	float gravity = -0.02f;
 	Animation* current_animation = &idle;
 	//Animation* current_animation_player2 = &idle;
 	SDL_Texture* graphics = nullptr;
