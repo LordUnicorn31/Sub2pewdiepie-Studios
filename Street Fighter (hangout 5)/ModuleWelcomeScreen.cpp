@@ -3,7 +3,7 @@
 #include <crtdbg.h>
 #include "Globals.h"
 #include "Application.h"
-#include "ModuleSceneKen.h"
+#include "ModuleSceneRyu.h"
 #include "ModuleWelcomeScreen.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
@@ -53,7 +53,7 @@ update_status ModuleWelcomeScreen::Update()
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
 		App->audio->Play(mainmenutoscenesound, 0);
-		App->fade->FadeToBlack(App->welcomescreen, App->scene_ken,1);
+		App->fade->FadeToBlack(App->welcomescreen, App->scene_Ryu,1);
 	}
 	return UPDATE_CONTINUE;
 }

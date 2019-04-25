@@ -5,7 +5,7 @@
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
 #include "ModuleFadeToBlack.h"
-#include "ModuleSceneKen.h"
+#include "ModuleSceneRyu.h"
 #include "ModuleCongratsScreen.h"
 #include "ModuleParticles.h"
 #include "ModuleCollision.h"

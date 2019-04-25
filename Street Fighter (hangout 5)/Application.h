@@ -9,7 +9,7 @@ class ModuleWindow;
 class ModuleInput;
 class ModuleTextures;
 class ModuleRender;
-class ModuleSceneKen;
+class ModuleSceneRyu;
 class ModuleWelcomeScreen; //
 class ModuleCongratsScreen; //
 class ModulePlayer;
@@ -28,7 +28,7 @@ public:
 	ModuleRender* render;
 	ModuleInput* input;
 	ModuleTextures* textures;
-	ModuleSceneKen* scene_ken;
+	ModuleSceneRyu* scene_Ryu;
 	ModulePlayer* player;
 	ModulePlayer* player2;
 	ModuleFadeToBlack* fade;
