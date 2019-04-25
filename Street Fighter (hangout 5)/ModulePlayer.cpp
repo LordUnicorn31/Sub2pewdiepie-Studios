@@ -270,7 +270,7 @@ bool ModulePlayer::Start()
 update_status ModulePlayer::Update()
 {
 	//turning.Reset();
-	if (App->input->keyboard[SDL_SCANCODE_N] == KEY_DOWN == 1)
+	if (App->input->keyboard[SDL_SCANCODE_N] == KEY_STATE::KEY_DOWN)
 		App->audio->Play(lowattack, 0);
 	App->player->current_animation = &idle;
 	App->player2->current_animation = &idle2;
@@ -287,46 +287,70 @@ update_status ModulePlayer::Update()
 	else
 		App->player2->lookingright = false;
 
-	if (App->input->keyboard[SDL_SCANCODE_D] == 1 && App->player->position.x < SCREEN_WIDTH - 60)
+	if (App->input->keyboard[SDL_SCANCODE_D] == 1 && App->player->position.x < SCREEN_WIDTH - 60 && !(App->player->jumpingidle == true || App->player->jumpingright == true || App->player->jumpingleft == true))
 	{
-		if (App->player->position.x < App->player2->position.x ) // App->player->lookingright = true
+		if (App->player->position.x < App->player2->position.x) {// App->player->lookingright = true
 			App->player->current_animation = &forward;
-		else
+			App->player->backwarding = false;
+			App->player->forwarding = true;
+		}
+		else {
 			App->player->current_animation = &backward;
+			App->player->backwarding = true;
+			App->player->forwarding = false;
+		}
 
 		if (App->player->position.x < App->player2->position.x)
 			App->player->position.x += speed;
 		else
 			App->player->position.x += speed / 1.5f;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_A] == 1 && App->player->position.x > 1)
+	if (App->input->keyboard[SDL_SCANCODE_A] == 1 && App->player->position.x > 1 && !(App->player->jumpingidle == true || App->player->jumpingright == true || App->player->jumpingleft == true))
 	{
-		if (App->player->position.x < App->player2->position.x) // App->player->lookingright = true
+		if (App->player->position.x < App->player2->position.x) { // App->player->lookingright = true
 			App->player->current_animation = &backward;
-		else
+			App->player->backwarding = true;
+			App->player->forwarding = false;
+		}
+		else {
 			App->player->current_animation = &forward;
+			App->player->forwarding = true;
+			App->player->backwarding = false;
+		}
 		if (App->player->position.x < App->player2->position.x)
 			App->player->position.x -= speed / 1.5f;
 		else
 			App->player->position.x -= speed;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == 1 && App->player2->position.x < SCREEN_WIDTH - 60)
+	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == 1 && App->player2->position.x < SCREEN_WIDTH - 60 && !(App->player2->jumpingidle == true || App->player2->jumpingright == true || App->player2->jumpingleft == true))
 	{
-		if (App->player2->position.x < App->player->position.x) // App->player2->lookingright = true
+		if (App->player2->position.x < App->player->position.x) {// App->player2->lookingright = true
 			App->player2->current_animation = &forward2;
-		else
+			App->player2->forwarding = true;
+			App->player2->backwarding = false;
+		}
+		else {
 			App->player2->current_animation = &backward2;
+			App->player2->backwarding = true;
+			App->player2->forwarding = false;
+		}
 		if (App->player2->position.x < App->player->position.x)
 			App->player2->position.x += speed;
 		else
 			App->player2->position.x += speed / 1.5f;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_LEFT] == 1 && App->player2->position.x > 1)
+	if (App->input->keyboard[SDL_SCANCODE_LEFT] == 1 && App->player2->position.x > 1 && !(App->player2->jumpingidle == true || App->player2->jumpingright == true || App->player2->jumpingleft == true))
 	{
-		if (App->player2->position.x < App->player->position.x) // App->player2->lookingright = true
+		if (App->player2->position.x < App->player->position.x) {// App->player2->lookingright = true
 			App->player2->current_animation = &backward2;
-		else
+			App->player2->backwarding = true;
+			App->player2->forwarding = false;
+		}
+		else {
 			App->player2->current_animation = &forward2;
+			App->player2->forwarding = true;
+			App->player2->backwarding = false;
+		}
 		if (App->player2->position.x < App->player->position.x)
 			App->player2->position.x -= speed / 1.5f;
 		else
@@ -334,16 +358,16 @@ update_status ModulePlayer::Update()
 	}
 	if (App->player->hadoukenable < 101)
 	App->player->hadoukenable += 1;
-	if (App->input->keyboard[SDL_SCANCODE_1] == 1 && KEY_DOWN == 1)
+	if (App->input->keyboard[SDL_SCANCODE_1] == KEY_STATE::KEY_DOWN)
 		if (App->player->hadoukenable > 100) {
-			App->particles->AddParticle(App->particles->hadouken, App->player->position.x, App->player->position.y - 200, 0); 
+			App->particles->AddParticle(App->particles->hadouken, App->player->position.x, App->player->position.y - 90, 0); 
 			App->player->hadoukenable = 0;
 		}
-	
-	//de moment aixo em dona errors aixi que ##comment
-	if (App->player->position.x < App->player2->position.x && App->player->lookingright == false) { //TURN LEFT TO RIGHT PLAYER 1
+	//if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN &&)
+	//de moment aixo em dona errors aixi que ##comment 
+	/*if (App->player->position.x < App->player2->position.x && App->player->lookingright == false) { //TURN LEFT TO RIGHT PLAYER 1
 		App->player->current_animation = &turning;
-		if (App->player->current_animation->Finished() == true) 
+		if (App->player->turning.Finished() == true)
 		{
 			//turning.speed = 0.1f;
 			App->player->lookingright = true;
@@ -352,7 +376,7 @@ update_status ModulePlayer::Update()
 	}
 	else if (App->player->position.x > App->player2->position.x && App->player->lookingright == true) { //TURN RIGHT TO LEFT PLAYER 1
 		App->player->current_animation = &turning;
-		if (App->player->current_animation->Finished() == true) 
+		if (App->player->turning.Finished() == true) 
 		{
 			//turning.speed = 0.1f;
 			App->player->lookingright = false;
@@ -362,7 +386,7 @@ update_status ModulePlayer::Update()
 	}
 	if (App->player2->position.x < App->player->position.x && App->player2->lookingright == false) { //TURN LEFT TO RIGHT PLAYER 2
 		App->player2->current_animation = &turning2;
-		if (App->player2->current_animation->Finished() == true)
+		if (App->player2->turning2.Finished() == true)
 		{
 			//turning.speed = 0.1f;
 			App->player2->lookingright = true;
@@ -371,13 +395,17 @@ update_status ModulePlayer::Update()
 	}
 	else if (App->player2->position.x > App->player->position.x && App->player2->lookingright == true) { //TURN RIGHT TO LEFT PLAYER 2
 		App->player2->current_animation = &turning2;
-		if (App->player2->current_animation->Finished() == true)
+		if (App->player2->turning2.Finished() == true)
 		{
 			//turning.speed = 0.1f;
 			App->player2->lookingright = false;
 			App->player2->turning.Reset();
 		}
-	}
+	}*/
+
+
+
+
 	if (App->player->lookingright == true)
 	App->player->playercollider->rect.x = App->player->position.x;
 	else

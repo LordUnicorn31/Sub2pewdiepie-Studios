@@ -77,7 +77,7 @@ update_status ModuleSceneKen::Update()
 	App->render->Blit(graphics, 0, 176, &ground);
 
 
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == 1) {
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
 		App->fade->FadeToBlack(App->scene_ken, App->congratsscreen,1);
 		if (App->player->position.x > 300)
 			App->fade->FadeToBlack(App->scene_ken, App->congratsscreen,1);

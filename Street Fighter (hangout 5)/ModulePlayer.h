@@ -27,6 +27,14 @@ public:
 	SDL_Texture* graphics = nullptr;
 	bool lookingright;
 	int hadoukenable = 0;
+	bool forwarding = false;
+	bool backwarding = false;
+	bool jumpingidle = false;
+	bool jumpingright = false;
+	bool jumpingleft = false;
+	bool punching = false;
+	bool kicking = false;
+	bool hadouking = false;
 	//colliders
 	Collider* playercollider = nullptr;
 	//Collider* player2collider = nullptr;
