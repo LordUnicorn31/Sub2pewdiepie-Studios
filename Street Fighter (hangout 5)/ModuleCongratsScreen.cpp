@@ -46,7 +46,7 @@ bool ModuleCongratsScreen::CleanUp()
 update_status ModuleCongratsScreen::Update()
 {
 	App->render->Blit(graphics, -150, -45, &background, 0.75f); // back of the room
-	if (App->input->keyboardstates[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
 		App->fade->FadeToBlack(App->congratsscreen, App->welcomescreen,1);
 	}
 	return UPDATE_CONTINUE;

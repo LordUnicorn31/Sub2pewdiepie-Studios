@@ -288,7 +288,7 @@ update_status ModulePlayer::Update()
 	else
 		App->player2->lookingright = false;
 
-	if (App->input->keyboard[SDL_SCANCODE_D] == 1 && App->player->position.x < SCREEN_WIDTH - 60 && !(App->player->jumpingidle == true || App->player->jumpingright == true || App->player->jumpingleft == true))
+	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && App->player->position.x < SCREEN_WIDTH - 60 && !(App->player->jumpingidle == true || App->player->jumpingright == true || App->player->jumpingleft == true))
 	{
 		if (App->player->position.x < App->player2->position.x) {// App->player->lookingright = true
 			App->player->current_animation = &forward;
@@ -306,7 +306,7 @@ update_status ModulePlayer::Update()
 		else
 			App->player->position.x += speed / 1.5f;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_A] == 1 && App->player->position.x > 1 && !(App->player->jumpingidle == true || App->player->jumpingright == true || App->player->jumpingleft == true))
+	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && App->player->position.x > 1 && !(App->player->jumpingidle == true || App->player->jumpingright == true || App->player->jumpingleft == true))
 	{
 		if (App->player->position.x < App->player2->position.x) { // App->player->lookingright = true
 			App->player->current_animation = &backward;
@@ -323,7 +323,7 @@ update_status ModulePlayer::Update()
 		else
 			App->player->position.x -= speed;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == 1 && App->player2->position.x < SCREEN_WIDTH - 60 && !(App->player2->jumpingidle == true || App->player2->jumpingright == true || App->player2->jumpingleft == true))
+	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && App->player2->position.x < SCREEN_WIDTH - 60 && !(App->player2->jumpingidle == true || App->player2->jumpingright == true || App->player2->jumpingleft == true))
 	{
 		if (App->player2->position.x < App->player->position.x) {// App->player2->lookingright = true
 			App->player2->current_animation = &forward2;
@@ -340,7 +340,7 @@ update_status ModulePlayer::Update()
 		else
 			App->player2->position.x += speed / 1.5f;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_LEFT] == 1 && App->player2->position.x > 1 && !(App->player2->jumpingidle == true || App->player2->jumpingright == true || App->player2->jumpingleft == true))
+	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && App->player2->position.x > 1 && !(App->player2->jumpingidle == true || App->player2->jumpingright == true || App->player2->jumpingleft == true))
 	{
 		if (App->player2->position.x < App->player->position.x) {// App->player2->lookingright = true
 			App->player2->current_animation = &backward2;
