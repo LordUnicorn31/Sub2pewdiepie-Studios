@@ -261,6 +261,7 @@ bool ModulePlayer::Start()
 	midattack = App->audio->Load("Street Fighter Attack moves\\midattack.wav");
 	midpunchhit = App->audio->Load("Street Fighter Attack moves\\midpunchhit.wav");
 	midkickhit = App->audio->Load("Street Fighter Attack moves\\midkickhit.wav");
+	jumpgrounded = App->audio->Load("jumpgrounded.wav");
 	App->player->position.x = 0;
 	App->player->position.y = 220;
 	App->player2->position.x = 100;
@@ -369,7 +370,13 @@ update_status ModulePlayer::Update()
 	App->player->hadoukenable += 1;
 	if (App->input->keyboard[SDL_SCANCODE_1] == KEY_STATE::KEY_DOWN && !(App->player->jumpingidle == true || App->player->jumpingright == true || App->player->jumpingleft == true))
 		if (App->player->hadoukenable > 100) {
+			if (App->player->lookingright)
 			App->particles->AddParticle(App->particles->hadouken, App->player->position.x, App->player->position.y - 90, 0); 
+			else {
+				App->particles->hadouken.speed.x = -4;
+				App->particles->AddParticle(App->particles->hadouken, App->player->position.x, App->player->position.y - 90, 0, true);
+				App->particles->hadouken.speed.x = 4;
+			}
 			App->player->hadoukenable = 0;
 		}
 	
@@ -429,6 +436,7 @@ update_status ModulePlayer::Update()
 		App->player->vely += gravity;
 		if (App->player->position.y >= 220) {
 			App->player->jumpingidle = false;
+			App->audio->Play(App->player->jumpgrounded, 0);
 			App->player->position.y = 220;
 			App->player->jump.Reset();
 			App->player->current_animation = &App->player->idle;
@@ -440,8 +448,9 @@ update_status ModulePlayer::Update()
 		App->player2->vely += gravity;
 		if (App->player2->position.y >= 220) {
 			App->player2->jumpingidle = false;
+			App->audio->Play(App->player2->jumpgrounded, 0);
 			App->player2->position.y = 220;
-			App->player2->jump.Reset();
+			App->player2->jump2.Reset();
 			App->player2->current_animation = &App->player2->idle;
 		}
 	}

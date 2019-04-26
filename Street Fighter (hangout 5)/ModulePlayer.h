@@ -120,6 +120,7 @@ public:
 	Mix_Chunk* highkickhit = nullptr;		//triggers when high kick collides with enemy
 
 	Mix_Chunk* hadoukenhit = nullptr;		//triggers when hadouken collider hits the enemy (so i think it should go to Particles.h maybe, idk)
+	Mix_Chunk* jumpgrounded = nullptr;
 };
 
 #endif
