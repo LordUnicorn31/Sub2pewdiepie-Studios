@@ -74,7 +74,7 @@ update_status ModuleParticles::Update()
 		}
 		else if (SDL_GetTicks() >= p->born)
 		{
-			App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()), NULL, NULL);
+			App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()), NULL, p->flipped);
 			if (p->fx_played == false)
 			{
 				p->fx_played = true;
@@ -86,7 +86,7 @@ update_status ModuleParticles::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(const Particle& particle, int x, int y, Uint32 delay)
+void ModuleParticles::AddParticle(const Particle& particle, int x, int y, Uint32 delay, bool flipped_)
 {
 	Particle* p = new Particle(particle);
 	p->born = SDL_GetTicks() + delay;
@@ -94,6 +94,7 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, Uint32
 	p->position.y = y;
 	//App->audio->Play(p->sfx, 0);
 	active[last_particle++] = p;
+	p->flipped = flipped_;
 }
 // -------------------------------------------------------------
 // -------------------------------------------------------------

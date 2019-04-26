@@ -20,6 +20,7 @@ struct Particle
 	iPoint speed;
 	Uint32 born = 0;
 	Uint32 life = 0;
+	bool flipped = false;
 	bool fx_played = false;
 
 	Particle();
@@ -38,7 +39,7 @@ public:
 	update_status Update();
 	bool CleanUp();
 
-	void AddParticle(const Particle& particle, int x, int y, Uint32 delay = 0);
+	void AddParticle(const Particle& particle, int x, int y, Uint32 delay = 0, bool flipped_ = false);
 	Particle hadouken;
 	Mix_Chunk* hadoukenhit = nullptr;
 
