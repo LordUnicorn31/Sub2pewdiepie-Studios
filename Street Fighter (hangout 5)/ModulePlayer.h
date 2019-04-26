@@ -66,6 +66,7 @@ public:
 	//Animations player2
 	//
 
+		/*
 	Animation idle2;
 	//movement
 	Animation forward2;
@@ -85,7 +86,7 @@ public:
 	Animation lowmid_kick2;
 	Animation high_kick2;
 		Animation low_close_kick2;
-		Animation high_close_kick2;
+		Animation high_close_kick2;*/
 			//Animation jump_kick2;
 	//
 	fPoint position;
