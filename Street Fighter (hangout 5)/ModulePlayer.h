@@ -22,7 +22,7 @@ public:
 
 public:
 	float vely = 0.0f;
-	float gravity = -0.02f;
+	float gravity = -0.08f;
 	Animation* current_animation = &idle;
 	//Animation* current_animation_player2 = &idle;
 	SDL_Texture* graphics = nullptr;
@@ -34,7 +34,7 @@ public:
 	bool jumpingright = false;
 	bool jumpingleft = false;
 	bool punching = false;
-	bool punching2 = false;
+	//bool punching2 = false;
 	bool kicking = false;
 	bool hadouking = false;
 	//colliders

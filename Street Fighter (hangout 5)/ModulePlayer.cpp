@@ -45,14 +45,17 @@ ModulePlayer::ModulePlayer()
 	turning.speed = 0.1f;
 	turning.loop = false;
 
-	jump.PushBack({17,  847, 71-17,   931-847});
-	jump.PushBack({100, 823, 155-100, 926-823});
-	jump.PushBack({176, 805, 225-176, 893-805});
-	jump.PushBack({251, 798, 304-251, 874-798});
-	jump.PushBack({327, 813, 374-327, 882-813});
-	jump.PushBack({397, 810, 444-397, 898-810});
-	jump.PushBack({464, 819, 518-464, 927-819});
-	jump.speed = 0.2f;
+	jump.PushBack({ 464, 819, 518 - 464, 927 - 819 });
+	//jump.PushBack({17,  847, 71-17,   931-847});
+	//jump.PushBack({100, 823, 155-100, 926-823});
+	//jump.PushBack({176, 805, 225-176, 893-805});
+	jump.PushBack({ 251, 798, 304 - 251, 874 - 798 });
+	jump.PushBack({ 251, 798, 304 - 251, 874 - 798 });
+	//jump.PushBack({327, 813, 374-327, 882-813});
+	//jump.PushBack({397, 810, 444-397, 898-810});
+	jump.PushBack({ 464, 819, 518 - 464, 927 - 819 });
+	jump.speed = 0.05f;
+	jump.loop = false;
 
 	jump_frontflip.PushBack({594, 823, 648-594,  925-823});
 	jump_frontflip.PushBack({669, 813, 729-669,  890-813});
@@ -157,14 +160,17 @@ ModulePlayer::ModulePlayer()
 	turning2.speed = 0.1f;
 	turning2.loop = false;
 
-	jump2.PushBack({ 17,  847, 71 - 17,   931 - 847 });
-	jump2.PushBack({ 100, 823, 155 - 100, 926 - 823 });
-	jump2.PushBack({ 176, 805, 225 - 176, 893 - 805 });
-	jump2.PushBack({ 251, 798, 304 - 251, 874 - 798 });
-	jump2.PushBack({ 327, 813, 374 - 327, 882 - 813 });
-	jump2.PushBack({ 397, 810, 444 - 397, 898 - 810 });
 	jump2.PushBack({ 464, 819, 518 - 464, 927 - 819 });
-	jump2.speed = 0.2f;
+	//jump.PushBack({17,  847, 71-17,   931-847});
+	//jump.PushBack({100, 823, 155-100, 926-823});
+	//jump.PushBack({176, 805, 225-176, 893-805});
+	jump2.PushBack({ 251, 798, 304 - 251, 874 - 798 });
+	jump2.PushBack({ 251, 798, 304 - 251, 874 - 798 });
+	//jump.PushBack({327, 813, 374-327, 882-813});
+	//jump.PushBack({397, 810, 444-397, 898-810});
+	jump2.PushBack({ 464, 819, 518 - 464, 927 - 819 });
+	jump2.speed = 0.05f;
+	jump2.loop = false;
 
 	jump_frontflip2.PushBack({ 594, 823, 648 - 594,  925 - 823 });
 	jump_frontflip2.PushBack({ 669, 813, 729 - 669,  890 - 813 });
@@ -367,48 +373,79 @@ update_status ModulePlayer::Update()
 			App->player->hadoukenable = 0;
 		}
 	
-	if (App->input->keyboard[SDL_SCANCODE_2] == KEY_STATE::KEY_REPEAT/* && !(App->player->jumpingidle == true || App->player->jumpingright == true || App->player->jumpingleft == true)*/) {
+	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT && !(App->player->jumpingidle == true || App->player->jumpingright == true || App->player->jumpingleft == true)) {
 		//jump.Reset();
-		jumpingidle = true;
+		App->player->jumpingidle = true;
 		LOG("uWu");
-		App->player->vely = 10.0f;
+		App->player->vely = 4.0f;
 
 
 	}
+	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT && !(App->player2->jumpingidle == true || App->player2->jumpingright == true || App->player2->jumpingleft == true)) {
+		//jump.Reset();
+		App->player2->jumpingidle = true;
+		LOG("uWu");
+		App->player2->vely = 4.0f;
+
+
+	}
+
 	if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN) {
-		lowpunch.Reset();
-		punching = true;
-		App->player->current_animation = &lowpunch;
+		App->player->lowpunch.Reset();
+		App->player->punching = true;
+		App->player->current_animation = &App->player->lowpunch;
 	}
-	if (punching) {
-		if (lowpunch.Finished()==false) {
-			if (current_animation != &lowpunch) {
-				App->player->current_animation = &lowpunch;
+	if (App->player->punching) {
+		if (App->player->lowpunch.Finished()==false) {
+			if (App->player->current_animation != &App->player->lowpunch) {
+				App->player->current_animation = &App->player->lowpunch;
 			}
 		}
 		else {
-			App->player->current_animation = &idle;
-			punching = false;
+			App->player->current_animation = &App->player->idle;
+			App->player->punching = false;
 		}
 	}
 	if (App->input->keyboard[SDL_SCANCODE_P] == KEY_STATE::KEY_DOWN) {
-		lowpunch.Reset();
-		punching2 = true;
-		App->player2->current_animation = &lowpunch;
+		App->player2->lowpunch.Reset();
+		App->player2->punching = true;
+		App->player2->current_animation = &App->player2->lowpunch;
 	}
-	if (punching2) {
-		if (lowpunch.Finished() == false) {
-			if (current_animation != &lowpunch) {
-				App->player2->current_animation = &lowpunch;
+	if (App->player2->punching) {
+		if (App->player2->lowpunch.Finished() == false) {
+			if (App->player2->current_animation != &App->player2->lowpunch) {
+				App->player2->current_animation = &App->player2->lowpunch;
 			}
 		}
 		else {
-			App->player2->current_animation = &idle;
-			punching2 = false;
+			App->player2->current_animation = &App->player2->idle;
+			App->player2->punching = false;
 		}
 	}
-	if (App->player->jumpingidle == true)
+	
+	if (App->player->jumpingidle == true) {
+		App->player->current_animation = &App->player->jump;
 		App->player->position.y -= App->player->vely;
+		App->player->vely += gravity;
+		if (App->player->position.y >= 220) {
+			App->player->jumpingidle = false;
+			App->player->position.y = 220;
+			App->player->jump.Reset();
+			App->player->current_animation = &App->player->idle;
+		}
+	}
+	if (App->player2->jumpingidle == true) {
+		App->player2->current_animation = &App->player2->jump;
+		App->player2->position.y -= App->player2->vely;
+		App->player2->vely += gravity;
+		if (App->player2->position.y >= 220) {
+			App->player2->jumpingidle = false;
+			App->player2->position.y = 220;
+			App->player2->jump.Reset();
+			App->player2->current_animation = &App->player2->idle;
+		}
+	}
+
 	//if playerposition.y <= groundY && (jumpingright/left/idle) then jumpingleft, idle, right to false
 
 	//if jumping left position -= speed
