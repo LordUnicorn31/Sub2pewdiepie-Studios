@@ -6,7 +6,7 @@
 #include "Globals.h"
 
 struct SDL_Texture;
-
+struct Mix_Chunck;
 class ModuleCongratsScreen : public Module
 {
 public:
@@ -25,6 +25,9 @@ public:
 	SDL_Rect foreground;
 	SDL_Rect background;
 	Animation water;
+	Mix_Chunk* congratsmusic = nullptr;
+	//Mix_Chunk *audio=nullptr;
+	
 };
 
 #endif // __MODULECONGRATSSCREEN_H__

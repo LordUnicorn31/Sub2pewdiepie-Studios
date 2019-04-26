@@ -13,6 +13,7 @@
 #include "Application.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleInput.h"
+#include "ModuleAudio.h"
 // Reference at https://youtu.be/6OlenbCC4WI?t=382
 
 ModuleCongratsScreen::ModuleCongratsScreen()
@@ -30,6 +31,9 @@ bool ModuleCongratsScreen::Start()
 	LOG("Loading background assets");
 	bool ret = true;
 	graphics = App->textures->Load("congrats.png");
+	congratsmusic = App->audio->Load("13 End Battle.ogg");
+	
+	App->audio->Play(congratsmusic, 0);
 	return ret;
 }
 
@@ -39,6 +43,7 @@ bool ModuleCongratsScreen::CleanUp()
 	// TODO 5: Remove all memory leaks
 	LOG("Unloading congrats stage");
 	App->textures->Unload(graphics);
+	App->audio->Unload(congratsmusic);
 	return true;
 }
 
@@ -48,6 +53,7 @@ update_status ModuleCongratsScreen::Update()
 	App->render->Blit(graphics, 0, 0, &background, 0.75f); // back of the room
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
 		App->fade->FadeToBlack(App->congratsscreen, App->welcomescreen,1);
+		
 	}
 	return UPDATE_CONTINUE;
 }
