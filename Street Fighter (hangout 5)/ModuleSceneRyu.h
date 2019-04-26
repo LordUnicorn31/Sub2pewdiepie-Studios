@@ -26,6 +26,10 @@ public:
 	SDL_Rect sky;
 	SDL_Rect background;
 	SDL_Rect castle;
+	SDL_Texture* uitext = nullptr;	//V
+	SDL_Rect uibg; //V
+	SDL_Rect uip1; //V
+	SDL_Rect uip2; //V
 };
 
 #endif // __MODULESCENERYU_H__
