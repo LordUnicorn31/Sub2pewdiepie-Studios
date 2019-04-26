@@ -11,6 +11,7 @@
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
 #include "ModuleCollision.h"
+#include "ModuleFonts.h"
 //#include "ModuleWinloseScreen.h"
 
 Application::Application()
@@ -28,6 +29,7 @@ Application::Application()
 	modules[10] = audio = new ModuleAudio();
 	modules[11] = collision = new ModuleCollision();
 	modules[12] = player2 = new ModulePlayer();
+	modules[13] = fonts = new ModuleFonts();
 	//modules[13] = winlosescreen = new ModuleWinloseScreen();
 }	
 
