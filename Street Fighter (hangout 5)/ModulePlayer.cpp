@@ -176,7 +176,7 @@ update_status ModulePlayer::Update()
 	else
 		App->player2->lookingright = false;
 
-	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && App->player->position.x < SCREEN_WIDTH - 60 && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft))
+	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && App->player->position.x < SCREEN_WIDTH - 60 && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft || App->player->punching))
 	{
 		if (App->player->position.x < App->player2->position.x) {// App->player->lookingright = true
 			App->player->current_animation = &App->player->forward;
@@ -194,7 +194,7 @@ update_status ModulePlayer::Update()
 		else
 			App->player->position.x += speed / 1.5f;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && App->player->position.x > 1 && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft))
+	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && App->player->position.x > 1 && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft || App->player->punching))
 	{
 		if (App->player->position.x < App->player2->position.x) { // App->player->lookingright = true
 			App->player->current_animation = &App->player->backward;
@@ -211,7 +211,7 @@ update_status ModulePlayer::Update()
 		else
 			App->player->position.x -= speed;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && App->player2->position.x < SCREEN_WIDTH - 60 && !(App->player2->jumpingidle || App->player2->jumpingright || App->player2->jumpingleft))
+	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && App->player2->position.x < SCREEN_WIDTH - 60 && !(App->player2->jumpingidle || App->player2->jumpingright || App->player2->jumpingleft || App->player2->punching))
 	{
 		if (App->player2->position.x < App->player->position.x) {// App->player2->lookingright = true
 			App->player2->current_animation = &App->player2->forward;
@@ -228,7 +228,7 @@ update_status ModulePlayer::Update()
 		else
 			App->player2->position.x += speed / 1.5f;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && App->player2->position.x > 1 && !(App->player2->jumpingidle || App->player2->jumpingright || App->player2->jumpingleft))
+	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && App->player2->position.x > 1 && !(App->player2->jumpingidle || App->player2->jumpingright || App->player2->jumpingleft || App->player2->punching))
 	{
 		if (App->player2->position.x < App->player->position.x) {// App->player2->lookingright = true
 			App->player2->current_animation = &App->player2->backward;
@@ -276,7 +276,7 @@ update_status ModulePlayer::Update()
 
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft || App->player->forwarding || App->player->backwarding)) {
+	if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft/* || App->player->forwarding || App->player->backwarding*/)) {
 		App->player->lowpunch.Reset();
 		App->player->punching = true;
 		App->audio->Play(App->player->lowattack, 0);
@@ -293,7 +293,7 @@ update_status ModulePlayer::Update()
 			App->player->punching = false;
 		}
 	}
-	if (App->input->keyboard[SDL_SCANCODE_P] == KEY_STATE::KEY_DOWN && !(App->player2->jumpingidle || App->player2->jumpingright || App->player2->jumpingleft || App->player->forwarding || App->player->backwarding)) {
+	if (App->input->keyboard[SDL_SCANCODE_P] == KEY_STATE::KEY_DOWN && !(App->player2->jumpingidle || App->player2->jumpingright || App->player2->jumpingleft/* || App->player->forwarding || App->player->backwarding*/)) {
 		App->player2->lowpunch.Reset();
 		App->player2->punching = true;
 		App->audio->Play(App->player2->lowattack, 0);
