@@ -5,7 +5,7 @@
 #include "ModuleRender.h"
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
-#include "ModuleSceneKen.h"
+#include "ModuleSceneRyu.h"
 #include "ModulePlayer.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleCongratsScreen.h"
@@ -13,7 +13,7 @@
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
-ModuleSceneKen::ModuleSceneKen()
+ModuleSceneRyu::ModuleSceneRyu()
 {
 	// ground
 	ground.x = 0;
@@ -40,13 +40,13 @@ ModuleSceneKen::ModuleSceneKen()
 	castle.h = 73;
 }
 
-ModuleSceneKen::~ModuleSceneKen()
+ModuleSceneRyu::~ModuleSceneRyu()
 {}
 
 // Load assets
-bool ModuleSceneKen::Start()
+bool ModuleSceneRyu::Start()
 {
-	LOG("Loading ken scene");
+	LOG("Loading Ryu scene");
 
 	graphics = App->textures->Load("scene_ryu.png");
 	music = App->audio->Load("05 Ryu.ogg");
@@ -57,9 +57,9 @@ bool ModuleSceneKen::Start()
 }
 
 // UnLoad assets
-bool ModuleSceneKen::CleanUp()
+bool ModuleSceneRyu::CleanUp()
 {
-	LOG("Unloading ken scene");
+	LOG("Unloading Ryu scene");
 	App->textures->Unload(graphics);
 	App->player->Disable();
 	App->player2->Disable();
@@ -68,7 +68,7 @@ bool ModuleSceneKen::CleanUp()
 }
 
 // Update: draw background
-update_status ModuleSceneKen::Update()
+update_status ModuleSceneRyu::Update()
 {
 	// Draw everything --------------------------------------
 	App->render->Blit(graphics, 0, 0, &sky,0.75);
@@ -78,9 +78,9 @@ update_status ModuleSceneKen::Update()
 
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
-		App->fade->FadeToBlack(App->scene_ken, App->congratsscreen,1);
+		App->fade->FadeToBlack(App->scene_Ryu, App->congratsscreen,1);
 		if (App->player->position.x > 300)
-			App->fade->FadeToBlack(App->scene_ken, App->congratsscreen,1);
+			App->fade->FadeToBlack(App->scene_Ryu, App->congratsscreen,1);
 	}
 	return UPDATE_CONTINUE;
 }
