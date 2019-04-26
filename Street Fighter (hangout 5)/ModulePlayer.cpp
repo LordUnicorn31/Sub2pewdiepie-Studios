@@ -339,6 +339,9 @@ update_status ModulePlayer::Update()
 	//if playerposition.y <= groundY && (jumpingright/left/idle) then jumpingleft, idle, right to false
 	//if jumping left position -= speed
 	//if jumping right position += speed
+	/*if (App->player->punching) {
+		//App->collision->AddCollider({10, -80, 28, 10}, COLLIDER_PLAYER1_PUNCH, )
+	}*/
 
 	if (App->player->lookingright)
 	App->player->playercollider->rect.x = App->player->position.x + 10;

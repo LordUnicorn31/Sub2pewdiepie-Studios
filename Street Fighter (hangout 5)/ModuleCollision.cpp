@@ -37,6 +37,8 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_PLAYER2_HADOUKEN][COLLIDER_PLAYER2] = false;
 	matrix[COLLIDER_PLAYER2_HADOUKEN][COLLIDER_PLAYER1_HADOUKEN] = false;
 	matrix[COLLIDER_PLAYER2_HADOUKEN][COLLIDER_PLAYER2_HADOUKEN] = false;
+
+
 }
 
 // Destructor

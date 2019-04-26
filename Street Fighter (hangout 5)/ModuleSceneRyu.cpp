@@ -101,9 +101,9 @@ update_status ModuleSceneRyu::Update()
 	App->render->Blit(graphics, 290, 39, &castle,0.92f);
 	App->render->Blit(graphics, 0, 0, &background, 0.92f);
 	App->render->Blit(graphics, 0, 176, &ground);
-	App->render->Blit(uitext, 50, 0, &uibg); //V
-	App->render->Blit(uitext, 51 + (88 - uip1.w), 3, &uip1); //V
-	App->render->Blit(uitext, 155, 3, &uip2); //V
+	App->render->Blit(uitext, 100, 0, &uibg); //V
+	App->render->Blit(uitext, 101 + (88 - uip1.w), 3, &uip1); //V
+	App->render->Blit(uitext, 205, 3, &uip2); //V
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
 		App->fade->FadeToBlack(App->scene_Ryu, App->congratsscreen,1);
