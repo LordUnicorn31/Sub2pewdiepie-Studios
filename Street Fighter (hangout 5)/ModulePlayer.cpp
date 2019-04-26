@@ -375,7 +375,38 @@ update_status ModulePlayer::Update()
 
 
 	}
-
+	if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN) {
+		lowpunch.Reset();
+		punching = true;
+		App->player->current_animation = &lowpunch;
+	}
+	if (punching) {
+		if (lowpunch.Finished()==false) {
+			if (current_animation != &lowpunch) {
+				App->player->current_animation = &lowpunch;
+			}
+		}
+		else {
+			App->player->current_animation = &idle;
+			punching = false;
+		}
+	}
+	if (App->input->keyboard[SDL_SCANCODE_P] == KEY_STATE::KEY_DOWN) {
+		lowpunch.Reset();
+		punching2 = true;
+		App->player2->current_animation = &lowpunch;
+	}
+	if (punching2) {
+		if (lowpunch.Finished() == false) {
+			if (current_animation != &lowpunch) {
+				App->player2->current_animation = &lowpunch;
+			}
+		}
+		else {
+			App->player2->current_animation = &idle;
+			punching2 = false;
+		}
+	}
 	if (App->player->jumpingidle == true)
 		App->player->position.y -= App->player->vely;
 	//if playerposition.y <= groundY && (jumpingright/left/idle) then jumpingleft, idle, right to false
