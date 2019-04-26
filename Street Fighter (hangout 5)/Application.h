@@ -18,6 +18,7 @@ class Module;
 class ModuleParticles;
 class ModuleAudio;
 class ModuleCollision;
+//class ModuleWinloseScreen;
 
 class Application
 {
@@ -37,6 +38,7 @@ public:
 	ModuleParticles* particles;
 	ModuleAudio* audio;
 	ModuleCollision* collision;
+	//ModuleWinloseScreen* winlosescreen;
 
 public:
 

@@ -50,7 +50,11 @@ update_status ModulePlayer::Update()
 	Animation* current_animation = &idle;
 
 	int speed = 1;
-
+	if (App->input->keyboard[SDL_SCANCODE_A] == 1)
+	{
+		current_animation = &backward;
+		position.x -= speed;
+	}
 	if(App->input->keyboard[SDL_SCANCODE_D] == 1)
 	{
 		current_animation = &forward;
