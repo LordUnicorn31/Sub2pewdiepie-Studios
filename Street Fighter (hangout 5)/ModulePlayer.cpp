@@ -390,6 +390,10 @@ void ModulePlayer::OnCollision(Collider*c1, Collider*c2) {
 bool ModulePlayer::CleanUp() {
 	App->textures->Unload(graphics);
 	App->audio->Unload(lowattack);
+	App->audio->Unload(lowattack);
+	App->audio->Unload(lowpunchhit);
+	App->audio->Unload(lowkickhit);
+	App->audio->Unload(jumpgrounded);
 	if (App->player->playercollider!=nullptr) {
 		App->player->playercollider->to_delete = true;
 	}
