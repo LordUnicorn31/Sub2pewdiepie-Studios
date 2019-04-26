@@ -137,9 +137,9 @@ bool ModulePlayer::Start()
 	LOG("Loading player textures");
 	bool ret = true;
 	graphics = App->textures->Load("ryu.png"); // arcade version
-	midattack = App->audio->Load("Street Fighter Attack moves\\midattack.wav");
-	midpunchhit = App->audio->Load("Street Fighter Attack moves\\midpunchhit.wav");
-	midkickhit = App->audio->Load("Street Fighter Attack moves\\midkickhit.wav");
+	lowattack = App->audio->Load("Street Fighter Attack moves\\lowattack.wav");
+	lowpunchhit = App->audio->Load("Street Fighter Attack moves\\lowpunchhit.wav");
+	lowkickhit = App->audio->Load("Street Fighter Attack moves\\lowkickhit.wav");
 	jumpgrounded = App->audio->Load("jumpgrounded.wav");
 	App->player->position.x = 0;
 	App->player->position.y = 220;
@@ -176,7 +176,7 @@ update_status ModulePlayer::Update()
 	else
 		App->player2->lookingright = false;
 
-	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && App->player->position.x < SCREEN_WIDTH - 60 && !(App->player->jumpingidle == true || App->player->jumpingright == true || App->player->jumpingleft == true))
+	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && App->player->position.x < SCREEN_WIDTH - 60 && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft))
 	{
 		if (App->player->position.x < App->player2->position.x) {// App->player->lookingright = true
 			App->player->current_animation = &App->player->forward;
@@ -194,7 +194,7 @@ update_status ModulePlayer::Update()
 		else
 			App->player->position.x += speed / 1.5f;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && App->player->position.x > 1 && !(App->player->jumpingidle == true || App->player->jumpingright == true || App->player->jumpingleft == true))
+	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && App->player->position.x > 1 && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft))
 	{
 		if (App->player->position.x < App->player2->position.x) { // App->player->lookingright = true
 			App->player->current_animation = &App->player->backward;
@@ -211,7 +211,7 @@ update_status ModulePlayer::Update()
 		else
 			App->player->position.x -= speed;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && App->player2->position.x < SCREEN_WIDTH - 60 && !(App->player2->jumpingidle == true || App->player2->jumpingright == true || App->player2->jumpingleft == true))
+	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && App->player2->position.x < SCREEN_WIDTH - 60 && !(App->player2->jumpingidle || App->player2->jumpingright || App->player2->jumpingleft))
 	{
 		if (App->player2->position.x < App->player->position.x) {// App->player2->lookingright = true
 			App->player2->current_animation = &App->player2->forward;
@@ -228,7 +228,7 @@ update_status ModulePlayer::Update()
 		else
 			App->player2->position.x += speed / 1.5f;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && App->player2->position.x > 1 && !(App->player2->jumpingidle == true || App->player2->jumpingright == true || App->player2->jumpingleft == true))
+	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && App->player2->position.x > 1 && !(App->player2->jumpingidle || App->player2->jumpingright || App->player2->jumpingleft))
 	{
 		if (App->player2->position.x < App->player->position.x) {// App->player2->lookingright = true
 			App->player2->current_animation = &App->player2->backward;
@@ -247,7 +247,7 @@ update_status ModulePlayer::Update()
 	}
 	if (App->player->hadoukenable < 101)
 	App->player->hadoukenable += 1;
-	if (App->input->keyboard[SDL_SCANCODE_1] == KEY_STATE::KEY_DOWN && !(App->player->jumpingidle == true || App->player->jumpingright == true || App->player->jumpingleft == true))
+	if (App->input->keyboard[SDL_SCANCODE_1] == KEY_STATE::KEY_DOWN && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft))
 		if (App->player->hadoukenable > 100) {
 			if (App->player->lookingright)
 			App->particles->AddParticle(App->particles->hadouken, App->player->position.x, App->player->position.y - 90, 0); 
@@ -259,7 +259,7 @@ update_status ModulePlayer::Update()
 			App->player->hadoukenable = 0;
 		}
 	
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT && !(App->player->jumpingidle == true || App->player->jumpingright == true || App->player->jumpingleft == true)) {
+	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft)) {
 		//jump.Reset();
 		App->player->jumpingidle = true;
 		//LOG("uWu");
@@ -267,7 +267,7 @@ update_status ModulePlayer::Update()
 
 
 	}
-	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT && !(App->player2->jumpingidle == true || App->player2->jumpingright == true || App->player2->jumpingleft == true)) {
+	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT && !(App->player2->jumpingidle || App->player2->jumpingright || App->player2->jumpingleft)) {
 		//jump.Reset();
 		App->player2->jumpingidle = true;
 		//LOG("uWu");
@@ -276,9 +276,10 @@ update_status ModulePlayer::Update()
 
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN) {
+	if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft || App->player->forwarding || App->player->backwarding)) {
 		App->player->lowpunch.Reset();
 		App->player->punching = true;
+		App->audio->Play(App->player->lowattack, 0);
 		App->player->current_animation = &App->player->lowpunch;
 	}
 	if (App->player->punching) {
@@ -292,9 +293,10 @@ update_status ModulePlayer::Update()
 			App->player->punching = false;
 		}
 	}
-	if (App->input->keyboard[SDL_SCANCODE_P] == KEY_STATE::KEY_DOWN) {
+	if (App->input->keyboard[SDL_SCANCODE_P] == KEY_STATE::KEY_DOWN && !(App->player2->jumpingidle || App->player2->jumpingright || App->player2->jumpingleft || App->player->forwarding || App->player->backwarding)) {
 		App->player2->lowpunch.Reset();
 		App->player2->punching = true;
+		App->audio->Play(App->player2->lowattack, 0);
 		App->player2->current_animation = &App->player2->lowpunch;
 	}
 	if (App->player2->punching) {

@@ -17,7 +17,8 @@
 
 ModuleWelcomeScreen::ModuleWelcomeScreen()
 {
-	background = { 120, 128, 671, 300 };
+	//background = { 120, 128, 671, 300 };
+	background = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
 }
 
 ModuleWelcomeScreen::~ModuleWelcomeScreen()
@@ -28,7 +29,7 @@ bool ModuleWelcomeScreen::Start()
 {
 	LOG("Loading background assets");
 	bool ret = true;
-	graphics = App->textures->Load("honda_stage3.png");
+	graphics = App->textures->Load("intro.png");
 	mainmenumusic = App->audio->Load("02 The World Warrior.ogg");
 	mainmenutoscenesound = App->audio->Load("IntroToScene.wav");
 	App->audio->Play(mainmenumusic, -1);
@@ -49,7 +50,7 @@ bool ModuleWelcomeScreen::CleanUp()
 // Update: draw background
 update_status ModuleWelcomeScreen::Update()
 {
-	App->render->Blit(graphics, -150, -45, &background, 0.75f); // back of the room
+	App->render->Blit(graphics, /*-150*/ 0, /*-45*/ 0, &background, 0.75f); // back of the room
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
 		App->audio->Play(mainmenutoscenesound, 0);
