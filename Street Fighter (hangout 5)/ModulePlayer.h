@@ -21,8 +21,7 @@ public:
 	void OnCollision(Collider*, Collider*);
 
 public:
-	float vely = 0.0f;
-	float gravity = -0.08f;
+
 	Animation* current_animation = &idle;
 	//Animation* current_animation_player2 = &idle;
 	SDL_Texture* graphics = nullptr;
@@ -34,7 +33,6 @@ public:
 	bool jumpingright = false;
 	bool jumpingleft = false;
 	bool punching = false;
-	//bool punching2 = false;
 	bool kicking = false;
 	bool hadouking = false;
 	//colliders
@@ -66,7 +64,6 @@ public:
 	//Animations player2
 	//
 
-		/*
 	Animation idle2;
 	//movement
 	Animation forward2;
@@ -86,7 +83,7 @@ public:
 	Animation lowmid_kick2;
 	Animation high_kick2;
 		Animation low_close_kick2;
-		Animation high_close_kick2;*/
+		Animation high_close_kick2;
 			//Animation jump_kick2;
 	//
 	fPoint position;
@@ -121,7 +118,6 @@ public:
 	Mix_Chunk* highkickhit = nullptr;		//triggers when high kick collides with enemy
 
 	Mix_Chunk* hadoukenhit = nullptr;		//triggers when hadouken collider hits the enemy (so i think it should go to Particles.h maybe, idk)
-	Mix_Chunk* jumpgrounded = nullptr;
 };
 
 #endif

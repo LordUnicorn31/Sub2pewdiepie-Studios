@@ -3,7 +3,7 @@
 #include <crtdbg.h>
 #include "Globals.h"
 #include "Application.h"
-#include "ModuleSceneRyu.h"
+#include "ModuleSceneKen.h"
 #include "ModuleWelcomeScreen.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
@@ -17,8 +17,7 @@
 
 ModuleWelcomeScreen::ModuleWelcomeScreen()
 {
-	//background = { 120, 128, 671, 300 };
-	background = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
+	background = { 120, 128, 671, 300 };
 }
 
 ModuleWelcomeScreen::~ModuleWelcomeScreen()
@@ -29,10 +28,10 @@ bool ModuleWelcomeScreen::Start()
 {
 	LOG("Loading background assets");
 	bool ret = true;
-	graphics = App->textures->Load("intro.png");
+	graphics = App->textures->Load("honda_stage3.png");
 	mainmenumusic = App->audio->Load("02 The World Warrior.ogg");
 	mainmenutoscenesound = App->audio->Load("IntroToScene.wav");
-	App->audio->Play(mainmenumusic, -1);
+	App->audio->Play(mainmenumusic, 0);
 	return ret;
 }
 
@@ -50,11 +49,11 @@ bool ModuleWelcomeScreen::CleanUp()
 // Update: draw background
 update_status ModuleWelcomeScreen::Update()
 {
-	App->render->Blit(graphics, /*-150*/ 0, /*-45*/ 0, &background, 0.75f); // back of the room
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
+	App->render->Blit(graphics, -150, -45, &background, 0.75f); // back of the room
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_DOWN == 1)
 	{
 		App->audio->Play(mainmenutoscenesound, 0);
-		App->fade->FadeToBlack(App->welcomescreen, App->scene_Ryu,1);
+		App->fade->FadeToBlack(App->welcomescreen, App->scene_ken,1);
 	}
 	return UPDATE_CONTINUE;
 }

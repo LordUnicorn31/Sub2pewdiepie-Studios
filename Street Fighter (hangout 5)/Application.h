@@ -9,7 +9,7 @@ class ModuleWindow;
 class ModuleInput;
 class ModuleTextures;
 class ModuleRender;
-class ModuleSceneRyu;
+class ModuleSceneKen;
 class ModuleWelcomeScreen; //
 class ModuleCongratsScreen; //
 class ModulePlayer;
@@ -18,7 +18,6 @@ class Module;
 class ModuleParticles;
 class ModuleAudio;
 class ModuleCollision;
-//class ModuleWinloseScreen;
 
 class Application
 {
@@ -29,7 +28,7 @@ public:
 	ModuleRender* render;
 	ModuleInput* input;
 	ModuleTextures* textures;
-	ModuleSceneRyu* scene_Ryu;
+	ModuleSceneKen* scene_ken;
 	ModulePlayer* player;
 	ModulePlayer* player2;
 	ModuleFadeToBlack* fade;
@@ -38,7 +37,6 @@ public:
 	ModuleParticles* particles;
 	ModuleAudio* audio;
 	ModuleCollision* collision;
-	//ModuleWinloseScreen* winlosescreen;
 
 public:
 

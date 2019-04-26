@@ -28,7 +28,8 @@ public:
 	bool CleanUp();
 
 public:
-	KEY_STATE keyboard[MAX_KEYS];
+	KEY_STATE keyboardstates[MAX_KEYS];
+	const Uint8 *keyboard = nullptr;
 	//Uint32 mouse;
 	int mPosX;
 	int mPosY;
