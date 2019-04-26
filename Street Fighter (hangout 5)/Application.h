@@ -19,7 +19,7 @@ class ModuleParticles;
 class ModuleAudio;
 class ModuleCollision;
 class ModuleFonts;
-//class ModuleWinloseScreen;
+
 
 class Application
 {
@@ -40,7 +40,7 @@ public:
 	ModuleAudio* audio;
 	ModuleCollision* collision;
 	ModuleFonts* fonts;
-	//ModuleWinloseScreen* winlosescreen;
+	
 
 public:
 

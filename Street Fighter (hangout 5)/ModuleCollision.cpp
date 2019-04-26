@@ -38,6 +38,17 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_PLAYER2_HADOUKEN][COLLIDER_PLAYER1_HADOUKEN] = false;
 	matrix[COLLIDER_PLAYER2_HADOUKEN][COLLIDER_PLAYER2_HADOUKEN] = false;
 
+	matrix[COLLIDER_PLAYER1_PUNCH][COLLIDER_WALL] = true;
+	matrix[COLLIDER_PLAYER1_PUNCH][COLLIDER_PLAYER1] = false;
+	matrix[COLLIDER_PLAYER1_PUNCH][COLLIDER_PLAYER2] = true;
+	matrix[COLLIDER_PLAYER1_PUNCH][COLLIDER_PLAYER1_PUNCH] = false;
+	matrix[COLLIDER_PLAYER1_PUNCH][COLLIDER_PLAYER2_PUNCH] = false;
+
+	matrix[COLLIDER_PLAYER2_PUNCH][COLLIDER_WALL] = true;
+	matrix[COLLIDER_PLAYER2_PUNCH][COLLIDER_PLAYER1] = true;
+	matrix[COLLIDER_PLAYER2_PUNCH][COLLIDER_PLAYER2] = false;
+	matrix[COLLIDER_PLAYER2_PUNCH][COLLIDER_PLAYER2_PUNCH] = false;
+	matrix[COLLIDER_PLAYER2_PUNCH][COLLIDER_PLAYER1_PUNCH] = false;
 
 }
 
@@ -135,6 +146,9 @@ void ModuleCollision::DebugDraw()
 		case COLLIDER_PLAYER2_HADOUKEN: // magenta
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
 			break;
+		case COLLIDER_PLAYER1_PUNCH:
+			App->render->DrawQuad(colliders[i]->rect, 0, 0, 0, alpha);
+			break;	
 		}
 	}
 }
