@@ -39,6 +39,7 @@ public:
 	bool hadouking = false;
 	//colliders
 	Collider* playercollider = nullptr;
+	Collider* player1punch = nullptr;
 	//Collider* player2collider = nullptr;
 
 	//movement
