@@ -5,14 +5,11 @@
 #include "Animation.h"
 #include "Globals.h"
 #include "p2Point.h"
-#include"ModuleCollision.h"
 
 #define MAX_ACTIVE_PARTICLES 100
 
 struct SDL_Texture;
 struct Mix_Chunk;
-struct Collider;
-enum COLLIDER_TYPE;
 struct Particle
 {
 	Collider* collider = nullptr;
@@ -42,7 +39,7 @@ public:
 	update_status Update();
 	bool CleanUp();
 
-	void AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type,Uint32 delay = 0, bool flipped_ = false);
+	void AddParticle(const Particle& particle, int x, int y, Uint32 delay = 0, bool flipped_ = false);
 	Particle hadouken;
 	Mix_Chunk* hadoukenhit = nullptr;
 
@@ -50,6 +47,7 @@ private:
 	
 	SDL_Texture* graphics = nullptr;
 	Particle* active[MAX_ACTIVE_PARTICLES];
+	uint last_particle = 0;
 
 public:
 	void OnCollision(Collider*, Collider*);
