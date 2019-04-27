@@ -425,6 +425,10 @@ update_status ModulePlayer::Update()
 
 	App->render->Blit(graphics, App->player->position.x, App->player->position.y - r1.h, &r1, 1.0f, !App->player->lookingright);
 	App->render->Blit(graphics, App->player2->position.x, App->player2->position.y - r2.h, &r2, 1.0f, !App->player2->lookingright);
+
+	//fonts
+	//font_welcome = App->fonts->Load("")
+	return UPDATE_CONTINUE;
 	
 	return UPDATE_CONTINUE;
 }
