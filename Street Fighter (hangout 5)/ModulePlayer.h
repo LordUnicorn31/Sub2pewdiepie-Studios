@@ -21,6 +21,7 @@ public:
 	void OnCollision(Collider*, Collider*);
 
 public:
+	int life = 0;
 	float vely = 0.0f;
 	float gravity = -0.08f;
 	Animation* current_animation = &idle;
