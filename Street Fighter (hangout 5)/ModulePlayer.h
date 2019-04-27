@@ -56,6 +56,7 @@ public:
 		Animation high_close_punch;
 			Animation low_jump_punch;
 			Animation high_jump_punch;
+			iPoint punchpos;
 			
 	//kicks
 	Animation lowmid_kick;
