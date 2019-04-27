@@ -144,8 +144,10 @@ bool ModulePlayer::Start()
 	bool ret = true;
 	graphics = App->textures->Load("ryu.png"); // arcade version
 	lowattack = App->audio->Load("Street Fighter Attack moves\\lowattack.wav");
+	midattack = App->audio->Load("Street Fighter Attack moves\\midattack.wav");
 	lowpunchhit = App->audio->Load("Street Fighter Attack moves\\lowpunchhit.wav");
 	lowkickhit = App->audio->Load("Street Fighter Attack moves\\lowkickhit.wav");
+	hadoukenaudio = App->audio->Load("Hadouken.wav");
 	jumpgrounded = App->audio->Load("jumpgrounded.wav");
 	App->player->position.x = 0;
 	App->player->position.y = 220;
@@ -323,7 +325,7 @@ update_status ModulePlayer::Update()
 	if (App->input->keyboard[SDL_SCANCODE_K] == KEY_STATE::KEY_DOWN && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft||App->player->punching||App->player->kicking/* || App->player->forwarding || App->player->backwarding*/)) {
 		App->player->low_close_kick.Reset();
 		App->player->kicking = true;
-		App->audio->Play(App->player->lowattack, 0);
+		App->audio->Play(App->player->midattack, 0);
 		App->player->current_animation = &App->player->low_close_kick;
 	}
 	if (App->player->kicking) {
@@ -341,7 +343,7 @@ update_status ModulePlayer::Update()
 	if (App->input->keyboard[SDL_SCANCODE_O] == KEY_STATE::KEY_DOWN && !(App->player2->jumpingidle || App->player2->jumpingright || App->player2->jumpingleft || App->player2->punching || App->player2->kicking/* || App->player->forwarding || App->player->backwarding*/)) {
 		App->player2->low_close_kick.Reset();
 		App->player2->kicking = true;
-		App->audio->Play(App->player->lowattack, 0);
+		App->audio->Play(App->player2->midattack, 0);
 		App->player2->current_animation = &App->player2->lowpunch;
 	}
 	if (App->player2->kicking) {
@@ -359,6 +361,7 @@ update_status ModulePlayer::Update()
 	if (App->input->keyboard[SDL_SCANCODE_L] == KEY_STATE::KEY_DOWN && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft || App->player->punching || App->player->kicking||App->player->hadouking2/* || App->player->forwarding || App->player->backwarding*/)) {
 		App->player->playerhadouken.Reset();
 		App->player->hadouking2 = true;
+		App->audio->Play(App->player->hadoukenaudio, 0);
 		//App->audio->Play(App->player->lowattac, 0);falta el audio del hadouken
 		App->player->current_animation = &App->player->playerhadouken;
 	}
