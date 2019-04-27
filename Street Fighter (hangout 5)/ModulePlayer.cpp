@@ -379,7 +379,7 @@ update_status ModulePlayer::Update()
 			}
 			if (App->player->position.x < App->player2->position.x) {
 				App->particles->hadouken.speed.x = 4;
-				App->particles->AddParticle(App->particles->hadouken, App->player->position.x, App->player->position.y - 80, 0, false);
+				App->particles->AddParticle(App->particles->hadouken, App->player->position.x+10, App->player->position.y - 80, 0, false);
 			}
 			App->player->hadouking2 = false;
 		}
@@ -404,7 +404,7 @@ update_status ModulePlayer::Update()
 			}
 			if (App->player2->position.x < App->player->position.x) {
 				App->particles->hadouken.speed.x = 4;
-				App->particles->AddParticle(App->particles->hadouken, App->player2->position.x, App->player2->position.y - 80, 0, false);
+				App->particles->AddParticle(App->particles->hadouken, App->player2->position.x+10, App->player2->position.y - 80, 0, false);
 			}
 			App->player2->hadouking2 = false;
 		}
