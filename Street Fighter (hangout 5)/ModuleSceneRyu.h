@@ -8,6 +8,7 @@
 struct SDL_Texture;
 struct Mix_Chunk;
 
+
 class ModuleSceneRyu : public Module
 {
 public:

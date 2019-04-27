@@ -14,7 +14,6 @@
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
 
-
 ModuleSceneRyu::ModuleSceneRyu()
 {
 	// ground
