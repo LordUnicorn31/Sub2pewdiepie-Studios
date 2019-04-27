@@ -362,7 +362,6 @@ update_status ModulePlayer::Update()
 		App->player->playerhadouken.Reset();
 		App->player->hadouking2 = true;
 		App->audio->Play(App->player->hadoukenaudio, 0);
-		//App->audio->Play(App->player->lowattac, 0);falta el audio del hadouken
 		App->player->current_animation = &App->player->playerhadouken;
 	}
 	if (App->player->hadouking2) {
@@ -388,7 +387,6 @@ update_status ModulePlayer::Update()
 		App->player2->playerhadouken.Reset();
 		App->player2->hadouking2 = true;
 		App->audio->Play(App->player->hadoukenaudio, 0);
-		//App->audio->Play(App->player->lowattac, 0);falta el audio del hadouken
 		App->player2->current_animation = &App->player2->playerhadouken;
 	}
 	if (App->player2->hadouking2) {
@@ -463,8 +461,6 @@ update_status ModulePlayer::Update()
 
 	//fonts
 	//font_welcome = App->fonts->Load("")
-	return UPDATE_CONTINUE;
-	
 	return UPDATE_CONTINUE;
 }
 
