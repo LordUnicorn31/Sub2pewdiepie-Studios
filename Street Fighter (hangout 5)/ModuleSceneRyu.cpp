@@ -13,8 +13,7 @@
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
-int HPloss = (70 * 0.88);	//V: es una variable placeholder que equivale al daño que recibe.
-//V: Una vez esté programado el daño de los ataques, reemplazar 70 por una variable externa "damage" o algo
+
 
 ModuleSceneRyu::ModuleSceneRyu()
 {
@@ -65,6 +64,7 @@ bool ModuleSceneRyu::Start()
 {
 	LOG("Loading Ryu scene");
 
+	
 	uitext = App->textures->Load("HPBAR.png"); //V
 	graphics = App->textures->Load("scene_ryu.png");
 	music = App->audio->Load("05 Ryu.ogg");
@@ -89,13 +89,26 @@ bool ModuleSceneRyu::CleanUp()
 // Update: draw background
 update_status ModuleSceneRyu::Update()
 {
-	//HP loss mechanic
-	if (HPloss > 0 && uip1.w > 0)
+
+	//HP update mechanic
+	if (prevHP1 > App->player->life)
 	{
-		HPloss--;
-		uip1.w--;
+		prevHP1--;
 	}
-	
+	else if (prevHP1 < App->player->life)
+	{
+		prevHP1++;
+	}
+	uip1.w = (prevHP1 * 0.88); // V
+	if (prevHP2 > App->player2->life)
+	{
+		prevHP2--;
+	}
+	else if (prevHP2 < App->player2->life)
+	{
+		prevHP2++;
+	}
+	uip2.w = (prevHP2 * 0.88); // V
 	// Draw everything --------------------------------------
 	App->render->Blit(graphics, 0, 0, &sky,0.75);
 	App->render->Blit(graphics, 290, 39, &castle,0.92f);
