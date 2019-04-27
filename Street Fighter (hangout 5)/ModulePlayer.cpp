@@ -126,6 +126,12 @@ ModulePlayer::ModulePlayer()
 	high_jump_punch.PushBack({307, 979, 375-307, 1055-979});
 	high_jump_punch.PushBack({235, 987, 286-235, 1055-987});
 	high_jump_punch.speed = 0.1f;
+
+	playerhadouken.PushBack({ 36,1544,72,92 });
+	playerhadouken.PushBack({ 137,1550,82,84 });
+	playerhadouken.PushBack({ 243,1552,92,83 });
+	playerhadouken.PushBack({ 356,1557,108,79 });
+	playerhadouken.speed = 0.1f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -345,6 +351,25 @@ update_status ModulePlayer::Update()
 		else {
 			App->player2->current_animation = &App->player2->idle;
 			App->player2->kicking = false;
+		}
+	}
+
+	if (App->input->keyboard[SDL_SCANCODE_L] == KEY_STATE::KEY_DOWN && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft || App->player->punching || App->player->kicking||App->player->hadouking2/* || App->player->forwarding || App->player->backwarding*/)) {
+		App->player->playerhadouken.Reset();
+		App->player->hadouking2 = true;
+		//App->audio->Play(App->player->lowattac, 0);falta el audio del hadouken
+		App->player->current_animation = &App->player->playerhadouken;
+	}
+	if (App->player->hadouking2) {
+		if (!App->player->playerhadouken.Finished()) {
+			if (App->player->current_animation != &App->player->playerhadouken) {
+				App->player->current_animation = &App->player->playerhadouken;
+			}
+		}
+		else {
+			App->player->current_animation = &App->player->idle;
+			App->particles->AddParticle(App->particles->hadouken, App->player->position.x, App->player->position.y - 80, 0, true);
+			App->player->hadouking2 = false;
 		}
 	}
 

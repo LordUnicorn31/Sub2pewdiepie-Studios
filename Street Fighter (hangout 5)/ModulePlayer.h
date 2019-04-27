@@ -36,11 +36,14 @@ public:
 	bool punching = false;
 	bool kicking = false;
 	bool hadouking = false;
+	bool hadouking2 = false;//le fet pk no vull borrar el que as fet am el numero 1
 	//colliders
 	Collider* playercollider = nullptr;
 	Collider* player1punch = nullptr;
 	//Collider* player2collider = nullptr;
 
+	//hadouken
+	Animation playerhadouken;
 	//movement
 	Animation idle;
 	Animation forward;

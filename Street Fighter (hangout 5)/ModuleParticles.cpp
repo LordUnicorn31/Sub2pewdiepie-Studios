@@ -6,6 +6,7 @@
 #include "ModuleParticles.h"
 #include "ModuleCollision.h"
 #include "ModuleAudio.h"
+#include "ModulePlayer.h"
 #include "SDL/include/SDL_timer.h"
 
 ModuleParticles::ModuleParticles()
@@ -25,7 +26,7 @@ bool ModuleParticles::Start()
 	hadoukenhit = App->audio->Load("hadoukenhit.wav");
 	hadouken.anim.PushBack({ 492,1562,45,33 });
 	hadouken.anim.PushBack({ 549,1564,57,30 });
-	hadouken.life = 1000;
+	hadouken.life = 1500;
 	hadouken.anim.speed = 0.2f;
 	hadouken.sfx = hadoukenhit;
 	//hadouken.collider = App->collision->AddCollider({ 0, 0, 20, 20 }, )
@@ -74,7 +75,12 @@ update_status ModuleParticles::Update()
 		}
 		else if (SDL_GetTicks() >= p->born)
 		{
-			App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()), NULL, p->flipped);
+			if (App->player->position.x < App->player2->position.x) {
+				App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()), NULL);
+			}
+			if(App->player->position.x>App->player2->position.x){
+				App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()), NULL, p->flipped);
+			}
 			if (p->fx_played == false)
 			{
 				p->fx_played = true;
