@@ -455,9 +455,14 @@ update_status ModulePlayer::Update()
 	// Draw everything --------------------------------------
 	SDL_Rect r1 = App->player->current_animation->GetCurrentFrame();
 	SDL_Rect r2 = App->player2->current_animation->GetCurrentFrame();
-
+	if (App->player->lookingright)
 	App->render->Blit(graphics, App->player->position.x, App->player->position.y - r1.h, &r1, 1.0f, !App->player->lookingright);
+	else
+	App->render->Blit(graphics, App->player->position.x + 60, App->player->position.y - r1.h, &r1, 1.0f, !App->player->lookingright);
+	if (App->player2->lookingright)
 	App->render->Blit(graphics, App->player2->position.x, App->player2->position.y - r2.h, &r2, 1.0f, !App->player2->lookingright);
+	else
+	App->render->Blit(graphics, App->player2->position.x + 60, App->player2->position.y - r2.h, &r2, 1.0f, !App->player2->lookingright);
 
 	//fonts
 	//font_welcome = App->fonts->Load("")
