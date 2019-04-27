@@ -75,12 +75,7 @@ update_status ModuleParticles::Update()
 		}
 		else if (SDL_GetTicks() >= p->born)
 		{
-			if (App->player->position.x < App->player2->position.x) {
-				App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()), NULL);
-			}
-			if(App->player->position.x>App->player2->position.x){
-				App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()), NULL, p->flipped);
-			}
+			App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()), NULL, p->flipped);
 			if (p->fx_played == false)
 			{
 				p->fx_played = true;
