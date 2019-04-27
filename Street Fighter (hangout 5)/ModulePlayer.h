@@ -34,7 +34,6 @@ public:
 	bool jumpingright = false;
 	bool jumpingleft = false;
 	bool punching = false;
-	//bool punching2 = false;
 	bool kicking = false;
 	bool hadouking = false;
 	//colliders

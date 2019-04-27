@@ -48,16 +48,14 @@ int ModuleFonts::Load(const char* texture_path, const char* characters, uint row
 	fonts[id].rows = rows; // rows: rows of characters in the texture
 
 	// TODO 1: Finish storing font data
-	for (int i = 0; characters[i] != '\0'; ++i) {
-		++fonts[id].len;
+	//fonts[id].len = strlen(characters]);
+	for (int i = 0; i < MAX_FONT_CHARS; ++i) {
 		fonts[id].table[i] = characters[i];
 	}
-	//fonts[id].len = strlen(characters]);
-	uint w, h;
-	App->textures->GetSize(tex, w, h);
+	fonts[id].len = strlen(characters);
+	App->textures->GetSize(tex, fonts[id].char_w, fonts[id].char_h);
 	fonts[id].row_chars = fonts[id].len / fonts[id].rows;
-	fonts[id].char_w = w;
-	fonts[id].char_h = h;
+	fonts[id].char_w /= fonts[id].len / fonts[id].rows;
 	// len: lenght of the table
 	// table: array of chars to have the list of characters
 	// row_chars: amount of chars per row of the texture
@@ -98,8 +96,26 @@ void ModuleFonts::BlitText(int x, int y, int font_id, const char* text) const
 	for(uint i = 0; i < len; ++i)
 	{
 		// TODO 2: Find the character in the table and its position in the texture, then Blit
-		if (font->table == text) {
-			App->render->Blit(fonts->graphic, x, y, &rect);
+		for (uint z = 0; z < font->len; ++z) {
+			if (font->table[z] == text[i]) {
+				if (font->rows == 1) {
+					rect.x = z * font->char_w;
+					rect.y = 0;
+				}
+				else if (font->rows == 2) {
+					if (z > font->row_chars) {
+						rect.x = (z - font->row_chars) * font->char_w;
+						rect.y = font->char_h;
+					}
+					else {
+						rect.x = z * font->char_w;
+						rect.y = 0;
+					}
+				}
+				App->render->Blit(fonts->graphic, x, y, &rect, 0.0f, false);
+				x += font->char_w;
+				break;
+			}
 		}
 	}
 }
