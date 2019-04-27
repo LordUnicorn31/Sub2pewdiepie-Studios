@@ -41,6 +41,7 @@ public:
 	//colliders
 	Collider* playercollider = nullptr;
 	Collider* player1punch = nullptr;
+	Collider* player1kcik = nullptr;
 	//Collider* player2collider = nullptr;
 
 	//hadouken
