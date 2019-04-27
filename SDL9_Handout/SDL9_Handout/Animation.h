@@ -31,11 +31,10 @@ public:
 		frames[last_frame++] = rect;
 	}
 
-	SDL_Rect& GetCurrentFrame(bool doframeshits = true)
+	SDL_Rect& GetCurrentFrame()
 	{
-		if (doframeshits) {
 		current_frame += speed;
-		if(current_frame >= last_frame)
+		if (current_frame >= last_frame)
 		{
 			current_frame = (loop) ? 0.0f : last_frame - 1;
 			loops++;
