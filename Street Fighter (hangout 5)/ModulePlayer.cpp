@@ -153,7 +153,9 @@ bool ModulePlayer::Start()
 	App->player2->position.y = 220;
 	App->player->playercollider = App->collision->AddCollider({ 0, 220, 40, 80}, COLLIDER_PLAYER1, App->player);
 	App->player2->playercollider = App->collision->AddCollider({ 100, 220, 40, 80 }, COLLIDER_PLAYER2, App->player2);
-	//App->player->player1punch = App->collision->AddCollider({ 0, 220, 50, 80 }, COLLIDER_PLAYER1_PUNCH, App->player);
+	punchpos.x = 0;
+	punchpos.y = 220;
+	App->player->player1punch = App->collision->AddCollider({ punchpos.x, punchpos.y, 50, 80 }, COLLIDER_PLAYER1_PUNCH, App->player);
 	lookingright = false;
 
 	return ret;
