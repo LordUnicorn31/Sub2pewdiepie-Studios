@@ -370,7 +370,12 @@ update_status ModulePlayer::Update()
 		}
 		else {
 			App->player->current_animation = &App->player->idle;
-			App->particles->AddParticle(App->particles->hadouken, App->player->position.x, App->player->position.y - 80, 0, true);
+			if (App->player->position.x > App->player2->position.x) {
+				App->particles->AddParticle(App->particles->hadouken, App->player->position.x, App->player->position.y - 80, 0, true);
+			}
+			if (App->player->position.x < App->player2->position.x) {
+				App->particles->AddParticle(App->particles->hadouken, App->player->position.x, App->player->position.y - 80, 0, false);
+			}
 			App->player->hadouking2 = false;
 		}
 	}
