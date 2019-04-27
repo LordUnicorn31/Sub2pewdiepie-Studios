@@ -31,8 +31,9 @@ public:
 		frames[last_frame++] = rect;
 	}
 
-	SDL_Rect& GetCurrentFrame()
+	SDL_Rect& GetCurrentFrame(bool doframeshits = true)
 	{
+		if (doframeshits) {
 		current_frame += speed;
 		if(current_frame >= last_frame)
 		{
