@@ -24,6 +24,9 @@ Click [our Wiki](https://github.com/LordUnicorn31/Sub2pewdiepie-Studios/wiki/Des
 
 As the game is still a prototype, controls are limited and only one character can be played.
 
+- Menu navigation
+  - Start: Space
+
 #### Player 1
 - Movement
   - Jump: W
