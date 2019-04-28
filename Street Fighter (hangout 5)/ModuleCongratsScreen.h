@@ -20,7 +20,10 @@ public:
 public:
 
 	SDL_Texture* graphics = nullptr;
+	SDL_Texture* winer_loser = nullptr;
 	SDL_Rect background;
+	SDL_Rect winer;
+	SDL_Rect loser;
 	Mix_Chunk* congratsmusic = nullptr;
 	
 };
