@@ -2,9 +2,9 @@
 
 ## Version index
 
-- [pre v0.4](https://github.com/LordUnicorn31/Sub2pewdiepie-Studios/new/master#10--04--2019)
-- [v0.4](https://github.com/LordUnicorn31/Sub2pewdiepie-Studios/new/master#v04)
-- [v0.5](https://github.com/LordUnicorn31/Sub2pewdiepie-Studios/new/master#v05)
+- [pre v0.4](./Changelog.md#10--04--2019)
+- [v0.4](./Changelog.md#v04)
+- [v0.5](./Changelog.md#v04)
 
 #### 10 / 04 / 2019
 
