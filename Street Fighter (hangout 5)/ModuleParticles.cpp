@@ -136,6 +136,8 @@ bool Particle::Update()
 
 	position.x += speed.x;
 	position.y += speed.y;
+	if (collider != nullptr)
+		collider->SetPos(position.x, position.y);
 
 	return ret;
 }
@@ -153,4 +155,8 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 			break;
 		}
 	}
+}
+Particle::~Particle() {
+	if (collider != nullptr)
+		collider->to_delete = true;
 }

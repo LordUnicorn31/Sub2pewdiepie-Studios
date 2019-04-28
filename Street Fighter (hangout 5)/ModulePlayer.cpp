@@ -472,7 +472,7 @@ update_status ModulePlayer::Update()
 
 void ModulePlayer::OnCollision(Collider*c1, Collider*c2) {
 
-	if (c1 == App->player->playercollider && !App->fade->IsFading()) {
+	if (c1 == App->player->playercollider &&!App->fade->IsFading()) {
 		//player 1 empuja player 2
 		if(App->player->position.x<App->player2->position.x)
 			App->player2->position.x += 2;
