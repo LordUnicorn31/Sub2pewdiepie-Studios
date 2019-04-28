@@ -158,7 +158,8 @@ bool ModulePlayer::Start()
 	punchpos.x = 0;
 	punchpos.y = 220;
 	life = 100;
-	App->player->player1punch = App->collision->AddCollider({ punchpos.x, punchpos.y, 50, 80 }, COLLIDER_PLAYER1_DAMAGE, App->player);
+	App->player->pdamagecollider = App->collision->AddCollider({ punchpos.x, punchpos.y, 50, 80 }, COLLIDER_PLAYER1_DAMAGE, App->player);
+	App->player2->pdamagecollider = App->collision->AddCollider({ punchpos.x, punchpos.y, 50, 80 }, COLLIDER_PLAYER2_DAMAGE, App->player2);
 	lookingright = false;
 
 	return ret;
@@ -486,6 +487,13 @@ void ModulePlayer::OnCollision(Collider*c1, Collider*c2) {
 		else
 			App->player->position.x -= 2;
 	}
+	if (c1 == App->player->playercollider && c2->type == COLLIDER_PLAYER2_DAMAGE)
+		App->player->life -= 15;
+
+	if (c1 == App->player2->playercollider && c2->type == COLLIDER_PLAYER1_DAMAGE)
+		App->player2->life -= 15;
+
+
 	/*if (App->scene_ken->IsEnabled() == true)
 	App->fade->FadeToBlack(App->scene_ken, App->scene_honda);
 	if (App->scene_honda->IsEnabled() == true)

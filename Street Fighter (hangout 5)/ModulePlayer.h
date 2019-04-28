@@ -40,8 +40,8 @@ public:
 	bool hadouking2 = false;//le fet pk no vull borrar el que as fet am el numero 1
 	//colliders
 	Collider* playercollider = nullptr;
-	Collider* player1punch = nullptr;
-	Collider* player1kcik = nullptr;
+	Collider* pdamagecollider = nullptr;
+	//Collider* player1kcik = nullptr;
 	//Collider* player2collider = nullptr;
 
 	//hadouken
