@@ -34,8 +34,7 @@ bool ModuleCongratsScreen::Start()
 {
 	LOG("Loading background assets");
 	bool ret = true;
-	graphics = App->textures->Load("congrats.png");
-	winer_loser = App->textures->Load("ryu.png");
+	graphics = App->textures->Load("congratsplayer1.png");
 	congratsmusic = App->audio->Load("13 End Battle.ogg");
 	
 	App->audio->Play(congratsmusic, 0);
@@ -48,7 +47,6 @@ bool ModuleCongratsScreen::CleanUp()
 	// TODO 5: Remove all memory leaks
 	LOG("Unloading congrats stage");
 	App->textures->Unload(graphics);
-	App->textures->Unload(winer_loser);
 	App->audio->Unload(congratsmusic);
 	return true;
 }
@@ -57,8 +55,6 @@ bool ModuleCongratsScreen::CleanUp()
 update_status ModuleCongratsScreen::Update()
 {
 	App->render->Blit(graphics, 0, 0, &background, 0.75f);
-	App->render->Blit(winer_loser, 5, 50, &winer, 0.75f);
-	App->render->Blit(winer_loser, 260, 50, &loser, 0.75f);
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
 		App->fade->FadeToBlack(App->congratsscreen, App->welcomescreen,1);
 		
