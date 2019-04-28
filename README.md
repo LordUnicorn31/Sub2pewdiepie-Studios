@@ -39,7 +39,7 @@ As the game is still a prototype, controls are limited and only one character ca
   - Punch: J
   - Kick: K
   - Special move: L
-
+- Win: Space
 
 #### Player 2
 - Movement
@@ -51,6 +51,7 @@ As the game is still a prototype, controls are limited and only one character ca
   - Punch: NUMPAD 1
   - Kick: NUMPAD 2
   - Special move: NUMPAD 3
+- Win: Enter
 
 To learn more about the original controls and know the controls that the final version will have implemented, click [here](https://github.com/LordUnicorn31/Sub2pewdiepie-Studios/wiki/Design#controls)
 
