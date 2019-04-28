@@ -5,6 +5,7 @@
 #include "Animation.h"
 #include "Globals.h"
 #include "p2Point.h"
+#include "ModuleInput.h"
 
 struct SDL_Texture;
 struct Mix_Chunk;
@@ -28,6 +29,7 @@ public:
 	//Animation* current_animation_player2 = &idle;
 	SDL_Texture* graphics = nullptr;
 	bool lookingright;
+	bool godmode = false;
 	int hadoukenable = 0;
 	bool forwarding = false;
 	bool backwarding = false;
@@ -131,6 +133,8 @@ public:
 	Mix_Chunk* hadoukenaudio = nullptr;			//triggers when player throws hadouken					//needed
 	Mix_Chunk* hadoukenhit = nullptr;		//triggers when hadouken collider hits the enemy (so i think it should go to Particles.h maybe, idk)
 	Mix_Chunk* jumpgrounded = nullptr;
+
+
 };
 
 #endif

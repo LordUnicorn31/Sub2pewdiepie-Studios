@@ -152,9 +152,9 @@ bool ModulePlayer::Start()
 	lowkickhit = App->audio->Load("Street Fighter Attack moves\\lowkickhit.wav");
 	hadoukenaudio = App->audio->Load("Hadouken.wav");
 	jumpgrounded = App->audio->Load("jumpgrounded.wav");
-	App->player->position.x = 0;
+	App->player->position.x = 50;
 	App->player->position.y = 220;
-	App->player2->position.x = 100;
+	App->player2->position.x = 250;
 	App->player2->position.y = 220;
 	App->player->playercollider = App->collision->AddCollider({ 0, 220, 40, 80}, COLLIDER_PLAYER1, App->player);
 	App->player2->playercollider = App->collision->AddCollider({ 100, 220, 40, 80 }, COLLIDER_PLAYER2, App->player2);
@@ -164,6 +164,7 @@ bool ModulePlayer::Start()
 	App->player->pdamagecollider = App->collision->AddCollider({ punchpos.x, punchpos.y, 50, 80 }, COLLIDER_PLAYER1_DAMAGE, App->player);
 	App->player2->pdamagecollider = App->collision->AddCollider({ punchpos.x, punchpos.y, 50, 80 }, COLLIDER_PLAYER2_DAMAGE, App->player2);
 	lookingright = false;
+	godmode = false;
 
 	return ret;
 }
@@ -182,6 +183,17 @@ update_status ModulePlayer::Update()
 	//current_animation = &high_jump_punch;
 	//playerRotation(nullptr);
 	float speed = 1.0f;
+	if (App->input->keyboard[SDL_SCANCODE_F1] == KEY_STATE::KEY_DOWN) 
+		App->player->godmode = true;
+	
+	if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN)
+		App->player->godmode = false;
+
+	if (App->input->keyboard[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN)
+		App->player2->godmode = true;
+
+	if (App->input->keyboard[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN)
+		App->player2->godmode = false;
 
 	if (App->player->position.x < App->player2->position.x)
 		App->player->lookingright = true;
@@ -275,7 +287,7 @@ update_status ModulePlayer::Update()
 			App->player->hadoukenable = 0;
 		}*/
 	
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft || App->player->playerhittedcounter < 59)) {
+	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft || App->player->punching || App->player->kicking || App->player->playerhittedcounter < 59)) {
 		//jump.Reset();
 		App->player->jumpingidle = true;
 		//LOG("uWu");
@@ -283,7 +295,7 @@ update_status ModulePlayer::Update()
 
 
 	}
-	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT && !(App->player2->jumpingidle || App->player2->jumpingright || App->player2->jumpingleft || App->player2->playerhittedcounter < 59)) {
+	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT && !(App->player2->jumpingidle || App->player2->jumpingright || App->player2->jumpingleft || App->player2->punching || App->player2->kicking || App->player2->playerhittedcounter < 59)) {
 		//jump.Reset();
 		App->player2->jumpingidle = true;
 		//LOG("uWu");
@@ -292,7 +304,7 @@ update_status ModulePlayer::Update()
 
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft||App->player->punching||App->player->kicking || App->player->hadouking2 || App->player->playerhittedcounter < 59/* || App->player->forwarding || App->player->backwarding*/)) {
+	if (App->input->keyboard[SDL_SCANCODE_1] == KEY_STATE::KEY_DOWN && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft||App->player->punching||App->player->kicking || App->player->hadouking2 || App->player->playerhittedcounter < 59/* || App->player->forwarding || App->player->backwarding*/)) {
 		App->player->lowpunch.Reset();
 		App->player->punching = true;
 		App->audio->Play(App->player->lowattack, 0);
@@ -309,7 +321,7 @@ update_status ModulePlayer::Update()
 			App->player->punching = false;
 		}
 	}
-	if (App->input->keyboard[SDL_SCANCODE_1] == KEY_STATE::KEY_DOWN && !(App->player2->jumpingidle || App->player2->jumpingright || App->player2->jumpingleft || App->player2->punching || App->player2->kicking || App->player2->hadouking2 || App->player2->playerhittedcounter < 59/* || App->player->forwarding || App->player->backwarding*/)) {
+	if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN && !(App->player2->jumpingidle || App->player2->jumpingright || App->player2->jumpingleft || App->player2->punching || App->player2->kicking || App->player2->hadouking2 || App->player2->playerhittedcounter < 59/* || App->player->forwarding || App->player->backwarding*/)) {
 		App->player2->lowpunch.Reset();
 		App->player2->punching = true;
 		App->audio->Play(App->player2->lowattack, 0);
@@ -327,7 +339,7 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_K] == KEY_STATE::KEY_DOWN && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft||App->player->punching||App->player->kicking || App->player->hadouking2 || App->player->playerhittedcounter < 59/* || App->player->forwarding || App->player->backwarding*/)) {
+	if (App->input->keyboard[SDL_SCANCODE_2] == KEY_STATE::KEY_DOWN && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft||App->player->punching||App->player->kicking || App->player->hadouking2 || App->player->playerhittedcounter < 59/* || App->player->forwarding || App->player->backwarding*/)) {
 		App->player->low_close_kick.Reset();
 		App->player->kicking = true;
 		App->audio->Play(App->player->midattack, 0);
@@ -345,7 +357,7 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_2] == KEY_STATE::KEY_DOWN && !(App->player2->jumpingidle || App->player2->jumpingright || App->player2->jumpingleft || App->player2->punching || App->player2->kicking||App->player2->hadouking2 || App->player2->playerhittedcounter < 59/* || App->player->forwarding || App->player->backwarding*/)) {
+	if (App->input->keyboard[SDL_SCANCODE_K] == KEY_STATE::KEY_DOWN && !(App->player2->jumpingidle || App->player2->jumpingright || App->player2->jumpingleft || App->player2->punching || App->player2->kicking||App->player2->hadouking2 || App->player2->playerhittedcounter < 59/* || App->player->forwarding || App->player->backwarding*/)) {
 		App->player2->low_close_kick.Reset();
 		App->player2->kicking = true;
 		App->audio->Play(App->player2->midattack, 0);
@@ -363,7 +375,7 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_L] == KEY_STATE::KEY_DOWN && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft || App->player->punching || App->player->kicking||App->player->hadouking2 || App->player->playerhittedcounter < 59/* || App->player->forwarding || App->player->backwarding*/)) {
+	if (App->input->keyboard[SDL_SCANCODE_3] == KEY_STATE::KEY_DOWN && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft || App->player->punching || App->player->kicking||App->player->hadouking2 || App->player->playerhittedcounter < 59/* || App->player->forwarding || App->player->backwarding*/)) {
 		App->player->playerhadouken.Reset();
 		App->player->hadouking2 = true;
 		App->audio->Play(App->player->hadoukenaudio, 0);
@@ -388,7 +400,7 @@ update_status ModulePlayer::Update()
 			App->player->hadouking2 = false;
 		}
 	}
-	if (App->input->keyboard[SDL_SCANCODE_3] == KEY_STATE::KEY_DOWN && !(App->player2->jumpingidle || App->player2->jumpingright || App->player2->jumpingleft || App->player2->punching || App->player2->kicking || App->player2->hadouking2 || App->player2->playerhittedcounter < 59/* || App->player->forwarding || App->player->backwarding*/)) {
+	if (App->input->keyboard[SDL_SCANCODE_L] == KEY_STATE::KEY_DOWN && !(App->player2->jumpingidle || App->player2->jumpingright || App->player2->jumpingleft || App->player2->punching || App->player2->kicking || App->player2->hadouking2 || App->player2->playerhittedcounter < 59/* || App->player->forwarding || App->player->backwarding*/)) {
 		App->player2->playerhadouken.Reset();
 		App->player2->hadouking2 = true;
 		App->audio->Play(App->player->hadoukenaudio, 0);
@@ -468,13 +480,13 @@ update_status ModulePlayer::Update()
 	}
 	else if (App->player->kicking) {
 
-		App->player->pdamagecollider->rect.w = 30;
-		App->player->pdamagecollider->rect.h = 15;
+		App->player->pdamagecollider->rect.w = 40;
+		App->player->pdamagecollider->rect.h = 40;
 		if (App->player->lookingright)
-			App->player->pdamagecollider->rect.x = App->player->position.x + 60;
+			App->player->pdamagecollider->rect.x = App->player->position.x + 40;
 		else
-			App->player->pdamagecollider->rect.x = App->player->position.x - 31;
-		App->player->pdamagecollider->rect.y = App->player->position.y - 76;
+			App->player->pdamagecollider->rect.x = App->player->position.x - 20;
+		App->player->pdamagecollider->rect.y = App->player->position.y - 54;
 	}
 	else
 	{
@@ -482,32 +494,51 @@ update_status ModulePlayer::Update()
 		App->player->pdamagecollider->rect.y = 500;
 	}
 
+	
+	//
 	if (App->player2->punching) {
-		
+
 		App->player2->pdamagecollider->rect.w = 30;
 		App->player2->pdamagecollider->rect.h = 15;
 		if (App->player2->lookingright)
 			App->player2->pdamagecollider->rect.x = App->player2->position.x + 60;
 		else
 			App->player2->pdamagecollider->rect.x = App->player2->position.x - 31;
-			App->player2->pdamagecollider->rect.y = App->player2->position.y - 76;
+		App->player2->pdamagecollider->rect.y = App->player2->position.y - 76;
 	}
-	else {
+	else if (App->player2->kicking) {
+
+		App->player2->pdamagecollider->rect.w = 40;
+		App->player2->pdamagecollider->rect.h = 40;
+		if (App->player2->lookingright)
+			App->player2->pdamagecollider->rect.x = App->player2->position.x + 40;
+		else
+			App->player2->pdamagecollider->rect.x = App->player2->position.x - 20;
+		App->player2->pdamagecollider->rect.y = App->player2->position.y - 54;
+	}
+	else
+	{
 		App->player2->pdamagecollider->rect.x = 0;
 		App->player2->pdamagecollider->rect.y = 500;
 	}
-	//
-
 
 	if (App->player->playerhittedcounter < 60) {
 		App->player->playerhittedcounter++;
 		App->player->current_animation = &App->player->hitted;
+		if (App->player->lookingright)
+			App->player->position.x -= 0.3f;
+		else
+			App->player->position.x += 0.3f;
 	}
 	if (App->player2->playerhittedcounter < 60) {
 		App->player2->playerhittedcounter++;
 		App->player2->current_animation = &App->player2->hitted;
+		if (App->player2->lookingright)
+			App->player2->position.x -= 0.3f;
+		else
+			App->player2->position.x += 0.3f;
 	}
-
+	
 	//player2collider->rect.x = App->player2->position.x;
 	//player2collider->rect.y = App->player2->position.y - 90;
 	// Draw everything --------------------------------------
@@ -551,22 +582,22 @@ void ModulePlayer::OnCollision(Collider*c1, Collider*c2) {
 		else
 			App->player->position.x -= 2;
 	}
-	if (c1 == App->player->playercollider && c2->type == COLLIDER_PLAYER2_HADOUKEN && (App->player->playerhittedcounter > 59)) {
+	if (c1 == App->player->playercollider && c2->type == COLLIDER_PLAYER2_HADOUKEN && (App->player->playerhittedcounter > 59) && !App->player->godmode) {
 		App->player->life -= 15;
 		App->player->playerhittedcounter = 0;
 	}
 
-	if (c1 == App->player2->playercollider && c2->type == COLLIDER_PLAYER1_HADOUKEN && (App->player2->playerhittedcounter > 59)) {
+	if (c1 == App->player2->playercollider && c2->type == COLLIDER_PLAYER1_HADOUKEN && (App->player2->playerhittedcounter > 59) && !App->player2->godmode) {
 		App->player2->life -= 15;
 		App->player2->playerhittedcounter = 0;
 	}
 
-	if (c1 == App->player->playercollider && c2->type == COLLIDER_PLAYER2_DAMAGE && (App->player->playerhittedcounter > 59)) {
+	if (c1 == App->player->playercollider && c2->type == COLLIDER_PLAYER2_DAMAGE && (App->player->playerhittedcounter > 59) && !App->player->godmode) {
 		App->player->life -= 10;
 		App->player->playerhittedcounter = 0;
 	}
 
-	if (c1 == App->player2->playercollider && c2->type == COLLIDER_PLAYER1_DAMAGE && (App->player2->playerhittedcounter > 59)) {
+	if (c1 == App->player2->playercollider && c2->type == COLLIDER_PLAYER1_DAMAGE && (App->player2->playerhittedcounter > 59) && !App->player2->godmode) {
 		App->player2->life -= 10;
 		App->player2->playerhittedcounter = 0;
 	}
