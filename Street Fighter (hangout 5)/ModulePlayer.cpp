@@ -402,7 +402,7 @@ update_status ModulePlayer::Update()
 				App->particles->hadouken.speed.x = -4;
 				App->particles->AddParticle(App->particles->hadouken, App->player2->position.x, App->player2->position.y - 80, COLLIDER_PLAYER2_DAMAGE, 0, true);
 			}
-			if (App->player2->position.x < App->player->position.x) {
+			/*if (App->player2->position.x < App->player->position.x)*/ else {
 				App->particles->hadouken.speed.x = 4;
 				App->particles->AddParticle(App->particles->hadouken, App->player2->position.x+10, App->player2->position.y - 80, COLLIDER_PLAYER2_DAMAGE, 0, false);
 			}

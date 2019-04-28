@@ -23,13 +23,15 @@ public:
 		frames[last_frame++] = rect;
 	}
 
-	SDL_Rect& GetCurrentFrame()
+	SDL_Rect& GetCurrentFrame(bool doshit = true)
 	{
-		current_frame += speed;
-		if (current_frame >= last_frame)
-		{
-			current_frame = (loop) ? 0.0f : last_frame - 1;
-			loops++;
+		if (doshit) {
+			current_frame += speed;
+			if (current_frame >= last_frame)
+			{
+				current_frame = (loop) ? 0.0f : last_frame - 1;
+				loops++;
+			}
 		}
 
 		return frames[(int)current_frame];

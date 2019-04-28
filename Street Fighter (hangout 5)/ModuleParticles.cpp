@@ -8,6 +8,7 @@
 #include "ModuleAudio.h"
 #include "ModulePlayer.h"
 #include "SDL/include/SDL_timer.h"
+#include "Animation.h"
 
 ModuleParticles::ModuleParticles()
 {
@@ -75,6 +76,9 @@ update_status ModuleParticles::Update()
 		}
 		else if (SDL_GetTicks() >= p->born)
 		{
+			if (p->flipped)
+			App->render->Blit(graphics, p->position.x + p->anim.GetCurrentFrame(false).w, p->position.y, &(p->anim.GetCurrentFrame()), NULL, p->flipped);
+			else
 			App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()), NULL, p->flipped);
 			if (p->fx_played == false)
 			{
