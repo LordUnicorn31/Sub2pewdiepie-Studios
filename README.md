@@ -8,6 +8,8 @@ Version 0.5 || 28/04/2019
   
   [**Controls and Characters**](./README.md#controls-and-characters)
   
+  [**Changelog**](./README.md#changelog)
+  
   [**About**](./README.md#about)
   
 ### Introduction
@@ -53,6 +55,10 @@ As the game is still a prototype, controls are limited and only one character ca
 To learn more about the original controls and know the controls that the final version will have implemented, click [here](https://github.com/LordUnicorn31/Sub2pewdiepie-Studios/wiki/Design#controls)
 
 To learn about the differenc characters, click [here](https://github.com/LordUnicorn31/Sub2pewdiepie-Studios/wiki/Design#playable-characters)
+
+### Changelog
+
+To sum up all commits, we created a changelog. [Click here to check it out](./Changelog.md) 
 
 ### About
 
