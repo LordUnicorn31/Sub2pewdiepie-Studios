@@ -61,7 +61,7 @@ As the game is still a prototype, controls are limited and only one character ca
 
 To learn more about the original controls and know the controls that the final version will have implemented, click [here](https://github.com/LordUnicorn31/Sub2pewdiepie-Studios/wiki/Design#controls)
 
-To learn about the differenc characters, click [here](https://github.com/LordUnicorn31/Sub2pewdiepie-Studios/wiki/Design#playable-characters)
+To learn about the different characters, click [here](https://github.com/LordUnicorn31/Sub2pewdiepie-Studios/wiki/Design#playable-characters)
 
 ### Changelog
 
