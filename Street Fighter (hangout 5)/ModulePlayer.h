@@ -38,6 +38,7 @@ public:
 	bool kicking = false;
 	bool hadouking = false;
 	bool hadouking2 = false;//le fet pk no vull borrar el que as fet am el numero 1
+	int playerhittedcounter = 0;
 	//colliders
 	Collider* playercollider = nullptr;
 	Collider* pdamagecollider = nullptr;
@@ -50,6 +51,7 @@ public:
 	Animation idle;
 	Animation forward;
 	Animation backward;
+	Animation hitted;
 	Animation turning;
 	Animation jump;
 	Animation jump_frontflip;
