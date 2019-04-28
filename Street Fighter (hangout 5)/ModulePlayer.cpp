@@ -376,11 +376,11 @@ update_status ModulePlayer::Update()
 			App->player->current_animation = &App->player->idle;
 			if (App->player->position.x > App->player2->position.x) {
 				App->particles->hadouken.speed.x = -4;
-				App->particles->AddParticle(App->particles->hadouken, App->player->position.x, App->player->position.y - 80, COLLIDER_PLAYER1_DAMAGE, 0, true);
+				App->particles->AddParticle(App->particles->hadouken, App->player->position.x, App->player->position.y - 80, COLLIDER_PLAYER1_HADOUKEN, 0, true);
 			}
 			if (App->player->position.x < App->player2->position.x) {
 				App->particles->hadouken.speed.x = 4;
-				App->particles->AddParticle(App->particles->hadouken, App->player->position.x+10, App->player->position.y - 80, COLLIDER_PLAYER1_DAMAGE, 0, false);
+				App->particles->AddParticle(App->particles->hadouken, App->player->position.x+10, App->player->position.y - 80, COLLIDER_PLAYER1_HADOUKEN, 0, false);
 			}
 			App->player->hadouking2 = false;
 		}
@@ -401,11 +401,11 @@ update_status ModulePlayer::Update()
 			App->player2->current_animation = &App->player2->idle;
 			if (App->player2->position.x > App->player->position.x) {
 				App->particles->hadouken.speed.x = -4;
-				App->particles->AddParticle(App->particles->hadouken, App->player2->position.x, App->player2->position.y - 80, COLLIDER_PLAYER2_DAMAGE, 0, true);
+				App->particles->AddParticle(App->particles->hadouken, App->player2->position.x, App->player2->position.y - 80, COLLIDER_PLAYER2_HADOUKEN, 0, true);
 			}
 			/*if (App->player2->position.x < App->player->position.x)*/ else {
 				App->particles->hadouken.speed.x = 4;
-				App->particles->AddParticle(App->particles->hadouken, App->player2->position.x+10, App->player2->position.y - 80, COLLIDER_PLAYER2_DAMAGE, 0, false);
+				App->particles->AddParticle(App->particles->hadouken, App->player2->position.x+10, App->player2->position.y - 80, COLLIDER_PLAYER2_HADOUKEN, 0, false);
 			}
 			App->player2->hadouking2 = false;
 		}
@@ -487,12 +487,17 @@ void ModulePlayer::OnCollision(Collider*c1, Collider*c2) {
 		else
 			App->player->position.x -= 2;
 	}
-	if (c1 == App->player->playercollider && c2->type == COLLIDER_PLAYER2_DAMAGE)
+	if (c1 == App->player->playercollider && c2->type == COLLIDER_PLAYER2_HADOUKEN)
 		App->player->life -= 15;
 
-	if (c1 == App->player2->playercollider && c2->type == COLLIDER_PLAYER1_DAMAGE)
+	if (c1 == App->player2->playercollider && c2->type == COLLIDER_PLAYER1_HADOUKEN)
 		App->player2->life -= 15;
 
+	if (c1 == App->player->playercollider && c2->type == COLLIDER_PLAYER2_DAMAGE)
+		App->player->life -= 10;
+
+	if (c1 == App->player2->playercollider && c2->type == COLLIDER_PLAYER1_DAMAGE)
+		App->player2->life -= 10;
 
 	/*if (App->scene_ken->IsEnabled() == true)
 	App->fade->FadeToBlack(App->scene_ken, App->scene_honda);
