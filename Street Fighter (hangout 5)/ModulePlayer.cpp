@@ -442,16 +442,47 @@ update_status ModulePlayer::Update()
 		//App->collision->AddCollider({10, -80, 28, 10}, COLLIDER_PLAYER1_PUNCH, )
 	}*/
 
-	if (App->player->lookingright)
+	//if (App->player->lookingright)
 	App->player->playercollider->rect.x = App->player->position.x + 10;
-	else
-	App->player->playercollider->rect.x = App->player->position.x + 10;
+	//else
+	//App->player->playercollider->rect.x = App->player->position.x + 10;
 	App->player->playercollider->rect.y = App->player->position.y - 80;
-	if (App->player2->lookingright)
-		App->player2->playercollider->rect.x = App->player2->position.x + 10;
-	else
+	//if (App->player2->lookingright)
 	App->player2->playercollider->rect.x = App->player2->position.x + 10;
+	//else
+	//App->player2->playercollider->rect.x = App->player2->position.x + 10;
 	App->player2->playercollider->rect.y = App->player2->position.y - 80;
+
+	if (App->player->punching) {
+
+		App->player->pdamagecollider->rect.w = 30;
+		App->player->pdamagecollider->rect.h = 10;
+		if (App->player->lookingright)
+			App->player->pdamagecollider->rect.x = App->player->position.x + 60;
+		else
+			App->player->pdamagecollider->rect.x = App->player->position.x - 31;
+			App->player->pdamagecollider->rect.y = App->player->position.y - 80;
+	}
+	else {
+		App->player->pdamagecollider->rect.x = 0;
+		App->player->pdamagecollider->rect.y = 500;
+	}
+
+	if (App->player2->punching) {
+		
+		App->player2->pdamagecollider->rect.w = 30;
+		App->player2->pdamagecollider->rect.h = 10;
+		if (App->player2->lookingright)
+			App->player2->pdamagecollider->rect.x = App->player2->position.x + 60;
+		else
+			App->player2->pdamagecollider->rect.x = App->player2->position.x - 31;
+			App->player2->pdamagecollider->rect.y = App->player2->position.y - 80;
+	}
+	else {
+		App->player2->pdamagecollider->rect.x = 0;
+		App->player2->pdamagecollider->rect.y = 500;
+	}
+
 	//player2collider->rect.x = App->player2->position.x;
 	//player2collider->rect.y = App->player2->position.y - 90;
 	// Draw everything --------------------------------------
