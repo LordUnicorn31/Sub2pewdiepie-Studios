@@ -23,8 +23,8 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
-	graphics = App->textures->Load("ryu.png");
-	hadoukenhit = App->audio->Load("hadoukenhit.wav");
+	graphics = App->textures->Load("media_files/ryu.png");
+	hadoukenhit = App->audio->Load("media_files/hadoukenhit.wav");
 	hadouken.anim.PushBack({ 492,1562,45,33 });
 	hadouken.anim.PushBack({ 549,1564,57,30 });
 	hadouken.life = 1500;

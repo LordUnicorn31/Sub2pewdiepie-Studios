@@ -145,13 +145,13 @@ bool ModulePlayer::Start()
 {
 	LOG("Loading player textures");
 	bool ret = true;
-	graphics = App->textures->Load("ryu.png"); // arcade version
-	lowattack = App->audio->Load("Street Fighter Attack moves\\lowattack.wav");
-	midattack = App->audio->Load("Street Fighter Attack moves\\midattack.wav");
-	lowpunchhit = App->audio->Load("Street Fighter Attack moves\\lowpunchhit.wav");
-	lowkickhit = App->audio->Load("Street Fighter Attack moves\\lowkickhit.wav");
-	hadoukenaudio = App->audio->Load("Hadouken.wav");
-	jumpgrounded = App->audio->Load("jumpgrounded.wav");
+	graphics = App->textures->Load("media_files/ryu.png"); // arcade version
+	lowattack = App->audio->Load("media_files/Street Fighter Attack moves\\lowattack.wav");
+	midattack = App->audio->Load("media_files/Street Fighter Attack moves\\midattack.wav");
+	lowpunchhit = App->audio->Load("media_files/Street Fighter Attack moves\\lowpunchhit.wav");
+	lowkickhit = App->audio->Load("media_files/Street Fighter Attack moves\\lowkickhit.wav");
+	hadoukenaudio = App->audio->Load("media_files/Hadouken.wav");
+	jumpgrounded = App->audio->Load("media_files/jumpgrounded.wav");
 	App->player->position.x = 50;
 	App->player->position.y = 220;
 	App->player2->position.x = 250;

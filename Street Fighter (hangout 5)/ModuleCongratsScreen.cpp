@@ -34,9 +34,9 @@ bool ModuleCongratsScreen::Start()
 {
 	LOG("Loading background assets");
 	bool ret = true;
-	graphics = App->textures->Load("congratsplayer1.png");
-	graphics2 = App->textures->Load("congratsplayer2.png");
-	congratsmusic = App->audio->Load("13 End Battle.ogg");
+	graphics = App->textures->Load("media_files/congratsplayer1.png");
+	graphics2 = App->textures->Load("media_files/congratsplayer2.png");
+	congratsmusic = App->audio->Load("media_files/13 End Battle.ogg");
 	
 	App->audio->Play(congratsmusic, 0);
 	return ret;

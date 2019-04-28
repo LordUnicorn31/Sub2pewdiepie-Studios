@@ -64,9 +64,9 @@ bool ModuleSceneRyu::Start()
 	LOG("Loading Ryu scene");
 
 	
-	uitext = App->textures->Load("HPBAR.png"); //V
-	graphics = App->textures->Load("scene_ryu.png");
-	music = App->audio->Load("05 Ryu.ogg");
+	uitext = App->textures->Load("media_files/HPBAR.png"); //V
+	graphics = App->textures->Load("media_files/scene_ryu.png");
+	music = App->audio->Load("media_files/05 Ryu.ogg");
 	App->audio->Play(music, -1);
 	App->player->Enable();
 	App->player2->Enable();

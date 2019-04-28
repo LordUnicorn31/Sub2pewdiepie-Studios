@@ -29,9 +29,9 @@ bool ModuleWelcomeScreen::Start()
 {
 	LOG("Loading background assets");
 	bool ret = true;
-	graphics = App->textures->Load("intro.png");
-	mainmenumusic = App->audio->Load("02 The World Warrior.ogg");
-	mainmenutoscenesound = App->audio->Load("IntroToScene.wav");
+	graphics = App->textures->Load("media_files/intro.png");
+	mainmenumusic = App->audio->Load("media_files/02 The World Warrior.ogg");
+	mainmenutoscenesound = App->audio->Load("media_files/IntroToScene.wav");
 	App->audio->Play(mainmenumusic, -1);
 	return ret;
 }
