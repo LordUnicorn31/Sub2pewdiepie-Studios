@@ -497,6 +497,12 @@ update_status ModulePlayer::Update()
 	else
 	App->render->Blit(graphics, App->player2->position.x + 60, App->player2->position.y - r2.h, &r2, 1.0f, !App->player2->lookingright);
 
+	if (App->player->life <= 0) {
+		App->fade->FadeToBlack(App->scene_Ryu, App->congratsscreen);
+	}
+	if (App->player2->life <= 0) {
+		App->fade->FadeToBlack(App->scene_Ryu, App->congratsscreen);
+	}
 	//fonts
 	//font_welcome = App->fonts->Load("")
 	return UPDATE_CONTINUE;

@@ -160,6 +160,12 @@ void ModuleCollision::DebugDraw()
 		case COLLIDER_PLAYER2_DAMAGE: // magenta
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
 			break;
+		case COLLIDER_PLAYER1_HADOUKEN:
+			App->render->DrawQuad(colliders[i]->rect, 255, 255, 0, alpha);
+			break;
+		case COLLIDER_PLAYER2_HADOUKEN:
+			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
+			break;
 		}
 	}
 }
