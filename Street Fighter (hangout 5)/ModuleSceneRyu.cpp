@@ -118,9 +118,13 @@ update_status ModuleSceneRyu::Update()
 	App->render->Blit(uitext, 205, 3, &uip2); //V
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
-		App->fade->FadeToBlack(App->scene_Ryu, App->congratsscreen,1);
+		App->player2->life = 0;
+		/*App->fade->FadeToBlack(App->scene_Ryu, App->congratsscreen,1);
 		if (App->player->position.x > 300)
-			App->fade->FadeToBlack(App->scene_Ryu, App->congratsscreen,1);
+			App->fade->FadeToBlack(App->scene_Ryu, App->congratsscreen,1);*/
+	}
+	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN) {
+		App->player->life = 0;
 	}
 	return UPDATE_CONTINUE;
 }
