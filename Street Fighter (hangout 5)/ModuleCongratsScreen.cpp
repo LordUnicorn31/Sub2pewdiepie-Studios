@@ -35,6 +35,7 @@ bool ModuleCongratsScreen::Start()
 	LOG("Loading background assets");
 	bool ret = true;
 	graphics = App->textures->Load("congratsplayer1.png");
+	graphics2 = App->textures->Load("congratsplayer2.png");
 	congratsmusic = App->audio->Load("13 End Battle.ogg");
 	
 	App->audio->Play(congratsmusic, 0);
@@ -54,7 +55,11 @@ bool ModuleCongratsScreen::CleanUp()
 // Update: draw background
 update_status ModuleCongratsScreen::Update()
 {
-	App->render->Blit(graphics, 0, 0, &background, 0.75f);
+	if (App->player->life > App->player2->life)
+		App->render->Blit(graphics, 0, 0, &background, 0.75f);
+	else
+		App->render->Blit(graphics2, 0, 0, &background, 0.75f);
+
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
 		App->fade->FadeToBlack(App->congratsscreen, App->welcomescreen,1);
 		

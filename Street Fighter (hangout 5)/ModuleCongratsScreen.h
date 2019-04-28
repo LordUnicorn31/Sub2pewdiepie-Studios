@@ -20,6 +20,7 @@ public:
 public:
 
 	SDL_Texture* graphics = nullptr;
+	SDL_Texture* graphics2 = nullptr;
 	SDL_Rect background;
 	SDL_Rect winer;
 	SDL_Rect loser;
