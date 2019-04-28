@@ -28,7 +28,12 @@ As the game is still a prototype, controls are limited and only one character ca
 
 - Menu navigation
   - Start: Space
-
+- Debugging
+  - Toggle Godmode: F4
+  - Show Colliders: F5
+  - Instant win player 1: Space
+  - Instant win player 2: Enter
+  
 #### Player 1
 - Movement
   - Jump: W
@@ -36,10 +41,9 @@ As the game is still a prototype, controls are limited and only one character ca
   - Move left: A
   - Move right: D
 - Combat
-  - Punch: J
-  - Kick: K
-  - Special move: L
-- Win: Space
+  - Punch: NUMPAD 1
+  - Kick: NUMPAD 2
+  - Special move: NUMPAD 3
 
 #### Player 2
 - Movement
@@ -48,10 +52,9 @@ As the game is still a prototype, controls are limited and only one character ca
   - Move left: LEFT arrow key
   - Move right: RIGHT arrow key
 - Combat
-  - Punch: NUMPAD 1
-  - Kick: NUMPAD 2
-  - Special move: NUMPAD 3
-- Win: Enter
+  - Punch: J
+  - Kick: K
+  - Special move: L
 
 To learn more about the original controls and know the controls that the final version will have implemented, click [here](https://github.com/LordUnicorn31/Sub2pewdiepie-Studios/wiki/Design#controls)
 
