@@ -14,9 +14,10 @@
 
 ModulePlayer::ModulePlayer()
 {
-
+	//animations
 #pragma region ryu
 
+	
 #pragma region idle
 	// idle animation (arcade sprite sheet)
 	idle.PushBack({7, 14, 60, 90});
@@ -25,8 +26,8 @@ ModulePlayer::ModulePlayer()
 	idle.PushBack({276, 11, 60, 93});
 	idle.PushBack({366, 12, 60, 92});
 	idle.speed = 0.1f;
-#pragma endregion
-
+#pragma endregion				//used
+	
 #pragma region forward
 
 	// walk forward animation (arcade sprite sheet)
@@ -38,8 +39,8 @@ ModulePlayer::ModulePlayer()
 	forward.PushBack({432, 131, 50, 89});
 	forward.speed = 0.1f;
 
-#pragma endregion
-
+#pragma endregion				//used
+	
 #pragma region backward
 
 	backward.PushBack({542, 131, 60, 86});
@@ -50,13 +51,19 @@ ModulePlayer::ModulePlayer()
 	backward.PushBack({974, 129, 56, 88});
 	backward.speed = 0.1f;
 
-#pragma endregion
+#pragma endregion			//used
+	
+#pragma region turning
 
 	turning.PushBack({480, 9, 53, 94});
 	turning.PushBack({553, 7, 57, 96});
 	turning.PushBack({ 629, 11, 55, 93});
 	turning.speed = 0.1f;
 	turning.loop = false;
+
+#pragma endregion				//not used
+	
+#pragma region jumpneutral
 
 	jump.PushBack({ 464, 819, 518 - 464, 927 - 819 });
 	//jump.PushBack({17,  847, 71-17,   931-847});
@@ -70,6 +77,9 @@ ModulePlayer::ModulePlayer()
 	jump.speed = 0.05f;
 	jump.loop = false;
 
+#pragma endregion			//used
+	
+#pragma region jumpfrontflip
 	jump_frontflip.PushBack({594, 823, 648-594,  925-823});
 	jump_frontflip.PushBack({669, 813, 729-669,  890-813});
 	jump_frontflip.PushBack({744, 811, 847-744,  852-811});
@@ -79,9 +89,17 @@ ModulePlayer::ModulePlayer()
 	jump_frontflip.PushBack({1149,802, 1203-1149,910-802});
 	jump_frontflip.speed = 0.1f;
 
+#pragma endregion		//not used
+	
+#pragma region low punch
+
 	lowpunch.PushBack({19, 272, 63, 90});
 	lowpunch.PushBack({108, 272, 91, 90});
 	lowpunch.speed = 0.1f;
+
+#pragma endregion			//used
+
+#pragma region mid/high punch
 
 	midhigh_punch.PushBack({253, 269, 312-253, 362-269}); //millor fer servir aquesta nomenclatura de posar pixels {x, y, xfinal-xinicial, yfinal-yinicial}
 	midhigh_punch.PushBack({333, 268, 406-333, 362-268});
@@ -90,9 +108,17 @@ ModulePlayer::ModulePlayer()
 	midhigh_punch.PushBack({253, 269, 312-253, 362-269});
 	midhigh_punch.speed = 0.1f;
 
+#pragma endregion		//not used
+	
+#pragma region low close punch
+
 	low_close_punch.PushBack({18,  519, 77-18,   612-519});
 	low_close_punch.PushBack({101, 515, 166-101, 612-515});
 	low_close_punch.speed = 0.1f;
+
+#pragma endregion		//not used
+	
+#pragma region high close punch
 
 	high_close_punch.PushBack({759, 519, 824-759, 611-519});
 	high_close_punch.PushBack({848, 518, 936-848, 611-518});
@@ -101,12 +127,20 @@ ModulePlayer::ModulePlayer()
 	high_close_punch.PushBack({759, 519, 824-759, 611-519});
 	high_close_punch.speed = 0.1f;
 
+#pragma endregion	//not used
+	
+#pragma region low/mid kick
+	
 	lowmid_kick.PushBack({606, 269, 665-606, 362-269});
 	lowmid_kick.PushBack({689, 267, 754-689, 358-267});
 	lowmid_kick.PushBack({777, 265, 890-777, 358-265});
 	lowmid_kick.PushBack({689, 267, 754-689, 358-267});
 	lowmid_kick.PushBack({606, 269, 665-606, 362-269});
 	lowmid_kick.speed = 0.1f;
+
+#pragma endregion		//not used
+	
+#pragma region high kick
 
 	high_kick.PushBack({16,  398, 76-16,   487-398});
 	high_kick.PushBack({99,  394, 192-99,  487-394});
@@ -115,12 +149,20 @@ ModulePlayer::ModulePlayer()
 	high_kick.PushBack({482, 407, 545-482, 487-407});
 	high_kick.speed = 0.1f;
 
+#pragma endregion			//not used
+	
+#pragma region low close kick
+
 	low_close_kick.PushBack({ 12, 657, 71-12,  750-657});
 	low_close_kick.PushBack({ 95, 657, 142-95, 750-657});
 	low_close_kick.PushBack({ 167,658, 246-167,750-658});
 	low_close_kick.PushBack({ 95, 657, 142-95, 750-657});
 	low_close_kick.PushBack({ 12, 657, 71-12,  750-657});
 	low_close_kick.speed = 0.1f;
+
+#pragma endregion		//used
+	
+#pragma region high close kick
 
 	high_close_kick.PushBack({637, 657, 696-637, 750-657});
 	high_close_kick.PushBack({720, 657, 773-720, 750-657});
@@ -129,9 +171,17 @@ ModulePlayer::ModulePlayer()
 	high_close_kick.PushBack({989, 657, 1036-989,750-657});
 	high_close_kick.speed = 0.1f;
 
+#pragma endregion		//not used
+
+#pragma region low jumping punch
+
 	low_jump_punch.PushBack({29, 987, 80-29,  1055-987});
 	low_jump_punch.PushBack({97, 985, 177-97, 1055-985});
 	low_jump_punch.speed = 0.1f;
+
+#pragma endregion	//not used
+
+#pragma region high jumping punch
 
 	high_jump_punch.PushBack({235, 987, 286-235, 1055-987});
 	high_jump_punch.PushBack({307, 979, 375-307, 1055-979});
@@ -140,14 +190,24 @@ ModulePlayer::ModulePlayer()
 	high_jump_punch.PushBack({235, 987, 286-235, 1055-987});
 	high_jump_punch.speed = 0.1f;
 
+#pragma endregion	//not used
+
+#pragma region player hadouken
+
 	playerhadouken.PushBack({ 36,1544,72,92 });
 	playerhadouken.PushBack({ 137,1550,82,84 });
 	playerhadouken.PushBack({ 243,1552,92,83 });
 	playerhadouken.PushBack({ 356,1557,108,79 });
 	playerhadouken.speed = 0.08f;
 
+#pragma endregion		//used
+
+#pragma region player hitted
+
 	hitted.PushBack({ 207, 2091, 274 - 207, 2179 - 2091 });
 	hitted.speed = 0.1f;
+
+#pragma endregion		//used (incomplete, missing 4 frames)
 
 #pragma endregion
 
@@ -161,7 +221,8 @@ bool ModulePlayer::Start()
 {
 	LOG("Loading player textures");
 	bool ret = true;
-	graphics = App->textures->Load("media_files/ryu.png"); // arcade version
+	graphicsryu = App->textures->Load("media_files/ryu.png"); // arcade version
+	graphicszangief = App->textures->Load("media_files/Zangief_Sprites.png"); //snes version lmao Yeet 
 	lowattack = App->audio->Load("media_files/Street Fighter Attack moves\\lowattack.wav");
 	midattack = App->audio->Load("media_files/Street Fighter Attack moves\\midattack.wav");
 	lowpunchhit = App->audio->Load("media_files/Street Fighter Attack moves\\lowpunchhit.wav");
@@ -561,13 +622,13 @@ update_status ModulePlayer::Update()
 	SDL_Rect r1 = App->player->current_animation->GetCurrentFrame();
 	SDL_Rect r2 = App->player2->current_animation->GetCurrentFrame();
 	if (App->player->lookingright)
-	App->render->Blit(graphics, App->player->position.x, App->player->position.y - r1.h, &r1, 1.0f, !App->player->lookingright);
+	App->render->Blit(graphicsryu, App->player->position.x, App->player->position.y - r1.h, &r1, 1.0f, !App->player->lookingright);
 	else
-	App->render->Blit(graphics, App->player->position.x + 60, App->player->position.y - r1.h, &r1, 1.0f, !App->player->lookingright);
+	App->render->Blit(graphicsryu, App->player->position.x + 60, App->player->position.y - r1.h, &r1, 1.0f, !App->player->lookingright);
 	if (App->player2->lookingright)
-	App->render->Blit(graphics, App->player2->position.x, App->player2->position.y - r2.h, &r2, 1.0f, !App->player2->lookingright);
+	App->render->Blit(graphicsryu, App->player2->position.x, App->player2->position.y - r2.h, &r2, 1.0f, !App->player2->lookingright);
 	else
-	App->render->Blit(graphics, App->player2->position.x + 60, App->player2->position.y - r2.h, &r2, 1.0f, !App->player2->lookingright);
+	App->render->Blit(graphicsryu, App->player2->position.x + 60, App->player2->position.y - r2.h, &r2, 1.0f, !App->player2->lookingright);
 
 	if (App->player->life <= 0) {
 		//App->particles->CleanUp();
@@ -625,7 +686,7 @@ void ModulePlayer::OnCollision(Collider*c1, Collider*c2) {
 }
 
 bool ModulePlayer::CleanUp() {
-	App->textures->Unload(graphics);
+	App->textures->Unload(graphicsryu);
 	App->audio->Unload(lowattack);
 	App->audio->Unload(lowattack);
 	App->audio->Unload(lowpunchhit);

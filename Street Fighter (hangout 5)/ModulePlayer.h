@@ -27,7 +27,8 @@ public:
 	float gravity = -0.08f;
 	Animation* current_animation = &idle;
 	//Animation* current_animation_player2 = &idle;
-	SDL_Texture* graphics = nullptr;
+	SDL_Texture* graphicsryu = nullptr;
+	SDL_Texture* graphicszangief = nullptr;
 	bool lookingright;
 	bool godmode = false;
 	int hadoukenable = 0;
