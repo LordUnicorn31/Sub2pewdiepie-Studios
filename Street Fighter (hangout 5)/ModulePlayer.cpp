@@ -14,6 +14,10 @@
 
 ModulePlayer::ModulePlayer()
 {
+
+#pragma region ryu
+
+#pragma region idle
 	// idle animation (arcade sprite sheet)
 	idle.PushBack({7, 14, 60, 90});
 	idle.PushBack({95, 15, 60, 89});
@@ -21,6 +25,9 @@ ModulePlayer::ModulePlayer()
 	idle.PushBack({276, 11, 60, 93});
 	idle.PushBack({366, 12, 60, 92});
 	idle.speed = 0.1f;
+#pragma endregion
+
+#pragma region forward
 
 	// walk forward animation (arcade sprite sheet)
 	forward.PushBack({9, 136, 53, 83});
@@ -31,6 +38,10 @@ ModulePlayer::ModulePlayer()
 	forward.PushBack({432, 131, 50, 89});
 	forward.speed = 0.1f;
 
+#pragma endregion
+
+#pragma region backward
+
 	backward.PushBack({542, 131, 60, 86});
 	backward.PushBack({628, 129, 58, 89});
 	backward.PushBack({713, 128, 56, 89});
@@ -38,6 +49,8 @@ ModulePlayer::ModulePlayer()
 	backward.PushBack({883, 128, 57, 90});
 	backward.PushBack({974, 129, 56, 88});
 	backward.speed = 0.1f;
+
+#pragma endregion
 
 	turning.PushBack({480, 9, 53, 94});
 	turning.PushBack({553, 7, 57, 96});
@@ -135,6 +148,9 @@ ModulePlayer::ModulePlayer()
 
 	hitted.PushBack({ 207, 2091, 274 - 207, 2179 - 2091 });
 	hitted.speed = 0.1f;
+
+#pragma endregion
+
 }
 
 ModulePlayer::~ModulePlayer()
