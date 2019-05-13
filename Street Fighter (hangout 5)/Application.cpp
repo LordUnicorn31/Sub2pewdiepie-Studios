@@ -4,6 +4,7 @@
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
 #include "ModuleSceneRyu.h"
+#include "ModuleSceneZangief.h"
 #include "ModuleWelcomeScreen.h"
 #include "ModuleCongratsScreen.h"
 #include "ModulePlayer.h"
@@ -30,6 +31,7 @@ Application::Application()
 	modules[11] = collision = new ModuleCollision();
 	modules[12] = player2 = new ModulePlayer(/*playernames::ZANGIEF*/playernames::ZANGIEF);
 	modules[13] = fonts = new ModuleFonts();
+	modules[14] = scene_Zangief = new ModuleSceneZangief();
 	//modules[13] = winlosescreen = new ModuleWinloseScreen();
 }	
 
@@ -46,6 +48,7 @@ bool Application::Init()
 	player->Disable();
 	player2->Disable();
 	scene_Ryu->Disable();
+	scene_Zangief->Disable();
 	congratsscreen->Disable();
 	for(int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();
