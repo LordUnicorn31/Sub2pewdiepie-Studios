@@ -9,11 +9,14 @@
 
 struct SDL_Texture;
 struct Mix_Chunk;
+enum playernames {
+	RYU, ZANGIEF
+};
 
 class ModulePlayer : public Module
 {
 public:
-	ModulePlayer();
+	ModulePlayer(int playername);
 	~ModulePlayer();
 
 	bool Start();
@@ -27,7 +30,8 @@ public:
 	float gravity = -0.08f;
 	Animation* current_animation = &idle;
 	//Animation* current_animation_player2 = &idle;
-	SDL_Texture* graphics = nullptr;
+	SDL_Texture* graphicsryu = nullptr;
+	SDL_Texture* graphicszangief = nullptr;
 	bool lookingright;
 	bool godmode = false;
 	int hadoukenable = 0;
@@ -53,55 +57,35 @@ public:
 	Animation idle;
 	Animation forward;
 	Animation backward;
+	Animation crouch;
 	Animation hitted;
 	Animation turning;
 	Animation jump;
 	Animation jump_frontflip;
 	//punches
-	Animation lowpunch;
-	Animation midhigh_punch;
+	Animation low_punch;
+	Animation mid_punch;
+	Animation high_punch;
 		Animation low_close_punch;
+		Animation mid_close_punch;
 		Animation high_close_punch;
 			Animation low_jump_punch;
+			Animation mid_jump_punch;
 			Animation high_jump_punch;
-			iPoint punchpos;
+
+	iPoint punchpos;
 			
 	//kicks
-	Animation lowmid_kick;
+	Animation low_kick;
+	Animation mid_kick;
 	Animation high_kick;
 		Animation low_close_kick;
+		Animation mid_close_kick;
 		Animation high_close_kick;
 			//Animation jump_kick;
-	//
-	//Animations player2
-	//
 
-		/*
-	Animation idle2;
-	//movement
-	Animation forward2;
-	Animation backward2;
-	Animation turning2;
-	Animation jump2;
-	Animation jump_frontflip2;
-	//punches
-	Animation lowpunch2;
-	Animation midhigh_punch2;
-		Animation low_close_punch2;
-		Animation high_close_punch2;
-			Animation low_jump_punch2;
-			Animation high_jump_punch2;
-			
-	//kicks
-	Animation lowmid_kick2;
-	Animation high_kick2;
-		Animation low_close_kick2;
-		Animation high_close_kick2;*/
-			//Animation jump_kick2;
-	//
 	fPoint position;
 
-	//Mix_Chunk* 
 	/*void playerRotation(ModulePlayer *foe) {
 		if (foe == nullptr)
 			return;
@@ -130,7 +114,7 @@ public:
 	Mix_Chunk* midkickhit = nullptr;		//triggers when mid kick collides with enemy			//needed
 	Mix_Chunk* highkickhit = nullptr;		//triggers when high kick collides with enemy
 
-	Mix_Chunk* hadoukenaudio = nullptr;			//triggers when player throws hadouken					//needed
+	Mix_Chunk* hadoukenaudio = nullptr;		//triggers when player throws hadouken					//needed
 	Mix_Chunk* hadoukenhit = nullptr;		//triggers when hadouken collider hits the enemy (so i think it should go to Particles.h maybe, idk)
 	Mix_Chunk* jumpgrounded = nullptr;
 
