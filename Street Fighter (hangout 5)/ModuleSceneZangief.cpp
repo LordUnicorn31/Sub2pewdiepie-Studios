@@ -17,11 +17,11 @@
 
 ModuleSceneZangief::ModuleSceneZangief()
 {
-	// ground
-	ground.x = 0;
-	ground.y = 400;
-	ground.w = 622;
-	ground.h = 48;
+	// background
+	background.x = 0;
+	background.y = 0;
+	background.w = 368;
+	background.h = 224;//389
 }
 
 ModuleSceneZangief::~ModuleSceneZangief()
@@ -34,7 +34,7 @@ bool ModuleSceneZangief::Start()
 
 
 	uitext = App->textures->Load("media_files/HPBAR.png"); //V
-	graphics = App->textures->Load("media_files/bg_zangief_sprite.png");
+	graphics = App->textures->Load("media_files/prova.png");
 	App->player->Enable();
 	App->player2->Enable();
 	return true;
@@ -55,7 +55,7 @@ bool ModuleSceneZangief::CleanUp()
 update_status ModuleSceneZangief::Update()
 {
 
-	//HP update mechanic
+	/*//HP update mechanic
 	if (prevHP1 > App->player->life)
 	{
 		prevHP1--;
@@ -73,19 +73,13 @@ update_status ModuleSceneZangief::Update()
 	{
 		prevHP2++;
 	}
-	uip2.w = (prevHP2 * 0.88); // V
+	uip2.w = (prevHP2 * 0.88); // V*/
 	// Draw everything --------------------------------------
-	//App->render->Blit(graphics, 0, 0, &sky, 0.75);
+	App->render->Blit(graphics, 0, 0, &background, 0.75);
 
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
-		App->player2->life = 0;
-		/*App->fade->FadeToBlack(App->scene_Ryu, App->congratsscreen,1);
-		if (App->player->position.x > 300)
-			App->fade->FadeToBlack(App->scene_Ryu, App->congratsscreen,1);*/
-	}
-	if (App->input->keyboard[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN) {
-		App->player->life = 0;
+		App->fade->FadeToBlack(App->scene_Zangief, App->congratsscreen, 1);
 	}
 	return UPDATE_CONTINUE;
 }
