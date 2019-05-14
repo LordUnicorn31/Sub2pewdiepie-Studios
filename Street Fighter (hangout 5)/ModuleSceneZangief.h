@@ -30,6 +30,12 @@ public:
 	int prevHP1 = 100;	//V: es una variable placeholder que equivale a la vida antes del update
 	int prevHP2 = 100;	//V: recordad iniciarlas en 100 cuando esté hecho (están en 0 para ver que funcionan)
 	SDL_Rect background;
+	SDL_Rect ground;
+	SDL_Rect background2;
+	SDL_Rect valla;
+	SDL_Rect extinctor;
+	Animation dudes;
+	Animation dudes2;
 };
 
 #endif // __MODULESCENEZANGIEF_H__
