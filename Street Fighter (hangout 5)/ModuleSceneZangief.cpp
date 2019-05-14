@@ -85,7 +85,7 @@ bool ModuleSceneZangief::CleanUp()
 update_status ModuleSceneZangief::Update()
 {
 
-	/*//HP update mechanic
+	//HP update mechanic
 	if (prevHP1 > App->player->life)
 	{
 		prevHP1--;
@@ -103,7 +103,7 @@ update_status ModuleSceneZangief::Update()
 	{
 		prevHP2++;
 	}
-	uip2.w = (prevHP2 * 0.88); // V*/
+	uip2.w = (prevHP2 * 0.88); // V
 	// Draw everything --------------------------------------
 	App->render->Blit(graphics, -40, -206, &background2, 0.75);
 	App->render->Blit(graphics, -140, 176, &ground, 0.75);

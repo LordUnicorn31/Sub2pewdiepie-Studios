@@ -22,16 +22,16 @@ Application::Application()
 	modules[2] = input = new ModuleInput();
 	modules[3] = textures = new ModuleTextures();
 	modules[4] = scene_Ryu = new ModuleSceneRyu();
-	modules[5] = player = new ModulePlayer(playernames::RYU);
-	modules[6] = fade = new ModuleFadeToBlack();
-	modules[7] = welcomescreen = new ModuleWelcomeScreen();
-	modules[8] = congratsscreen = new ModuleCongratsScreen();
-	modules[9] = particles = new ModuleParticles();
-	modules[10] = audio = new ModuleAudio();
-	modules[11] = collision = new ModuleCollision();
-	modules[12] = player2 = new ModulePlayer(/*playernames::ZANGIEF*/playernames::ZANGIEF);
-	modules[13] = fonts = new ModuleFonts();
-	modules[14] = scene_Zangief = new ModuleSceneZangief();
+	modules[5] = scene_Zangief = new ModuleSceneZangief();
+	modules[6] = player = new ModulePlayer(playernames::RYU);
+	modules[7] = fade = new ModuleFadeToBlack();
+	modules[8] = welcomescreen = new ModuleWelcomeScreen();
+	modules[9] = congratsscreen = new ModuleCongratsScreen();
+	modules[10] = particles = new ModuleParticles();
+	modules[11] = audio = new ModuleAudio();
+	modules[12] = collision = new ModuleCollision();
+	modules[13] = player2 = new ModulePlayer(/*playernames::ZANGIEF*/playernames::ZANGIEF);
+	modules[14] = fonts = new ModuleFonts();
 	//modules[13] = winlosescreen = new ModuleWinloseScreen();
 }	
 
