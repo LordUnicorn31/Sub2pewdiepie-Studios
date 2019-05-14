@@ -65,6 +65,8 @@ bool ModuleSceneZangief::Start()
 
 	uitext = App->textures->Load("media_files/HPBAR.png"); //V
 	graphics = App->textures->Load("media_files/bg_zangief_sprite.png");
+	music = App->audio->Load("media_files/zangief.ogg");
+	App->audio->Play(music, -1);
 	App->player->Enable();
 	App->player2->Enable();
 	return true;
@@ -78,6 +80,7 @@ bool ModuleSceneZangief::CleanUp()
 	App->textures->Unload(uitext); //V
 	App->player->Disable();
 	App->player2->Disable();
+	App->audio->Unload(music);
 	return true;
 }
 
