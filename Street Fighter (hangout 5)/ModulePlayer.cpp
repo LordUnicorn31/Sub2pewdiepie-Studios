@@ -319,9 +319,9 @@ bool ModulePlayer::Start()
 	hadoukenaudio = App->audio->Load("media_files/Hadouken.wav");
 	jumpgrounded = App->audio->Load("media_files/jumpgrounded.wav");
 	App->player->position.x = 50;
-	App->player->position.y = 220;
+	App->player->position.y = 200;
 	App->player2->position.x = 250;
-	App->player2->position.y = 220;
+	App->player2->position.y = 200;
 	App->player->playercollider = App->collision->AddCollider({ 0, 220, 40, 80}, COLLIDER_PLAYER1, App->player);
 	App->player2->playercollider = App->collision->AddCollider({ 100, 220, 40, 80 }, COLLIDER_PLAYER2, App->player2);
 	punchpos.x = 0;

@@ -13,6 +13,9 @@
 #include "ModuleAudio.h"
 #include "ModuleCollision.h"
 #include "ModuleFonts.h"
+#include "ModuleSpecialMoves.h"
+#include "ModuleController.h"
+#include "ModuleUi.h"
 //#include "ModuleWinloseScreen.h"
 
 Application::Application()
@@ -20,18 +23,21 @@ Application::Application()
 	modules[0] = window = new ModuleWindow();
 	modules[1] = render = new ModuleRender();
 	modules[2] = input = new ModuleInput();
-	modules[3] = textures = new ModuleTextures();
-	modules[4] = scene_Ryu = new ModuleSceneRyu();
-	modules[5] = scene_Zangief = new ModuleSceneZangief();
-	modules[6] = player = new ModulePlayer(playernames::RYU);
-	modules[7] = fade = new ModuleFadeToBlack();
-	modules[8] = welcomescreen = new ModuleWelcomeScreen();
-	modules[9] = congratsscreen = new ModuleCongratsScreen();
-	modules[10] = particles = new ModuleParticles();
-	modules[11] = audio = new ModuleAudio();
-	modules[12] = collision = new ModuleCollision();
-	modules[13] = player2 = new ModulePlayer(/*playernames::ZANGIEF*/playernames::ZANGIEF);
-	modules[14] = fonts = new ModuleFonts();
+	modules[3] = controller = new ModuleController();
+	modules[4] = special_moves = new ModuleSpecialMoves();
+	modules[5] = textures = new ModuleTextures();
+	modules[6] = scene_Ryu = new ModuleSceneRyu();
+	modules[7] = scene_Zangief = new ModuleSceneZangief();
+	modules[8] = player = new ModulePlayer(playernames::RYU);
+	modules[9] = fade = new ModuleFadeToBlack();
+	modules[10] = welcomescreen = new ModuleWelcomeScreen();
+	modules[11] = congratsscreen = new ModuleCongratsScreen();
+	modules[12] = particles = new ModuleParticles();
+	modules[13] = audio = new ModuleAudio();
+	modules[14] = collision = new ModuleCollision();
+	modules[15] = player2 = new ModulePlayer(/*playernames::ZANGIEF*/playernames::ZANGIEF);
+	modules[16] = fonts = new ModuleFonts();
+	modules[17] = ui = new ModuleUi();
 	//modules[13] = winlosescreen = new ModuleWinloseScreen();
 }	
 
