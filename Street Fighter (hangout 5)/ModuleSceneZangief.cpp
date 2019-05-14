@@ -52,6 +52,11 @@ ModuleSceneZangief::ModuleSceneZangief()
 	extinctor.y = 54;
 	extinctor.w = 566-552;
 	extinctor.h = 87-54;
+
+	palanca.x=1185;
+	palanca.y=206;
+	palanca.w = 1298-1185;
+	palanca.h = 644-206;
 }
 
 ModuleSceneZangief::~ModuleSceneZangief()
@@ -114,6 +119,7 @@ update_status ModuleSceneZangief::Update()
 	App->render->Blit(graphics, -76, 9.5, &(dudes.GetCurrentFrame()), 0.75);
 	App->render->Blit(graphics, -90, 78, &(dudes2.GetCurrentFrame()), 0.75);
 	App->render->Blit(graphics, 229, 146, &extinctor, 0.75);
+	App->render->Blit(graphics, 369, -220, &palanca, 0.75);
 	App->render->Blit(graphics, -171, 130, &valla, 0.75);
 
 

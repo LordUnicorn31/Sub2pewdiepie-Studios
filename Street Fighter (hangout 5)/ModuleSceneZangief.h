@@ -34,6 +34,7 @@ public:
 	SDL_Rect background2;
 	SDL_Rect valla;
 	SDL_Rect extinctor;
+	SDL_Rect palanca;
 	Animation dudes;
 	Animation dudes2;
 };
