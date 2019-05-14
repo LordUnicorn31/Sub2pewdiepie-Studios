@@ -14,9 +14,6 @@
 #include "ModuleUi.h"
 #include "ModuleController.h"
 
-// Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
-
-
 ModuleController::ModuleController()
 {
 

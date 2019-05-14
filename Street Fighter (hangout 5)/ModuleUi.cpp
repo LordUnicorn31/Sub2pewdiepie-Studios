@@ -13,8 +13,6 @@
 #include "ModuleSceneZangief.h"
 #include "ModuleUi.h"
 
-// Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
-
 
 ModuleUi::ModuleUi()
 {
