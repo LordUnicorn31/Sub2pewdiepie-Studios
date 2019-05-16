@@ -16,7 +16,7 @@ enum playernames {
 class ModulePlayer : public Module
 {
 public:
-	ModulePlayer(int playername);
+	ModulePlayer(int playername, int leftButton, int rightButton, int upButton, int downButton, int punchButton, int kickButton, int specialButton, int godModeOn, int godModeOff);
 	~ModulePlayer();
 
 	bool Start();
@@ -117,8 +117,16 @@ public:
 	Mix_Chunk* hadoukenaudio = nullptr;		//triggers when player throws hadouken					//needed
 	Mix_Chunk* hadoukenhit = nullptr;		//triggers when hadouken collider hits the enemy (so i think it should go to Particles.h maybe, idk)
 	Mix_Chunk* jumpgrounded = nullptr;
-
-
+	//player Buttons
+	int leftButton;
+	int rightButton;
+	int upButton;
+	int downButton;
+	int punchButton;
+	int kickButton;
+	int specialButton;
+	int godModeOnButton;
+	int godModeOffButton;
 };
 
 #endif
