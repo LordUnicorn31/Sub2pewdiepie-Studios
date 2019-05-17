@@ -25,13 +25,14 @@ public:
 	void OnCollision(Collider*, Collider*);
 
 public:
+	int name;
 	int life = 0;
 	float vely = 0.0f;
 	float gravity = -0.08f;
 	Animation* current_animation = &idle;
 	//Animation* current_animation_player2 = &idle;
-	SDL_Texture* graphicsryu = nullptr;
-	SDL_Texture* graphicszangief = nullptr;
+	SDL_Texture* graphics = nullptr;
+	//SDL_Texture* graphicszangief = nullptr;
 	bool lookingright;
 	bool godmode = false;
 	int hadoukenable = 0;
@@ -127,6 +128,8 @@ public:
 	int specialButton;
 	int godModeOnButton;
 	int godModeOffButton;
+	//function declarations
+	//void renderPlayerOnScreen(ModulePlayer* player);
 };
 
 #endif

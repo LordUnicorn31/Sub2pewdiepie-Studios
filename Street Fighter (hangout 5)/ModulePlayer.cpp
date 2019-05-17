@@ -243,7 +243,7 @@ ModulePlayer::ModulePlayer(int playername_, int leftButton_, int rightButton_, i
 #pragma endregion		//used (incomplete, missing 4 frames)
 
 #pragma endregion
-
+		this->name = playernames::RYU;
 		break;
 		}
 	case ZANGIEF: 
@@ -288,7 +288,7 @@ ModulePlayer::ModulePlayer(int playername_, int leftButton_, int rightButton_, i
 		low_punch.speed = 0.06f;
 
 #pragma endregion
-
+		this->name = playernames::ZANGIEF;
 		break;
 		}
 		
@@ -302,6 +302,17 @@ ModulePlayer::ModulePlayer(int playername_, int leftButton_, int rightButton_, i
 	specialButton = specialButton_;
 	godModeOnButton = godModeOn_;
 	godModeOffButton = godModeOff_;
+	/*switch (playername_) {
+	case playernames::RYU: {
+		graphics = App->textures->Load("media_files/ryu.png"); // arcade version
+		break;
+	}
+	case playernames::ZANGIEF: {
+		graphics = App->textures->Load("media_files/Zangief_Sprites.png"); //snes version lmao Yeet 
+		break;
+	}
+	}*/
+	
 }
 
 void loadanimations() {
@@ -311,23 +322,41 @@ void loadanimations() {
 ModulePlayer::~ModulePlayer()
 {}
 
+void loadCharacterGraphics(ModulePlayer* player) {
+	switch (player->name)
+	{
+	case playernames::RYU: {
+		player->graphics = App->textures->Load("media_files/ryu.png");
+		break;
+	}
+	case playernames::ZANGIEF: {
+		player->graphics = App->textures->Load("media_files/Zangief_Sprites.png");
+		break;
+	}
+	default:
+		break;
+	}
+	return;
+}
+
 // Load assets
 bool ModulePlayer::Start()
 {
 	LOG("Loading player textures");
 	bool ret = true;
-	graphicsryu = App->textures->Load("media_files/ryu.png"); // arcade version
-	graphicszangief = App->textures->Load("media_files/Zangief_Sprites.png"); //snes version lmao Yeet 
 	lowattack = App->audio->Load("media_files/Street Fighter Attack moves\\lowattack.wav");
 	midattack = App->audio->Load("media_files/Street Fighter Attack moves\\midattack.wav");
 	lowpunchhit = App->audio->Load("media_files/Street Fighter Attack moves\\lowpunchhit.wav");
 	lowkickhit = App->audio->Load("media_files/Street Fighter Attack moves\\lowkickhit.wav");
 	hadoukenaudio = App->audio->Load("media_files/Hadouken.wav");
 	jumpgrounded = App->audio->Load("media_files/jumpgrounded.wav");
+	loadCharacterGraphics(App->player);
+	loadCharacterGraphics(App->player2);
+	//graphicsryu = App->textures->Load("media_files/ryu.png"); // arcade version			Old graphics load function
+	//graphicszangief = App->textures->Load("media_files/Zangief_Sprites.png"); //snes version lmao Yeet 
 	App->player->position.x = 50;
-	App->player->position.y = 200;
 	App->player2->position.x = 250;
-	App->player2->position.y = 200;
+	position.y = 200;
 	App->player->playercollider = App->collision->AddCollider({ 0, 220, 40, 80}, COLLIDER_PLAYER1, App->player);
 	App->player2->playercollider = App->collision->AddCollider({ 100, 220, 40, 80 }, COLLIDER_PLAYER2, App->player2);
 	punchpos.x = 0;
@@ -339,6 +368,15 @@ bool ModulePlayer::Start()
 	godmode = false;
 
 	return ret;
+}
+
+void renderPlayerOnScreen(ModulePlayer* player) {
+	SDL_Rect r = player->current_animation->GetCurrentFrame();
+	if (player->lookingright)
+		App->render->Blit(player->graphics, player->position.x, player->position.y - r.h, &r, 1.0f, !player->lookingright);
+	else
+		App->render->Blit(player->graphics, player->position.x + 60, player->position.y - r.h, &r, 1.0f, !player->lookingright);
+	return;
 }
 
 // Update: draw background
@@ -602,10 +640,10 @@ update_status ModulePlayer::Update()
 		App->player->current_animation = &App->player->jump;
 		App->player->position.y -= App->player->vely;
 		App->player->vely += gravity;
-		if (App->player->position.y >= 220) {
+		if (App->player->position.y >= 200) {
 			App->player->jumpingidle = false;
 			App->audio->Play(App->player->jumpgrounded, 0);
-			App->player->position.y = 220;
+			App->player->position.y = 200;
 			App->player->jump.Reset();
 			App->player->current_animation = &App->player->idle;
 		}
@@ -614,10 +652,10 @@ update_status ModulePlayer::Update()
 		App->player2->current_animation = &App->player2->jump;
 		App->player2->position.y -= App->player2->vely;
 		App->player2->vely += gravity;
-		if (App->player2->position.y >= 220) {
+		if (App->player2->position.y >= 200) {
 			App->player2->jumpingidle = false;
 			App->audio->Play(App->player2->jumpgrounded, 0);
-			App->player2->position.y = 220;
+			App->player2->position.y = 200;
 			App->player2->jump.Reset();
 			App->player2->current_animation = &App->player2->idle;
 		}
@@ -715,16 +753,19 @@ update_status ModulePlayer::Update()
 	//player2collider->rect.x = App->player2->position.x;
 	//player2collider->rect.y = App->player2->position.y - 90;
 	// Draw everything --------------------------------------
-	SDL_Rect r1 = App->player->current_animation->GetCurrentFrame();
-	SDL_Rect r2 = App->player2->current_animation->GetCurrentFrame();
-	if (App->player->lookingright)
+	
+	/*SDL_Rect r2 = App->player2->current_animation->GetCurrentFrame();
+	/*if (App->player->lookingright)
 	App->render->Blit(graphicsryu, App->player->position.x, App->player->position.y - r1.h, &r1, 1.0f, !App->player->lookingright);
 	else
 	App->render->Blit(graphicsryu, App->player->position.x + 60, App->player->position.y - r1.h, &r1, 1.0f, !App->player->lookingright);
 	if (App->player2->lookingright)
 	App->render->Blit(graphicszangief, App->player2->position.x, App->player2->position.y - r2.h, &r2, 1.0f, !App->player2->lookingright);
 	else
-	App->render->Blit(graphicszangief, App->player2->position.x + 60, App->player2->position.y - r2.h, &r2, 1.0f, !App->player2->lookingright);
+	App->render->Blit(graphicszangief, App->player2->position.x + 60, App->player2->position.y - r2.h, &r2, 1.0f, !App->player2->lookingright);*/
+	renderPlayerOnScreen(App->player);
+	renderPlayerOnScreen(App->player2);
+
 
 	if (App->player->life <= 0) {
 		//App->particles->CleanUp();
@@ -775,6 +816,8 @@ void ModulePlayer::OnCollision(Collider*c1, Collider*c2) {
 		App->player2->playerhittedcounter = 0;
 	}
 
+
+
 	/*if (App->scene_ken->IsEnabled() == true)
 	App->fade->FadeToBlack(App->scene_ken, App->scene_honda);
 	if (App->scene_honda->IsEnabled() == true)
@@ -782,7 +825,8 @@ void ModulePlayer::OnCollision(Collider*c1, Collider*c2) {
 }
 
 bool ModulePlayer::CleanUp() {
-	App->textures->Unload(graphicsryu);
+	//App->textures->Unload(graphicsryu);
+	App->textures->Unload(graphics);
 	App->audio->Unload(lowattack);
 	App->audio->Unload(lowattack);
 	App->audio->Unload(lowpunchhit);
