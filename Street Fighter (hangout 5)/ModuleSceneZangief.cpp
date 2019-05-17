@@ -113,14 +113,14 @@ update_status ModuleSceneZangief::Update()
 	}
 	uip2.w = (prevHP2 * 0.88); // V
 	// Draw everything --------------------------------------
-	App->render->Blit(graphics, -40, -206, &background2, 0.75);
-	App->render->Blit(graphics, -140, 176, &ground, 0.75);
-	App->render->Blit(graphics, -140, -206, &background, 0.75);
-	App->render->Blit(graphics, -76, 9.5, &(dudes.GetCurrentFrame()), 0.75);
-	App->render->Blit(graphics, -90, 78, &(dudes2.GetCurrentFrame()), 0.75);
-	App->render->Blit(graphics, 229, 146, &extinctor, 0.75);
-	App->render->Blit(graphics, 369, -220, &palanca, 0.75);
-	App->render->Blit(graphics, -171, 130, &valla, 0.75);
+	App->render->Blit(graphics, -40, -206, &background2, 0.70);
+	App->render->Blit(graphics, -140, 176, &ground,0.8);
+	App->render->Blit(graphics, -140, -206, &background, 0.80);
+	App->render->Blit(graphics, -76, 9.5, &(dudes.GetCurrentFrame()), 0.80);
+	App->render->Blit(graphics, -90, 78, &(dudes2.GetCurrentFrame()), 0.80);
+	App->render->Blit(graphics, 229, 146, &extinctor, 0.80);
+	App->render->Blit(graphics, 369, -220, &palanca, 0.8);
+	App->render->Blit(graphics, -171, 130, &valla, 1.3);
 
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
