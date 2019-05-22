@@ -379,6 +379,18 @@ void renderPlayerOnScreen(ModulePlayer* player) {
 	return;
 }
 
+void lookingRightCheck(ModulePlayer* myplayer, ModulePlayer* foe) {
+	if (myplayer->position.x < foe->position.x)
+		myplayer->lookingright = true;
+	else
+		myplayer->lookingright = false;
+	return;
+}
+
+void moveRight(ModulePlayer* player, )
+{
+
+}
 // Update: draw background
 update_status ModulePlayer::Update()
 {
@@ -405,16 +417,11 @@ update_status ModulePlayer::Update()
 	if (App->input->keyboard[App->player2->godModeOffButton] == KEY_STATE::KEY_DOWN)
 		App->player2->godmode = false;
 
-	if (App->player->position.x < App->player2->position.x)
-		App->player->lookingright = true;
-	else
-		App->player->lookingright = false;
+	lookingRightCheck(App->player, App->player2);
+	lookingRightCheck(App->player2, App->player);
 
-	if (App->player2->position.x < App->player->position.x)
-		App->player2->lookingright = true;
-	else
-		App->player2->lookingright = false;
-
+	//moveRight(player);
+	//moveRight(player2);
 	if (App->input->keyboard[App->player->rightButton] == KEY_STATE::KEY_REPEAT && App->player->position.x < SCREEN_WIDTH - 60 && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft || App->player->punching||App->player->kicking || App->player->hadouking2 || App->player->playerhittedcounter < 59))
 	{
 		if (App->player->position.x < App->player2->position.x) {// App->player->lookingright = true
