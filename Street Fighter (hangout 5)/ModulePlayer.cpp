@@ -331,6 +331,11 @@ ModulePlayer::ModulePlayer(int playername_, int leftButton_, int rightButton_, i
 		high_kick.PushBack({747, 271, 802-747, 369-271});
 		high_kick.speed = 0.09f;
 
+		low_close_kick.PushBack({1250, 271, 1321-1250, 369-271});
+		low_close_kick.PushBack({1331, 266, 1403-1331, 369-266});
+		low_close_kick.PushBack({1410, 271, 1481-1410, 369-271});
+		low_close_kick.speed = 0.06f;
+
 		high_close_kick.PushBack({817, 272, 874-817, 369-272});
 		high_close_kick.PushBack({881, 274, 942-881, 369-274});
 		high_close_kick.PushBack({950, 262, 1019-950, 369-262});
@@ -339,6 +344,12 @@ ModulePlayer::ModulePlayer(int playername_, int leftButton_, int rightButton_, i
 		high_close_kick.PushBack({1181, 300, 1237-1181, 369-300});
 		high_close_kick.speed = 0.06f;
 
+		/*low crouch punch
+		mid / high crouch punch
+		low / mid / high crouch kick
+		low / mid / high jump punch
+
+		*/
 	// timing list: http://zachd.com/nki/ST/flame.html
 
 #pragma endregion
