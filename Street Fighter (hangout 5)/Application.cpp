@@ -28,7 +28,7 @@ Application::Application()
 	modules[5] = textures = new ModuleTextures();
 	modules[6] = scene_Ryu = new ModuleSceneRyu();
 	modules[7] = scene_Zangief = new ModuleSceneZangief();
-	modules[8] = player = new ModulePlayer(playernames::RYU, SDL_SCANCODE_A, SDL_SCANCODE_D, SDL_SCANCODE_W, SDL_SCANCODE_S, SDL_SCANCODE_1, SDL_SCANCODE_2, SDL_SCANCODE_3, SDL_SCANCODE_F1, SDL_SCANCODE_F2);
+	modules[8] = player = new ModulePlayer(playernames::ZANGIEF, SDL_SCANCODE_A, SDL_SCANCODE_D, SDL_SCANCODE_W, SDL_SCANCODE_S, SDL_SCANCODE_1, SDL_SCANCODE_2, SDL_SCANCODE_3, SDL_SCANCODE_F1, SDL_SCANCODE_F2);
 	modules[9] = fade = new ModuleFadeToBlack();
 	modules[10] = welcomescreen = new ModuleWelcomeScreen();
 	modules[11] = congratsscreen = new ModuleCongratsScreen();

@@ -12,7 +12,7 @@
 #include "ModuleAudio.h"
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
-
+//ZANGIEF MOVE LIST: http://www.fightabase.com/charMove.aspx?id=4940
 
 ModulePlayer::ModulePlayer(int playername_, int leftButton_, int rightButton_, int upButton_, int downButton_, int punchButton_, int kickButton_, int specialButton_, int godModeOn_, int godModeOff_) //parameter that takes enum playernames (0 = ryu, 1 = zangief). In Application.cpp (or whenever you create a new moduleplayer) you have to specify the character (for instance playernames::RYU). Depending in the character the constructor will vary
 {
@@ -287,7 +287,62 @@ ModulePlayer::ModulePlayer(int playername_, int leftButton_, int rightButton_, i
 		low_punch.PushBack({165, 149, 223-165, 243-149});
 		low_punch.speed = 0.06f;
 
+		block.PushBack({970, 24, 1023-970, 117-24});
+		block.PushBack({1038, 57, 1091-1038, 117-57});
+		block.speed = 0.06f;
+
+		low_punch.PushBack({6, 149, 64-6, 243-149});
+		low_punch.PushBack({72, 150, 149-72, 243-150});
+		low_punch.PushBack({165, 149, 224, 243});
+		low_punch.speed = 0.06f;
+
+		mid_punch.PushBack({ 6, 149, 64 - 6, 243 - 149 });
+		mid_punch.PushBack({ 72, 150, 149 - 72, 243 - 150 });
+		mid_punch.PushBack({ 165, 149, 224, 243 });
+		mid_punch.speed = 0.09f;
+
+		high_punch.PushBack({243, 145, 298-243, 243-145});
+		high_punch.PushBack({ 308, 149, 366 - 308, 243-149});
+		high_punch.PushBack({375, 150, 452-375, 243-150});
+		high_punch.PushBack({462, 151, 535-462, 243-151});
+		high_punch.PushBack({544, 150, 621-544, 243-150});
+		high_punch.PushBack({628, 149, 686-628, 243-149});
+		high_punch.PushBack({701, 145, 756-701, 243-145});
+		high_punch.speed = 0.06f;
+
+		low_close_punch.PushBack({778, 134, 831-778, 243-134});
+		low_close_punch.PushBack({843, 150, 908-843, 243-150});
+		low_close_punch.PushBack({918, 156, 994-918, 243-156});
+		low_close_punch.speed = 0.06f;
+
+		low_kick.PushBack({7, 269, 65-7, 369-269});
+		low_kick.PushBack({75, 271, 162-75, 369-271});
+		low_kick.speed = 0.06f;
+
+		mid_kick.PushBack({176, 269, 234-176, 369-269});
+		mid_kick.PushBack({246, 268, 318-246, 369-268});
+		mid_kick.PushBack({329, 269, 424-329, 369-269});
+		mid_kick.PushBack({434, 268, 506-434, 369-268});
+		mid_kick.PushBack({519, 269, 577-519, 369-269});
+		mid_kick.speed = 0.06f;
+
+		high_kick.PushBack({589, 271, 644-589, 369-271});
+		high_kick.PushBack({651, 266, 736-651, 369-266});
+		high_kick.PushBack({747, 271, 802-747, 369-271});
+		high_kick.speed = 0.09f;
+
+		high_close_kick.PushBack({817, 272, 874-817, 369-272});
+		high_close_kick.PushBack({881, 274, 942-881, 369-274});
+		high_close_kick.PushBack({950, 262, 1019-950, 369-262});
+		high_close_kick.PushBack({1027, 273, 1096-1027, 369-273});
+		high_close_kick.PushBack({1105, 282, 1173-1105, 369-282});
+		high_close_kick.PushBack({1181, 300, 1237-1181, 369-300});
+		high_close_kick.speed = 0.06f;
+
+	// timing list: http://zachd.com/nki/ST/flame.html
+
 #pragma endregion
+
 		this->name = playernames::ZANGIEF;
 		break;
 		}
@@ -322,7 +377,7 @@ void loadanimations() {
 ModulePlayer::~ModulePlayer()
 {}
 
-void loadCharacterGraphics(ModulePlayer* player) {
+void loadCharacterGraphics(ModulePlayer* player, ModulePlayer* player2) {
 	switch (player->name)
 	{
 	case playernames::RYU: {
@@ -331,6 +386,20 @@ void loadCharacterGraphics(ModulePlayer* player) {
 	}
 	case playernames::ZANGIEF: {
 		player->graphics = App->textures->Load("media_files/Zangief_Sprites.png");
+		break;
+	}
+	default:
+		break;
+	}
+	switch (player2->name)
+	{
+	case playernames::RYU: {
+		player->graphics = App->textures->Load("media_files/ryu.png");
+		break;
+	}
+	case playernames::ZANGIEF: {
+		if (player->name == playernames::ZANGIEF)
+			player2->graphics = App->textures->Load("media_files/Zangief_Sprites_2.png");
 		break;
 	}
 	default:
@@ -350,8 +419,7 @@ bool ModulePlayer::Start()
 	lowkickhit = App->audio->Load("media_files/Street Fighter Attack moves\\lowkickhit.wav");
 	hadoukenaudio = App->audio->Load("media_files/Hadouken.wav");
 	jumpgrounded = App->audio->Load("media_files/jumpgrounded.wav");
-	loadCharacterGraphics(App->player);
-	loadCharacterGraphics(App->player2);
+	loadCharacterGraphics(App->player, App->player2);
 	//graphicsryu = App->textures->Load("media_files/ryu.png"); // arcade version			Old graphics load function
 	//graphicszangief = App->textures->Load("media_files/Zangief_Sprites.png"); //snes version lmao Yeet 
 	App->player->position.x = 50;
@@ -387,10 +455,10 @@ void lookingRightCheck(ModulePlayer* myplayer, ModulePlayer* foe) {
 	return;
 }
 
-void moveRight(ModulePlayer* player, )
+/*void moveRight(ModulePlayer* player, )
 {
 
-}
+}*/
 // Update: draw background
 update_status ModulePlayer::Update()
 {

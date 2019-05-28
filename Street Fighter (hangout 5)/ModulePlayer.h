@@ -43,8 +43,12 @@ public:
 	bool jumpingleft = false;
 	bool punching = false;
 	bool kicking = false;
+	bool blocking = false;
+	//ryu
 	bool hadouking = false;
 	bool hadouking2 = false;//le fet pk no vull borrar el que as fet am el numero 1
+	//zangief
+	
 	int playerhittedcounter = 0;
 	//colliders
 	Collider* playercollider = nullptr;
@@ -63,6 +67,7 @@ public:
 	Animation turning;
 	Animation jump;
 	Animation jump_frontflip;
+	Animation block;
 	//punches
 	Animation low_punch;
 	Animation mid_punch;
