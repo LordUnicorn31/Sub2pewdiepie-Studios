@@ -55,6 +55,12 @@ public:
 	bool jumpingidle = false;
 	bool jumpingright = false;
 	bool jumpingleft = false;
+	bool lping = false;
+	bool mping = false;
+	bool hping = false;
+	bool lking = false;
+	bool mking = false;
+	bool hking = false;
 	bool punching = false;
 	bool kicking = false;
 	bool blocking = false;
@@ -127,6 +133,7 @@ public:
 	Animation chestgrab;
 	Animation suplex;
 	Animation piledriver;
+	Animation deadlydrive;
 
 	fPoint position;
 

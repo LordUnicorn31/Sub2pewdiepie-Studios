@@ -626,15 +626,22 @@ void lookingRightCheck(ModulePlayer* myplayer, ModulePlayer* foe) {
 
 void moveRight(ModulePlayer* player, ModulePlayer* foe)
 {
-	if (App->input->keyboard[player->rightButton] == KEY_STATE::KEY_REPEAT 
-		&& player->position.x < SCREEN_WIDTH - 60 
-		&& !(player->jumpingidle 
-			|| player->jumpingright 
-			|| player->jumpingleft 
-			|| player->punching 
-			|| player->kicking 
+	if (
+		App->input->keyboard[player->rightButton] == KEY_STATE::KEY_REPEAT
+		&& player->position.x < SCREEN_WIDTH - 60
+		&& !(player->jumpingidle
+			|| player->jumpingright
+			|| player->jumpingleft
+			|| player->lping
+			|| player->mping
+			|| player->hping
+			|| player->lking
+			|| player->mking
+			|| player->hking
 			|| player->hadouking2 
-			|| player->playerhittedcounter < 59))
+			|| player->playerhittedcounter < 59
+			)
+		)
 	{
 		if (player->position.x < foe->position.x) {// App->player->lookingright = true
 			player->current_animation = &player->forward;
@@ -661,8 +668,12 @@ void moveLeft(ModulePlayer* player, ModulePlayer* foe)
 		&& !(player->jumpingidle 
 			|| player->jumpingright 
 			|| player->jumpingleft 
-			|| player->punching 
-			|| player->kicking 
+			|| player->lping
+			|| player->mping
+			|| player->hping
+			|| player->lking
+			|| player->mking
+			|| player->hking
 			|| player->hadouking2 
 			|| player->playerhittedcounter < 59))
 	{
@@ -681,6 +692,11 @@ void moveLeft(ModulePlayer* player, ModulePlayer* foe)
 		else
 			player->position.x -= 1.0f;
 	}
+}
+
+void jump(ModulePlayer* player)
+{
+
 }
 // Update: draw background
 update_status ModulePlayer::Update()
@@ -793,6 +809,9 @@ update_status ModulePlayer::Update()
 			App->player->hadoukenable = 0;
 		}*/
 	
+	//jump(App->player);
+	//jump(App->player2);
+
 	if (App->input->keyboard[App->player->upButton] == KEY_STATE::KEY_REPEAT && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft || App->player->punching || App->player->kicking || App->player->playerhittedcounter < 59)) {
 		//jump.Reset();
 		App->player->jumpingidle = true;
@@ -806,7 +825,7 @@ update_status ModulePlayer::Update()
 		App->player2->jumpingidle = true;
 		//LOG("uWu");
 		App->player2->vely = 4.5f;
-
+		
 
 	}
 
@@ -1048,7 +1067,6 @@ update_status ModulePlayer::Update()
 	//player2collider->rect.x = App->player2->position.x;
 	//player2collider->rect.y = App->player2->position.y - 90;
 	// Draw everything --------------------------------------
-	
 	/*SDL_Rect r2 = App->player2->current_animation->GetCurrentFrame();
 	/*if (App->player->lookingright)
 	App->render->Blit(graphicsryu, App->player->position.x, App->player->position.y - r1.h, &r1, 1.0f, !App->player->lookingright);
