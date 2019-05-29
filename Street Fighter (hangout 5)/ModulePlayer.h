@@ -16,7 +16,21 @@ enum playernames {
 class ModulePlayer : public Module
 {
 public:
-	ModulePlayer(int playername, int leftButton, int rightButton, int upButton, int downButton, int punchButton, int kickButton, int specialButton, int godModeOn, int godModeOff);
+	ModulePlayer(
+		int playername, 
+		int leftButton, 
+		int rightButton, 
+		int upButton, 
+		int downButton, 
+		int lp,
+		int mp,
+		int hp,
+		int lk,
+		int mk,
+		int hk, 
+		int godModeOn, 
+		int godModeOff
+	);
 	~ModulePlayer();
 
 	bool Start();
@@ -78,6 +92,10 @@ public:
 			Animation low_jump_punch;
 			Animation mid_jump_punch;
 			Animation high_jump_punch;
+				Animation low_crouch_punch;
+				Animation mid_crouch_punch;		//
+				Animation high_crouch_punch;	//share animation
+					Animation jumping_punch;
 
 	iPoint punchpos;
 			
@@ -88,7 +106,10 @@ public:
 		Animation low_close_kick;
 		Animation mid_close_kick;
 		Animation high_close_kick;
-			//Animation jump_kick;
+			Animation low_crouch_kick;		//
+			Animation mid_crouch_kick;		//
+			Animation high_crouch_kick;		//share animation
+				Animation jumping_kick;
 
 	fPoint position;
 
@@ -128,8 +149,12 @@ public:
 	int rightButton;
 	int upButton;
 	int downButton;
-	int punchButton;
-	int kickButton;
+	int lp;
+	int mp;
+	int hp;
+	int lk;
+	int mk;
+	int hk;
 	int specialButton;
 	int godModeOnButton;
 	int godModeOffButton;

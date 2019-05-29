@@ -14,7 +14,21 @@
 
 //ZANGIEF MOVE LIST: http://www.fightabase.com/charMove.aspx?id=4940
 
-ModulePlayer::ModulePlayer(int playername_, int leftButton_, int rightButton_, int upButton_, int downButton_, int punchButton_, int kickButton_, int specialButton_, int godModeOn_, int godModeOff_) //parameter that takes enum playernames (0 = ryu, 1 = zangief). In Application.cpp (or whenever you create a new moduleplayer) you have to specify the character (for instance playernames::RYU). Depending in the character the constructor will vary
+ModulePlayer::ModulePlayer(
+	int playername_, 
+	int leftButton_, 
+	int rightButton_, 
+	int upButton_, 
+	int downButton_, 
+	int lp_,
+	int mp_,
+	int hp_,
+	int lk_,
+	int mk_,
+	int hk_, 
+	int godModeOn_, 
+	int godModeOff_
+) //parameter that takes enum playernames (0 = ryu, 1 = zangief). In Application.cpp (or whenever you create a new moduleplayer) you have to specify the character (for instance playernames::RYU). Depending in the character the constructor will vary
 {
 	
 	//1 = Ryu
@@ -291,11 +305,6 @@ ModulePlayer::ModulePlayer(int playername_, int leftButton_, int rightButton_, i
 		block.PushBack({1038, 57, 1091-1038, 117-57});
 		block.speed = 0.06f;
 
-		low_punch.PushBack({6, 149, 64-6, 243-149});
-		low_punch.PushBack({72, 150, 149-72, 243-150});
-		low_punch.PushBack({165, 149, 224, 243});
-		low_punch.speed = 0.06f;
-
 		mid_punch.PushBack({ 6, 149, 64 - 6, 243 - 149 });
 		mid_punch.PushBack({ 72, 150, 149 - 72, 243 - 150 });
 		mid_punch.PushBack({ 165, 149, 224, 243 });
@@ -344,6 +353,44 @@ ModulePlayer::ModulePlayer(int playername_, int leftButton_, int rightButton_, i
 		high_close_kick.PushBack({1181, 300, 1237-1181, 369-300});
 		high_close_kick.speed = 0.06f;
 
+		low_crouch_punch.PushBack({6, 422, 78-6, 495-422});
+		low_crouch_punch.speed = 0.06f;
+
+		mid_crouch_punch.PushBack({91, 417, 144-91, 495-417});
+		mid_crouch_punch.PushBack({151, 411, 229-151, 495-411});
+		mid_crouch_punch.PushBack({238, 417, 291-238, 495-417});
+		mid_crouch_punch.speed = 0.06f;
+
+		high_crouch_punch.PushBack({ 91, 417, 144 - 91, 495 - 417 });
+		high_crouch_punch.PushBack({ 151, 411, 229 - 151, 495 - 411 });
+		high_crouch_punch.PushBack({ 238, 417, 291 - 238, 495 - 417 });
+		high_crouch_punch.speed = 0.09f;
+
+		low_crouch_kick.PushBack({306, 414, 369-306, 495-414});
+		low_crouch_kick.PushBack({382, 414, 468-382, 495-414});
+		low_crouch_kick.PushBack({475, 414, 538-475, 495-414});
+		low_crouch_kick.speed = 0.03f;
+
+		mid_crouch_kick.PushBack({ 306, 414, 369 - 306, 495 - 414 });
+		mid_crouch_kick.PushBack({ 382, 414, 468 - 382, 495 - 414 });
+		mid_crouch_kick.PushBack({ 475, 414, 538 - 475, 495 - 414 });
+		mid_crouch_kick.speed = 0.06f;
+
+		high_crouch_kick.PushBack({ 306, 414, 369 - 306, 495 - 414 });
+		high_crouch_kick.PushBack({ 382, 414, 468 - 382, 495 - 414 });
+		high_crouch_kick.PushBack({ 475, 414, 538 - 475, 495 - 414 });
+		high_crouch_kick.speed = 0.09f;
+
+		jumping_punch.PushBack({552, 417, 611-552, 480-417});
+		jumping_punch.PushBack({620, 421, 701-620, 480-421});
+		jumping_punch.PushBack({711, 421, 760-711, 497-421});
+		jumping_punch.speed = 0.06f;
+
+		jumping_kick.PushBack({780, 402, 845-780, 495-402});
+		jumping_kick.PushBack({861, 409, 964-861, 470-409});
+		jumping_kick.PushBack({971, 402, 1036-971, 495-402});
+		jumping_kick.speed = 0.12f;
+
 		/*low crouch punch
 		mid / high crouch punch
 		low / mid / high crouch kick
@@ -363,9 +410,12 @@ ModulePlayer::ModulePlayer(int playername_, int leftButton_, int rightButton_, i
 	rightButton = rightButton_;
 	upButton = upButton_;
 	downButton = downButton_;
-	punchButton = punchButton_;
-	kickButton = kickButton_;
-	specialButton = specialButton_;
+	lp = lp_;
+	mp = mp_;
+	hp = hp_;
+	lk = lk_;
+	mk = mk_;
+	hk = hk_;
 	godModeOnButton = godModeOn_;
 	godModeOffButton = godModeOff_;
 	/*switch (playername_) {
@@ -601,7 +651,7 @@ update_status ModulePlayer::Update()
 
 	}
 
-	if (App->input->keyboard[App->player->punchButton] == KEY_STATE::KEY_DOWN && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft||App->player->punching||App->player->kicking || App->player->hadouking2 || App->player->playerhittedcounter < 59/* || App->player->forwarding || App->player->backwarding*/)) {
+	if (App->input->keyboard[App->player->lp] == KEY_STATE::KEY_DOWN && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft||App->player->punching||App->player->kicking || App->player->hadouking2 || App->player->playerhittedcounter < 59/* || App->player->forwarding || App->player->backwarding*/)) {
 		App->player->low_punch.Reset();
 		App->player->punching = true;
 		App->audio->Play(App->player->lowattack, 0);
@@ -618,7 +668,7 @@ update_status ModulePlayer::Update()
 			App->player->punching = false;
 		}
 	}
-	if (App->input->keyboard[App->player2->punchButton] == KEY_STATE::KEY_DOWN && !(App->player2->jumpingidle || App->player2->jumpingright || App->player2->jumpingleft || App->player2->punching || App->player2->kicking || App->player2->hadouking2 || App->player2->playerhittedcounter < 59/* || App->player->forwarding || App->player->backwarding*/)) {
+	if (App->input->keyboard[App->player2->lp] == KEY_STATE::KEY_DOWN && !(App->player2->jumpingidle || App->player2->jumpingright || App->player2->jumpingleft || App->player2->punching || App->player2->kicking || App->player2->hadouking2 || App->player2->playerhittedcounter < 59/* || App->player->forwarding || App->player->backwarding*/)) {
 		App->player2->low_punch.Reset();
 		App->player2->punching = true;
 		App->audio->Play(App->player2->lowattack, 0);
@@ -636,7 +686,7 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	if (App->input->keyboard[App->player->kickButton] == KEY_STATE::KEY_DOWN && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft||App->player->punching||App->player->kicking || App->player->hadouking2 || App->player->playerhittedcounter < 59/* || App->player->forwarding || App->player->backwarding*/)) {
+	if (App->input->keyboard[App->player->lk] == KEY_STATE::KEY_DOWN && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft||App->player->punching||App->player->kicking || App->player->hadouking2 || App->player->playerhittedcounter < 59/* || App->player->forwarding || App->player->backwarding*/)) {
 		App->player->low_close_kick.Reset();
 		App->player->kicking = true;
 		App->audio->Play(App->player->midattack, 0);
@@ -654,7 +704,7 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	if (App->input->keyboard[App->player2->kickButton] == KEY_STATE::KEY_DOWN && !(App->player2->jumpingidle || App->player2->jumpingright || App->player2->jumpingleft || App->player2->punching || App->player2->kicking||App->player2->hadouking2 || App->player2->playerhittedcounter < 59/* || App->player->forwarding || App->player->backwarding*/)) {
+	if (App->input->keyboard[App->player2->lk] == KEY_STATE::KEY_DOWN && !(App->player2->jumpingidle || App->player2->jumpingright || App->player2->jumpingleft || App->player2->punching || App->player2->kicking||App->player2->hadouking2 || App->player2->playerhittedcounter < 59/* || App->player->forwarding || App->player->backwarding*/)) {
 		App->player2->low_close_kick.Reset();
 		App->player2->kicking = true;
 		App->audio->Play(App->player2->midattack, 0);

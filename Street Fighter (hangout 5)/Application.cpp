@@ -28,14 +28,14 @@ Application::Application()
 	modules[5] = textures = new ModuleTextures();
 	modules[6] = scene_Ryu = new ModuleSceneRyu();
 	modules[7] = scene_Zangief = new ModuleSceneZangief();
-	modules[8] = player = new ModulePlayer(playernames::ZANGIEF, SDL_SCANCODE_A, SDL_SCANCODE_D, SDL_SCANCODE_W, SDL_SCANCODE_S, SDL_SCANCODE_1, SDL_SCANCODE_2, SDL_SCANCODE_3, SDL_SCANCODE_F1, SDL_SCANCODE_F2);
+	modules[8] = player = new ModulePlayer(playernames::ZANGIEF, SDL_SCANCODE_A, SDL_SCANCODE_D, SDL_SCANCODE_W, SDL_SCANCODE_S, SDL_SCANCODE_1, SDL_SCANCODE_2, SDL_SCANCODE_3, SDL_SCANCODE_4, SDL_SCANCODE_5, SDL_SCANCODE_6, SDL_SCANCODE_F1, SDL_SCANCODE_F2);
 	modules[9] = fade = new ModuleFadeToBlack();
 	modules[10] = welcomescreen = new ModuleWelcomeScreen();
 	modules[11] = congratsscreen = new ModuleCongratsScreen();
 	modules[12] = particles = new ModuleParticles();
 	modules[13] = audio = new ModuleAudio();
 	modules[14] = collision = new ModuleCollision();
-	modules[15] = player2 = new ModulePlayer(playernames::ZANGIEF, SDL_SCANCODE_LEFT, SDL_SCANCODE_RIGHT, SDL_SCANCODE_UP, SDL_SCANCODE_DOWN, SDL_SCANCODE_J, SDL_SCANCODE_K, SDL_SCANCODE_L, SDL_SCANCODE_F3, SDL_SCANCODE_F4);
+	modules[15] = player2 = new ModulePlayer(playernames::ZANGIEF, SDL_SCANCODE_LEFT, SDL_SCANCODE_RIGHT, SDL_SCANCODE_UP, SDL_SCANCODE_DOWN, SDL_SCANCODE_J, SDL_SCANCODE_K, SDL_SCANCODE_L, SDL_SCANCODE_F3, SDL_SCANCODE_F4, NULL, NULL, NULL);
 	modules[16] = fonts = new ModuleFonts();
 	modules[17] = ui = new ModuleUi();
 	//modules[13] = winlosescreen = new ModuleWinloseScreen();
