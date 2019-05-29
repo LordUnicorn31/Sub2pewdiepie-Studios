@@ -251,8 +251,8 @@ ModulePlayer::ModulePlayer(
 
 #pragma region player hitted
 
-		hitted.PushBack({ 207, 2091, 274 - 207, 2179 - 2091 });
-		hitted.speed = 0.1f;
+		hittednormal.PushBack({ 207, 2091, 274 - 207, 2179 - 2091 });
+		hittednormal.speed = 0.1f;
 
 #pragma endregion		//used (incomplete, missing 4 frames)
 
@@ -421,6 +421,12 @@ ModulePlayer::ModulePlayer(
 		jumpheadbutt.speed = 0.06f;
 		jumpheadbutt.loop = false;
 
+		//animation stops and stays within a short time
+		deadlydrive.PushBack({993, 897, 1047-993, 1003-897});
+		deadlydrive.PushBack({1055, 932, 1112-1055, 1003-932});
+		deadlydrive.speed = 0.04f;
+		deadlydrive.loop = false;
+
 		//animation stops and resets when grounded
 		kneedrop.PushBack({});
 		kneedrop.speed = 0.06f;
@@ -464,6 +470,40 @@ ModulePlayer::ModulePlayer(
 		//piledriver.PushBack({327, 771, 389-327, 867-771});
 		piledriver.speed = 0.06f;
 		piledriver.loop = false;
+
+		hittednormal.PushBack({297, 1169, 361-297, 1271-1169});
+		hittednormal.PushBack({367, 1166, 436-367, 1271-1166});
+		hittednormal.PushBack({442, 1160, 514-442, 1271-1160});
+		hittednormal.PushBack({521, 1164, 590-521, 1271-1164});
+		hittednormal.speed = 0.04f;
+
+		hittedcrouch.PushBack({6, 1183, 69-6, 1271-1183});
+		hittedcrouch.PushBack({79, 1184, 134-79, 1271-1184});
+		hittedcrouch.PushBack({145, 1196, 211-145, 1271-1196});
+		hittedcrouch.PushBack({224, 1186, 277-224, 1271-1186});
+		hittedcrouch.speed = 0.06f;
+
+		hittedknockdown.PushBack({602, 1191, 654-602, 1271-1191});
+		hittedknockdown.PushBack({665, 1190, 740-665, 1255-1190});
+		hittedknockdown.PushBack({748, 1218, 830-748, 1254-1218});
+		hittedknockdown.PushBack({845, 1235, 927-845, 1271-1235});
+		hittedknockdown.PushBack({935, 1217, 1003-935, 1271-1217});
+		hittedknockdown.PushBack({1013, 1209, 1066-1013, 1271-1209});
+		hittedknockdown.PushBack({1078, 1195, 1136-1078, 1271-1195});
+		hittedknockdown.speed = 0.04f;
+
+		//no need to repeat cuz only executed once XD XD XD LMAO
+		KO.PushBack({8, 1355, 77-8, 1419-1355});
+		KO.PushBack({93, 1371, 178-93, 1419-1371});
+		KO.PushBack({190, 1355, 259-190, 1419-1355});
+		KO.PushBack({272, 1383, 354-272, 1419-1383});
+		KO.PushBack({366, 1382, 447-366, 1419-1382});
+		KO.speed = 0.04f;
+		KO.loop = false;
+
+		victory.PushBack({468, 1316, 529-468, 1419-1316});
+		victory.PushBack({543, 1281, 600-543, 1419-1281});
+		victory.speed = 0.03f;
 
 	// timing list: http://zachd.com/nki/ST/flame.html
 
@@ -584,23 +624,71 @@ void lookingRightCheck(ModulePlayer* myplayer, ModulePlayer* foe) {
 	return;
 }
 
-/*void moveRight(ModulePlayer* player, )
+void moveRight(ModulePlayer* player, ModulePlayer* foe)
 {
+	if (App->input->keyboard[player->rightButton] == KEY_STATE::KEY_REPEAT 
+		&& player->position.x < SCREEN_WIDTH - 60 
+		&& !(player->jumpingidle 
+			|| player->jumpingright 
+			|| player->jumpingleft 
+			|| player->punching 
+			|| player->kicking 
+			|| player->hadouking2 
+			|| player->playerhittedcounter < 59))
+	{
+		if (player->position.x < foe->position.x) {// App->player->lookingright = true
+			player->current_animation = &player->forward;
+			player->backwarding = false;
+			player->forwarding = true;
+		}
+		else {
+			player->current_animation = &player->backward;
+			player->backwarding = true;
+			player->forwarding = false;
+		}
 
-}*/
+		if (player->position.x < foe->position.x)
+			player->position.x += 1.0f;
+		else
+			player->position.x += 1.0f / 1.5f;
+	}
+}
+
+void moveLeft(ModulePlayer* player, ModulePlayer* foe)
+{
+	if (App->input->keyboard[player->leftButton] == KEY_STATE::KEY_REPEAT 
+		&& player->position.x > 1 
+		&& !(player->jumpingidle 
+			|| player->jumpingright 
+			|| player->jumpingleft 
+			|| player->punching 
+			|| player->kicking 
+			|| player->hadouking2 
+			|| player->playerhittedcounter < 59))
+	{
+		if (player->position.x < foe->position.x) { // App->player->lookingright = true
+			player->current_animation = &player->backward;
+			player->backwarding = true;
+			player->forwarding = false;
+		}
+		else {
+			player->current_animation = &player->forward;
+			player->forwarding = true;
+			player->backwarding = false;
+		}
+		if (player->position.x < foe->position.x)
+			player->position.x -= 1.0f / 1.5f;
+		else
+			player->position.x -= 1.0f;
+	}
+}
 // Update: draw background
 update_status ModulePlayer::Update()
 {
 	forwarding = false;
 	backwarding = false;
-	//App->player->jumpingidle = true;
-	//turning.Reset();
-	/*if (App->input->keyboard[SDL_SCANCODE_N] == KEY_STATE::KEY_DOWN)
-		App->audio->Play(lowattack, 0);*/
 	App->player->current_animation = &App->player->idle;
 	App->player2->current_animation = &App->player2->idle;
-	//current_animation = &high_jump_punch;
-	//playerRotation(nullptr);
 	float speed = 1.0f;
 	if (App->input->keyboard[App->player->godModeOnButton] == KEY_STATE::KEY_DOWN) 
 		App->player->godmode = true;
@@ -617,9 +705,12 @@ update_status ModulePlayer::Update()
 	lookingRightCheck(App->player, App->player2);
 	lookingRightCheck(App->player2, App->player);
 
-	//moveRight(player);
-	//moveRight(player2);
-	if (App->input->keyboard[App->player->rightButton] == KEY_STATE::KEY_REPEAT && App->player->position.x < SCREEN_WIDTH - 60 && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft || App->player->punching||App->player->kicking || App->player->hadouking2 || App->player->playerhittedcounter < 59))
+	moveRight(App->player, App->player2);
+	moveRight(App->player2, App->player);
+	moveLeft(App->player, App->player2);
+	moveLeft(App->player2, App->player);
+
+	/*if (App->input->keyboard[App->player->rightButton] == KEY_STATE::KEY_REPEAT && App->player->position.x < SCREEN_WIDTH - 60 && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft || App->player->punching||App->player->kicking || App->player->hadouking2 || App->player->playerhittedcounter < 59))
 	{
 		if (App->player->position.x < App->player2->position.x) {// App->player->lookingright = true
 			App->player->current_animation = &App->player->forward;
@@ -636,8 +727,8 @@ update_status ModulePlayer::Update()
 			App->player->position.x += speed;
 		else
 			App->player->position.x += speed / 1.5f;
-	}
-	if (App->input->keyboard[App->player->leftButton] == KEY_STATE::KEY_REPEAT && App->player->position.x > 1 && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft || App->player->punching||App->player->kicking || App->player->hadouking2 || App->player->playerhittedcounter < 59))
+	}*/
+	/*if (App->input->keyboard[App->player->leftButton] == KEY_STATE::KEY_REPEAT && App->player->position.x > 1 && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft || App->player->punching||App->player->kicking || App->player->hadouking2 || App->player->playerhittedcounter < 59))
 	{
 		if (App->player->position.x < App->player2->position.x) { // App->player->lookingright = true
 			App->player->current_animation = &App->player->backward;
@@ -653,8 +744,8 @@ update_status ModulePlayer::Update()
 			App->player->position.x -= speed / 1.5f;
 		else
 			App->player->position.x -= speed;
-	}
-	if (App->input->keyboard[App->player2->rightButton] == KEY_STATE::KEY_REPEAT && App->player2->position.x < SCREEN_WIDTH - 60 && !(App->player2->jumpingidle || App->player2->jumpingright || App->player2->jumpingleft || App->player2->punching || App->player2->kicking || App->player2->hadouking2 || App->player2->playerhittedcounter < 59))
+	}*/
+	/*if (App->input->keyboard[App->player2->rightButton] == KEY_STATE::KEY_REPEAT && App->player2->position.x < SCREEN_WIDTH - 60 && !(App->player2->jumpingidle || App->player2->jumpingright || App->player2->jumpingleft || App->player2->punching || App->player2->kicking || App->player2->hadouking2 || App->player2->playerhittedcounter < 59))
 	{
 		if (App->player2->position.x < App->player->position.x) {// App->player2->lookingright = true
 			App->player2->current_animation = &App->player2->forward;
@@ -670,8 +761,8 @@ update_status ModulePlayer::Update()
 			App->player2->position.x += speed;
 		else
 			App->player2->position.x += speed / 1.5f;
-	}
-	if (App->input->keyboard[App->player2->leftButton] == KEY_STATE::KEY_REPEAT && App->player2->position.x > 1 && !(App->player2->jumpingidle || App->player2->jumpingright || App->player2->jumpingleft || App->player2->punching || App->player2->kicking || App->player2->hadouking2 || App->player2->playerhittedcounter < 59))
+	}*/
+	/*if (App->input->keyboard[App->player2->leftButton] == KEY_STATE::KEY_REPEAT && App->player2->position.x > 1 && !(App->player2->jumpingidle || App->player2->jumpingright || App->player2->jumpingleft || App->player2->punching || App->player2->kicking || App->player2->hadouking2 || App->player2->playerhittedcounter < 59))
 	{
 		if (App->player2->position.x < App->player->position.x) {// App->player2->lookingright = true
 			App->player2->current_animation = &App->player2->backward;
@@ -687,7 +778,7 @@ update_status ModulePlayer::Update()
 			App->player2->position.x -= speed / 1.5f;
 		else
 			App->player2->position.x -= speed;
-	}
+	}*/
 	/*if (App->player->hadoukenable < 101)
 	App->player->hadoukenable += 1;
 	if (App->input->keyboard[SDL_SCANCODE_1] == KEY_STATE::KEY_DOWN && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft))
@@ -939,7 +1030,7 @@ update_status ModulePlayer::Update()
 
 	if (App->player->playerhittedcounter < 60) {
 		App->player->playerhittedcounter++;
-		App->player->current_animation = &App->player->hitted;
+		App->player->current_animation = &App->player->hittednormal;
 		if (App->player->lookingright)
 			App->player->position.x -= 0.3f;
 		else
@@ -947,7 +1038,7 @@ update_status ModulePlayer::Update()
 	}
 	if (App->player2->playerhittedcounter < 60) {
 		App->player2->playerhittedcounter++;
-		App->player2->current_animation = &App->player2->hitted;
+		App->player2->current_animation = &App->player2->hittednormal;
 		if (App->player2->lookingright)
 			App->player2->position.x -= 0.3f;
 		else
@@ -1000,7 +1091,7 @@ void ModulePlayer::OnCollision(Collider*c1, Collider*c2) {
 		else
 			App->player->position.x -= 2;
 	}
-	if (c1 == App->player->playercollider && c2->type == COLLIDER_PLAYER2_HADOUKEN && (App->player->playerhittedcounter > 59) && !App->player->godmode) {
+	/*if (c1 == App->player->playercollider && c2->type == COLLIDER_PLAYER2_HADOUKEN && (App->player->playerhittedcounter > 59) && !App->player->godmode) {
 		App->player->life -= 15;
 		App->player->playerhittedcounter = 0;
 	}
@@ -1008,7 +1099,7 @@ void ModulePlayer::OnCollision(Collider*c1, Collider*c2) {
 	if (c1 == App->player2->playercollider && c2->type == COLLIDER_PLAYER1_HADOUKEN && (App->player2->playerhittedcounter > 59) && !App->player2->godmode) {
 		App->player2->life -= 15;
 		App->player2->playerhittedcounter = 0;
-	}
+	}*/
 
 	if (c1 == App->player->playercollider && c2->type == COLLIDER_PLAYER2_DAMAGE && (App->player->playerhittedcounter > 59) && !App->player->godmode) {
 		App->player->life -= 10;

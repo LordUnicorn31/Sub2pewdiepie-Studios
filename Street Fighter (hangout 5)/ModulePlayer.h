@@ -77,11 +77,16 @@ public:
 	Animation forward;
 	Animation backward;
 	Animation crouch;
-	Animation hitted;
+	Animation hittedcrouch;
+	Animation hittednormal;
+	Animation hittedknockdown;
 	Animation turning;
 	Animation jump;
 	Animation jump_frontflip;
 	Animation block;
+
+	Animation KO;
+	Animation victory;
 	//punches
 	Animation low_punch;
 	Animation mid_punch;
