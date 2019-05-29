@@ -385,16 +385,42 @@ ModulePlayer::ModulePlayer(
 		jumping_punch.PushBack({620, 421, 701-620, 480-421});
 		jumping_punch.PushBack({711, 421, 760-711, 497-421});
 		jumping_punch.speed = 0.06f;
+		jumping_punch.loop = false;
 
 		jumping_kick.PushBack({780, 402, 845-780, 495-402});
 		jumping_kick.PushBack({861, 409, 964-861, 470-409});
 		jumping_kick.PushBack({971, 402, 1036-971, 495-402});
 		jumping_kick.speed = 0.12f;
+		jumping_kick.loop = false;
+
+		//animations stops and resets when grounded
+		jumping_forward_highpunch.PushBack({1222, 413, 1282-1222, 487-413});
+		jumping_forward_highpunch.PushBack({1295, 422, 1398-1295, 474-422});
+		jumping_forward_highpunch.PushBack({1415, 413, 1475-1415, 487-413});
+		jumping_forward_highpunch.speed = 0.12f;
+		jumping_forward_highpunch.loop = false;
+		
+		spinninglariat.PushBack({11, 525, 66-11, 623-525});
+		spinninglariat.PushBack({74, 524, 133-74, 623-524});
+		spinninglariat.PushBack({142, 523, 217-142, 623-523});
+		spinninglariat.PushBack({230, 522, 283-230, 623-522});
+		spinninglariat.PushBack({293, 521, 375-293, 623-521});
+		spinninglariat.PushBack({382, 524, 441-382, 623-524});
+		spinninglariat.PushBack({450, 523, 525-450, 623-523});
+		spinninglariat.PushBack({538, 522, 591-538, 623-522});
+		spinninglariat.speed = 0.06f;
+
+		//animations stops and resets when grounded
+		siberiansplash.PushBack({925, 537, 985-925, 611-537});
+		siberiansplash.PushBack({1005, 544, 1108-1005, 604-544});
+		siberiansplash.speed = 0.1f;
+		siberiansplash.loop = false;
 
 		/*low crouch punch
 		mid / high crouch punch
 		low / mid / high crouch kick
 		low / mid / high jump punch
+		low / mid / high jump kick
 
 		*/
 	// timing list: http://zachd.com/nki/ST/flame.html
