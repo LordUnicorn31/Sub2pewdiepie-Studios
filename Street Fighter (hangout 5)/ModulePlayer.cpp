@@ -416,13 +416,55 @@ ModulePlayer::ModulePlayer(
 		siberiansplash.speed = 0.1f;
 		siberiansplash.loop = false;
 
-		/*low crouch punch
-		mid / high crouch punch
-		low / mid / high crouch kick
-		low / mid / high jump punch
-		low / mid / high jump kick
+		//animation stops and resets when grounded
+		jumpheadbutt.PushBack({1133, 536, 1192-1133, 617-536});
+		jumpheadbutt.speed = 0.06f;
+		jumpheadbutt.loop = false;
 
-		*/
+		//animation stops and resets when grounded
+		kneedrop.PushBack({});
+		kneedrop.speed = 0.06f;
+		kneedrop.loop = false;
+
+		//idk how i will do the grab for repeatedly pulsing it, so i put it on loop false;
+		bitegrab.PushBack({5, 656, 83-5, 745-656});
+		bitegrab.PushBack({86, 655, 161-86, 745-655});
+		bitegrab.PushBack({168, 654, 241-168, 745-654});
+		bitegrab.speed = 0.12f;
+		bitegrab.loop = false;
+
+		//idk how i will do the grab for repeatedly pulsing it, so i put it on loop false;
+		facegrab.PushBack({865, 652, 935-865, 745-652});
+		facegrab.PushBack({958, 651, 1024-958, 745-651});
+		facegrab.speed = 0.1f;
+		facegrab.loop = false;
+
+		//idk how i will do the grab for repeatedly pulsing it, so i put it on loop false;
+		chestgrab.PushBack({1045, 660, 1113-1045, 745-660});
+		chestgrab.PushBack({1119, 661, 1190-1119, 745-661});
+		chestgrab.speed = 0.1f;
+		chestgrab.loop = false;
+
+		//animation stops and resets when suplex is over
+		suplex.PushBack({263, 656, 341-263, 745-656});
+		suplex.PushBack({351, 664, 418-351, 745-664});
+		suplex.PushBack({434, 638, 487-434, 745-638});
+		suplex.PushBack({500, 656, 588-500, 745-656});
+		suplex.PushBack({607, 653, 701-607, 711-653});
+		suplex.PushBack({716, 683, 769-716, 745-683});
+		suplex.PushBack({783, 669, 841-783, 745-669});
+		suplex.speed = 0.09f;
+		suplex.loop = false;
+
+		//animation stops and resets when piledriver is over
+		piledriver.PushBack({7, 778, 85-7, 867-778});
+		piledriver.PushBack({97, 786, 164-97, 867-786});
+		piledriver.PushBack({183, 780, 224, 867});
+		piledriver.PushBack({252, 791, 309-252, 849-791});
+		//piledriver.PushBack({327, 771, 389-327, 867-771});
+		piledriver.speed = 0.06f;
+		piledriver.loop = false;
+
 	// timing list: http://zachd.com/nki/ST/flame.html
 
 #pragma endregion
