@@ -96,6 +96,7 @@ public:
 				Animation mid_crouch_punch;		//
 				Animation high_crouch_punch;	//share animation
 					Animation jumping_punch;
+					Animation jumping_forward_highpunch;
 
 	iPoint punchpos;
 			
@@ -110,6 +111,17 @@ public:
 			Animation mid_crouch_kick;		//
 			Animation high_crouch_kick;		//share animation
 				Animation jumping_kick;
+
+	//specials
+	Animation spinninglariat;
+	Animation siberiansplash;
+	Animation jumpheadbutt;
+	Animation kneedrop;
+	Animation bitegrab;
+	Animation facegrab;
+	Animation chestgrab;
+	Animation suplex;
+	Animation piledriver;
 
 	fPoint position;
 
