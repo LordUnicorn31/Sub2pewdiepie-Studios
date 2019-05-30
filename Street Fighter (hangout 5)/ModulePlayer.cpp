@@ -591,8 +591,6 @@ bool able(ModulePlayer* player)
 		|| player->lking
 		|| player->mking
 		|| player->hking
-		|| player->punching
-		|| player->kicking
 		|| player->playerhittedcounter < 59)
 		) {
 		ret = true;
@@ -727,7 +725,7 @@ void dopunch(ModulePlayer* player, int move)
 	{
 	case playermoves::LP:
 	{
-		if (App->input->keyboard[App->player->lp] == KEY_STATE::KEY_DOWN && able(player)) {
+		if (App->input->keyboard[player->lp] == KEY_STATE::KEY_DOWN && able(player)) {
 			player->low_punch.Reset();
 			player->lping = true;
 			App->audio->Play(player->lowattack, 0);
@@ -747,7 +745,7 @@ void dopunch(ModulePlayer* player, int move)
 	}
 	case playermoves::MP:
 	{
-		if (App->input->keyboard[App->player->mp] == KEY_STATE::KEY_DOWN && able(player)) {
+		if (App->input->keyboard[player->mp] == KEY_STATE::KEY_DOWN && able(player)) {
 			player->mid_punch.Reset();
 			player->mping = true;
 			App->audio->Play(player->midattack, 0);
@@ -767,7 +765,7 @@ void dopunch(ModulePlayer* player, int move)
 	}
 	case playermoves::HP:
 	{
-		if (App->input->keyboard[App->player->hp] == KEY_STATE::KEY_DOWN && able(player)) {
+		if (App->input->keyboard[player->hp] == KEY_STATE::KEY_DOWN && able(player)) {
 			player->high_punch.Reset();
 			player->hping = true;
 			App->audio->Play(player->highattack, 0);
@@ -796,7 +794,69 @@ void dokick(ModulePlayer* player, int move)
 	{
 	case playermoves::LK:
 	{
-
+		if (App->input->keyboard[player->lk] == KEY_STATE::KEY_DOWN
+			&& able(player))
+		{
+			player->low_kick.Reset();
+			player->lking = true;
+			App->audio->Play(player->lowattack, 0);
+			player->current_animation = &player->low_kick;
+		}
+		if (player->lking) {
+			if (!player->low_kick.Finished()) {
+				if (player->current_animation != &player->low_kick) {
+					player->current_animation = &player->low_kick;
+				}
+			}
+			else {
+				player->current_animation = &player->idle;
+				player->lking = false;
+			}
+		}
+	}
+	case playermoves::MK:
+	{
+		if (App->input->keyboard[player->mk] == KEY_STATE::KEY_DOWN
+			&& able(player))
+		{
+			player->mid_kick.Reset();
+			player->mking = true;
+			App->audio->Play(player->midattack, 0);
+			player->current_animation = &player->mid_kick;
+		}
+		if (player->mking) {
+			if (!player->mid_kick.Finished()) {
+				if (player->current_animation != &player->mid_kick) {
+					player->current_animation = &player->mid_kick;
+				}
+			}
+			else {
+				player->current_animation = &player->idle;
+				player->mking = false;
+			}
+		}
+	}
+	case playermoves::HK:
+	{
+		if (App->input->keyboard[player->hk] == KEY_STATE::KEY_DOWN
+			&& able(player))
+		{
+			player->high_kick.Reset();
+			player->hking = true;
+			App->audio->Play(player->highattack, 0);
+			player->current_animation = &player->high_kick;
+		}
+		if (player->hking) {
+			if (!player->high_kick.Finished()) {
+				if (player->current_animation != &player->high_kick) {
+					player->current_animation = &player->high_kick;
+				}
+			}
+			else {
+				player->current_animation = &player->idle;
+				player->hking = false;
+			}
+		}
 	}
 	default:
 		break;
@@ -935,6 +995,11 @@ update_status ModulePlayer::Update()
 	dopunch(App->player, playermoves::LP);
 	dopunch(App->player, playermoves::MP);
 	dopunch(App->player, playermoves::HP);
+
+	dopunch(App->player2, playermoves::LP);
+	dopunch(App->player2, playermoves::MP);
+	dopunch(App->player2, playermoves::HP);
+
 	/*
 	if (App->input->keyboard[App->player->lp] == KEY_STATE::KEY_DOWN && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft||App->player->punching||App->player->kicking || App->player->hadouking2 || App->player->playerhittedcounter < 59)) {
 		App->player->low_punch.Reset();
@@ -970,26 +1035,32 @@ update_status ModulePlayer::Update()
 			App->player2->punching = false;
 		}
 	}*/
+	dokick(App->player, playermoves::LK);
+	dokick(App->player, playermoves::MK);
+	dokick(App->player, playermoves::HK);
 
-	if (App->input->keyboard[App->player->lk] == KEY_STATE::KEY_DOWN && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft||App->player->punching||App->player->kicking || App->player->hadouking2 || App->player->playerhittedcounter < 59/* || App->player->forwarding || App->player->backwarding*/)) {
-		App->player->low_close_kick.Reset();
-		App->player->kicking = true;
-		App->audio->Play(App->player->midattack, 0);
-		App->player->current_animation = &App->player->low_close_kick;
-	}
-	if (App->player->kicking) {
-		if (!App->player->low_close_kick.Finished()) {
-			if (App->player->current_animation != &App->player->low_close_kick) {
-				App->player->current_animation = &App->player->low_close_kick;
-			}
-		}
-		else {
-			App->player->current_animation = &App->player->idle;
-			App->player->kicking = false;
-		}
-	}
+	dokick(App->player2, playermoves::LK);
+	dokick(App->player2, playermoves::MK);
+	dokick(App->player2, playermoves::HK);
 
-	if (App->input->keyboard[App->player2->lk] == KEY_STATE::KEY_DOWN && !(App->player2->jumpingidle || App->player2->jumpingright || App->player2->jumpingleft || App->player2->punching || App->player2->kicking||App->player2->hadouking2 || App->player2->playerhittedcounter < 59/* || App->player->forwarding || App->player->backwarding*/)) {
+	//if (App->input->keyboard[App->player->lk] == KEY_STATE::KEY_DOWN && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft||App->player->punching||App->player->kicking || App->player->hadouking2 || App->player->playerhittedcounter < 59/* || App->player->forwarding || App->player->backwarding*/)) {
+	//	App->player->low_close_kick.Reset();
+	//	App->player->kicking = true;
+	//	App->audio->Play(App->player->midattack, 0);
+	//	App->player->current_animation = &App->player->low_close_kick;
+	//}
+	//if (App->player->kicking) {
+	//	if (!App->player->low_close_kick.Finished()) {
+	//		if (App->player->current_animation != &App->player->low_close_kick) {
+	//			App->player->current_animation = &App->player->low_close_kick;
+	//		}
+	//	}
+	//	else {
+	//		App->player->current_animation = &App->player->idle;
+	//		App->player->kicking = false;
+	//	}
+	//}
+	/*if (App->input->keyboard[App->player2->lk] == KEY_STATE::KEY_DOWN && !(App->player2->jumpingidle || App->player2->jumpingright || App->player2->jumpingleft || App->player2->punching || App->player2->kicking||App->player2->hadouking2 || App->player2->playerhittedcounter < 59)) {
 		App->player2->low_close_kick.Reset();
 		App->player2->kicking = true;
 		App->audio->Play(App->player2->midattack, 0);
@@ -1005,9 +1076,9 @@ update_status ModulePlayer::Update()
 			App->player2->current_animation = &App->player2->idle;
 			App->player2->kicking = false;
 		}
-	}
-
-	if (App->input->keyboard[App->player->specialButton] == KEY_STATE::KEY_DOWN && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft || App->player->punching || App->player->kicking||App->player->hadouking2 || App->player->playerhittedcounter < 59/* || App->player->forwarding || App->player->backwarding*/)) {
+	}*/
+	//old hadouken xd
+	/*if (App->input->keyboard[App->player->specialButton] == KEY_STATE::KEY_DOWN && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft || App->player->punching || App->player->kicking||App->player->hadouking2 || App->player->playerhittedcounter < 59)) {
 		App->player->playerhadouken.Reset();
 		App->player->hadouking2 = true;
 		App->audio->Play(App->player->hadoukenaudio, 0);
@@ -1032,7 +1103,7 @@ update_status ModulePlayer::Update()
 			App->player->hadouking2 = false;
 		}
 	}
-	if (App->input->keyboard[App->player2->specialButton] == KEY_STATE::KEY_DOWN && !(App->player2->jumpingidle || App->player2->jumpingright || App->player2->jumpingleft || App->player2->punching || App->player2->kicking || App->player2->hadouking2 || App->player2->playerhittedcounter < 59/* || App->player->forwarding || App->player->backwarding*/)) {
+	if (App->input->keyboard[App->player2->specialButton] == KEY_STATE::KEY_DOWN && !(App->player2->jumpingidle || App->player2->jumpingright || App->player2->jumpingleft || App->player2->punching || App->player2->kicking || App->player2->hadouking2 || App->player2->playerhittedcounter < 59)) {
 		App->player2->playerhadouken.Reset();
 		App->player2->hadouking2 = true;
 		App->audio->Play(App->player->hadoukenaudio, 0);
@@ -1050,13 +1121,14 @@ update_status ModulePlayer::Update()
 				App->particles->hadouken.speed.x = -4;
 				App->particles->AddParticle(App->particles->hadouken, App->player2->position.x, App->player2->position.y - 80, COLLIDER_PLAYER2_HADOUKEN, 0, true);
 			}
-			/*if (App->player2->position.x < App->player->position.x)*/ else {
+			//if (App->player2->position.x < App->player->position.x) else {
 				App->particles->hadouken.speed.x = 4;
 				App->particles->AddParticle(App->particles->hadouken, App->player2->position.x+10, App->player2->position.y - 80, COLLIDER_PLAYER2_HADOUKEN, 0, false);
 			}
 			App->player2->hadouking2 = false;
 		}
-	}
+	}*/
+
 	if (App->player->jumpingidle) {
 		App->player->current_animation = &App->player->jump;
 		App->player->position.y -= App->player->vely;
