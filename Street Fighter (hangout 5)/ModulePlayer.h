@@ -12,6 +12,10 @@ struct Mix_Chunk;
 enum playernames {
 	RYU, ZANGIEF
 };
+enum playermoves {
+	LP, MP, HP, LK, MK, HK
+	
+};
 
 class ModulePlayer : public Module
 {
@@ -154,8 +158,7 @@ public:
 	//Audios
 	Mix_Chunk* lowattack = nullptr;			//punch or kick that you miss (you don't hit anything)
 	Mix_Chunk* midattack = nullptr;			//punch or kick that you miss (you don't hit anything)	// needed
-	Mix_Chunk* highattackpunch = nullptr;	//high punch that you miss (you don't hit anything)
-	Mix_Chunk* highattackkick = nullptr;	//high kick that you miss (you don't hit anything)
+	Mix_Chunk* highattack = nullptr;	//high punch that you miss (you don't hit anything)
 
 	Mix_Chunk* lowpunchhit = nullptr;		//triggers when low punch collides with enemy
 	Mix_Chunk* midpunchhit = nullptr;		//triggers when mid punch collides with enemy			//needed
