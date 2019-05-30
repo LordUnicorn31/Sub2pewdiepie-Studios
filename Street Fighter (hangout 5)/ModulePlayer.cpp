@@ -299,16 +299,18 @@ ModulePlayer::ModulePlayer(
 		low_punch.PushBack({6, 149, 64-6, 243-149});
 		low_punch.PushBack({72, 150, 149-72, 243-150});
 		low_punch.PushBack({165, 149, 223-165, 243-149});
-		low_punch.speed = 0.06f;
+		low_punch.speed = 0.1f;
 
+		//animation stops and resets when player stops blocking (quite obvious, right)
 		block.PushBack({970, 24, 1023-970, 117-24});
 		block.PushBack({1038, 57, 1091-1038, 117-57});
 		block.speed = 0.06f;
+		block.loop = false;
 
 		mid_punch.PushBack({ 6, 149, 64 - 6, 243 - 149 });
 		mid_punch.PushBack({ 72, 150, 149 - 72, 243 - 150 });
-		mid_punch.PushBack({ 165, 149, 224, 243 });
-		mid_punch.speed = 0.09f;
+		mid_punch.PushBack({ 165, 149, 224-165, 243-149});
+		mid_punch.speed = 0.08f;
 
 		high_punch.PushBack({243, 145, 298-243, 243-145});
 		high_punch.PushBack({ 308, 149, 366 - 308, 243-149});
@@ -782,6 +784,19 @@ void dopunch(ModulePlayer* player, int move)
 				player->hping = false;
 			}
 		}
+	}
+	default:
+		break;
+	}
+}
+
+void dokick(ModulePlayer* player, int move)
+{
+	switch (move)
+	{
+	case playermoves::LK:
+	{
+
 	}
 	default:
 		break;
