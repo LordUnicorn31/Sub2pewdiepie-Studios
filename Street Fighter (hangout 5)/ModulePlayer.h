@@ -50,6 +50,8 @@ public:
 	Animation* current_animation = &idle;
 	//Animation* current_animation_player2 = &idle;
 	SDL_Texture* graphics = nullptr;
+	SDL_Texture *bigfactory = nullptr;
+	SDL_Rect verja;
 	//SDL_Texture* graphicszangief = nullptr;
 	bool lookingright;
 	bool godmode = false;

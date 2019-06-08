@@ -10,6 +10,7 @@
 #include "ModuleParticles.h"
 #include "ModuleCollision.h"
 #include "ModuleAudio.h"
+#include "ModuleSceneZangief.h"
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
 //ZANGIEF MOVE LIST: http://www.fightabase.com/charMove.aspx?id=4940
@@ -538,7 +539,10 @@ ModulePlayer::ModulePlayer(
 		break;
 	}
 	}*/
-	
+	verja.x = 0;
+	verja.y = 170;
+	verja.w = 347;
+	verja.h = 265 - 170;
 }
 
 void loadanimations() {
@@ -604,6 +608,7 @@ bool ModulePlayer::Start()
 {
 	LOG("Loading player textures");
 	bool ret = true;
+	bigfactory = App->textures->Load("media_files/bg_zangief_sprite.png");
 	lowattack = App->audio->Load("media_files/Street Fighter Attack moves\\lowattack.wav");
 	midattack = App->audio->Load("media_files/Street Fighter Attack moves\\midattack.wav");
 	highattack = App->audio->Load("media_files/Street Fighter Attack moves\\highattack.wav");
@@ -1257,6 +1262,9 @@ update_status ModulePlayer::Update()
 	App->render->Blit(graphicszangief, App->player2->position.x + 60, App->player2->position.y - r2.h, &r2, 1.0f, !App->player2->lookingright);*/
 	renderPlayerOnScreen(App->player);
 	renderPlayerOnScreen(App->player2);
+	if (App->scene_Zangief->IsEnabled()) {
+		App->render->Blit(bigfactory, -171, 130, &verja, 1.3);
+	}
 
 
 	if (App->player->life <= 0) {

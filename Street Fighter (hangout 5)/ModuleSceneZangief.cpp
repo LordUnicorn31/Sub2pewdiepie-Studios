@@ -120,7 +120,7 @@ update_status ModuleSceneZangief::Update()
 	App->render->Blit(graphics, -90, 78, &(dudes2.GetCurrentFrame()), 0.80);
 	App->render->Blit(graphics, 229, 146, &extinctor, 0.80);
 	App->render->Blit(graphics, 369, -220, &palanca, 0.8);
-	App->render->Blit(graphics, -171, 130, &valla, 1.3);
+	//App->render->Blit(graphics, -171, 130, &valla, 1.3);
 
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
