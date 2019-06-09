@@ -29,6 +29,7 @@ public:
 	int white_font = -1;
 	char time_text[2];
 	int time = 99;
+	uint current_time;
 	SDL_Texture* uitext = nullptr;	//V
 	SDL_Rect uibg; //V
 	SDL_Rect uip1; //V

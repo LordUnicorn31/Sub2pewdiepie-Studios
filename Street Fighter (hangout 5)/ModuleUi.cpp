@@ -1,6 +1,5 @@
 #define _CRTDBG_MAP_ALLOC
 #include "Globals.h"
-//#include "stdio.h"
 #include "Application.h"
 #include "ModuleWindow.h"
 #include "ModuleRender.h"
@@ -14,6 +13,7 @@
 #include "ModuleSceneZangief.h"
 #include "ModuleUi.h"
 #include "ModuleFonts.h"
+#include "SDL/include/SDL.h"
 
 
 ModuleUi::ModuleUi()
@@ -64,6 +64,7 @@ bool ModuleUi::CleanUp()
 update_status ModuleUi::Update()
 {
 	if (App->scene_Zangief->IsEnabled()) {
+		current_time = SDL_GetTicks();
 		if (prevHP1 > App->player->life)
 		{
 			prevHP1--;
@@ -95,6 +96,14 @@ update_status ModuleUi::Update()
 		App->fonts->BlitText(198, 3, blueorange_font, "50000");
 		App->fonts->BlitText(250, 3, blueorange_font, "2P");
 		App->fonts->BlitText(305, 3, blueorange_font, "0");
+		if ((App->scene_Zangief->zangief_init_time + 2000) > current_time) {
+			App->fonts->BlitText(170, 85, orange_font, "ROUND 1");
+			App->fonts->BlitText(162, 105, red_font, "BATTLE 01");
+		}
+		if ((App->scene_Zangief->zangief_init_time + 2000) < current_time &&(App->scene_Zangief->zangief_init_time + 3500) >current_time) {
+			App->fonts->BlitText(170, 85, orange_font, "FIFHT!");
+			App->fonts->BlitText(162, 105, red_font, "BATTLE 01");
+		}
 	}
 	return UPDATE_CONTINUE;
 }

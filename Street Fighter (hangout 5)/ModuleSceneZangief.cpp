@@ -11,6 +11,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleCongratsScreen.h"
 #include "ModuleAudio.h"
+#include "SDL/include/SDL.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -67,7 +68,7 @@ bool ModuleSceneZangief::Start()
 {
 	LOG("Loading Zangief scene");
 
-
+	zangief_init_time = SDL_GetTicks();
 	uitext = App->textures->Load("media_files/HPBAR.png"); //V
 	graphics = App->textures->Load("media_files/bg_zangief_sprite.png");
 	music = App->audio->Load("media_files/zangief.ogg");
@@ -93,25 +94,6 @@ bool ModuleSceneZangief::CleanUp()
 update_status ModuleSceneZangief::Update()
 {
 
-	//HP update mechanic
-	if (prevHP1 > App->player->life)
-	{
-		prevHP1--;
-	}
-	else if (prevHP1 < App->player->life)
-	{
-		prevHP1++;
-	}
-	uip1.w = (prevHP1 * 0.88); // V
-	if (prevHP2 > App->player2->life)
-	{
-		prevHP2--;
-	}
-	else if (prevHP2 < App->player2->life)
-	{
-		prevHP2++;
-	}
-	uip2.w = (prevHP2 * 0.88); // V
 	// Draw everything --------------------------------------
 	App->render->Blit(graphics, -40, -206, &background2, 0.70);
 	App->render->Blit(graphics, -140, 176, &ground,0.8);
