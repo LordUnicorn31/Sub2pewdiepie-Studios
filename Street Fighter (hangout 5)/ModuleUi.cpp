@@ -12,6 +12,7 @@
 #include "ModuleAudio.h"
 #include "ModuleSceneZangief.h"
 #include "ModuleUi.h"
+#include "ModuleFonts.h"
 
 
 ModuleUi::ModuleUi()
@@ -35,6 +36,7 @@ ModuleUi::~ModuleUi()
 {}
 
 bool ModuleUi::Init() {
+	font_id= App->fonts->Load("media_files/fonts2.png", "ABCDEFGHI KLMNOP RSTU WYZ.!, 0123456789ABCDEHI KLMNOP RSTU.!,'?         ", 2);
 	return true;
 }
 // UnLoad assets
@@ -46,6 +48,6 @@ bool ModuleUi::CleanUp()
 // Update: draw background
 update_status ModuleUi::Update()
 {
-
+	App->fonts->BlitText(100, 100, font_id, "EL MODULE FONTS FUNCIONA");
 	return UPDATE_CONTINUE;
 }

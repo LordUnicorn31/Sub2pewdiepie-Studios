@@ -21,6 +21,7 @@ public:
 public:
 
 	SDL_Texture* graphics = nullptr;
+	int font_id = -1;
 	SDL_Texture* uitext = nullptr;	//V
 	SDL_Rect uibg; //V
 	SDL_Rect uip1; //V
