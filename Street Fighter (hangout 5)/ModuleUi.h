@@ -21,7 +21,10 @@ public:
 public:
 
 	SDL_Texture* graphics = nullptr;
-	int font_id = -1;
+	int orange_font=-1;
+	int grey_font=-1;
+	char time_text[2];
+	int time = 99;
 	SDL_Texture* uitext = nullptr;	//V
 	SDL_Rect uibg; //V
 	SDL_Rect uip1; //V

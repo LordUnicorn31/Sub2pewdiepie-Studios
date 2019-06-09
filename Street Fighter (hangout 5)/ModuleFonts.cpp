@@ -112,7 +112,7 @@ void ModuleFonts::BlitText(int x, int y, int font_id, const char* text) const
 						rect.y = 0;
 					}
 				}
-				App->render->Blit(fonts->graphic, x, y, &rect, 0.0f, false);
+				App->render->Blit(font->graphic, x, y, &rect, 0.0f, false);
 				x += font->char_w;
 				break;
 			}

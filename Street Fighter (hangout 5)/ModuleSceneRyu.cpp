@@ -89,7 +89,6 @@ bool ModuleSceneRyu::CleanUp()
 // Update: draw background
 update_status ModuleSceneRyu::Update()
 {
-
 	//HP update mechanic
 	if (prevHP1 > App->player->life)
 	{

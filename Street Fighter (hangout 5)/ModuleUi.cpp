@@ -1,5 +1,6 @@
 #define _CRTDBG_MAP_ALLOC
 #include "Globals.h"
+#include "stdio.h"
 #include "Application.h"
 #include "ModuleWindow.h"
 #include "ModuleRender.h"
@@ -36,18 +37,50 @@ ModuleUi::~ModuleUi()
 {}
 
 bool ModuleUi::Init() {
-	font_id= App->fonts->Load("media_files/fonts2.png", "ABCDEFGHI KLMNOP RSTU WYZ.!, 0123456789ABCDEHI KLMNOP RSTU.!,'?         ", 2);
+	orange_font = App->fonts->Load("media_files/orange_font.png", "ABCDEFGHI KLMNOP RSTU WYZ.!, 0123456789", 1);
+	grey_font = App->fonts->Load("media_files/grey_font.png", "ABCDEFGHI KLMNOP RSTU WYZ.!,'?012345678", 1);
+	uitext = App->textures->Load("media_files/HPBAR.png"); //V
 	return true;
+	//HP update mechanic
 }
 // UnLoad assets
 bool ModuleUi::CleanUp()
 {
+	App->fonts->UnLoad(orange_font);
+	App->fonts->UnLoad(grey_font);
+	App->textures->Unload(uitext);
 	return true;
 }
 
 // Update: draw background
 update_status ModuleUi::Update()
 {
-	App->fonts->BlitText(100, 100, font_id, "EL MODULE FONTS FUNCIONA");
+	if (App->scene_Zangief->IsEnabled()) {
+		if (prevHP1 > App->player->life)
+		{
+			prevHP1--;
+		}
+		else if (prevHP1 < App->player->life)
+		{
+			prevHP1++;
+		}
+		uip1.w = (prevHP1 * 0.88); // V
+		if (prevHP2 > App->player2->life)
+		{
+			prevHP2--;
+		}
+		else if (prevHP2 < App->player2->life)
+		{
+			prevHP2++;
+		}
+		uip2.w = (prevHP2 * 0.88); // V
+		sprintf_s(time_text, 10, "%7d", time);
+		App->fonts->BlitText(101, 13, orange_font, "ZANGIEF");
+		App->fonts->BlitText(238, 13,	grey_font, "ZANGIEF");
+		App->fonts->BlitText(190,14, orange_font, "99");
+		App->render->Blit(uitext, 100, 0, &uibg);
+		App->render->Blit(uitext, 101 + (88 - uip1.w), 3, &uip1); //V
+		App->render->Blit(uitext, 205, 3, &uip2);
+	}
 	return UPDATE_CONTINUE;
 }
