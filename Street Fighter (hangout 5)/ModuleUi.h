@@ -23,6 +23,10 @@ public:
 	SDL_Texture* graphics = nullptr;
 	int orange_font=-1;
 	int grey_font=-1;
+	int blueorange_font = -1;
+	int green_font = -1;
+	int red_font = -1;
+	int white_font = -1;
 	char time_text[2];
 	int time = 99;
 	SDL_Texture* uitext = nullptr;	//V
