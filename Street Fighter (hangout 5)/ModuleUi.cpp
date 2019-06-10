@@ -53,6 +53,7 @@ bool ModuleUi::Init() {
 	green_font= App->fonts->Load("media_files/fonts/green_font.png", "ABCDEFGHI KLMNOP RSTUV XYZ0123456789.,", 1);
 	uitext = App->textures->Load("media_files/HPBAR.png"); //V
 	fight = App->audio->Load("media_files/Fight.wav");
+	round= App->audio->Load("media_files/Round.wav");
 	return true;
 	//HP update mechanic
 }
@@ -66,6 +67,8 @@ bool ModuleUi::CleanUp()
 	App->fonts->UnLoad(white_font);
 	App->fonts->UnLoad(green_font);
 	App->textures->Unload(uitext);
+	App->audio->Unload(round);
+	App->audio->Unload(fight);
 	return true;
 }
 
@@ -141,7 +144,6 @@ update_status ModuleUi::Update()
 		}
 		if (next_round) {
 			next_round = false;
-			fighting = true;
 			App->fade->FadeToBlack(App->scene_Zangief, App->scene_Zangief, 0.5);
 		}
 		App->render->Blit(uitext, 62, 11, &win_hand);

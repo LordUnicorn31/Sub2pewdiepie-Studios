@@ -23,7 +23,6 @@ public:
 
 	SDL_Texture* graphics = nullptr;
 	Mix_Chunk* music = nullptr;
-	SDL_Texture* uitext = nullptr;	//V
 	uint zangief_init_time;
 	int time_index;
 	SDL_Rect background;

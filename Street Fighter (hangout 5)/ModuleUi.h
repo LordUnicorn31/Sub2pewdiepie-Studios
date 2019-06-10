@@ -37,6 +37,7 @@ public:
 	uint current_time;
 	SDL_Texture* uitext = nullptr;	//V
 	Mix_Chunk* fight= nullptr;
+	Mix_Chunk*round = nullptr;
 	bool fighting;
 	SDL_Rect uibg; //V
 	SDL_Rect uip1; //V

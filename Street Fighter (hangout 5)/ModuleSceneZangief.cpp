@@ -74,7 +74,7 @@ bool ModuleSceneZangief::Start()
 	App->ui->second = 0;
 	if(App->ui->round_index<50)App->ui->round_index++;
 	App->ui->to_next_round = true;
-	uitext = App->textures->Load("media_files/HPBAR.png"); //V
+	App->ui->fighting = true;
 	graphics = App->textures->Load("media_files/bg_zangief_sprite.png");
 	music = App->audio->Load("media_files/zangief.ogg");
 	App->audio->Play(music, -1);
@@ -88,7 +88,6 @@ bool ModuleSceneZangief::CleanUp()
 {
 	LOG("Unloading Ryu scene");
 	App->textures->Unload(graphics);
-	App->textures->Unload(uitext); //V
 	App->player->Disable();
 	App->player2->Disable();
 	App->audio->Unload(music);

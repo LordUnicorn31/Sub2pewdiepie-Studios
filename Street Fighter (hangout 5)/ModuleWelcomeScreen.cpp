@@ -56,6 +56,7 @@ update_status ModuleWelcomeScreen::Update()
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
 		App->audio->Play(mainmenutoscenesound, 0);
+		App->vs_screen->seconds = 0;
 		App->fade->FadeToBlack(App->welcomescreen, App->select,1);
 	}
 	return UPDATE_CONTINUE;
