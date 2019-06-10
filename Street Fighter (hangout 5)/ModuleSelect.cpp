@@ -18,7 +18,7 @@
 
 ModuleSelect::ModuleSelect()
 {
-	//background = { 120, 128, 671, 300 };
+	background = { 120, 128, 671, 300 };
 	background = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
 }
 
@@ -30,9 +30,9 @@ bool ModuleSelect::Start()
 {
 	LOG("Loading background assets");
 	bool ret = true;
-	//graphics = App->textures->Load("media_files/vs_screen.png");
-	//audio = App->audio->Load("media_files/04 Start Battle.ogg");
-	//App->audio->Play(music, 0);
+	graphics = App->textures->Load("media_files/screenselection2.png");
+	selectmusic = App->audio->Load("media_files/03 Player Select.ogg");
+	App->audio->Play(selectmusic, 1);
 	return ret;
 }
 
@@ -48,7 +48,7 @@ bool ModuleSelect::CleanUp()
 // Update: draw background
 update_status ModuleSelect::Update()
 {
-	//App->render->Blit(graphics, /*-150*/ 0, /*-45*/ 0, &background, 0.75f);
+	App->render->Blit(graphics, 0,  0, &background, 0.75f);
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
 		App->fade->FadeToBlack(App->select, App->vs_screen, 1);
 	}

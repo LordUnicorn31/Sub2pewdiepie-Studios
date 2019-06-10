@@ -18,7 +18,7 @@ public:
 	bool CleanUp();
 
 public:
-	Mix_Chunk* audio = nullptr;
+	Mix_Chunk* selectmusic = nullptr;
 	SDL_Texture* graphics = nullptr;
 	SDL_Rect background;
 };
