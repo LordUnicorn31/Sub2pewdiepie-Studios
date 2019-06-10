@@ -15,6 +15,7 @@
 #include "ModuleFonts.h"
 #include "ModuleSpecialMoves.h"
 #include "ModuleUi.h"
+#include "ModuleVsScreen.h"
 //#include "ModuleWinloseScreen.h"
 
 Application::Application()
@@ -66,6 +67,7 @@ Application::Application()
 	);
 	modules[15] = fonts = new ModuleFonts();
 	modules[16] = ui = new ModuleUi();
+	modules[17] = vs_screen = new ModuleVsScreen();
 }	
 
 Application::~Application()
@@ -83,6 +85,7 @@ bool Application::Init()
 	scene_Ryu->Disable();
 	scene_Zangief->Disable();
 	congratsscreen->Disable();
+	vs_screen->Disable();
 	for(int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();
 

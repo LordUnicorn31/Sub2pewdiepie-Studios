@@ -14,48 +14,41 @@
 #include "ModuleInput.h"
 #include "ModuleAudio.h"
 #include "ModuleVsScreen.h"
-// Reference at https://youtu.be/6OlenbCC4WI?t=382
 
-ModuleWelcomeScreen::ModuleWelcomeScreen()
+ModuleVsScreen::ModuleVsScreen()
 {
 	//background = { 120, 128, 671, 300 };
 	background = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
 }
 
-ModuleWelcomeScreen::~ModuleWelcomeScreen()
+ModuleVsScreen::~ModuleVsScreen()
 {}
 
 // Load assets
-bool ModuleWelcomeScreen::Start()
+bool ModuleVsScreen::Start()
 {
 	LOG("Loading background assets");
 	bool ret = true;
-	graphics = App->textures->Load("media_files/intro.png");
-	mainmenumusic = App->audio->Load("media_files/02 The World Warrior.ogg");
-	mainmenutoscenesound = App->audio->Load("media_files/IntroToScene.wav");
-	App->audio->Play(mainmenumusic, -1);
+	graphics = App->textures->Load("media_files/vs_screen.png");
 	return ret;
 }
 
 // Load assets
-bool ModuleWelcomeScreen::CleanUp()
+bool ModuleVsScreen::CleanUp()
 {
 	// TODO 5: Remove all memory leaks
 	LOG("Unloading honda stage");
 	App->textures->Unload(graphics);
-	App->audio->Unload(mainmenumusic);
-	App->audio->Unload(mainmenutoscenesound);
 	return true;
 }
 
 // Update: draw background
-update_status ModuleWelcomeScreen::Update()
+update_status ModuleVsScreen::Update()
 {
 	App->render->Blit(graphics, /*-150*/ 0, /*-45*/ 0, &background, 0.75f); // back of the room
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
-		App->audio->Play(mainmenutoscenesound, 0);
-		App->fade->FadeToBlack(App->welcomescreen, App->vs_screen,1);
+		App->fade->FadeToBlack(App->vs_screen, App->scene_Zangief, 1);
 	}
 	return UPDATE_CONTINUE;
 }
