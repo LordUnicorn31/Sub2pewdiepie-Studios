@@ -14,7 +14,7 @@
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
 //ZANGIEF MOVE LIST: http://www.fightabase.com/charMove.aspx?id=4940
-
+#define PLAYERHITTEDTIMING 40
 ModulePlayer::ModulePlayer(
 	int playername_, 
 	int leftButton_, 
@@ -597,7 +597,7 @@ bool able(ModulePlayer* player)
 		|| player->lking
 		|| player->mking
 		|| player->hking
-		|| player->playerhittedcounter < 59)
+		|| player->playerhittedcounter < PLAYERHITTEDTIMING -1)
 		) {
 		ret = true;
 	}
@@ -956,6 +956,12 @@ void updateAttackCollider(ModulePlayer* player, int move)
 	{
 		if (player->hping && player->high_punch.currentframe() > player->high_punch.speed)
 		{
+			if (player->high_punch.currentframe() > player->high_punch.speed*PLAYERHITTEDTIMING)
+			{
+				player->pdamagecollider->rect.x = 0;
+				player->pdamagecollider->rect.y = 500;
+				break;
+			}
 			player->pdamagecollider->rect.w = 30;
 			player->pdamagecollider->rect.h = 15;
 			if (player->lookingright)
@@ -982,8 +988,14 @@ void updateAttackCollider(ModulePlayer* player, int move)
 	}
 	case playermoves::MK:
 	{
-		if (player->mking)
+		if (player->mking && player->mid_kick.currentframe() > player->mid_kick.speed*2)
 		{
+			if (player->mid_kick.currentframe() > player->mid_kick.speed*40)
+			{
+				player->pdamagecollider->rect.x = 0;
+				player->pdamagecollider->rect.y = 500;
+				break;
+			}
 			player->pdamagecollider->rect.w = 45;
 			player->pdamagecollider->rect.h = 20;
 			if (player->lookingright)
@@ -992,11 +1004,27 @@ void updateAttackCollider(ModulePlayer* player, int move)
 				player->pdamagecollider->rect.x = player->position.x - 15-22;
 			player->pdamagecollider->rect.y = player->position.y - 70;
 		}
+		
 		break;
 	}
-	
+	case playermoves::HK:
+	{
+		if (player->hking  && player->high_kick.currentframe() > player->high_kick.speed)
+		{
+			
+			player->pdamagecollider->rect.w = 45;
+			player->pdamagecollider->rect.h = 45;
+			if (player->lookingright)
+				player->pdamagecollider->rect.x = player->position.x + 40;
+			else
+				player->pdamagecollider->rect.x = player->position.x - 25;
+			player->pdamagecollider->rect.y = player->position.y - 92;
+		}
+		break;
+	}
 	if (!(player->lping || player->mping || player->hping || player->lking || player->mking || player->hking))
 	{
+		caca:
 		player->pdamagecollider->rect.x = 0;
 		player->pdamagecollider->rect.y = 500;
 	}
@@ -1373,7 +1401,7 @@ update_status ModulePlayer::Update()
 		App->player2->pdamagecollider->rect.y = 500;
 	}*/
 
-	if (App->player->playerhittedcounter < 60) {
+	if (App->player->playerhittedcounter < PLAYERHITTEDTIMING) {
 		App->player->playerhittedcounter++;
 		App->player->current_animation = &App->player->hittednormal;
 		if (App->player->lookingright)
@@ -1381,7 +1409,7 @@ update_status ModulePlayer::Update()
 		else
 			App->player->position.x += 0.3f;
 	}
-	if (App->player2->playerhittedcounter < 60) {
+	if (App->player2->playerhittedcounter < PLAYERHITTEDTIMING) {
 		App->player2->playerhittedcounter++;
 		App->player2->current_animation = &App->player2->hittednormal;
 		if (App->player2->lookingright)
@@ -1448,12 +1476,12 @@ void ModulePlayer::OnCollision(Collider*c1, Collider*c2) {
 		App->player2->playerhittedcounter = 0;
 	}*/
 
-	if (c1 == App->player->playercollider && c2->type == COLLIDER_PLAYER2_DAMAGE && (App->player->playerhittedcounter > 59) && !App->player->godmode) {
+	if (c1 == App->player->playercollider && c2->type == COLLIDER_PLAYER2_DAMAGE && (App->player->playerhittedcounter > PLAYERHITTEDTIMING -1) && !App->player->godmode) {
 		App->player->life -= 10;
 		App->player->playerhittedcounter = 0;
 	}
 
-	if (c1 == App->player2->playercollider && c2->type == COLLIDER_PLAYER1_DAMAGE && (App->player2->playerhittedcounter > 59) && !App->player2->godmode) {
+	if (c1 == App->player2->playercollider && c2->type == COLLIDER_PLAYER1_DAMAGE && (App->player2->playerhittedcounter > PLAYERHITTEDTIMING -1) && !App->player2->godmode) {
 		App->player2->life -= 10;
 		App->player2->playerhittedcounter = 0;
 	}
