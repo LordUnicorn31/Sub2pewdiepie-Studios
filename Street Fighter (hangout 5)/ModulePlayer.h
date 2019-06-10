@@ -16,24 +16,28 @@ enum playermoves {
 	LP, MP, HP, LK, MK, HK
 	
 };
+enum players {
+	PLAYER1, PLAYER2
+};
 
 class ModulePlayer : public Module
 {
 public:
 	ModulePlayer(
-		int playername, 
-		int leftButton, 
-		int rightButton, 
-		int upButton, 
-		int downButton, 
+		int playername,
+		int leftButton,
+		int rightButton,
+		int upButton,
+		int downButton,
 		int lp,
 		int mp,
 		int hp,
 		int lk,
 		int mk,
-		int hk, 
-		int godModeOn, 
-		int godModeOff
+		int hk,
+		int godModeOn,
+		int godModeOff,
+		int playernum
 	);
 	~ModulePlayer();
 
@@ -44,6 +48,7 @@ public:
 
 public:
 	int name;
+	int playernum;
 	int life = 0;
 	float vely = 0.0f;
 	float gravity = -0.08f;

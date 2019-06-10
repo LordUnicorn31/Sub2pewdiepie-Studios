@@ -28,7 +28,8 @@ ModulePlayer::ModulePlayer(
 	int mk_,
 	int hk_, 
 	int godModeOn_, 
-	int godModeOff_
+	int godModeOff_,
+	int playernum_
 ) //parameter that takes enum playernames (0 = ryu, 1 = zangief). In Application.cpp (or whenever you create a new moduleplayer) you have to specify the character (for instance playernames::RYU). Depending in the character the constructor will vary
 {
 	
@@ -527,6 +528,7 @@ ModulePlayer::ModulePlayer(
 	lk = lk_;
 	mk = mk_;
 	hk = hk_;
+	playernum = playernum_;
 	godModeOnButton = godModeOn_;
 	godModeOffButton = godModeOff_;
 	/*switch (playername_) {
@@ -658,8 +660,7 @@ void lookingRightCheck(ModulePlayer* myplayer, ModulePlayer* foe) {
 
 void moveRight(ModulePlayer* player, ModulePlayer* foe)
 {
-	if (
-		App->input->keyboard[player->rightButton] == KEY_STATE::KEY_REPEAT
+	if ((App->input->keyboard[player->rightButton] == KEY_STATE::KEY_REPEAT || App->input->game_pad[player->rightButton][player->playernum])
 		&& player->position.x < SCREEN_WIDTH - 60
 		&& able(player)
 		)
@@ -684,7 +685,7 @@ void moveRight(ModulePlayer* player, ModulePlayer* foe)
 
 void moveLeft(ModulePlayer* player, ModulePlayer* foe)
 {
-	if (App->input->keyboard[player->leftButton] == KEY_STATE::KEY_REPEAT 
+	if ((App->input->keyboard[player->leftButton] == KEY_STATE::KEY_REPEAT || App->input->game_pad[player->leftButton][player->playernum])
 		&& player->position.x > 1 
 		&& able(player))
 	{
@@ -707,15 +708,14 @@ void moveLeft(ModulePlayer* player, ModulePlayer* foe)
 
 void dojump(ModulePlayer* player)
 {
-	if (
-		App->input->keyboard[player->upButton] == KEY_STATE::KEY_REPEAT
+	if ((App->input->keyboard[player->upButton] == KEY_STATE::KEY_REPEAT || App->input->game_pad[player->upButton][player->playernum])
 		&& able(player)
 		)
 	{
 		//jump.Reset();
-		if (App->input->keyboard[player->rightButton] == KEY_STATE::KEY_REPEAT)
+		if ((App->input->keyboard[player->rightButton] == KEY_STATE::KEY_REPEAT || App->input->game_pad[player->rightButton][player->playernum]))
 			player->jumpingright = true;
-		else if (App->input->keyboard[player->leftButton] == KEY_STATE::KEY_REPEAT)
+		else if ((App->input->keyboard[player->leftButton] == KEY_STATE::KEY_REPEAT || App->input->game_pad[player->leftButton][player->playernum]))
 			player->jumpingleft = true;
 		else
 		player->jumpingidle = true;
@@ -730,7 +730,7 @@ void dopunch(ModulePlayer* player, int move)
 	{
 	case playermoves::LP:
 	{
-		if (App->input->keyboard[player->lp] == KEY_STATE::KEY_DOWN && able(player)) {
+		if ((App->input->keyboard[player->lp] == KEY_STATE::KEY_DOWN || App->input->game_pad[player->lp][player->playernum] == KEY_STATE::KEY_DOWN) && able(player)) {
 			player->low_punch.Reset();
 			player->lping = true;
 			App->audio->Play(player->lowattack, 0);
@@ -750,7 +750,7 @@ void dopunch(ModulePlayer* player, int move)
 	}
 	case playermoves::MP:
 	{
-		if (App->input->keyboard[player->mp] == KEY_STATE::KEY_DOWN && able(player)) {
+		if ((App->input->keyboard[player->mp] == KEY_STATE::KEY_DOWN || App->input->game_pad[player->mp][player->playernum]) && able(player)) {
 			player->mid_punch.Reset();
 			player->mping = true;
 			App->audio->Play(player->midattack, 0);
@@ -770,7 +770,7 @@ void dopunch(ModulePlayer* player, int move)
 	}
 	case playermoves::HP:
 	{
-		if (App->input->keyboard[player->hp] == KEY_STATE::KEY_DOWN && able(player)) {
+		if ((App->input->keyboard[player->hp] == KEY_STATE::KEY_DOWN || App->input->game_pad[player->hp][player->playernum]) && able(player)) {
 			player->high_punch.Reset();
 			player->hping = true;
 			App->audio->Play(player->highattack, 0);
@@ -799,7 +799,7 @@ void dokick(ModulePlayer* player, int move)
 	{
 	case playermoves::LK:
 	{
-		if (App->input->keyboard[player->lk] == KEY_STATE::KEY_DOWN
+		if ((App->input->keyboard[player->lk] == KEY_STATE::KEY_DOWN || App->input->game_pad[player->lk][player->playernum])
 			&& able(player))
 		{
 			player->low_kick.Reset();
@@ -821,7 +821,7 @@ void dokick(ModulePlayer* player, int move)
 	}
 	case playermoves::MK:
 	{
-		if (App->input->keyboard[player->mk] == KEY_STATE::KEY_DOWN
+		if ((App->input->keyboard[player->mk] == KEY_STATE::KEY_DOWN || App->input->game_pad[player->mk][player->playernum])
 			&& able(player))
 		{
 			player->mid_kick.Reset();
@@ -843,7 +843,7 @@ void dokick(ModulePlayer* player, int move)
 	}
 	case playermoves::HK:
 	{
-		if (App->input->keyboard[player->hk] == KEY_STATE::KEY_DOWN
+		if ((App->input->keyboard[player->hk] == KEY_STATE::KEY_DOWN || App->input->game_pad[player->hk][player->playernum])
 			&& able(player))
 		{
 			player->high_kick.Reset();

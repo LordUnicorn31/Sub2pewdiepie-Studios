@@ -28,18 +28,20 @@ Application::Application()
 	modules[6] = scene_Zangief = new ModuleSceneZangief();
 	modules[7] = player = new ModulePlayer
 	(playernames::ZANGIEF,
-		SDL_SCANCODE_A, 
-		SDL_SCANCODE_D, 
-		SDL_SCANCODE_W, 
-		SDL_SCANCODE_S, 
-		SDL_SCANCODE_1, 
-		SDL_SCANCODE_2, 
-		SDL_SCANCODE_3, 
-		SDL_SCANCODE_4, 
-		SDL_SCANCODE_5, 
-		SDL_SCANCODE_6, 
+		SDL_CONTROLLER_BUTTON_DPAD_LEFT, 
+		SDL_CONTROLLER_BUTTON_DPAD_RIGHT, 
+		SDL_CONTROLLER_BUTTON_DPAD_UP, 
+		SDL_CONTROLLER_BUTTON_DPAD_DOWN, 
+		SDL_CONTROLLER_BUTTON_X, 
+		SDL_CONTROLLER_BUTTON_Y, 
+		SDL_CONTROLLER_BUTTON_LEFTSHOULDER, 
+		SDL_CONTROLLER_BUTTON_A, 
+		SDL_CONTROLLER_BUTTON_B, 
+		SDL_CONTROLLER_BUTTON_RIGHTSHOULDER, 
 		SDL_SCANCODE_F1,
-		SDL_SCANCODE_F2);
+		SDL_SCANCODE_F2,
+		players::PLAYER1
+	);
 	modules[8] = fade = new ModuleFadeToBlack();
 	modules[9] = welcomescreen = new ModuleWelcomeScreen();
 	modules[10] = congratsscreen = new ModuleCongratsScreen();
@@ -48,18 +50,20 @@ Application::Application()
 	modules[13] = collision = new ModuleCollision();
 	modules[14] = player2 = new ModulePlayer
 	(playernames::ZANGIEF,
-		SDL_SCANCODE_LEFT,
-		SDL_SCANCODE_RIGHT,
-		SDL_SCANCODE_UP,
-		SDL_SCANCODE_DOWN,
-		SDL_SCANCODE_J,
-		SDL_SCANCODE_K,
-		SDL_SCANCODE_L,
+		SDL_CONTROLLER_BUTTON_DPAD_LEFT,
+		SDL_CONTROLLER_BUTTON_DPAD_RIGHT,
+		SDL_CONTROLLER_BUTTON_DPAD_UP,
+		SDL_CONTROLLER_BUTTON_DPAD_DOWN,
+		SDL_CONTROLLER_BUTTON_X,
+		SDL_CONTROLLER_BUTTON_Y,
+		SDL_CONTROLLER_BUTTON_LEFTSHOULDER,
+		SDL_CONTROLLER_BUTTON_A,
+		SDL_CONTROLLER_BUTTON_B,
+		SDL_CONTROLLER_BUTTON_RIGHTSHOULDER,
 		SDL_SCANCODE_F3,
 		SDL_SCANCODE_F4,
-		NULL,
-		NULL,
-		NULL);
+		players::PLAYER2
+	);
 	modules[15] = fonts = new ModuleFonts();
 	modules[16] = ui = new ModuleUi();
 }	
