@@ -868,6 +868,46 @@ void dokick(ModulePlayer* player, int move)
 	}
 }
 
+void whileJumping(ModulePlayer* player)
+{
+	if (!(player->jumpingidle || player->jumpingleft || player->jumpingright))
+		return;
+	player->current_animation = &player->jump;
+	player->position.y -= App->player->vely;
+	player->vely += player->gravity;
+	if (player->jumpingidle && player->position.y >= 200)
+	{
+		player->jumpingidle = false;
+		App->audio->Play(player->jumpgrounded, 0);
+		player->position.y = 200;
+		player->jump.Reset();
+		player->current_animation = &player->idle;
+		return;
+	}
+	if (player->jumpingright && player->position.y >= 200)
+	{
+		player->jumpingright = false;
+		App->audio->Play(player->jumpgrounded, 0);
+		player->position.y = 200;
+		player->jump.Reset();
+		player->current_animation = &player->idle;
+		return;
+	}
+	if (player->jumpingleft && player->position.y >= 200)
+	{
+		player->jumpingleft = false;
+		App->audio->Play(player->jumpgrounded, 0);
+		player->position.y = 200;
+		player->jump.Reset();
+		player->current_animation = &player->idle;
+		return;
+	}
+	if (player->jumpingright)
+		player->position.x += 1.0f;
+	else if (player->jumpingleft)
+		player->position.x += -1.0f;
+
+}
 // Update: draw background
 update_status ModulePlayer::Update()
 {
@@ -1134,19 +1174,12 @@ update_status ModulePlayer::Update()
 		}
 	}*/
 
-	if (App->player->jumpingidle) {
-		App->player->current_animation = &App->player->jump;
-		App->player->position.y -= App->player->vely;
-		App->player->vely += gravity;
-		if (App->player->position.y >= 200) {
-			App->player->jumpingidle = false;
-			App->audio->Play(App->player->jumpgrounded, 0);
-			App->player->position.y = 200;
-			App->player->jump.Reset();
-			App->player->current_animation = &App->player->idle;
-		}
-	}
-	if (App->player2->jumpingidle) {
+	whileJumping(App->player);
+	whileJumping(App->player2);
+	
+	
+
+	/*if (App->player2->jumpingidle) {
 		App->player2->current_animation = &App->player2->jump;
 		App->player2->position.y -= App->player2->vely;
 		App->player2->vely += gravity;
@@ -1157,7 +1190,7 @@ update_status ModulePlayer::Update()
 			App->player2->jump.Reset();
 			App->player2->current_animation = &App->player2->idle;
 		}
-	}
+	}*/
 
 	//if playerposition.y <= groundY && (jumpingright/left/idle) then jumpingleft, idle, right to false
 	//if jumping left position -= speed
