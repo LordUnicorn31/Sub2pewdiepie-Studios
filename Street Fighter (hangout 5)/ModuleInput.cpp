@@ -104,7 +104,7 @@ update_status ModuleInput::PreUpdate()
 					break;
 				}
 				if (SDL_GameControllerGetAttached(controller_player_2) == SDL_FALSE) {
-					controller_player_2 = SDL_GameControllerOpen(i);
+					controller_player_2 = SDL_GameControllerOpen(i+1);
 					break;
 				}
 			}
