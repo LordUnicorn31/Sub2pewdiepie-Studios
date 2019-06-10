@@ -13,7 +13,8 @@ enum playernames {
 	RYU, ZANGIEF
 };
 enum playermoves {
-	LP, MP, HP, LK, MK, HK
+	LP, MP, HP, LK, MK, HK,
+	LPC, MPC, HPC, LKC, MKC, HKC
 	
 };
 enum players {
@@ -72,6 +73,13 @@ public:
 	bool lking = false;
 	bool mking = false;
 	bool hking = false;
+	bool lpcring = false;
+	bool mpcring = false;
+	bool hpcring = false;
+	bool lkcring = false;
+	bool mkcring = false;
+	bool hkcring = false;
+	bool crouching = false;
 	bool punching = false;
 	bool kicking = false;
 	bool blocking = false;

@@ -597,7 +597,40 @@ bool able(ModulePlayer* player)
 		|| player->lking
 		|| player->mking
 		|| player->hking
+		|| player->lpcring
+		|| player->mpcring
+		|| player->hpcring
+		|| player->lkcring
+		|| player->mkcring
+		|| player->hkcring
+		|| player->crouching
 		|| player->playerhittedcounter < PLAYERHITTEDTIMING -1)
+		) {
+		ret = true;
+	}
+
+	return ret;
+}
+
+bool ablecrouching(ModulePlayer* player)
+{
+	bool ret = false;
+	if (!(player->jumpingidle
+		|| player->jumpingright
+		|| player->jumpingleft
+		|| player->lping
+		|| player->mping
+		|| player->hping
+		|| player->lking
+		|| player->mking
+		|| player->hking
+		|| player->lpcring
+		|| player->mpcring
+		|| player->hpcring
+		|| player->lkcring
+		|| player->mkcring
+		|| player->hkcring
+		|| player->playerhittedcounter < PLAYERHITTEDTIMING - 1)
 		) {
 		ret = true;
 	}
@@ -721,6 +754,20 @@ void dojump(ModulePlayer* player)
 		player->jumpingidle = true;
 		//LOG("uWu");
 		player->vely = 4.5f;
+	}
+}
+
+void docrouch(ModulePlayer* player)
+{
+	player->crouching = false;
+	if ((App->input->keyboard[player->downButton] == KEY_STATE::KEY_REPEAT || App->input->game_pad[player->downButton][player->playernum])
+		&& able(player)
+		)
+		player->crouching = true;
+		//LOG("uWu");
+	else
+	{
+		player->crouch.Reset();
 	}
 }
 
@@ -907,6 +954,42 @@ void whileJumping(ModulePlayer* player)
 	else if (player->jumpingleft)
 		player->position.x += -1.0f;
 
+}
+
+void whilecrouching(ModulePlayer* player, int move)
+{
+	if (!(player->lpcring || player->mpcring || player->hpcring || player->lkcring || player->mkcring || player->hkcring ||player->crouching))
+		return; 
+	player->current_animation = &player->crouch;
+	{
+		switch (move)
+		{
+		case playermoves::LPC:
+		{
+			if ((App->input->keyboard[player->lp] == KEY_STATE::KEY_DOWN || App->input->game_pad[player->lp][player->playernum] == KEY_STATE::KEY_DOWN) && ablecrouching(player)) {
+				player->low_crouch_punch.Reset();
+				player->lpcring = true;
+				App->audio->Play(player->lowattack, 0);
+				player->current_animation = &player->low_crouch_punch;
+			}
+			if (player->lpcring) {
+				if (!player->low_crouch_punch.Finished()) {
+					if (player->current_animation != &player->low_crouch_punch) {
+						player->current_animation = &player->low_crouch_punch;
+					}
+				}
+				else {
+					player->current_animation = &player->idle;
+					player->lpcring = false;
+				}
+			}
+			break;
+		}
+		
+		}
+		
+
+	}
 }
 
 void updatePlayerCollider(ModulePlayer* player)
@@ -1158,6 +1241,22 @@ update_status ModulePlayer::Update()
 		//LOG("uWu");
 		App->player2->vely = 4.5f;
 	}*/	 
+	docrouch(App->player);
+	docrouch(App->player2);
+
+	whilecrouching(App->player, playermoves::LPC);
+	whilecrouching(App->player, playermoves::MPC);
+	whilecrouching(App->player, playermoves::HPC);
+	whilecrouching(App->player, playermoves::LKC);
+	whilecrouching(App->player, playermoves::MKC);
+	whilecrouching(App->player, playermoves::HKC);
+
+	whilecrouching(App->player2, playermoves::LPC);
+	whilecrouching(App->player2, playermoves::MPC);
+	whilecrouching(App->player2, playermoves::HPC);
+	whilecrouching(App->player2, playermoves::LKC);
+	whilecrouching(App->player2, playermoves::MKC);
+	whilecrouching(App->player2, playermoves::HKC);
 
 	dopunch(App->player, playermoves::LP);
 	dopunch(App->player, playermoves::MP);
@@ -1209,6 +1308,8 @@ update_status ModulePlayer::Update()
 	dokick(App->player2, playermoves::LK);
 	dokick(App->player2, playermoves::MK);
 	dokick(App->player2, playermoves::HK);
+
+	
 
 	//if (App->input->keyboard[App->player->lk] == KEY_STATE::KEY_DOWN && !(App->player->jumpingidle || App->player->jumpingright || App->player->jumpingleft||App->player->punching||App->player->kicking || App->player->hadouking2 || App->player->playerhittedcounter < 59/* || App->player->forwarding || App->player->backwarding*/)) {
 	//	App->player->low_close_kick.Reset();
@@ -1319,6 +1420,7 @@ update_status ModulePlayer::Update()
 		//App->collision->AddCollider({10, -80, 28, 10}, COLLIDER_PLAYER1_PUNCH, )
 	}*/
 
+	updatePlayerCollider(App->player);
 	updatePlayerCollider(App->player);
 	updatePlayerCollider(App->player2);
 	/*
