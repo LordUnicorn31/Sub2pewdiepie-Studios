@@ -89,7 +89,6 @@ update_status ModuleUi::Update()
 		App->render->Blit(uitext, 205, 16, &uip2);
 		App->fonts->BlitText(101, 29, blueorange_font, "ZANGIEF");
 		App->fonts->BlitText(238, 29,	blueorange_font, "ZANGIEF");
-		App->fonts->BlitText(190,29, orange_font, "99");
 		App->fonts->BlitText(70,3, blueorange_font, "1P");
 		App->fonts->BlitText(130, 3, blueorange_font, "0");
 		App->fonts->BlitText(155, 3, blueorange_font, "NIN");
@@ -99,10 +98,26 @@ update_status ModuleUi::Update()
 		if ((App->scene_Zangief->zangief_init_time + 2000) > current_time) {
 			App->fonts->BlitText(170, 85, orange_font, "ROUND 1");
 			App->fonts->BlitText(162, 105, red_font, "BATTLE 01");
+			App->fonts->BlitText(190, 29, orange_font, "99");
 		}
-		if ((App->scene_Zangief->zangief_init_time + 2000) < current_time &&(App->scene_Zangief->zangief_init_time + 3500) >current_time) {
+		else if ((App->scene_Zangief->zangief_init_time + 2000) < current_time &&(App->scene_Zangief->zangief_init_time + 3500) >current_time) {
 			App->fonts->BlitText(170, 85, orange_font, "FIFHT!");
 			App->fonts->BlitText(162, 105, red_font, "BATTLE 01");
+			App->fonts->BlitText(190, 29, orange_font, "99");
+		}
+		else {
+			if (App->scene_Zangief->time_index > 0) {
+				second++;
+			}
+			if (second==60) {
+				--(App->scene_Zangief->time_index);
+				second=0;
+			}
+			App->fonts->BlitText(190, 29, orange_font, time_text[App->scene_Zangief->time_index]);
+		}
+		if (App->scene_Zangief->time_index == 0) {
+			App->fonts->BlitText(179, 75, red_font, "TIME");
+			App->fonts->BlitText(179, 87, red_font, "OVER");
 		}
 	}
 	return UPDATE_CONTINUE;

@@ -12,6 +12,7 @@
 #include "ModuleCongratsScreen.h"
 #include "ModuleAudio.h"
 #include "SDL/include/SDL.h"
+#include "ModuleUi.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -69,6 +70,8 @@ bool ModuleSceneZangief::Start()
 	LOG("Loading Zangief scene");
 
 	zangief_init_time = SDL_GetTicks();
+	time_index = 98;
+	App->ui->second = 0;
 	uitext = App->textures->Load("media_files/HPBAR.png"); //V
 	graphics = App->textures->Load("media_files/bg_zangief_sprite.png");
 	music = App->audio->Load("media_files/zangief.ogg");
