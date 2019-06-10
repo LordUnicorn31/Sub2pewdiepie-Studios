@@ -30,6 +30,8 @@ bool ModuleVsScreen::Start()
 	LOG("Loading background assets");
 	bool ret = true;
 	graphics = App->textures->Load("media_files/vs_screen.png");
+	music = App->audio->Load("media_files/04 Start Battle.ogg");
+	App->audio->Play(music, 0);
 	return ret;
 }
 
@@ -46,7 +48,8 @@ bool ModuleVsScreen::CleanUp()
 update_status ModuleVsScreen::Update()
 {
 	App->render->Blit(graphics, /*-150*/ 0, /*-45*/ 0, &background, 0.75f); // back of the room
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
+	seconds++;
+	if (seconds==(60*3))
 	{
 		App->fade->FadeToBlack(App->vs_screen, App->scene_Zangief, 1);
 	}
