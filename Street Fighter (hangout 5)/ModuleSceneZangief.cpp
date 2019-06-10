@@ -73,6 +73,7 @@ bool ModuleSceneZangief::Start()
 	time_index = 98;
 	App->ui->second = 0;
 	if(App->ui->round_index<50)App->ui->round_index++;
+	App->ui->to_next_round = true;
 	uitext = App->textures->Load("media_files/HPBAR.png"); //V
 	graphics = App->textures->Load("media_files/bg_zangief_sprite.png");
 	music = App->audio->Load("media_files/zangief.ogg");

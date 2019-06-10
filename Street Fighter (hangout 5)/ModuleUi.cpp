@@ -110,9 +110,9 @@ update_status ModuleUi::Update()
 		}
 		else {
 			if (App->scene_Zangief->time_index > 0) {
-				second++;
+				second +=1.9f;
 			}
-			if (second==60) {
+			if (second>=60) {
 				--(App->scene_Zangief->time_index);
 				second=0;
 			}
@@ -124,13 +124,12 @@ update_status ModuleUi::Update()
 		}
 		if (App->scene_Zangief->time_index == 0 && to_next_round) {
 			to_next_round = false;
-			time_end_round = SDL_GetTicks();
+			time_end_round = current_time+8000;
 		}
-		if ((time_end_round + 8000) < current_time&&App->scene_Zangief->time_index == 0) {
+		if (time_end_round < current_time&&App->scene_Zangief->time_index == 0) {
 			next_round = true;
 		}
 		if (next_round) {
-			to_next_round = true;
 			next_round = false;
 			App->fade->FadeToBlack(App->scene_Zangief, App->scene_Zangief, 0.5);
 		}
