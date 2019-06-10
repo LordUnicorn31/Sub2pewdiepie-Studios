@@ -34,8 +34,8 @@ bool ModuleCongratsScreen::Start()
 {
 	LOG("Loading background assets");
 	bool ret = true;
-	graphics = App->textures->Load("media_files/congratsplayer1.png");
-	graphics2 = App->textures->Load("media_files/congratsplayer2.png");
+	graphics = App->textures->Load("media_files/p1_win.png");
+	graphics2 = App->textures->Load("media_files/p2_win.png");
 	congratsmusic = App->audio->Load("media_files/13 End Battle.ogg");
 	
 	App->audio->Play(congratsmusic, 0);
@@ -48,6 +48,7 @@ bool ModuleCongratsScreen::CleanUp()
 	// TODO 5: Remove all memory leaks
 	LOG("Unloading congrats stage");
 	App->textures->Unload(graphics);
+	App->textures->Unload(graphics2);
 	App->audio->Unload(congratsmusic);
 	return true;
 }
