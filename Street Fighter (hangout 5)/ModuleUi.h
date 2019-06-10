@@ -39,6 +39,7 @@ public:
 	SDL_Rect uibg; //V
 	SDL_Rect uip1; //V
 	SDL_Rect uip2; //V
+	SDL_Rect win_hand;
 	int prevHP1 = 100;	//V: es una variable placeholder que equivale a la vida antes del update
 	int prevHP2 = 100;	//V: recordad iniciarlas en 100 cuando esté hecho (están en 0 para ver que funcionan)
 };

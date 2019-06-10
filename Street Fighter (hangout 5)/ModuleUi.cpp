@@ -18,6 +18,10 @@
 
 ModuleUi::ModuleUi()
 {
+	win_hand.x = 107;
+	win_hand.y = 12;
+	win_hand.h = 17;
+	win_hand.w = 16;
 	//ui bars		//V
 	uibg.x = 0;		//V
 	uibg.y = 0;		//V
@@ -133,6 +137,7 @@ update_status ModuleUi::Update()
 			next_round = false;
 			App->fade->FadeToBlack(App->scene_Zangief, App->scene_Zangief, 0.5);
 		}
+		App->render->Blit(uitext, 62, 11, &win_hand);
 	}
 	return UPDATE_CONTINUE;
 }
