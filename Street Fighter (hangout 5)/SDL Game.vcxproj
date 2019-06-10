@@ -86,6 +86,7 @@
     <ClInclude Include="ModuleRender.h" />
     <ClInclude Include="ModuleSceneRyu.h" />
     <ClInclude Include="ModuleSceneZangief.h" />
+    <ClInclude Include="ModuleSelect.h" />
     <ClInclude Include="ModuleSpecialMoves.h" />
     <ClInclude Include="ModuleTextures.h" />
     <ClInclude Include="ModuleUi.h" />
@@ -109,6 +110,7 @@
     <ClCompile Include="ModuleRender.cpp" />
     <ClCompile Include="ModuleSceneRyu.cpp" />
     <ClCompile Include="ModuleSceneZangief.cpp" />
+    <ClCompile Include="ModuleSelect.cpp" />
     <ClCompile Include="ModuleSpecialMoves.cpp" />
     <ClCompile Include="ModuleTextures.cpp" />
     <ClCompile Include="ModuleUi.cpp" />
