@@ -750,7 +750,7 @@ void dopunch(ModulePlayer* player, int move)
 	}
 	case playermoves::MP:
 	{
-		if ((App->input->keyboard[player->mp] == KEY_STATE::KEY_DOWN || App->input->game_pad[player->mp][player->playernum]) && able(player)) {
+		if ((App->input->keyboard[player->mp] == KEY_STATE::KEY_DOWN || App->input->game_pad[player->mp][player->playernum] == KEY_STATE::KEY_DOWN) && able(player)) {
 			player->mid_punch.Reset();
 			player->mping = true;
 			App->audio->Play(player->midattack, 0);
@@ -770,7 +770,7 @@ void dopunch(ModulePlayer* player, int move)
 	}
 	case playermoves::HP:
 	{
-		if ((App->input->keyboard[player->hp] == KEY_STATE::KEY_DOWN || App->input->game_pad[player->hp][player->playernum]) && able(player)) {
+		if ((App->input->keyboard[player->hp] == KEY_STATE::KEY_DOWN || App->input->game_pad[player->hp][player->playernum] == KEY_STATE::KEY_DOWN) && able(player)) {
 			player->high_punch.Reset();
 			player->hping = true;
 			App->audio->Play(player->highattack, 0);
@@ -799,7 +799,7 @@ void dokick(ModulePlayer* player, int move)
 	{
 	case playermoves::LK:
 	{
-		if ((App->input->keyboard[player->lk] == KEY_STATE::KEY_DOWN || App->input->game_pad[player->lk][player->playernum])
+		if ((App->input->keyboard[player->lk] == KEY_STATE::KEY_DOWN || App->input->game_pad[player->lk][player->playernum] == KEY_STATE::KEY_DOWN)
 			&& able(player))
 		{
 			player->low_kick.Reset();
@@ -821,7 +821,7 @@ void dokick(ModulePlayer* player, int move)
 	}
 	case playermoves::MK:
 	{
-		if ((App->input->keyboard[player->mk] == KEY_STATE::KEY_DOWN || App->input->game_pad[player->mk][player->playernum])
+		if ((App->input->keyboard[player->mk] == KEY_STATE::KEY_DOWN || App->input->game_pad[player->mk][player->playernum] == KEY_STATE::KEY_DOWN)
 			&& able(player))
 		{
 			player->mid_kick.Reset();
@@ -843,7 +843,7 @@ void dokick(ModulePlayer* player, int move)
 	}
 	case playermoves::HK:
 	{
-		if ((App->input->keyboard[player->hk] == KEY_STATE::KEY_DOWN || App->input->game_pad[player->hk][player->playernum])
+		if ((App->input->keyboard[player->hk] == KEY_STATE::KEY_DOWN || App->input->game_pad[player->hk][player->playernum] == KEY_STATE::KEY_DOWN)
 			&& able(player))
 		{
 			player->high_kick.Reset();
@@ -873,7 +873,7 @@ void whileJumping(ModulePlayer* player)
 	if (!(player->jumpingidle || player->jumpingleft || player->jumpingright))
 		return;
 	player->current_animation = &player->jump;
-	player->position.y -= App->player->vely;
+	player->position.y -= player->vely;
 	player->vely += player->gravity;
 	if (player->jumpingidle && player->position.y >= 200)
 	{
@@ -907,6 +907,100 @@ void whileJumping(ModulePlayer* player)
 	else if (player->jumpingleft)
 		player->position.x += -1.0f;
 
+}
+
+void updatePlayerCollider(ModulePlayer* player)
+{
+	player->playercollider->rect.x = player->position.x + 10;
+	player->playercollider->rect.y = player->position.y - 80;
+}
+
+void updateAttackCollider(ModulePlayer* player, int move)
+{
+	switch (move)
+	{
+	case playermoves::LP:
+	{
+		if (player->lping && player->low_punch.currentframe() > player->low_punch.speed)
+		{
+			player->pdamagecollider->rect.w = 30;
+			player->pdamagecollider->rect.h = 15;
+			if (player->lookingright)
+				player->pdamagecollider->rect.x = player->position.x + 45;
+			else
+				player->pdamagecollider->rect.x = player->position.x - 15;
+			player->pdamagecollider->rect.y = player->position.y - 80;
+		}
+		else
+		{
+			player->pdamagecollider->rect.x = 0;
+			player->pdamagecollider->rect.y = 500;
+		}
+		break;
+	}
+	case playermoves::MP:
+	{
+		if (player->mping && player->mid_punch.currentframe() > player->mid_punch.speed) 
+		{
+			player->pdamagecollider->rect.w = 30;
+			player->pdamagecollider->rect.h = 15;
+			if (player->lookingright)
+				player->pdamagecollider->rect.x = player->position.x + 45;
+			else
+				player->pdamagecollider->rect.x = player->position.x - 15;
+			player->pdamagecollider->rect.y = player->position.y - 80;
+		}
+		break;
+	}
+	case playermoves::HP:
+	{
+		if (player->hping && player->high_punch.currentframe() > player->high_punch.speed)
+		{
+			player->pdamagecollider->rect.w = 30;
+			player->pdamagecollider->rect.h = 15;
+			if (player->lookingright)
+				player->pdamagecollider->rect.x = player->position.x + 45;
+			else
+				player->pdamagecollider->rect.x = player->position.x - 15;
+			player->pdamagecollider->rect.y = player->position.y - 80;
+		}
+		break;
+	}
+	case playermoves::LK:
+	{
+		if (player->lking && player->low_kick.currentframe() > player->low_kick.speed)
+		{
+			player->pdamagecollider->rect.w = 35;
+			player->pdamagecollider->rect.h = 40;
+			if (player->lookingright)
+				player->pdamagecollider->rect.x = player->position.x + 45;
+			else
+				player->pdamagecollider->rect.x = player->position.x - 15;
+			player->pdamagecollider->rect.y = player->position.y - 50;
+		}
+		break;
+	}
+	case playermoves::MK:
+	{
+		if (player->mking)
+		{
+			player->pdamagecollider->rect.w = 45;
+			player->pdamagecollider->rect.h = 20;
+			if (player->lookingright)
+				player->pdamagecollider->rect.x = player->position.x + 45;
+			else
+				player->pdamagecollider->rect.x = player->position.x - 15-22;
+			player->pdamagecollider->rect.y = player->position.y - 70;
+		}
+		break;
+	}
+	
+	if (!(player->lping || player->mping || player->hping || player->lking || player->mking || player->hking))
+	{
+		player->pdamagecollider->rect.x = 0;
+		player->pdamagecollider->rect.y = 500;
+	}
+	}
 }
 // Update: draw background
 update_status ModulePlayer::Update()
@@ -1177,8 +1271,6 @@ update_status ModulePlayer::Update()
 	whileJumping(App->player);
 	whileJumping(App->player2);
 	
-	
-
 	/*if (App->player2->jumpingidle) {
 		App->player2->current_animation = &App->player2->jump;
 		App->player2->position.y -= App->player2->vely;
@@ -1199,6 +1291,9 @@ update_status ModulePlayer::Update()
 		//App->collision->AddCollider({10, -80, 28, 10}, COLLIDER_PLAYER1_PUNCH, )
 	}*/
 
+	updatePlayerCollider(App->player);
+	updatePlayerCollider(App->player2);
+	/*
 	//if (App->player->lookingright)
 	App->player->playercollider->rect.x = App->player->position.x + 10;
 	//else
@@ -1209,8 +1304,23 @@ update_status ModulePlayer::Update()
 	//else
 	//App->player2->playercollider->rect.x = App->player2->position.x + 10;
 	App->player2->playercollider->rect.y = App->player2->position.y - 80;
+	*/
 
-	if (App->player->punching) {
+	updateAttackCollider(App->player, playermoves::LP);
+	updateAttackCollider(App->player, playermoves::MP);
+	updateAttackCollider(App->player, playermoves::HP);
+	updateAttackCollider(App->player, playermoves::LK);
+	updateAttackCollider(App->player, playermoves::MK);
+	updateAttackCollider(App->player, playermoves::HK);
+
+	updateAttackCollider(App->player2, playermoves::LP);
+	updateAttackCollider(App->player2, playermoves::MP);
+	updateAttackCollider(App->player2, playermoves::HP);
+	updateAttackCollider(App->player2, playermoves::LK);
+	updateAttackCollider(App->player2, playermoves::MK);
+	updateAttackCollider(App->player2, playermoves::HK);
+
+	/*if (App->player->punching) {
 
 		App->player->pdamagecollider->rect.w = 30;
 		App->player->pdamagecollider->rect.h = 15;
@@ -1229,16 +1339,15 @@ update_status ModulePlayer::Update()
 		else
 			App->player->pdamagecollider->rect.x = App->player->position.x - 20;
 		App->player->pdamagecollider->rect.y = App->player->position.y - 54;
-	}
-	else
+	}*/
+	/*else
 	{
-		App->player->pdamagecollider->rect.x = 0;
-		App->player->pdamagecollider->rect.y = 500;
-	}
+		//comemeloscojones
+	}*/
 
 	
 	//
-	if (App->player2->punching) {
+	/*if (App->player2->punching) {
 
 		App->player2->pdamagecollider->rect.w = 30;
 		App->player2->pdamagecollider->rect.h = 15;
@@ -1262,7 +1371,7 @@ update_status ModulePlayer::Update()
 	{
 		App->player2->pdamagecollider->rect.x = 0;
 		App->player2->pdamagecollider->rect.y = 500;
-	}
+	}*/
 
 	if (App->player->playerhittedcounter < 60) {
 		App->player->playerhittedcounter++;
