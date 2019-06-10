@@ -759,16 +759,11 @@ void dojump(ModulePlayer* player)
 
 void docrouch(ModulePlayer* player)
 {
-	player->crouching = false;
 	if ((App->input->keyboard[player->downButton] == KEY_STATE::KEY_REPEAT || App->input->game_pad[player->downButton][player->playernum])
 		&& able(player)
 		)
 		player->crouching = true;
 		//LOG("uWu");
-	else
-	{
-		player->crouch.Reset();
-	}
 }
 
 void dopunch(ModulePlayer* player, int move)
@@ -985,7 +980,11 @@ void whilecrouching(ModulePlayer* player, int move)
 			}
 			break;
 		}
-		
+		default:
+		{
+			player->crouching = false;
+			player->crouch.Reset();
+		}
 		}
 		
 
@@ -1136,6 +1135,9 @@ update_status ModulePlayer::Update()
 	lookingRightCheck(App->player, App->player2);
 	lookingRightCheck(App->player2, App->player);
 
+	docrouch(App->player);
+	docrouch(App->player2);
+
 	moveRight(App->player, App->player2);
 	moveRight(App->player2, App->player);
 	moveLeft(App->player, App->player2);
@@ -1241,8 +1243,7 @@ update_status ModulePlayer::Update()
 		//LOG("uWu");
 		App->player2->vely = 4.5f;
 	}*/	 
-	docrouch(App->player);
-	docrouch(App->player2);
+	
 
 	whilecrouching(App->player, playermoves::LPC);
 	whilecrouching(App->player, playermoves::MPC);
