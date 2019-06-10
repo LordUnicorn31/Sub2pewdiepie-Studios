@@ -38,6 +38,7 @@ ModuleUi::ModuleUi()
 	next_round = false;
 	to_next_round = true;
 	round_index = -1;
+	fighting = true;
 }
 
 ModuleUi::~ModuleUi()
@@ -51,6 +52,7 @@ bool ModuleUi::Init() {
 	white_font= App->fonts->Load("media_files/fonts/white_font.png", "ABCDEFGHI KLMNOP RSTUV XYZ0123456789.,", 1);
 	green_font= App->fonts->Load("media_files/fonts/green_font.png", "ABCDEFGHI KLMNOP RSTUV XYZ0123456789.,", 1);
 	uitext = App->textures->Load("media_files/HPBAR.png"); //V
+	fight = App->audio->Load("media_files/Fight.wav");
 	return true;
 	//HP update mechanic
 }
@@ -108,6 +110,10 @@ update_status ModuleUi::Update()
 			App->fonts->BlitText(190, 29, orange_font, "99");
 		}
 		else if ((App->scene_Zangief->zangief_init_time + 2000) < current_time &&(App->scene_Zangief->zangief_init_time + 3500) >current_time) {
+			if (fighting) {
+				App->audio->Play(fight, 0);
+				fighting = false;
+			}
 			App->fonts->BlitText(170, 85, orange_font, "FIFHT!");
 			App->fonts->BlitText(162, 105, red_font, "BATTLE 01");
 			App->fonts->BlitText(190, 29, orange_font, "99");
@@ -135,6 +141,7 @@ update_status ModuleUi::Update()
 		}
 		if (next_round) {
 			next_round = false;
+			fighting = true;
 			App->fade->FadeToBlack(App->scene_Zangief, App->scene_Zangief, 0.5);
 		}
 		App->render->Blit(uitext, 62, 11, &win_hand);
