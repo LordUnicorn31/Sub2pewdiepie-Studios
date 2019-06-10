@@ -70,25 +70,33 @@ update_status ModuleInput::PreUpdate()
 		game_pad[i][GAME_PAD_2] = SDL_GameControllerGetButton(controller_player_2, (SDL_GameControllerButton)i);
 	}
 
-	for (int i = 0; i < MAX_BUTTONS; ++i) {
+	for (int i = 0; i < MAX_BUTTONS; ++i) 
+	{
 
 		for (int j = 0; j < MAX_GAME_PAD; ++j) {
-			if (game_pad[i][j] == KEY_IDLE) {
-				game_pad[i][j] == KEY_DOWN;
-				break;
+			if (game_pad[i][j] == 1)
+			{
+				if (game_pad[i][j] == KEY_IDLE)
+					game_pad[i][j] == KEY_DOWN;
+					//break;
+				
+				else {
+					game_pad[i][j] == KEY_REPEAT;
+					//break;
+				}
 			}
-			else {
-				game_pad[i][j] == KEY_REPEAT;
-				break;
-			}
+			else
+			{
 
-			if (game_pad[i][j] == KEY_REPEAT || game_pad[i][j] == KEY_DOWN) {
-				game_pad[i][j] == KEY_UP;
-				break;
-			}
-			else {
-				game_pad[i][j] == KEY_IDLE;
-				break;
+				if (game_pad[i][j] == KEY_REPEAT || game_pad[i][j] == KEY_DOWN) {
+					game_pad[i][j] == KEY_UP;
+					//break;
+				}
+				else {
+					game_pad[i][j] == KEY_IDLE;
+					//break;
+				}
+
 			}
 		}
 
