@@ -14,6 +14,7 @@
 #include "ModuleInput.h"
 #include "ModuleAudio.h"
 #include "ModuleVsScreen.h"
+#include "ModuleSelect.h"
 // Reference at https://youtu.be/6OlenbCC4WI?t=382
 
 ModuleWelcomeScreen::ModuleWelcomeScreen()
@@ -55,7 +56,7 @@ update_status ModuleWelcomeScreen::Update()
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
 		App->audio->Play(mainmenutoscenesound, 0);
-		App->fade->FadeToBlack(App->welcomescreen, App->vs_screen,1);
+		App->fade->FadeToBlack(App->welcomescreen, App->select,1);
 	}
 	return UPDATE_CONTINUE;
 }

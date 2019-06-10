@@ -3,7 +3,7 @@
 
 #include "Globals.h"
 
-#define NUM_MODULES 18
+#define NUM_MODULES 19
 
 class ModuleWindow;
 class ModuleInput;
@@ -23,6 +23,7 @@ class ModuleFonts;
 class ModuleUi;
 class ModuleSpecialMoves;
 class ModuleVsScreen;
+class ModuleSelect;
 
 
 class Application
@@ -48,6 +49,7 @@ public:
 	ModuleUi*ui;
 	ModuleSpecialMoves*special_moves;
 	ModuleVsScreen*vs_screen;
+	ModuleSelect*select;
 	
 
 public:
