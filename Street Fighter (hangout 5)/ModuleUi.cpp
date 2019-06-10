@@ -31,6 +31,9 @@ ModuleUi::ModuleUi()
 	uip2.y = 15;	//V
 	uip2.w = 88;	//V
 	uip2.h = 8;		//V
+	next_round = false;
+	to_next_round = true;
+	round_index = -1;
 }
 
 ModuleUi::~ModuleUi()
@@ -96,7 +99,7 @@ update_status ModuleUi::Update()
 		App->fonts->BlitText(250, 3, blueorange_font, "2P");
 		App->fonts->BlitText(305, 3, blueorange_font, "0");
 		if ((App->scene_Zangief->zangief_init_time + 2000) > current_time) {
-			App->fonts->BlitText(170, 85, orange_font, "ROUND 1");
+			App->fonts->BlitText(170, 85, orange_font, round_text[round_index]);
 			App->fonts->BlitText(162, 105, red_font, "BATTLE 01");
 			App->fonts->BlitText(190, 29, orange_font, "99");
 		}
@@ -118,6 +121,18 @@ update_status ModuleUi::Update()
 		if (App->scene_Zangief->time_index == 0) {
 			App->fonts->BlitText(179, 75, red_font, "TIME");
 			App->fonts->BlitText(179, 87, red_font, "OVER");
+		}
+		if (App->scene_Zangief->time_index == 0 && to_next_round) {
+			to_next_round = false;
+			time_end_round = SDL_GetTicks();
+		}
+		if ((time_end_round + 8000) < current_time&&App->scene_Zangief->time_index == 0) {
+			next_round = true;
+		}
+		if (next_round) {
+			to_next_round = true;
+			next_round = false;
+			App->fade->FadeToBlack(App->scene_Zangief, App->scene_Zangief, 0.5);
 		}
 	}
 	return UPDATE_CONTINUE;

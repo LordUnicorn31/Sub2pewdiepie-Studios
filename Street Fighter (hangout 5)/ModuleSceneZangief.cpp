@@ -72,6 +72,7 @@ bool ModuleSceneZangief::Start()
 	zangief_init_time = SDL_GetTicks();
 	time_index = 98;
 	App->ui->second = 0;
+	if(App->ui->round_index<50)App->ui->round_index++;
 	uitext = App->textures->Load("media_files/HPBAR.png"); //V
 	graphics = App->textures->Load("media_files/bg_zangief_sprite.png");
 	music = App->audio->Load("media_files/zangief.ogg");
@@ -109,6 +110,7 @@ update_status ModuleSceneZangief::Update()
 
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
+		App->ui->round_index = -1;
 		App->fade->FadeToBlack(App->scene_Zangief, App->congratsscreen, 1);
 	}
 	return UPDATE_CONTINUE;
