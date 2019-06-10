@@ -763,7 +763,7 @@ void docrouch(ModulePlayer* player)
 		&& able(player)
 		)
 		player->crouching = true;
-		//LOG("uWu");
+	//LOG("uWu");
 }
 
 void dopunch(ModulePlayer* player, int move)
@@ -955,7 +955,7 @@ void whilecrouching(ModulePlayer* player, int move)
 {
 	if (!(player->lpcring || player->mpcring || player->hpcring || player->lkcring || player->mkcring || player->hkcring ||player->crouching))
 		return; 
-	player->current_animation = &player->crouch;
+	
 	{
 		switch (move)
 		{
@@ -964,6 +964,7 @@ void whilecrouching(ModulePlayer* player, int move)
 			if ((App->input->keyboard[player->lp] == KEY_STATE::KEY_DOWN || App->input->game_pad[player->lp][player->playernum] == KEY_STATE::KEY_DOWN) && ablecrouching(player)) {
 				player->low_crouch_punch.Reset();
 				player->lpcring = true;
+				player->crouching = true;
 				App->audio->Play(player->lowattack, 0);
 				player->current_animation = &player->low_crouch_punch;
 			}
@@ -974,16 +975,44 @@ void whilecrouching(ModulePlayer* player, int move)
 					}
 				}
 				else {
-					player->current_animation = &player->idle;
+					player->current_animation = &player->crouch;
 					player->lpcring = false;
+					//player->crouching = false;
+					player->crouch.Reset();
 				}
+				return;
+			}
+			
+		}
+		/*case playermoves::MPC:
+		{
+			if ((App->input->keyboard[player->mp] == KEY_STATE::KEY_DOWN || App->input->game_pad[player->mp][player->playernum] == KEY_STATE::KEY_DOWN) && ablecrouching(player)) {
+				player->mid_crouch_punch.Reset();
+				player->lpcring = false;
+				player->mpcring = true;
+				App->audio->Play(player->midattack, 0);
+				player->current_animation = &player->mid_crouch_punch;
+			}
+			if (player->mpcring) {
+				if (!player->mid_crouch_punch.Finished()) {
+					if (player->current_animation != &player->mid_crouch_punch) {
+						player->current_animation = &player->mid_crouch_punch;
+					}
+				}
+				else {
+					player->current_animation = &player->crouch;
+					player->mpcring = false;
+					//player->crouching = false;
+					player->crouch.Reset();
+				}
+				return;
 			}
 			break;
-		}
+		}*/
 		default:
 		{
 			player->crouching = false;
-			player->crouch.Reset();
+			player->current_animation = &player->crouch;
 		}
 		}
 		
@@ -1246,18 +1275,18 @@ update_status ModulePlayer::Update()
 	
 
 	whilecrouching(App->player, playermoves::LPC);
-	whilecrouching(App->player, playermoves::MPC);
-	whilecrouching(App->player, playermoves::HPC);
+	//whilecrouching(App->player, playermoves::MPC);
+	/*whilecrouching(App->player, playermoves::HPC);
 	whilecrouching(App->player, playermoves::LKC);
 	whilecrouching(App->player, playermoves::MKC);
-	whilecrouching(App->player, playermoves::HKC);
+	whilecrouching(App->player, playermoves::HKC);*/
 
 	whilecrouching(App->player2, playermoves::LPC);
-	whilecrouching(App->player2, playermoves::MPC);
-	whilecrouching(App->player2, playermoves::HPC);
+	//whilecrouching(App->player2, playermoves::MPC);
+	/*whilecrouching(App->player2, playermoves::HPC);
 	whilecrouching(App->player2, playermoves::LKC);
 	whilecrouching(App->player2, playermoves::MKC);
-	whilecrouching(App->player2, playermoves::HKC);
+	whilecrouching(App->player2, playermoves::HKC);*/
 
 	dopunch(App->player, playermoves::LP);
 	dopunch(App->player, playermoves::MP);
