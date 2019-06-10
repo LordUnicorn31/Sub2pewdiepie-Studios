@@ -4,14 +4,19 @@
 #include "Module.h"
 #include "Globals.h"
 #include "SDL\include\SDL_scancode.h"
+#include "SDL/include/SDL_events.h"
 
 #define MAX_KEYS 300
+#define MAX_BUTTONS 15
 
-typedef unsigned char Uint8;
-//typedef unsigned char Uint32;
-enum KEY_STATE {
-	KEY_IDLE = 0, 
-	KEY_DOWN, 
+#define GAME_PAD_1 0
+#define GAME_PAD_2 1
+#define MAX_GAME_PAD 2
+
+enum KEY_STATE
+{
+	KEY_IDLE = 0,
+	KEY_DOWN,
 	KEY_REPEAT,
 	KEY_UP
 };
@@ -29,9 +34,14 @@ public:
 
 public:
 	KEY_STATE keyboard[MAX_KEYS];
-	//Uint32 mouse;
-	int mPosX;
-	int mPosY;
+	SDL_Event Events;
+	Uint8 game_pad[MAX_BUTTONS][MAX_GAME_PAD];
+
+	SDL_GameController* controller_player_1 = nullptr;
+	SDL_GameController* controller_player_2 = nullptr;
+
+private:
+	int controller_1_index;
 };
 
 #endif // __ModuleInput_H__

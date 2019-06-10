@@ -14,7 +14,6 @@
 #include "ModuleCollision.h"
 #include "ModuleFonts.h"
 #include "ModuleSpecialMoves.h"
-#include "ModuleController.h"
 #include "ModuleUi.h"
 //#include "ModuleWinloseScreen.h"
 
@@ -23,12 +22,11 @@ Application::Application()
 	modules[0] = window = new ModuleWindow();
 	modules[1] = render = new ModuleRender();
 	modules[2] = input = new ModuleInput();
-	modules[3] = controller = new ModuleController();
-	modules[4] = special_moves = new ModuleSpecialMoves();
-	modules[5] = textures = new ModuleTextures();
-	modules[6] = scene_Ryu = new ModuleSceneRyu();
-	modules[7] = scene_Zangief = new ModuleSceneZangief();
-	modules[8] = player = new ModulePlayer
+	modules[3] = special_moves = new ModuleSpecialMoves();
+	modules[4] = textures = new ModuleTextures();
+	modules[5] = scene_Ryu = new ModuleSceneRyu();
+	modules[6] = scene_Zangief = new ModuleSceneZangief();
+	modules[7] = player = new ModulePlayer
 	(playernames::ZANGIEF,
 		SDL_SCANCODE_A, 
 		SDL_SCANCODE_D, 
@@ -42,13 +40,13 @@ Application::Application()
 		SDL_SCANCODE_6, 
 		SDL_SCANCODE_F1,
 		SDL_SCANCODE_F2);
-	modules[9] = fade = new ModuleFadeToBlack();
-	modules[10] = welcomescreen = new ModuleWelcomeScreen();
-	modules[11] = congratsscreen = new ModuleCongratsScreen();
-	modules[12] = particles = new ModuleParticles();
-	modules[13] = audio = new ModuleAudio();
-	modules[14] = collision = new ModuleCollision();
-	modules[15] = player2 = new ModulePlayer
+	modules[8] = fade = new ModuleFadeToBlack();
+	modules[9] = welcomescreen = new ModuleWelcomeScreen();
+	modules[10] = congratsscreen = new ModuleCongratsScreen();
+	modules[11] = particles = new ModuleParticles();
+	modules[12] = audio = new ModuleAudio();
+	modules[13] = collision = new ModuleCollision();
+	modules[14] = player2 = new ModulePlayer
 	(playernames::ZANGIEF,
 		SDL_SCANCODE_LEFT,
 		SDL_SCANCODE_RIGHT,
@@ -62,9 +60,8 @@ Application::Application()
 		NULL,
 		NULL,
 		NULL);
-	modules[16] = fonts = new ModuleFonts();
-	modules[17] = ui = new ModuleUi();
-	//modules[13] = winlosescreen = new ModuleWinloseScreen();
+	modules[15] = fonts = new ModuleFonts();
+	modules[16] = ui = new ModuleUi();
 }	
 
 Application::~Application()

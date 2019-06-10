@@ -12,7 +12,6 @@
 #include "ModuleAudio.h"
 #include "ModuleSceneZangief.h"
 #include "ModuleUi.h"
-#include "ModuleController.h"
 #include "ModuleSpecialMoves.h"
 
 ModuleSpecialMoves::ModuleSpecialMoves()

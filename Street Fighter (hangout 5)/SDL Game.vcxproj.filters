@@ -29,9 +29,6 @@
     <ClInclude Include="Application.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleInput.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
     <ClInclude Include="ModuleRender.h">
       <Filter>Modules</Filter>
     </ClInclude>
@@ -77,10 +74,10 @@
     <ClInclude Include="ModuleSpecialMoves.h">
       <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleController.h">
+    <ClInclude Include="ModuleUi.h">
       <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleUi.h">
+    <ClInclude Include="ModuleInput.h">
       <Filter>Modules</Filter>
     </ClInclude>
   </ItemGroup>
@@ -92,9 +89,6 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="ModuleWindow.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleInput.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleRender.cpp">
@@ -139,10 +133,10 @@
     <ClCompile Include="ModuleSpecialMoves.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleController.cpp">
+    <ClCompile Include="ModuleUi.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleUi.cpp">
+    <ClCompile Include="ModuleInput.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>
