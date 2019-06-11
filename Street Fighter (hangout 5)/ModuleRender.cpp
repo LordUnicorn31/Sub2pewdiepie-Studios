@@ -122,7 +122,7 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section, f
 			rect.y = y * SCREEN_SIZE;
 		}
 	}
-
+	
 	if(section != NULL)
 	{
 		rect.w = section->w;

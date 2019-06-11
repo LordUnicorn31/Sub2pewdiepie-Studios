@@ -1739,6 +1739,11 @@ update_status ModulePlayer::Update()
 	updateAttackCollider(App->player2, playermoves::MKC);
 	updateAttackCollider(App->player2, playermoves::HKC);
 
+	App->render->camera.x = SCREEN_SIZE * ((App->player->position.x + App->player2->position.x + 60) / 2 - SCREEN_WIDTH / 2);
+	if (App->render->camera.x >= 400)
+		App->render->camera.x = 400;
+	if (App->render->camera.x <= -(700 - SCREEN_WIDTH)*SCREEN_SIZE)
+		App->render->camera.x = -(700 - SCREEN_WIDTH)*SCREEN_SIZE;
 	/*if (App->player->punching) {
 
 		App->player->pdamagecollider->rect.w = 30;
