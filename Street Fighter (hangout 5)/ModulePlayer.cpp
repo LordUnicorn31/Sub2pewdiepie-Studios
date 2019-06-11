@@ -1881,14 +1881,17 @@ void ModulePlayer::OnCollision(Collider*c1, Collider*c2) {
 		int damage = 0;
 		if (App->player2->lping || App->player2->lking || App->player2->lpcring || App->player2->lkcring)
 		{
+			App->audio->Play(lowpunchhit, 0);
 			damage = 10;
 		}
 		if (App->player2->mping || App->player2->mpcring || App->player2->mking || App->player2->mkcring)
 		{
+			App->audio->Play(midpunchhit, 0);
 			damage = 15;
 		}
 		if (App->player2->hping || App->player2->hking || App->player2->hpcring || App->player2->hkcring)
 		{
+			App->audio->Play(highpunchhit, 0);
 			damage = 20;
 		}
 		App->player->playerhittedcounter = 0;
@@ -1907,15 +1910,32 @@ void ModulePlayer::OnCollision(Collider*c1, Collider*c2) {
 
 	if (c1 == App->player2->playercollider && c2->type == COLLIDER_PLAYER1_DAMAGE && (App->player2->playerhittedcounter > PLAYERHITTEDTIMING -1) && !App->player2->godmode) {
 		int damage = 0;
-		if (App->player->lping || App->player->lking || App->player->lpcring|| App->player->lkcring)
+		if (App->player->lping || App->player->lking || App->player->lpcring || App->player->lkcring)
+		{
+			App->audio->Play(lowpunchhit, 0);
 			damage = 10;
+		}
 		if (App->player->mping || App->player->mpcring || App->player->mking || App->player->mkcring)
+		{
+			App->audio->Play(midpunchhit, 0);
 			damage = 15;
+		}
 		if (App->player->hping || App->player->hking || App->player->hpcring || App->player->hkcring)
+		{
+			App->audio->Play(highpunchhit, 0);
 			damage = 20;
-
-		App->player2->life -= damage;
+		}
 		App->player2->playerhittedcounter = 0;
+		if (!App->player2->backwarding)
+		{
+			App->player2->life -= damage;
+
+		}
+		else
+		{
+			App->player2->blocking = 0;
+			App->player2->current_animation = &App->player->block;
+		}
 	}
 
 	//doDamage(c1_, c2_, App->player, App->player2);
