@@ -24,7 +24,7 @@ Click [our Wiki](https://github.com/LordUnicorn31/Sub2pewdiepie-Studios/wiki/Des
 
 ### Trailer
 
-[](https://www.youtube.com/watch?v=arqv2YVp_3E)
+[lmao](https://www.youtube.com/watch?v=arqv2YVp_3E)
 
 ### Controls and Characters
 
