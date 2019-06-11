@@ -76,6 +76,7 @@ bool ModuleSceneZangief::Start()
 	App->ui->seconds_winner = 0;
 	App->ui->round_winning = true;
 	App->ui->stop_time = false;
+	App->ui->celebrating = true;
 	if(App->ui->round_index<50)App->ui->round_index++;
 	App->ui->current_round++;
 	App->ui->fighting = true;

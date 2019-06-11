@@ -61,6 +61,7 @@ bool ModuleUi::Init() {
 	five = App->audio->Load("media_files/round_5.ogg");
 	six = App->audio->Load("media_files/round_6.ogg");
 	seven = App->audio->Load("media_files/round_7.ogg");
+	you_win= App->audio->Load("media_files/You_Win.ogg");
 	return true;
 	//HP update mechanic
 }
@@ -83,6 +84,7 @@ bool ModuleUi::CleanUp()
 	App->audio->Unload(five);
 	App->audio->Unload(six);
 	App->audio->Unload(seven);
+	App->audio->Unload(you_win);
 	return true;
 }
 
@@ -179,6 +181,10 @@ update_status ModuleUi::Update()
 				if (seconds_winner >= (60 * 2)) {
 					App->fonts->BlitText(160, 87, orange_font, "ZANGIEF WINS");
 				}
+				if (seconds_winner >= (60 * 2) && celebrating) {
+					celebrating = false;
+					App->audio->Play(you_win, 0);
+				}
 				if (seconds_winner >= (60 * 5) && App->player2->matcheswon != 2) {
 					next_round = true;
 					seconds_winner = 0;
@@ -198,6 +204,10 @@ update_status ModuleUi::Update()
 				seconds_winner++;
 				if (seconds_winner >= (60 * 2)) {
 					App->fonts->BlitText(160, 87, orange_font, "ZANGIEF WINS");
+				}
+				if (seconds_winner >= (60 * 2) && celebrating) {
+					celebrating = false;
+					App->audio->Play(you_win, 0);
 				}
 				if (seconds_winner >= (60 * 5) && App->player->matcheswon != 2) {
 					next_round = true;

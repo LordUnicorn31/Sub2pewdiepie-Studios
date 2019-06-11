@@ -50,8 +50,10 @@ public:
 	Mix_Chunk*five = nullptr;
 	Mix_Chunk*six = nullptr;
 	Mix_Chunk*seven = nullptr;
+	Mix_Chunk*you_win= nullptr;
 	bool fighting;
 	bool rounding;
+	bool celebrating;
 	SDL_Rect uibg; //V
 	SDL_Rect uip1; //V
 	SDL_Rect uip2; //V
