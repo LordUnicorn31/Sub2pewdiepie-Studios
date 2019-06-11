@@ -72,11 +72,12 @@ bool ModuleSceneZangief::Start()
 	zangief_init_time = SDL_GetTicks();
 	time_index = 98;
 	App->ui->second = 0;
+	App->ui->seconds_end_round = 0;
 	if(App->ui->round_index<50)App->ui->round_index++;
 	App->ui->current_round++;
-	App->ui->to_next_round = true;
 	App->ui->fighting = true;
 	App->ui->rounding = true;
+	App->ui->out_time = true;
 
 
 	graphics = App->textures->Load("media_files/bg_zangief_sprite.png");

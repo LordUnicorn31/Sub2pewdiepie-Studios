@@ -36,7 +36,6 @@ ModuleUi::ModuleUi()
 	uip2.w = 88;	//V
 	uip2.h = 8;		//V
 	next_round = false;
-	to_next_round = true;
 	round_index = -1;
 	current_round = 0;
 }
@@ -175,18 +174,23 @@ update_status ModuleUi::Update()
 			App->fonts->BlitText(190, 29, orange_font, time_text[App->scene_Zangief->time_index]);
 		}
 		if (App->scene_Zangief->time_index == 0) {
-			App->fonts->BlitText(179, 75, red_font, "TIME");
-			App->fonts->BlitText(179, 87, red_font, "OVER");
-		}
-		if (App->scene_Zangief->time_index == 0 && to_next_round) {
-			to_next_round = false;
-			time_end_round = current_time+8000;
-		}
-		if (time_end_round < current_time&&App->scene_Zangief->time_index == 0) {
-			next_round = true;
+			seconds_end_round++;
+			if (seconds_end_round >= (60*8)) {
+				seconds_end_round = 0;
+				next_round = true;
+			}
+			if (seconds_end_round <= (60 * 3)&&out_time) {
+				App->fonts->BlitText(179, 75, red_font, "TIME");
+				App->fonts->BlitText(179, 87, red_font, "OVER");
+			}
+			if ((60 * 3) <= seconds_end_round && seconds_end_round<= (60 * 5)) {
+				App->fonts->BlitText(179, 75, orange_font, "DRAW");
+				App->fonts->BlitText(179, 87, orange_font, "GAME");
+			}
 		}
 		if (next_round) {
 			next_round = false;
+			out_time=false;
 			App->fade->FadeToBlack(App->scene_Zangief, App->scene_Zangief, 0.5);
 		}
 		App->render->Blit(uitext, 62, 11, &win_hand);
