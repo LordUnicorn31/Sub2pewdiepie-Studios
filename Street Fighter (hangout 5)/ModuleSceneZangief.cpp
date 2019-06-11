@@ -74,6 +74,7 @@ bool ModuleSceneZangief::Start()
 	App->ui->second = 0;
 	App->ui->seconds_end_round = 0;
 	App->ui->seconds_winner = 0;
+	App->ui->round_winning = true;
 	App->ui->stop_time = false;
 	if(App->ui->round_index<50)App->ui->round_index++;
 	App->ui->current_round++;
@@ -82,6 +83,10 @@ bool ModuleSceneZangief::Start()
 	App->ui->out_time = true;
 	App->player->freezing = true;
 	App->player->freezing = true;
+	if (App->player->matcheswon >= 3|| App->player2->matcheswon >= 3) {
+		App->player->matcheswon = 0;
+		App->player2->matcheswon = 0;
+	}
 
 
 	graphics = App->textures->Load("media_files/bg_zangief_sprite.png");

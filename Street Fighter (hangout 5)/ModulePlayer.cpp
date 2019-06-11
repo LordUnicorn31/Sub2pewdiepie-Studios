@@ -764,9 +764,17 @@ void dojump(ModulePlayer* player)
 void docrouch(ModulePlayer* player)
 {
 	if ((App->input->keyboard[player->downButton] == KEY_STATE::KEY_REPEAT || App->input->game_pad[player->downButton][player->playernum])
-		&& able(player)
+		&& ablecrouching(player)
 		)
+	{
 		player->crouching = true;
+		player->current_animation = &player->crouch;
+	}
+	else
+	{
+		player->crouching = false;
+		player->current_animation = &player->idle;
+	}
 	//LOG("uWu");
 }
 
@@ -968,7 +976,7 @@ void whilecrouching(ModulePlayer* player, int move)
 			if ((App->input->keyboard[player->lp] == KEY_STATE::KEY_DOWN || App->input->game_pad[player->lp][player->playernum] == KEY_STATE::KEY_DOWN) && ablecrouching(player)) {
 				player->low_crouch_punch.Reset();
 				player->lpcring = true;
-				player->crouching = true;
+				
 				App->audio->Play(player->lowattack, 0);
 				player->current_animation = &player->low_crouch_punch;
 			}
@@ -981,12 +989,11 @@ void whilecrouching(ModulePlayer* player, int move)
 				else {
 					player->current_animation = &player->crouch;
 					player->lpcring = false;
-					//player->crouching = false;
+					player->crouching = true;
 					player->crouch.Reset();
 				}
 				return;
 			}
-			
 		}
 		case playermoves::MPC:
 		{
@@ -1005,7 +1012,7 @@ void whilecrouching(ModulePlayer* player, int move)
 				else {
 					player->current_animation = &player->crouch;
 					player->mpcring = false;
-					//player->crouching = false;
+					player->crouching = true;
 					player->crouch.Reset();
 				}
 				return;
@@ -1029,7 +1036,7 @@ void whilecrouching(ModulePlayer* player, int move)
 				else {
 					player->current_animation = &player->crouch;
 					player->hpcring = false;
-					//player->crouching = false;
+					player->crouching = true;
 					player->crouch.Reset();
 				}
 				return;
@@ -1041,18 +1048,64 @@ void whilecrouching(ModulePlayer* player, int move)
 				player->low_crouch_kick.Reset();
 				player->lkcring = true;
 				App->audio->Play(player->lowattack, 0);
-				player->current_animation = &player->high_crouch_punch;
+				player->current_animation = &player->low_crouch_kick;
 			}
-			if (player->hpcring) {
-				if (!player->high_crouch_punch.Finished()) {
-					if (player->current_animation != &player->high_crouch_punch) {
-						player->current_animation = &player->high_crouch_punch;
+			if (player->lkcring) {
+				if (!player->low_crouch_kick.Finished()) {
+					if (player->current_animation != &player->low_crouch_kick) {
+						player->current_animation = &player->low_crouch_kick;
 					}
 				}
 				else {
 					player->current_animation = &player->crouch;
-					player->hpcring = false;
-					//player->crouching = false;
+					player->lkcring = false;
+					player->crouching = true;
+					player->crouch.Reset();
+				}
+				return;
+			}
+		}
+		case playermoves::MKC:
+		{
+			if ((App->input->keyboard[player->mk] == KEY_STATE::KEY_DOWN || App->input->game_pad[player->mk][player->playernum] == KEY_STATE::KEY_DOWN) && ablecrouching(player)) {
+				player->mid_crouch_kick.Reset();
+				player->mkcring = true;
+				App->audio->Play(player->midattack, 0);
+				player->current_animation = &player->mid_crouch_kick;
+			}
+			if (player->mkcring) {
+				if (!player->mid_crouch_kick.Finished()) {
+					if (player->current_animation != &player->mid_crouch_kick) {
+						player->current_animation = &player->mid_crouch_kick;
+					}
+				}
+				else {
+					player->current_animation = &player->crouch;
+					player->mkcring = false;
+					player->crouching = true;
+					player->crouch.Reset();
+				}
+				return;
+			}
+		}
+		case playermoves::HKC:
+		{
+			if ((App->input->keyboard[player->hk] == KEY_STATE::KEY_DOWN || App->input->game_pad[player->hk][player->playernum] == KEY_STATE::KEY_DOWN) && ablecrouching(player)) {
+				player->high_crouch_kick.Reset();
+				player->hkcring = true;
+				App->audio->Play(player->highattack, 0);
+				player->current_animation = &player->high_crouch_kick;
+			}
+			if (player->hkcring) {
+				if (!player->high_crouch_kick.Finished()) {
+					if (player->current_animation != &player->high_crouch_kick) {
+						player->current_animation = &player->high_crouch_kick;
+					}
+				}
+				else {
+					player->current_animation = &player->crouch;
+					player->hkcring = false;
+					player->crouching = true;
 					player->crouch.Reset();
 				}
 				return;
@@ -1060,8 +1113,8 @@ void whilecrouching(ModulePlayer* player, int move)
 		}
 		default:
 		{
-			player->crouching = false;
-			player->current_animation = &player->crouch;
+			//player->crouching = true;
+			//player->current_animation = &player->crouch;
 		}
 		}
 		
@@ -1071,8 +1124,18 @@ void whilecrouching(ModulePlayer* player, int move)
 
 void updatePlayerCollider(ModulePlayer* player)
 {
-	player->playercollider->rect.x = player->position.x + 10;
-	player->playercollider->rect.y = player->position.y - 80;
+	if (player->crouching)
+	{
+		player->playercollider->rect.h = 40;
+		player->playercollider->rect.x = player->position.x + 10;
+		player->playercollider->rect.y = player->position.y - 80 + player->playercollider->rect.h;
+	}
+	else
+	{
+		player->playercollider->rect.h = 80;
+		player->playercollider->rect.x = player->position.x + 10;
+		player->playercollider->rect.y = player->position.y - 80;
+	}
 }
 
 void updateAttackCollider(ModulePlayer* player, int move)
@@ -1182,7 +1245,112 @@ void updateAttackCollider(ModulePlayer* player, int move)
 		}
 		break;
 	}
-	if (!(player->lping || player->mping || player->hping || player->lking || player->mking || player->hking))
+	case playermoves::LPC:
+	{
+		if (player->lpcring/*  && player->low_crouch_punch.currentframe() > player->low_crouch_punch.speed*2*/)
+		{
+
+			player->pdamagecollider->rect.w = 30;
+			player->pdamagecollider->rect.h = 20;
+			if (player->lookingright)
+				player->pdamagecollider->rect.x = player->position.x + 40;
+			else
+				player->pdamagecollider->rect.x = player->position.x - 12;
+			player->pdamagecollider->rect.y = player->position.y - 60;
+		}
+		break;
+	}
+	case playermoves::MPC:
+	{
+		if (player->mpcring && player->mid_crouch_punch.currentframe() > player->mid_crouch_punch.speed)
+		{
+
+			player->pdamagecollider->rect.w = 30;
+			player->pdamagecollider->rect.h = 20;
+			if (player->lookingright)
+				player->pdamagecollider->rect.x = player->position.x + 45;
+			else
+				player->pdamagecollider->rect.x = player->position.x - 20;
+			player->pdamagecollider->rect.y = player->position.y - 70;
+		}
+		break;
+	}
+	case playermoves::HPC:
+	{
+		if (player->hpcring && player->high_crouch_punch.currentframe() > player->high_crouch_punch.speed)
+		{
+
+			player->pdamagecollider->rect.w = 30;
+			player->pdamagecollider->rect.h = 20;
+			if (player->lookingright)
+				player->pdamagecollider->rect.x = player->position.x + 45;
+			else
+				player->pdamagecollider->rect.x = player->position.x - 20;
+			player->pdamagecollider->rect.y = player->position.y - 70;
+		}
+		break;
+	}
+	case playermoves::LKC:
+	{
+		if (player->lkcring && player->low_crouch_kick.currentframe() > player->low_crouch_kick.speed)
+		{
+			if (player->low_crouch_kick.currentframe() > player->low_crouch_kick.speed * 40)
+			{
+				player->pdamagecollider->rect.x = 0;
+				player->pdamagecollider->rect.y = 500;
+				break;
+			}
+			player->pdamagecollider->rect.w = 40;
+			player->pdamagecollider->rect.h = 30;
+			if (player->lookingright)
+				player->pdamagecollider->rect.x = player->position.x + 45;
+			else
+				player->pdamagecollider->rect.x = player->position.x - 25;
+			player->pdamagecollider->rect.y = player->position.y - 32;
+		}
+		break;
+	}
+	case playermoves::MKC:
+	{
+		if (player->mkcring && player->mid_crouch_kick.currentframe() > player->mid_crouch_kick.speed)
+		{
+			if (player->mid_crouch_kick.currentframe() > player->mid_crouch_kick.speed * 30)
+			{
+				player->pdamagecollider->rect.x = 0;
+				player->pdamagecollider->rect.y = 500;
+				break;
+			}
+			player->pdamagecollider->rect.w = 40;
+			player->pdamagecollider->rect.h = 30;
+			if (player->lookingright)
+				player->pdamagecollider->rect.x = player->position.x + 45;
+			else
+				player->pdamagecollider->rect.x = player->position.x - 25;
+			player->pdamagecollider->rect.y = player->position.y - 32;
+		}
+		break;
+	}
+	case playermoves::HKC:
+	{
+		if (player->hkcring && player->high_crouch_kick.currentframe() > player->high_crouch_kick.speed)
+		{
+			if (player->high_crouch_kick.currentframe() > player->high_crouch_kick.speed * 30)
+			{
+				player->pdamagecollider->rect.x = 0;
+				player->pdamagecollider->rect.y = 500;
+				break;
+			}
+			player->pdamagecollider->rect.w = 40;
+			player->pdamagecollider->rect.h = 30;
+			if (player->lookingright)
+				player->pdamagecollider->rect.x = player->position.x + 45;
+			else
+				player->pdamagecollider->rect.x = player->position.x - 25;
+			player->pdamagecollider->rect.y = player->position.y - 32;
+		}
+		break;
+	}
+	if (!(player->lping || player->mping || player->hping || player->lking || player->mking || player->hking || player->lpcring))
 	{
 		caca:
 		player->pdamagecollider->rect.x = 0;
@@ -1324,15 +1492,15 @@ update_status ModulePlayer::Update()
 	
 
 	whilecrouching(App->player, playermoves::LPC);
-	//whilecrouching(App->player, playermoves::MPC);
-	/*whilecrouching(App->player, playermoves::HPC);
+	/*whilecrouching(App->player, playermoves::MPC);
+	whilecrouching(App->player, playermoves::HPC);
 	whilecrouching(App->player, playermoves::LKC);
 	whilecrouching(App->player, playermoves::MKC);
 	whilecrouching(App->player, playermoves::HKC);*/
 
 	whilecrouching(App->player2, playermoves::LPC);
-	//whilecrouching(App->player2, playermoves::MPC);
-	/*whilecrouching(App->player2, playermoves::HPC);
+	/*whilecrouching(App->player2, playermoves::MPC);
+	whilecrouching(App->player2, playermoves::HPC);
 	whilecrouching(App->player2, playermoves::LKC);
 	whilecrouching(App->player2, playermoves::MKC);
 	whilecrouching(App->player2, playermoves::HKC);*/
@@ -1522,12 +1690,26 @@ update_status ModulePlayer::Update()
 	updateAttackCollider(App->player, playermoves::MK);
 	updateAttackCollider(App->player, playermoves::HK);
 
+	updateAttackCollider(App->player, playermoves::LPC);
+	updateAttackCollider(App->player, playermoves::MPC);
+	updateAttackCollider(App->player, playermoves::HPC);
+	updateAttackCollider(App->player, playermoves::LKC);
+	updateAttackCollider(App->player, playermoves::MKC);
+	updateAttackCollider(App->player, playermoves::HKC);
+
 	updateAttackCollider(App->player2, playermoves::LP);
 	updateAttackCollider(App->player2, playermoves::MP);
 	updateAttackCollider(App->player2, playermoves::HP);
 	updateAttackCollider(App->player2, playermoves::LK);
 	updateAttackCollider(App->player2, playermoves::MK);
 	updateAttackCollider(App->player2, playermoves::HK);
+
+	updateAttackCollider(App->player2, playermoves::LPC);
+	updateAttackCollider(App->player2, playermoves::MPC);
+	updateAttackCollider(App->player2, playermoves::HPC);
+	updateAttackCollider(App->player2, playermoves::LKC);
+	updateAttackCollider(App->player2, playermoves::MKC);
+	updateAttackCollider(App->player2, playermoves::HKC);
 
 	/*if (App->player->punching) {
 
