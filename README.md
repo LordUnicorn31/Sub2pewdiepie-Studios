@@ -75,5 +75,6 @@ To sum up all commits, we created a changelog. [Click here to check it out](./Ch
 
 
 [Download the latest version]()
+
 [Check out our wiki](https://github.com/LordUnicorn31/Sub2pewdiepie-Studios/wiki)
 
