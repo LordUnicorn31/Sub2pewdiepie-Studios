@@ -33,6 +33,7 @@ public:
 	float second;
 	float seconds_end_round;
 	float seconds_winner;
+	bool round_winning;
 	bool next_round;
 	bool out_time;
 	bool stop_time;

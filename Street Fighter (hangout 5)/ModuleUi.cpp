@@ -168,6 +168,10 @@ update_status ModuleUi::Update()
 			App->player->freezing = false;
 			App->player2->freezing = false;
 			if (App->player->life <=0) {
+				if (round_winning) {
+					App->player2->matcheswon++;
+					round_winning = false;
+				}
 				App->player->freezing = true;
 				App->player2->freezing = true;
 				stop_time = true;
@@ -181,6 +185,10 @@ update_status ModuleUi::Update()
 				}
 			}
 			if (App->player2->life <= 0) {
+				if (round_winning) {
+					App->player->matcheswon++;
+					round_winning = false;
+				}
 				App->player->freezing = true;
 				App->player2->freezing = true;
 				stop_time = true;
@@ -233,7 +241,18 @@ update_status ModuleUi::Update()
 			out_time=false;
 			App->fade->FadeToBlack(App->scene_Zangief, App->scene_Zangief, 0.5);
 		}
-		App->render->Blit(uitext, 62, 11, &win_hand);
+		if (App->player->matcheswon == 1|| App->player->matcheswon == 2) {
+			App->render->Blit(uitext, 62, 11, &win_hand);
+		}
+		if (App->player->matcheswon == 2) {
+			App->render->Blit(uitext, 78, 11, &win_hand);
+		}
+		if (App->player2->matcheswon == 1|| App->player2->matcheswon == 2) {
+			App->render->Blit(uitext, 200, 11, &win_hand);
+		}
+		if (App->player2->matcheswon == 2) {
+			App->render->Blit(uitext, 216, 11, &win_hand);
+		}
 	}
 	return UPDATE_CONTINUE;
 }
