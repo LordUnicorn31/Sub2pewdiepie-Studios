@@ -118,10 +118,10 @@ update_status ModuleUi::Update()
 		App->fonts->BlitText(101, 29, blueorange_font, "ZANGIEF");
 		App->fonts->BlitText(238, 29,	blueorange_font, "ZANGIEF");
 		App->fonts->BlitText(70,3, blueorange_font, "1P");
-		App->fonts->BlitText(130, 3, blueorange_font, "0");
 		App->fonts->BlitText(155, 3, blueorange_font, "NIN");
 		App->fonts->BlitText(198, 3, blueorange_font, "50000");
 		App->fonts->BlitText(250, 3, blueorange_font, "2P");
+		App->fonts->BlitText(130, 3, blueorange_font, "0");
 		App->fonts->BlitText(305, 3, blueorange_font, "0");
 		if ((App->scene_Zangief->zangief_init_time + 2900) > current_time) {
 			if (rounding) {
@@ -179,7 +179,7 @@ update_status ModuleUi::Update()
 				stop_time = true;
 				seconds_winner++;
 				if (seconds_winner >= (60 * 2)) {
-					App->fonts->BlitText(160, 87, orange_font, "ZANGIEF WINS");
+					App->fonts->BlitText(155, 87, orange_font, "ZANGIEF WINS");
 				}
 				if (seconds_winner >= (60 * 2) && celebrating) {
 					celebrating = false;
@@ -203,7 +203,7 @@ update_status ModuleUi::Update()
 				stop_time = true;
 				seconds_winner++;
 				if (seconds_winner >= (60 * 2)) {
-					App->fonts->BlitText(160, 87, orange_font, "ZANGIEF WINS");
+					App->fonts->BlitText(155, 87, orange_font, "ZANGIEF WINS");
 				}
 				if (seconds_winner >= (60 * 2) && celebrating) {
 					celebrating = false;
@@ -244,14 +244,14 @@ update_status ModuleUi::Update()
 					App->fonts->BlitText(179, 87, orange_font, "GAME");
 				}
 				if (App->player->life > App->player2->life) {
-					App->fonts->BlitText(160, 87, orange_font, "ZANGIEF WINS");
+					App->fonts->BlitText(155, 87, orange_font, "ZANGIEF WINS");
 				}
 				if (App->player->life > App->player2->life&&winning_out_time) {
 					winning_out_time = false;
 					App->player->matcheswon++;
 				}
 				if (App->player->life < App->player2->life) {
-					App->fonts->BlitText(160, 87, orange_font, "ZANGIEF WINS");
+					App->fonts->BlitText(155, 87, orange_font, "ZANGIEF WINS");
 				}
 				if (App->player->life < App->player2->life&&winning_out_time) {
 					winning_out_time = false;
