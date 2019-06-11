@@ -1,6 +1,6 @@
 
 # STREET FIGHTER 2 [![](https://i.gyazo.com/7f26386cdf130dbfeff42523b5645310.png)](https://github.com/LordUnicorn31/Sub2pewdiepie-Studios/wiki)
-Version 0.5 || 28/04/2019
+Version Alpha 1.0 || 11/06/2019
 
 ![](https://media.discordapp.net/attachments/547341598720000011/556945077692530708/Logo.png)
 
@@ -86,7 +86,7 @@ To sum up all commits, we created a changelog. [Click here to check it out](./Ch
 
 ### External links
 
-[Download the latest version of our game]()
+Download the latest version of our game[HERE](https://github.com/LordUnicorn31/Sub2pewdiepie-Studios/releases)
 
-[Check out our wiki](https://github.com/LordUnicorn31/Sub2pewdiepie-Studios/wiki)
+Check out our wiki[HERE](https://github.com/LordUnicorn31/Sub2pewdiepie-Studios/wiki)
 
