@@ -33,6 +33,7 @@ ModuleCongratsScreen::~ModuleCongratsScreen()
 // Load assets
 bool ModuleCongratsScreen::Start()
 {
+	App->render->camera.x = 0;
 	LOG("Loading background assets");
 	bool ret = true;
 	graphics = App->textures->Load("media_files/p1_win.png");
