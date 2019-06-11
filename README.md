@@ -31,37 +31,29 @@ As the game is still a prototype, controls are limited and only one character ca
 - Debugging
   - Show Colliders: F5
 
-#### Player 1
+#### Player Control
 - Movement
-  - Jump: W
-  - Crouch: S
-  - Move left: A
-  - Move right: D
+  - Jump: UP button
+  - Crouch: DOWN button
+  - Move left: LEFT button
+  - Move right: RIGHT button
 - Combat
-  - Punch: NUMPAD 1
-  - Kick: NUMPAD 2
-  - Special move: NUMPAD 3
+  - Punch: 
+  - Fast Punch:
+  - Slow Punch:
+  - Kick:
+  - Fast Kick
+  - Slow Kick
 - Debugging
   - Godmode On: F1
   - Godmode Off: F2
   - Instant Win: Space
-  
-#### Player 2
-- Movement
-  - Jump: UP arrow key
-  - Crouch: DOWN arrow key
-  - Move left: LEFT arrow key
-  - Move right: RIGHT arrow key
-- Combat
-  - Punch: J
-  - Kick: K
-  - Special move: L
 - Debugging
   - Godmode On: F3
   - Godmode Off: F4
   - Instant Win: Space
 
-To learn more about the original controls and know the controls that the final version will have implemented, click [here](https://github.com/LordUnicorn31/Sub2pewdiepie-Studios/wiki/Design#controls)
+To learn more about the original controls, click [here](https://github.com/LordUnicorn31/Sub2pewdiepie-Studios/wiki/Design#controls)
 
 To learn about the different characters, click [here](https://github.com/LordUnicorn31/Sub2pewdiepie-Studios/wiki/Design#playable-characters)
 
