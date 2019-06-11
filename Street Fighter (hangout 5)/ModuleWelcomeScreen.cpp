@@ -15,6 +15,7 @@
 #include "ModuleAudio.h"
 #include "ModuleVsScreen.h"
 #include "ModuleSelect.h"
+#include "ModuleCollision.h"
 // Reference at https://youtu.be/6OlenbCC4WI?t=382
 
 ModuleWelcomeScreen::ModuleWelcomeScreen()
@@ -29,6 +30,7 @@ ModuleWelcomeScreen::~ModuleWelcomeScreen()
 // Load assets
 bool ModuleWelcomeScreen::Start()
 {
+	App->collision->CleanUp();
 	LOG("Loading background assets");
 	bool ret = true;
 	graphics = App->textures->Load("media_files/intro.png");
