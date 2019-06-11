@@ -175,3 +175,30 @@ bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uin
 
 	return ret;
 }
+void ModuleRender::StartCameraShake(int duration, float magnitude)
+{
+	//TODO 1: Store the data and start the shake
+	shaking = true;
+	shake_duration = duration;
+	shake_timer = 0.0f;
+	shake_magnitude = magnitude;
+}
+void ModuleRender::UpdateCameraShake()
+{
+	//TODO 2: Update the shake timer, stop shaking if we reach the full duration
+	//		  Generate a random value and set the camera offset
+	if (shake_timer < shake_duration) {
+		camera_offset.x = (rand() % 4 - 2) * shake_magnitude / 2;
+		camera_offset.y = (rand() % 4 - 2) * shake_magnitude / 2;
+		shake_timer++;
+	}
+	else {
+		shaking = false;
+		shake_duration = 0.0f;
+		shake_timer = 0.0f;
+		shake_magnitude = 0.0f;
+		camera_offset.x = 0;
+		camera_offset.y = 0;
+	}
+	return;
+}

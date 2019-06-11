@@ -17,6 +17,7 @@
 #include "ModuleUi.h"
 #include "ModuleVsScreen.h"
 #include "ModuleSelect.h"
+#include "ModuleSlowdown.h"
 //#include "ModuleWinloseScreen.h"
 
 Application::Application()
@@ -72,6 +73,7 @@ Application::Application()
 	modules[16] = ui = new ModuleUi();
 	modules[17] = vs_screen = new ModuleVsScreen();
 	modules[18] = select = new ModuleSelect();
+	modules[19] = slowdown = new ModuleSlowdown();
 }	
 
 Application::~Application()
