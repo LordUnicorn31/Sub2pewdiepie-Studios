@@ -50,7 +50,7 @@ bool ModuleSelect::CleanUp()
 update_status ModuleSelect::Update()
 {
 	App->render->Blit(graphics, 0,  0, &background, 0.75f);
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || App->input->game_pad[App->player->startButton]) {
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || App->input->game_pad[App->player->startButton][0]) {
 		App->fade->FadeToBlack(App->select, App->vs_screen, 1);
 	}
 
