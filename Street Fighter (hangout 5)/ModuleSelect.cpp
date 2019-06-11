@@ -30,7 +30,10 @@ bool ModuleSelect::Start()
 {
 	LOG("Loading background assets");
 	bool ret = true;
-	graphics = App->textures->Load("media_files/screenselection2.png");
+	graphics = App->textures->Load("media_files/backgroundselectscreen.png");
+	selector = App->textures->Load("media_files/selectorP1.png");
+	App->render->Blit(selector, 384, 224, &(select.GetCurrentFrame()), 0.75f);
+
 	selectmusic = App->audio->Load("media_files/03 Player Select.ogg");
 	App->audio->Play(selectmusic, 1);
 	return ret;

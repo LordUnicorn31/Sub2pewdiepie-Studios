@@ -20,6 +20,8 @@ public:
 public:
 	Mix_Chunk* selectmusic = nullptr;
 	SDL_Texture* graphics = nullptr;
+	SDL_Texture* selector = nullptr;
+	Animation select;
 	SDL_Rect background;
 };
 
