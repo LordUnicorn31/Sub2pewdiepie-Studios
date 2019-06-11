@@ -76,14 +76,16 @@ bool ModuleSceneZangief::Start()
 	App->ui->seconds_winner = 0;
 	App->ui->round_winning = true;
 	App->ui->stop_time = false;
+	App->ui->celebrating = true;
 	if(App->ui->round_index<50)App->ui->round_index++;
 	App->ui->current_round++;
 	App->ui->fighting = true;
 	App->ui->rounding = true;
 	App->ui->out_time = true;
+	App->ui->winning_out_time = true;
 	App->player->freezing = true;
 	App->player->freezing = true;
-	if (App->player->matcheswon >= 3|| App->player2->matcheswon >= 3) {
+	if (App->player->matcheswon >= 2|| App->player2->matcheswon >= 2) {
 		App->player->matcheswon = 0;
 		App->player2->matcheswon = 0;
 	}

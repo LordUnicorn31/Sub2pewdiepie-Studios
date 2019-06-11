@@ -1800,14 +1800,14 @@ update_status ModulePlayer::Update()
 	}
 
 
-	if (App->player->life <= 0) {
+	//if (App->player->life <= 0) {
 		//App->particles->CleanUp();
-		App->fade->FadeToBlack(App->scene_Ryu, App->congratsscreen);
-	}
-	if (App->player2->life <= 0) {
+		//App->fade->FadeToBlack(App->scene_Ryu, App->congratsscreen);
+	//}
+	//if (App->player2->life <= 0) {
 		//App->particles->CleanUp();
-		App->fade->FadeToBlack(App->scene_Ryu, App->congratsscreen);
-	}
+		//App->fade->FadeToBlack(App->scene_Ryu, App->congratsscreen);
+	//}
 	//fonts
 	//font_welcome = App->fonts->Load("")
 	return UPDATE_CONTINUE;

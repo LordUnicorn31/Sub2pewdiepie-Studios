@@ -37,6 +37,7 @@ public:
 	bool next_round;
 	bool out_time;
 	bool stop_time;
+	bool winning_out_time;
 	int time_end_round;
 	int round_index;
 	uint current_time;
@@ -50,8 +51,11 @@ public:
 	Mix_Chunk*five = nullptr;
 	Mix_Chunk*six = nullptr;
 	Mix_Chunk*seven = nullptr;
+	Mix_Chunk*you_win= nullptr;
+	Mix_Chunk*perfect = nullptr;
 	bool fighting;
 	bool rounding;
+	bool celebrating;
 	SDL_Rect uibg; //V
 	SDL_Rect uip1; //V
 	SDL_Rect uip2; //V
