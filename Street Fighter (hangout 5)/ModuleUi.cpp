@@ -305,16 +305,16 @@ update_status ModuleUi::Update()
 			App->fade->FadeToBlack(App->scene_Zangief, App->scene_Zangief, 0.5);
 		}
 		if (App->player->matcheswon == 1|| App->player->matcheswon == 2) {
-			App->render->Blit(uitext, 62, 11, &win_hand);
+			App->render->Blit(uitext, 62, 11, &win_hand,0);
 		}
 		if (App->player->matcheswon == 2) {
-			App->render->Blit(uitext, 78, 11, &win_hand);
+			App->render->Blit(uitext, 78, 11, &win_hand,0);
 		}
 		if (App->player2->matcheswon == 1|| App->player2->matcheswon == 2) {
-			App->render->Blit(uitext, 312, 11, &win_hand);
+			App->render->Blit(uitext, 312, 11, &win_hand,0);
 		}
 		if (App->player2->matcheswon == 2) {
-			App->render->Blit(uitext, 296, 11, &win_hand);
+			App->render->Blit(uitext, 296, 11, &win_hand,0);
 		}
 	}
 	return UPDATE_CONTINUE;
