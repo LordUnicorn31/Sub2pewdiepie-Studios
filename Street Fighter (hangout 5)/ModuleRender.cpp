@@ -30,6 +30,8 @@ bool ModuleRender::Init()
 	}
 
 	renderer = SDL_CreateRenderer(App->window->window, -1, flags);
+
+	SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH * SCREEN_SIZE, SCREEN_HEIGHT * SCREEN_SIZE);
 	
 	if(renderer == NULL)
 	{
@@ -88,6 +90,7 @@ bool ModuleRender::CleanUp()
 
 	return true;
 }
+
 
 // Blit to screen
 bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section, float speed, bool isFlipped, bool use_camera)
@@ -202,3 +205,4 @@ void ModuleRender::UpdateCameraShake()
 	}
 	return;
 }
+

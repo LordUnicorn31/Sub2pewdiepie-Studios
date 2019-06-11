@@ -181,3 +181,6 @@ void ModuleRender::UpdateCameraShake()
 	}
 	return;
 }
+int SDL_RenderSetLogicalSize(SDL_Renderer* renderer, int w, int h);
+
+void SDL_RenderGetLogicalSize(SDL_Renderer* renderer, int* w, int* h);

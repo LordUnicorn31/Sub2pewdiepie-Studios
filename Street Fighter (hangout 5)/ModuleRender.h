@@ -28,6 +28,7 @@ public:
 	SDL_Renderer* renderer = nullptr;
 	SDL_Rect camera;
 	
+	
 private:
 	//TODO 0: A new set of variables to handle the camera shake
 	bool shaking = false;

@@ -20,6 +20,10 @@ ModuleSelect::ModuleSelect()
 {
 	background = { 120, 128, 671, 300 };
 	background = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
+
+	//Selector animation
+	select.PushBack({ 0, 1, 21, 33 });
+	select.PushBack({ 24, 0, 23, 34 });
 }
 
 ModuleSelect::~ModuleSelect()
@@ -46,6 +50,7 @@ bool ModuleSelect::CleanUp()
 	LOG("Unloading honda stage");
 	App->textures->Unload(graphics);
 	App->audio->Unload(selectmusic);
+	
 	return true;
 }
 
