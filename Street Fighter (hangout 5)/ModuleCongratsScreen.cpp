@@ -71,10 +71,10 @@ update_status ModuleCongratsScreen::Update()
 	else if (App->player->matcheswon < App->player2->matcheswon) {
 		App->render->Blit(graphics2, 0, 0, &background);
 	}
-
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
-		App->fade->FadeToBlack(App->congratsscreen, App->welcomescreen,1);
-		
+	secondss++;
+	if (secondss == (60 * 4))
+	{
+		App->fade->FadeToBlack(App->congratsscreen, App->welcomescreen, 2);
 	}
 	return UPDATE_CONTINUE;
 }

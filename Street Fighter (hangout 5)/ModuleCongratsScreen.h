@@ -25,6 +25,8 @@ public:
 	SDL_Rect winer;
 	SDL_Rect loser;
 	Mix_Chunk* congratsmusic = nullptr;
+	Mix_Chunk*game_over = nullptr;
+	uint secondss;
 	
 };
 
