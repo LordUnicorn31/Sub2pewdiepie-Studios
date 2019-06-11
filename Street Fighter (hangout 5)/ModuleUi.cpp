@@ -168,39 +168,44 @@ update_status ModuleUi::Update()
 			App->player->freezing = false;
 			App->player2->freezing = false;
 			if (App->player->life <=0) {
+				App->player->freezing = true;
+				App->player2->freezing = true;
 				if (round_winning) {
 					App->player2->matcheswon++;
 					round_winning = false;
 				}
-				App->player->freezing = true;
-				App->player2->freezing = true;
 				stop_time = true;
 				seconds_winner++;
-				if (seconds_winner >= (60*2)) {
-					App->fonts->BlitText(179, 87, orange_font, "ZANGIEF WINS");
+				if (seconds_winner >= (60 * 2)) {
+					App->fonts->BlitText(170, 87, orange_font, "ZANGIEF WINS");
 				}
-				if (seconds_winner >= (60 * 5)) {
+				if (seconds_winner >= (60 * 5) && App->player2->matcheswon != 2) {
 					next_round = true;
 					seconds_winner = 0;
 				}
+				else if (seconds_winner >= (60 * 5) && App->player2->matcheswon == 2) {
+					App->fade->FadeToBlack(App->scene_Zangief, App->congratsscreen, 1);
+				}
 			}
-			if (App->player2->life <= 0) {
+			else if (App->player2->life <= 0) {
+				App->player->freezing = true;
+				App->player2->freezing = true;
 				if (round_winning) {
 					App->player->matcheswon++;
 					round_winning = false;
 				}
-				App->player->freezing = true;
-				App->player2->freezing = true;
 				stop_time = true;
 				seconds_winner++;
-				if (seconds_winner >= (60*2)) {
-					App->fonts->BlitText(179, 87, orange_font, "ZANGIEF WINS");
+				if (seconds_winner >= (60 * 2)) {
+					App->fonts->BlitText(170, 87, orange_font, "ZANGIEF WINS");
 				}
-				if (seconds_winner >= (60 * 5)) {
+				if (seconds_winner >= (60 * 5) && App->player->matcheswon != 2) {
 					next_round = true;
 					seconds_winner = 0;
 				}
-				
+				else if (seconds_winner >= (60 * 5) && App->player->matcheswon == 2) {
+					App->fade->FadeToBlack(App->scene_Zangief, App->congratsscreen, 1);
+				}
 			}
 			if (App->scene_Zangief->time_index > 0&&!stop_time) {
 				second +=1.9f;
@@ -213,7 +218,7 @@ update_status ModuleUi::Update()
 		}
 		if (App->scene_Zangief->time_index == 0) {
 			App->player->freezing = true;
-			App->player->freezing = true;
+			App->player2->freezing = true;
 			seconds_end_round++;
 			if (seconds_end_round >= (60*8)) {
 				seconds_end_round = 0;
@@ -248,10 +253,10 @@ update_status ModuleUi::Update()
 			App->render->Blit(uitext, 78, 11, &win_hand);
 		}
 		if (App->player2->matcheswon == 1|| App->player2->matcheswon == 2) {
-			App->render->Blit(uitext, 200, 11, &win_hand);
+			App->render->Blit(uitext, 300, 11, &win_hand);
 		}
 		if (App->player2->matcheswon == 2) {
-			App->render->Blit(uitext, 216, 11, &win_hand);
+			App->render->Blit(uitext, 316, 11, &win_hand);
 		}
 	}
 	return UPDATE_CONTINUE;
