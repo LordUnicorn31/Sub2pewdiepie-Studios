@@ -32,8 +32,10 @@ public:
 	uint current_round;
 	float second;
 	float seconds_end_round;
+	float seconds_winner;
 	bool next_round;
 	bool out_time;
+	bool stop_time;
 	int time_end_round;
 	int round_index;
 	uint current_time;

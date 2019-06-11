@@ -36,6 +36,7 @@ ModuleUi::ModuleUi()
 	uip2.w = 88;	//V
 	uip2.h = 8;		//V
 	next_round = false;
+	stop_time = false;
 	round_index = -1;
 	current_round = 0;
 }
@@ -121,8 +122,6 @@ update_status ModuleUi::Update()
 		App->fonts->BlitText(250, 3, blueorange_font, "2P");
 		App->fonts->BlitText(305, 3, blueorange_font, "0");
 		if ((App->scene_Zangief->zangief_init_time + 2900) > current_time) {
-			App->player->freezing = true;
-			App->player2->freezing = true;
 			if (rounding) {
 				rounding = false;
 				switch (current_round) {
@@ -168,7 +167,34 @@ update_status ModuleUi::Update()
 		else {
 			App->player->freezing = false;
 			App->player2->freezing = false;
-			if (App->scene_Zangief->time_index > 0) {
+			if (App->player->life <=0) {
+				App->player->freezing = true;
+				App->player2->freezing = true;
+				stop_time = true;
+				seconds_winner++;
+				if (seconds_winner >= (60*2)) {
+					App->fonts->BlitText(179, 87, orange_font, "ZANGIEF WINS");
+				}
+				if (seconds_winner >= (60 * 5)) {
+					next_round = true;
+					seconds_winner = 0;
+				}
+			}
+			if (App->player2->life <= 0) {
+				App->player->freezing = true;
+				App->player2->freezing = true;
+				stop_time = true;
+				seconds_winner++;
+				if (seconds_winner >= (60*2)) {
+					App->fonts->BlitText(179, 87, orange_font, "ZANGIEF WINS");
+				}
+				if (seconds_winner >= (60 * 5)) {
+					next_round = true;
+					seconds_winner = 0;
+				}
+				
+			}
+			if (App->scene_Zangief->time_index > 0&&!stop_time) {
 				second +=1.9f;
 			}
 			if (second>=60) {
@@ -195,10 +221,10 @@ update_status ModuleUi::Update()
 					App->fonts->BlitText(179, 87, orange_font, "GAME");
 				}
 				if (App->player->life > App->player2->life) {
-					App->fonts->BlitText(179, 87, blueorange_font, "ZANGIEF WINS");
+					App->fonts->BlitText(179, 87, orange_font, "ZANGIEF WINS");
 				}
 				if (App->player->life < App->player2->life) {
-					App->fonts->BlitText(179, 87, blueorange_font, "ZANGIEF WINS");
+					App->fonts->BlitText(179, 87, orange_font, "ZANGIEF WINS");
 				}
 			}
 		}
