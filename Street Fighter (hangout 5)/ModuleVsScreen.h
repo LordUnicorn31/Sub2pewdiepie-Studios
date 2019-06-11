@@ -20,6 +20,7 @@ public:
 public:
 	Mix_Chunk* music = nullptr;
 	SDL_Texture* graphics = nullptr;
+	SDL_Texture* logo = nullptr;
 	SDL_Rect background;
 	uint seconds;
 };

@@ -21,6 +21,8 @@ public:
 	Mix_Chunk* mainmenumusic = nullptr;
 	Mix_Chunk* mainmenutoscenesound = nullptr;
 	SDL_Texture* graphics = nullptr;
+	SDL_Texture* logo = nullptr;
+	Animation loggo;
 	//Mix_Chunk *audio=nullptr;
 	SDL_Rect background;
 };
