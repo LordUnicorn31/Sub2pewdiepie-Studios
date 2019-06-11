@@ -992,7 +992,6 @@ void whilecrouching(ModulePlayer* player, int move)
 		{
 			if ((App->input->keyboard[player->mp] == KEY_STATE::KEY_DOWN || App->input->game_pad[player->mp][player->playernum] == KEY_STATE::KEY_DOWN) && ablecrouching(player)) {
 				player->mid_crouch_punch.Reset();
-				player->lpcring = false;
 				player->mpcring = true;
 				App->audio->Play(player->midattack, 0);
 				player->current_animation = &player->mid_crouch_punch;
@@ -1012,6 +1011,52 @@ void whilecrouching(ModulePlayer* player, int move)
 				return;
 			}
 			
+		}
+		case playermoves::HPC:
+		{
+			if ((App->input->keyboard[player->hp] == KEY_STATE::KEY_DOWN || App->input->game_pad[player->hp][player->playernum] == KEY_STATE::KEY_DOWN) && ablecrouching(player)) {
+				player->high_crouch_punch.Reset();
+				player->hpcring = true;
+				App->audio->Play(player->highattack, 0);
+				player->current_animation = &player->high_crouch_punch;
+			}
+			if (player->hpcring) {
+				if (!player->high_crouch_punch.Finished()) {
+					if (player->current_animation != &player->high_crouch_punch) {
+						player->current_animation = &player->high_crouch_punch;
+					}
+				}
+				else {
+					player->current_animation = &player->crouch;
+					player->hpcring = false;
+					//player->crouching = false;
+					player->crouch.Reset();
+				}
+				return;
+			}
+		}
+		case playermoves::LKC:
+		{
+			if ((App->input->keyboard[player->lk] == KEY_STATE::KEY_DOWN || App->input->game_pad[player->lk][player->playernum] == KEY_STATE::KEY_DOWN) && ablecrouching(player)) {
+				player->low_crouch_kick.Reset();
+				player->lkcring = true;
+				App->audio->Play(player->lowattack, 0);
+				player->current_animation = &player->high_crouch_punch;
+			}
+			if (player->hpcring) {
+				if (!player->high_crouch_punch.Finished()) {
+					if (player->current_animation != &player->high_crouch_punch) {
+						player->current_animation = &player->high_crouch_punch;
+					}
+				}
+				else {
+					player->current_animation = &player->crouch;
+					player->hpcring = false;
+					//player->crouching = false;
+					player->crouch.Reset();
+				}
+				return;
+			}
 		}
 		default:
 		{

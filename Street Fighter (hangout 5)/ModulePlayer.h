@@ -49,6 +49,8 @@ public:
 	void OnCollision(Collider*, Collider*);
 
 public:
+	int score = 0;
+	int matcheswon = 0;
 	int name;
 	int playernum;
 	int life = 0;
