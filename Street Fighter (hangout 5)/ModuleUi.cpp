@@ -16,7 +16,7 @@
 #include<stdio.h>
 #include "SDL/include/SDL.h"
 #include "ModuleCollision.h"
-
+#include "ModuleSlowdown.h"
 ModuleUi::ModuleUi()
 {
 	win_hand.x = 107;
@@ -196,6 +196,7 @@ update_status ModuleUi::Update()
 				App->player2->freezing = true;
 				App->player->knockdown = true;
 				App->player2->justwon = true;
+				App->slowdown->StartSlowdown(2, 50);
 				if (round_winning) {
 					App->player2->matcheswon++;
 					round_winning = false;
@@ -227,6 +228,7 @@ update_status ModuleUi::Update()
 				App->player2->freezing = true;
 				App->player2->knockdown = true;
 				App->player->justwon = true;
+				App->slowdown->StartSlowdown(2, 50);
 				if (round_winning) {
 					App->player->matcheswon++;
 					round_winning = false;
