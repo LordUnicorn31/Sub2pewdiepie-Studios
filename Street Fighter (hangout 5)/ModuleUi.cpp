@@ -184,8 +184,16 @@ update_status ModuleUi::Update()
 				App->fonts->BlitText(179, 87, red_font, "OVER");
 			}
 			if ((60 * 3) <= seconds_end_round && seconds_end_round<= (60 * 5)) {
-				App->fonts->BlitText(179, 75, orange_font, "DRAW");
-				App->fonts->BlitText(179, 87, orange_font, "GAME");
+				if (App->player->life == App->player2->life) {
+					App->fonts->BlitText(179, 75, orange_font, "DRAW");
+					App->fonts->BlitText(179, 87, orange_font, "GAME");
+				}
+				if (App->player->life > App->player2->life) {
+					App->fonts->BlitText(179, 87, blueorange_font, "ZANGIEF WINS");
+				}
+				if (App->player->life < App->player2->life) {
+					App->fonts->BlitText(179, 87, blueorange_font, "ZANGIEF WINS");
+				}
 			}
 		}
 		if (next_round) {
