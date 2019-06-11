@@ -120,9 +120,9 @@ update_status ModuleUi::Update()
 		}
 		uip2.w = (prevHP2 * 0.88); // V
 		//sprintf_s(time_text, 10, "%7d", time);
-		App->render->Blit(uitext, 100, 13, &uibg);
-		App->render->Blit(uitext, 101 + (88 - uip1.w), 16, &uip1); //V
-		App->render->Blit(uitext, 205, 16, &uip2);
+		App->render->Blit(uitext, 100, 13, &uibg, 0.0f);
+		App->render->Blit(uitext, 101 + (88 - uip1.w), 16, &uip1, 0.0f); //V
+		App->render->Blit(uitext, 205, 16, &uip2, 0.0f);
 		App->fonts->BlitText(101, 29, blueorange_font, "ZANGIEF");
 		App->fonts->BlitText(238, 29,	blueorange_font, "ZANGIEF");
 		App->fonts->BlitText(70,3, blueorange_font, "1P");
