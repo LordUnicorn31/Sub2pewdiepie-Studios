@@ -1255,8 +1255,98 @@ void updateAttackCollider(ModulePlayer* player, int move)
 			if (player->lookingright)
 				player->pdamagecollider->rect.x = player->position.x + 40;
 			else
+				player->pdamagecollider->rect.x = player->position.x - 12;
+			player->pdamagecollider->rect.y = player->position.y - 60;
+		}
+		break;
+	}
+	case playermoves::MPC:
+	{
+		if (player->mpcring && player->mid_crouch_punch.currentframe() > player->mid_crouch_punch.speed)
+		{
+
+			player->pdamagecollider->rect.w = 30;
+			player->pdamagecollider->rect.h = 20;
+			if (player->lookingright)
+				player->pdamagecollider->rect.x = player->position.x + 45;
+			else
+				player->pdamagecollider->rect.x = player->position.x - 20;
+			player->pdamagecollider->rect.y = player->position.y - 70;
+		}
+		break;
+	}
+	case playermoves::HPC:
+	{
+		if (player->hpcring && player->high_crouch_punch.currentframe() > player->high_crouch_punch.speed)
+		{
+
+			player->pdamagecollider->rect.w = 30;
+			player->pdamagecollider->rect.h = 20;
+			if (player->lookingright)
+				player->pdamagecollider->rect.x = player->position.x + 45;
+			else
+				player->pdamagecollider->rect.x = player->position.x - 20;
+			player->pdamagecollider->rect.y = player->position.y - 70;
+		}
+		break;
+	}
+	case playermoves::LKC:
+	{
+		if (player->lkcring && player->low_crouch_kick.currentframe() > player->low_crouch_kick.speed)
+		{
+			if (player->low_crouch_kick.currentframe() > player->low_crouch_kick.speed * 40)
+			{
+				player->pdamagecollider->rect.x = 0;
+				player->pdamagecollider->rect.y = 500;
+				break;
+			}
+			player->pdamagecollider->rect.w = 40;
+			player->pdamagecollider->rect.h = 30;
+			if (player->lookingright)
+				player->pdamagecollider->rect.x = player->position.x + 45;
+			else
 				player->pdamagecollider->rect.x = player->position.x - 25;
-			player->pdamagecollider->rect.y = player->position.y - 92;
+			player->pdamagecollider->rect.y = player->position.y - 32;
+		}
+		break;
+	}
+	case playermoves::MKC:
+	{
+		if (player->mkcring && player->mid_crouch_kick.currentframe() > player->mid_crouch_kick.speed)
+		{
+			if (player->mid_crouch_kick.currentframe() > player->mid_crouch_kick.speed * 30)
+			{
+				player->pdamagecollider->rect.x = 0;
+				player->pdamagecollider->rect.y = 500;
+				break;
+			}
+			player->pdamagecollider->rect.w = 40;
+			player->pdamagecollider->rect.h = 30;
+			if (player->lookingright)
+				player->pdamagecollider->rect.x = player->position.x + 45;
+			else
+				player->pdamagecollider->rect.x = player->position.x - 25;
+			player->pdamagecollider->rect.y = player->position.y - 32;
+		}
+		break;
+	}
+	case playermoves::HKC:
+	{
+		if (player->hkcring && player->high_crouch_kick.currentframe() > player->high_crouch_kick.speed)
+		{
+			if (player->high_crouch_kick.currentframe() > player->high_crouch_kick.speed * 30)
+			{
+				player->pdamagecollider->rect.x = 0;
+				player->pdamagecollider->rect.y = 500;
+				break;
+			}
+			player->pdamagecollider->rect.w = 40;
+			player->pdamagecollider->rect.h = 30;
+			if (player->lookingright)
+				player->pdamagecollider->rect.x = player->position.x + 45;
+			else
+				player->pdamagecollider->rect.x = player->position.x - 25;
+			player->pdamagecollider->rect.y = player->position.y - 32;
 		}
 		break;
 	}
