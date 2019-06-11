@@ -121,6 +121,8 @@ update_status ModuleUi::Update()
 		App->fonts->BlitText(250, 3, blueorange_font, "2P");
 		App->fonts->BlitText(305, 3, blueorange_font, "0");
 		if ((App->scene_Zangief->zangief_init_time + 2900) > current_time) {
+			App->player->freezing = true;
+			App->player->freezing = true;
 			if (rounding) {
 				rounding = false;
 				switch (current_round) {
@@ -164,6 +166,8 @@ update_status ModuleUi::Update()
 			App->fonts->BlitText(190, 29, orange_font, "99");
 		}
 		else {
+			App->player->freezing = false;
+			App->player2->freezing = false;
 			if (App->scene_Zangief->time_index > 0) {
 				second +=1.9f;
 			}
