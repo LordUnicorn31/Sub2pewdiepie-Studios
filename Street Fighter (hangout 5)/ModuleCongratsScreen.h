@@ -27,6 +27,7 @@ public:
 	Mix_Chunk* congratsmusic = nullptr;
 	Mix_Chunk*game_over = nullptr;
 	uint secondss;
+	bool fading;
 	
 };
 

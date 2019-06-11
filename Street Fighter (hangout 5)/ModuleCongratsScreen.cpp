@@ -38,7 +38,7 @@ bool ModuleCongratsScreen::Start()
 	graphics = App->textures->Load("media_files/p1_win.png");
 	graphics2 = App->textures->Load("media_files/p2_win.png");
 	congratsmusic = App->audio->Load("media_files/13 End Battle.ogg");
-	
+	fading = true;
 	App->audio->Play(congratsmusic, 0);
 	return ret;
 }
@@ -55,6 +55,9 @@ bool ModuleCongratsScreen::CleanUp()
 	App->player2->matcheswon = 0;
 	App->ui->round_index = -1;
 	App->ui->current_round = 0;
+	secondss = 0;
+	App->ui->score = 0;
+	App->ui->scoree = 0;
 	return true;
 }
 
@@ -65,16 +68,23 @@ update_status ModuleCongratsScreen::Update()
 		App->render->Blit(graphics, 0, 0, &background, 0.75f);
 	else
 		App->render->Blit(graphics2, 0, 0, &background, 0.75f);*/
+
 	if (App->player->matcheswon > App->player2->matcheswon) {
 		App->render->Blit(graphics, 0, 0, &background);
 	}
 	else if (App->player->matcheswon < App->player2->matcheswon) {
 		App->render->Blit(graphics2, 0, 0, &background);
 	}
+	else {
+		App->render->Blit(graphics, 0, 0, &background);
+	}
 	secondss++;
 	if (secondss == (60 * 4))
 	{
-		App->fade->FadeToBlack(App->congratsscreen, App->welcomescreen, 2);
+		if (fading) {
+			fading = false;
+			App->fade->FadeToBlack(App->congratsscreen, App->welcomescreen, 2);
+		}
 	}
 	return UPDATE_CONTINUE;
 }

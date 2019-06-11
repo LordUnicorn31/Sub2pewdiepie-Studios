@@ -61,6 +61,7 @@ public:
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture *bigfactory = nullptr;
 	SDL_Rect verja;
+	SDL_Rect palanca;
 	//SDL_Texture* graphicszangief = nullptr;
 	bool lookingright;
 	bool godmode = false;
