@@ -616,6 +616,7 @@ bool able(ModulePlayer* player)
 		|| player->hkcring
 		|| player->crouching
 		|| player->freezing
+		|| player->knockdown
 		//|| player->blocking < PLAYERHITTEDTIMING -1
 		|| player->playerhittedcounter < PLAYERHITTEDTIMING -1)
 		) {
@@ -644,6 +645,7 @@ bool ablecrouching(ModulePlayer* player)
 		|| player->mkcring
 		|| player->hkcring
 		|| player->freezing
+		|| player->knockdown
 		|| player->playerhittedcounter < PLAYERHITTEDTIMING - 1)
 		) {
 		ret = true;
@@ -1830,6 +1832,15 @@ update_status ModulePlayer::Update()
 	App->render->Blit(graphicszangief, App->player2->position.x, App->player2->position.y - r2.h, &r2, 1.0f, !App->player2->lookingright);
 	else
 	App->render->Blit(graphicszangief, App->player2->position.x + 60, App->player2->position.y - r2.h, &r2, 1.0f, !App->player2->lookingright);*/
+
+	if (App->player->knockdown)
+		App->player->current_animation = &App->player->KO;
+	if (App->player2->knockdown)
+		App->player2->current_animation = &App->player2->KO;
+	if (App->player->justwon)
+		App->player->current_animation = &App->player->victory;
+	if (App->player2->justwon)
+		App->player2->current_animation = &App->player2->victory;
 	renderPlayerOnScreen(App->player);
 	renderPlayerOnScreen(App->player2);
 	if (App->scene_Zangief->IsEnabled()) {

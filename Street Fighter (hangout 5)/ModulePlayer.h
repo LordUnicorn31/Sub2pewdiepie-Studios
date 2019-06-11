@@ -88,6 +88,8 @@ public:
 	bool kicking = false;
 	int blocking = 0;
 	bool freezing = false;
+	bool knockdown = false;
+	bool justwon = false;
 	//ryu
 	bool hadouking = false;
 	bool hadouking2 = false;//le fet pk no vull borrar el que as fet am el numero 1

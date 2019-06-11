@@ -15,7 +15,7 @@
 #include "ModuleFonts.h"
 #include<stdio.h>
 #include "SDL/include/SDL.h"
-
+#include "ModuleCollision.h"
 
 ModuleUi::ModuleUi()
 {
@@ -140,8 +140,13 @@ update_status ModuleUi::Update()
 			score += 10;
 			p1score = false;
 		}
+
 		if ((App->scene_Zangief->zangief_init_time + 2900) > current_time) {
 			if (rounding) {
+				App->player->knockdown = false;
+				App->player->justwon = false;
+				App->player2->knockdown = false;
+				App->player2->justwon = false;
 				rounding = false;
 				switch (current_round) {
 				case 1:
@@ -189,6 +194,8 @@ update_status ModuleUi::Update()
 			if (App->player->life <=0) {
 				App->player->freezing = true;
 				App->player2->freezing = true;
+				App->player->knockdown = true;
+				App->player2->justwon = true;
 				if (round_winning) {
 					App->player2->matcheswon++;
 					round_winning = false;
@@ -218,6 +225,8 @@ update_status ModuleUi::Update()
 			else if (App->player2->life <= 0) {
 				App->player->freezing = true;
 				App->player2->freezing = true;
+				App->player2->knockdown = true;
+				App->player->justwon = true;
 				if (round_winning) {
 					App->player->matcheswon++;
 					round_winning = false;
@@ -289,6 +298,7 @@ update_status ModuleUi::Update()
 		if (next_round) {
 			next_round = false;
 			out_time=false;
+			App->collision->CleanUp();
 			App->fade->FadeToBlack(App->scene_Zangief, App->scene_Zangief, 0.5);
 		}
 		if (App->player->matcheswon == 1|| App->player->matcheswon == 2) {
