@@ -73,8 +73,9 @@ To sum up all commits, we created a changelog. [Click here to check it out](./Ch
 
 [Victor Nisa Sánchez](https://github.com/VictorNisa)
 
+### External links
 
-[Download the latest version]()
+[Download the latest version of our game]()
 
 [Check out our wiki](https://github.com/LordUnicorn31/Sub2pewdiepie-Studios/wiki)
 
