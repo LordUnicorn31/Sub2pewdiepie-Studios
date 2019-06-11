@@ -41,7 +41,8 @@ bool ModuleSelect::CleanUp()
 {
 	// TODO 5: Remove all memory leaks
 	LOG("Unloading honda stage");
-	//App->textures->Unload(graphics);
+	App->textures->Unload(graphics);
+	App->audio->Unload(selectmusic);
 	return true;
 }
 
