@@ -122,7 +122,7 @@ update_status ModuleUi::Update()
 		App->fonts->BlitText(305, 3, blueorange_font, "0");
 		if ((App->scene_Zangief->zangief_init_time + 2900) > current_time) {
 			App->player->freezing = true;
-			App->player->freezing = true;
+			App->player2->freezing = true;
 			if (rounding) {
 				rounding = false;
 				switch (current_round) {
@@ -178,6 +178,8 @@ update_status ModuleUi::Update()
 			App->fonts->BlitText(190, 29, orange_font, time_text[App->scene_Zangief->time_index]);
 		}
 		if (App->scene_Zangief->time_index == 0) {
+			App->player->freezing = true;
+			App->player->freezing = true;
 			seconds_end_round++;
 			if (seconds_end_round >= (60*8)) {
 				seconds_end_round = 0;
