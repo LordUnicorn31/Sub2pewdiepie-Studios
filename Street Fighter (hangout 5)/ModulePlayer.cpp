@@ -547,6 +547,11 @@ ModulePlayer::ModulePlayer(
 	verja.y = 170;
 	verja.w = 347;
 	verja.h = 265 - 170;
+
+	palanca.x = 1185;
+	palanca.y = 206;
+	palanca.w = 1298 - 1185;
+	palanca.h = 644 - 206;
 }
 
 void loadanimations() {
@@ -1796,6 +1801,7 @@ update_status ModulePlayer::Update()
 	renderPlayerOnScreen(App->player);
 	renderPlayerOnScreen(App->player2);
 	if (App->scene_Zangief->IsEnabled()) {
+		App->render->Blit(bigfactory, 369, -220, &palanca, 0.8);
 		App->render->Blit(bigfactory, -171, 130, &verja, 1.3);
 	}
 
