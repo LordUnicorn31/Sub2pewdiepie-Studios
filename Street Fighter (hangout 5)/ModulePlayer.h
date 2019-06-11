@@ -84,6 +84,7 @@ public:
 	bool punching = false;
 	bool kicking = false;
 	bool blocking = false;
+	bool freezing = false;
 	//ryu
 	bool hadouking = false;
 	bool hadouking2 = false;//le fet pk no vull borrar el que as fet am el numero 1

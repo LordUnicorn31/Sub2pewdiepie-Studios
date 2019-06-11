@@ -606,6 +606,7 @@ bool able(ModulePlayer* player)
 		|| player->mkcring
 		|| player->hkcring
 		|| player->crouching
+		|| player->freezing
 		|| player->playerhittedcounter < PLAYERHITTEDTIMING -1)
 		) {
 		ret = true;
@@ -632,6 +633,7 @@ bool ablecrouching(ModulePlayer* player)
 		|| player->lkcring
 		|| player->mkcring
 		|| player->hkcring
+		|| player->freezing
 		|| player->playerhittedcounter < PLAYERHITTEDTIMING - 1)
 		) {
 		ret = true;
