@@ -73,8 +73,12 @@ bool ModuleSceneZangief::Start()
 	time_index = 98;
 	App->ui->second = 0;
 	if(App->ui->round_index<50)App->ui->round_index++;
+	App->ui->current_round++;
 	App->ui->to_next_round = true;
 	App->ui->fighting = true;
+	App->ui->rounding = true;
+
+
 	graphics = App->textures->Load("media_files/bg_zangief_sprite.png");
 	music = App->audio->Load("media_files/zangief.ogg");
 	App->audio->Play(music, -1);
@@ -111,6 +115,7 @@ update_status ModuleSceneZangief::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
 		App->ui->round_index = -1;
+		App->ui->current_round = 0;
 		App->fade->FadeToBlack(App->scene_Zangief, App->congratsscreen, 1);
 	}
 	return UPDATE_CONTINUE;

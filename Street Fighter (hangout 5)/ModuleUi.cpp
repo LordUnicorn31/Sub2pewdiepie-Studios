@@ -38,7 +38,7 @@ ModuleUi::ModuleUi()
 	next_round = false;
 	to_next_round = true;
 	round_index = -1;
-	fighting = true;
+	current_round = 0;
 }
 
 ModuleUi::~ModuleUi()
@@ -54,6 +54,13 @@ bool ModuleUi::Init() {
 	uitext = App->textures->Load("media_files/HPBAR.png"); //V
 	fight = App->audio->Load("media_files/Fight.wav");
 	round= App->audio->Load("media_files/Round.wav");
+	one = App->audio->Load("media_files/round_1.ogg");
+	two = App->audio->Load("media_files/round_2.ogg");
+	three = App->audio->Load("media_files/round_3.ogg");
+	four = App->audio->Load("media_files/round_4.ogg");
+	five = App->audio->Load("media_files/round_5.ogg");
+	six = App->audio->Load("media_files/round_6.ogg");
+	seven = App->audio->Load("media_files/round_7.ogg");
 	return true;
 	//HP update mechanic
 }
@@ -69,6 +76,13 @@ bool ModuleUi::CleanUp()
 	App->textures->Unload(uitext);
 	App->audio->Unload(round);
 	App->audio->Unload(fight);
+	App->audio->Unload(one);
+	App->audio->Unload(two);
+	App->audio->Unload(three);
+	App->audio->Unload(four);
+	App->audio->Unload(five);
+	App->audio->Unload(six);
+	App->audio->Unload(seven);
 	return true;
 }
 
@@ -107,12 +121,41 @@ update_status ModuleUi::Update()
 		App->fonts->BlitText(198, 3, blueorange_font, "50000");
 		App->fonts->BlitText(250, 3, blueorange_font, "2P");
 		App->fonts->BlitText(305, 3, blueorange_font, "0");
-		if ((App->scene_Zangief->zangief_init_time + 2000) > current_time) {
+		if ((App->scene_Zangief->zangief_init_time + 2900) > current_time) {
+			if (rounding) {
+				rounding = false;
+				switch (current_round) {
+				case 1:
+					App->audio->Play(one, 0);
+					break;
+				case 2:
+					App->audio->Play(two, 0);
+					break;
+				case 3:
+					App->audio->Play(three, 0);
+					break;
+				case 4:
+					App->audio->Play(four, 0);
+					break;
+				case 5:
+					App->audio->Play(five, 0);
+					break;
+				case 6:
+					App->audio->Play(six, 0);
+					break;
+				case 7:
+					App->audio->Play(seven, 0);
+					break;
+				default:
+					App->audio->Play(round, 0);
+					break;
+				}
+			}
 			App->fonts->BlitText(170, 85, orange_font, round_text[round_index]);
 			App->fonts->BlitText(162, 105, red_font, "BATTLE 01");
 			App->fonts->BlitText(190, 29, orange_font, "99");
 		}
-		else if ((App->scene_Zangief->zangief_init_time + 2000) < current_time &&(App->scene_Zangief->zangief_init_time + 3500) >current_time) {
+		else if ((App->scene_Zangief->zangief_init_time + 2900) < current_time &&(App->scene_Zangief->zangief_init_time + 3500) >current_time) {
 			if (fighting) {
 				App->audio->Play(fight, 0);
 				fighting = false;
