@@ -82,6 +82,7 @@ bool ModuleSceneZangief::Start()
 	App->ui->fighting = true;
 	App->ui->rounding = true;
 	App->ui->out_time = true;
+	App->ui->winning_out_time = true;
 	App->player->freezing = true;
 	App->player->freezing = true;
 	if (App->player->matcheswon >= 2|| App->player2->matcheswon >= 2) {

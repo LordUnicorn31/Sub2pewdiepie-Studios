@@ -37,6 +37,7 @@ public:
 	bool next_round;
 	bool out_time;
 	bool stop_time;
+	bool winning_out_time;
 	int time_end_round;
 	int round_index;
 	uint current_time;

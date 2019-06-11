@@ -244,10 +244,18 @@ update_status ModuleUi::Update()
 					App->fonts->BlitText(179, 87, orange_font, "GAME");
 				}
 				if (App->player->life > App->player2->life) {
-					App->fonts->BlitText(170, 87, orange_font, "ZANGIEF WINS");
+					App->fonts->BlitText(160, 87, orange_font, "ZANGIEF WINS");
+				}
+				if (App->player->life > App->player2->life&&winning_out_time) {
+					winning_out_time = false;
+					App->player->matcheswon++;
 				}
 				if (App->player->life < App->player2->life) {
-					App->fonts->BlitText(170, 87, orange_font, "ZANGIEF WINS");
+					App->fonts->BlitText(160, 87, orange_font, "ZANGIEF WINS");
+				}
+				if (App->player->life < App->player2->life&&winning_out_time) {
+					winning_out_time = false;
+					App->player2->matcheswon++;
 				}
 			}
 		}
