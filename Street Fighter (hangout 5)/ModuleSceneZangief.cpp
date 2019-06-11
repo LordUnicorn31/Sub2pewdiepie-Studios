@@ -85,6 +85,7 @@ bool ModuleSceneZangief::Start()
 	App->audio->Play(music, -1);
 	App->player->Enable();
 	App->player2->Enable();
+	
 	return true;
 }
 
