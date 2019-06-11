@@ -306,14 +306,14 @@ ModulePlayer::ModulePlayer(
 
 		//animation stops and resets when player stops blocking (quite obvious, right)
 		block.PushBack({970, 24, 1023-970, 117-24});
-		block.PushBack({1038, 57, 1091-1038, 117-57});
+		//block.PushBack({1038, 57, 1091-1038, 117-57});
 		block.speed = 0.06f;
 		block.loop = false;
 
 		mid_punch.PushBack({ 6, 149, 64 - 6, 243 - 149 });
 		mid_punch.PushBack({ 72, 150, 149 - 72, 243 - 150 });
 		mid_punch.PushBack({ 165, 149, 224-165, 243-149});
-		mid_punch.speed = 0.08f;
+		mid_punch.speed = 0.06f;
 
 		high_punch.PushBack({243, 145, 298-243, 243-145});
 		high_punch.PushBack({ 308, 149, 366 - 308, 243-149});
@@ -327,11 +327,11 @@ ModulePlayer::ModulePlayer(
 		low_close_punch.PushBack({778, 134, 831-778, 243-134});
 		low_close_punch.PushBack({843, 150, 908-843, 243-150});
 		low_close_punch.PushBack({918, 156, 994-918, 243-156});
-		low_close_punch.speed = 0.06f;
+		low_close_punch.speed = 0.09f;
 
 		low_kick.PushBack({7, 269, 65-7, 369-269});
 		low_kick.PushBack({75, 271, 162-75, 369-271});
-		low_kick.speed = 0.06f;
+		low_kick.speed = 0.09f;
 
 		mid_kick.PushBack({176, 269, 234-176, 369-269});
 		mid_kick.PushBack({246, 268, 318-246, 369-268});
@@ -374,7 +374,7 @@ ModulePlayer::ModulePlayer(
 		low_crouch_kick.PushBack({306, 414, 369-306, 495-414});
 		low_crouch_kick.PushBack({382, 414, 468-382, 495-414});
 		low_crouch_kick.PushBack({475, 414, 538-475, 495-414});
-		low_crouch_kick.speed = 0.03f;
+		low_crouch_kick.speed = 0.09f;
 
 		mid_crouch_kick.PushBack({ 306, 414, 369 - 306, 495 - 414 });
 		mid_crouch_kick.PushBack({ 382, 414, 468 - 382, 495 - 414 });
@@ -384,7 +384,7 @@ ModulePlayer::ModulePlayer(
 		high_crouch_kick.PushBack({ 306, 414, 369 - 306, 495 - 414 });
 		high_crouch_kick.PushBack({ 382, 414, 468 - 382, 495 - 414 });
 		high_crouch_kick.PushBack({ 475, 414, 538 - 475, 495 - 414 });
-		high_crouch_kick.speed = 0.09f;
+		high_crouch_kick.speed = 0.03f;
 
 		jumping_punch.PushBack({552, 417, 611-552, 480-417});
 		jumping_punch.PushBack({620, 421, 701-620, 480-421});
@@ -533,6 +533,10 @@ ModulePlayer::ModulePlayer(
 	playernum = playernum_;
 	godModeOnButton = godModeOn_;
 	godModeOffButton = godModeOff_;
+	if (playernum == 0)
+		collidertype == COLLIDER_PLAYER1_DAMAGE;
+	if (playernum == 1)
+		collidertype == COLLIDER_PLAYER2_DAMAGE;
 	/*switch (playername_) {
 	case playernames::RYU: {
 		graphics = App->textures->Load("media_files/ryu.png"); // arcade version
@@ -612,6 +616,7 @@ bool able(ModulePlayer* player)
 		|| player->hkcring
 		|| player->crouching
 		|| player->freezing
+		//|| player->blocking < PLAYERHITTEDTIMING -1
 		|| player->playerhittedcounter < PLAYERHITTEDTIMING -1)
 		) {
 		ret = true;
@@ -967,6 +972,22 @@ void whileJumping(ModulePlayer* player)
 		player->position.x += -1.0f;
 
 }
+
+/*void doDamage(Collider* c1, Collider* c2, ModulePlayer* playerhitted, ModulePlayer* playeragressive)
+{
+	if (c1 == playerhitted->playercollider && c2->type == playeragressive->collidertype && (playerhitted->playerhittedcounter > PLAYERHITTEDTIMING - 1) && !playerhitted->godmode) {
+		int damage = 0;
+		if (playeragressive->lping || playeragressive->lpcring)
+			damage = 10;
+		if (playeragressive->mking || playeragressive->mkcring)
+			damage = 20;
+		if (playeragressive->hking || playeragressive->hkcring)
+			damage = 30;
+
+		playerhitted->life -= damage;
+		playerhitted->playerhittedcounter = 0;
+	}
+}*/
 
 void whilecrouching(ModulePlayer* player, int move)
 {
@@ -1339,7 +1360,7 @@ void updateAttackCollider(ModulePlayer* player, int move)
 	{
 		if (player->hkcring && player->high_crouch_kick.currentframe() > player->high_crouch_kick.speed)
 		{
-			if (player->high_crouch_kick.currentframe() > player->high_crouch_kick.speed * 30)
+			if (player->high_crouch_kick.currentframe() > player->high_crouch_kick.speed * 60)
 			{
 				player->pdamagecollider->rect.x = 0;
 				player->pdamagecollider->rect.y = 500;
@@ -1768,8 +1789,13 @@ update_status ModulePlayer::Update()
 		App->player2->pdamagecollider->rect.x = 0;
 		App->player2->pdamagecollider->rect.y = 500;
 	}*/
-
-	if (App->player->playerhittedcounter < PLAYERHITTEDTIMING) {
+	if (App->player->blocking < PLAYERHITTEDTIMING)
+	{
+		App->player->blocking++;
+		App->player->playerhittedcounter++;
+		App->player->current_animation = &App->player->block;
+	}
+	if (App->player->playerhittedcounter < PLAYERHITTEDTIMING && !(App->player->blocking < PLAYERHITTEDTIMING) ) {
 		App->player->playerhittedcounter++;
 		App->player->current_animation = &App->player->hittednormal;
 		if (App->player->lookingright)
@@ -1777,7 +1803,13 @@ update_status ModulePlayer::Update()
 		else
 			App->player->position.x += 0.3f;
 	}
-	if (App->player2->playerhittedcounter < PLAYERHITTEDTIMING) {
+	if (App->player2->blocking < PLAYERHITTEDTIMING)
+	{
+		App->player2->blocking++;
+		App->player2->playerhittedcounter++;
+		App->player2->current_animation = &App->player->block;
+	}
+	if (App->player2->playerhittedcounter < PLAYERHITTEDTIMING && !(App->player2->blocking < PLAYERHITTEDTIMING)) {
 		App->player2->playerhittedcounter++;
 		App->player2->current_animation = &App->player2->hittednormal;
 		if (App->player2->lookingright)
@@ -1846,16 +1878,48 @@ void ModulePlayer::OnCollision(Collider*c1, Collider*c2) {
 	}*/
 
 	if (c1 == App->player->playercollider && c2->type == COLLIDER_PLAYER2_DAMAGE && (App->player->playerhittedcounter > PLAYERHITTEDTIMING -1) && !App->player->godmode) {
-		App->player->life -= 10;
+		int damage = 0;
+		if (App->player2->lping || App->player2->lking || App->player2->lpcring || App->player2->lkcring)
+		{
+			damage = 10;
+		}
+		if (App->player2->mping || App->player2->mpcring || App->player2->mking || App->player2->mkcring)
+		{
+			damage = 15;
+		}
+		if (App->player2->hping || App->player2->hking || App->player2->hpcring || App->player2->hkcring)
+		{
+			damage = 20;
+		}
 		App->player->playerhittedcounter = 0;
+		if (!App->player->backwarding)
+		{
+			App->player->life -= damage;
+			
+		}
+		else
+		{
+			App->player->blocking = 0;
+			App->player->current_animation = &App->player2->block;
+		}
+
 	}
 
 	if (c1 == App->player2->playercollider && c2->type == COLLIDER_PLAYER1_DAMAGE && (App->player2->playerhittedcounter > PLAYERHITTEDTIMING -1) && !App->player2->godmode) {
-		App->player2->life -= 10;
+		int damage = 0;
+		if (App->player->lping || App->player->lking || App->player->lpcring|| App->player->lkcring)
+			damage = 10;
+		if (App->player->mping || App->player->mpcring || App->player->mking || App->player->mkcring)
+			damage = 15;
+		if (App->player->hping || App->player->hking || App->player->hpcring || App->player->hkcring)
+			damage = 20;
+
+		App->player2->life -= damage;
 		App->player2->playerhittedcounter = 0;
 	}
 
-
+	//doDamage(c1_, c2_, App->player, App->player2);
+	//doDamage(c1_, c2_, App->player2, App->player);
 
 	/*if (App->scene_ken->IsEnabled() == true)
 	App->fade->FadeToBlack(App->scene_ken, App->scene_honda);

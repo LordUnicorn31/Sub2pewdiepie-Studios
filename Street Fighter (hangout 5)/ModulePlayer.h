@@ -86,7 +86,7 @@ public:
 	bool crouching = false;
 	bool punching = false;
 	bool kicking = false;
-	bool blocking = false;
+	int blocking = 0;
 	bool freezing = false;
 	//ryu
 	bool hadouking = false;
@@ -206,6 +206,8 @@ public:
 	int specialButton;
 	int godModeOnButton;
 	int godModeOffButton;
+
+	int collidertype;
 	//function declarations
 	//void renderPlayerOnScreen(ModulePlayer* player);
 };
