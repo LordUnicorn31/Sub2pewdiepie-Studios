@@ -56,10 +56,10 @@ bool ModuleCongratsScreen::CleanUp()
 // Update: draw background
 update_status ModuleCongratsScreen::Update()
 {
-	if (App->player->life > App->player2->life)
+	/*if (App->player->life > App->player2->life)
 		App->render->Blit(graphics, 0, 0, &background, 0.75f);
 	else
-		App->render->Blit(graphics2, 0, 0, &background, 0.75f);
+		App->render->Blit(graphics2, 0, 0, &background, 0.75f);*/
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
 		App->fade->FadeToBlack(App->congratsscreen, App->welcomescreen,1);
