@@ -53,7 +53,7 @@ bool ModuleWelcomeScreen::CleanUp()
 update_status ModuleWelcomeScreen::Update()
 {
 	App->render->Blit(graphics, /*-150*/ 0, /*-45*/ 0, &background, 0.75f); // back of the room
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || App->input->game_pad[App->player->startButton])
 	{
 		App->audio->Play(mainmenutoscenesound, 0);
 		App->vs_screen->seconds = 0;

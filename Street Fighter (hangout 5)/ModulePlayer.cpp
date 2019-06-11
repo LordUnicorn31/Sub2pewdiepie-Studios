@@ -27,6 +27,7 @@ ModulePlayer::ModulePlayer(
 	int lk_,
 	int mk_,
 	int hk_, 
+	int startButton_,
 	int godModeOn_, 
 	int godModeOff_,
 	int playernum_
@@ -528,6 +529,7 @@ ModulePlayer::ModulePlayer(
 	lk = lk_;
 	mk = mk_;
 	hk = hk_;
+	startButton = startButton_;
 	playernum = playernum_;
 	godModeOnButton = godModeOn_;
 	godModeOffButton = godModeOff_;
@@ -984,7 +986,7 @@ void whilecrouching(ModulePlayer* player, int move)
 			}
 			
 		}
-		/*case playermoves::MPC:
+		case playermoves::MPC:
 		{
 			if ((App->input->keyboard[player->mp] == KEY_STATE::KEY_DOWN || App->input->game_pad[player->mp][player->playernum] == KEY_STATE::KEY_DOWN) && ablecrouching(player)) {
 				player->mid_crouch_punch.Reset();
@@ -1007,8 +1009,8 @@ void whilecrouching(ModulePlayer* player, int move)
 				}
 				return;
 			}
-			break;
-		}*/
+			
+		}
 		default:
 		{
 			player->crouching = false;

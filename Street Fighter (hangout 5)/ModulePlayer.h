@@ -38,7 +38,8 @@ public:
 		int hk,
 		int godModeOn,
 		int godModeOff,
-		int playernum
+		int playernum,
+		int startButton
 	);
 	~ModulePlayer();
 
@@ -197,6 +198,7 @@ public:
 	int lk;
 	int mk;
 	int hk;
+	int startButton;
 	int specialButton;
 	int godModeOnButton;
 	int godModeOffButton;
