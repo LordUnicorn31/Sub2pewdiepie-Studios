@@ -56,6 +56,8 @@ bool ModuleCongratsScreen::CleanUp()
 	App->ui->round_index = -1;
 	App->ui->current_round = 0;
 	secondss = 0;
+	App->ui->score = 0;
+	App->ui->scoree = 0;
 	return true;
 }
 

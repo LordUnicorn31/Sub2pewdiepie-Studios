@@ -60,6 +60,8 @@ public:
 	bool fighting;
 	bool rounding;
 	bool celebrating;
+	bool p1score;
+	bool p2score;
 	SDL_Rect uibg; //V
 	SDL_Rect uip1; //V
 	SDL_Rect uip2; //V

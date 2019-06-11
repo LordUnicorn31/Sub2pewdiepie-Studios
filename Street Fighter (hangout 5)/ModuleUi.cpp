@@ -38,6 +38,8 @@ ModuleUi::ModuleUi()
 	uip2.h = 8;		//V
 	next_round = false;
 	stop_time = false;
+	p1score = false;
+	p2score = false;
 	round_index = -1;
 	current_round = 0;
 }
@@ -99,6 +101,7 @@ update_status ModuleUi::Update()
 		if (prevHP1 > App->player->life)
 		{
 			prevHP1--;
+			p2score = true;
 		}
 		else if (prevHP1 < App->player->life)
 		{
@@ -108,6 +111,7 @@ update_status ModuleUi::Update()
 		if (prevHP2 > App->player2->life)
 		{
 			prevHP2--;
+			p1score = true;
 		}
 		else if (prevHP2 < App->player2->life)
 		{
@@ -128,8 +132,14 @@ update_status ModuleUi::Update()
 		App->fonts->BlitText(80, 3, blueorange_font, score_text);
 		sprintf_s(score_textt, 10, "%7d", scoree);
 		App->fonts->BlitText(255, 3, blueorange_font, score_textt);
-		//score += (100 - (App->player2->life * 100));
-		//scoree+= (100 - (App->player->life * 100));
+		if (p2score) {
+			scoree += 10;
+			p2score = false;
+		}
+		if (p1score) {
+			score += 10;
+			p1score = false;
+		}
 		if ((App->scene_Zangief->zangief_init_time + 2900) > current_time) {
 			if (rounding) {
 				rounding = false;
