@@ -22,6 +22,10 @@ Fight the strongest fighters from around the Earth to claim the title of world c
 
 Click [our Wiki](https://github.com/LordUnicorn31/Sub2pewdiepie-Studios/wiki/Design#narrative-structure) for more details!
 
+### Trailer
+
+(https://www.youtube.com/watch?v=arqv2YVp_3E)
+
 ### Controls and Characters
 
 As the game is still a prototype, controls are limited and only one character can be played.
