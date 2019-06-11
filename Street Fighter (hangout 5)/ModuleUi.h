@@ -53,6 +53,10 @@ public:
 	Mix_Chunk*seven = nullptr;
 	Mix_Chunk*you_win= nullptr;
 	Mix_Chunk*perfect = nullptr;
+	char score_text[10];
+	char score_textt[10];
+	uint score = 0;
+	uint scoree = 0;
 	bool fighting;
 	bool rounding;
 	bool celebrating;

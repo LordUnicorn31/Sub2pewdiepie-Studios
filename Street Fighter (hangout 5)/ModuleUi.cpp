@@ -13,6 +13,7 @@
 #include "ModuleSceneZangief.h"
 #include "ModuleUi.h"
 #include "ModuleFonts.h"
+#include<stdio.h>
 #include "SDL/include/SDL.h"
 
 
@@ -123,8 +124,12 @@ update_status ModuleUi::Update()
 		App->fonts->BlitText(155, 3, blueorange_font, "NIN");
 		App->fonts->BlitText(198, 3, blueorange_font, "50000");
 		App->fonts->BlitText(250, 3, blueorange_font, "2P");
-		App->fonts->BlitText(130, 3, blueorange_font, "0");
-		App->fonts->BlitText(305, 3, blueorange_font, "0");
+		sprintf_s(score_text, 10, "%7d", score);
+		App->fonts->BlitText(80, 3, blueorange_font, score_text);
+		sprintf_s(score_textt, 10, "%7d", scoree);
+		App->fonts->BlitText(255, 3, blueorange_font, score_textt);
+		//score += (100 - (App->player2->life * 100));
+		//scoree+= (100 - (App->player->life * 100));
 		if ((App->scene_Zangief->zangief_init_time + 2900) > current_time) {
 			if (rounding) {
 				rounding = false;
