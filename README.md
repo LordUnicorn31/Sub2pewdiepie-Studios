@@ -31,7 +31,7 @@ Click [our Wiki](https://github.com/LordUnicorn31/Sub2pewdiepie-Studios/wiki/Des
 
 ### Trailer
 
-![](https://youtu.be/n4EKmiB_8uI)
+Check the trailer of our game tribute [HERE](https://youtu.be/n4EKmiB_8uI)
 
 ### Controls and Characters
 
