@@ -62,6 +62,7 @@ bool ModuleUi::Init() {
 	six = App->audio->Load("media_files/round_6.ogg");
 	seven = App->audio->Load("media_files/round_7.ogg");
 	you_win= App->audio->Load("media_files/You_Win.ogg");
+	perfect = App->audio->Load("media_files/Perfect.ogg");
 	return true;
 	//HP update mechanic
 }
@@ -85,6 +86,7 @@ bool ModuleUi::CleanUp()
 	App->audio->Unload(six);
 	App->audio->Unload(seven);
 	App->audio->Unload(you_win);
+	App->audio->Unload(perfect);
 	return true;
 }
 
@@ -183,7 +185,12 @@ update_status ModuleUi::Update()
 				}
 				if (seconds_winner >= (60 * 2) && celebrating) {
 					celebrating = false;
-					App->audio->Play(you_win, 0);
+					if (App->player2->life == 100) {
+						App->audio->Play(perfect, 0);
+					}
+					else {
+						App->audio->Play(you_win, 0);
+					}
 				}
 				if (seconds_winner >= (60 * 5) && App->player2->matcheswon != 2) {
 					next_round = true;
@@ -207,7 +214,12 @@ update_status ModuleUi::Update()
 				}
 				if (seconds_winner >= (60 * 2) && celebrating) {
 					celebrating = false;
-					App->audio->Play(you_win, 0);
+					if (App->player->life == 100) {
+						App->audio->Play(perfect, 0);
+					}
+					else {
+						App->audio->Play(you_win, 0);
+					}
 				}
 				if (seconds_winner >= (60 * 5) && App->player->matcheswon != 2) {
 					next_round = true;

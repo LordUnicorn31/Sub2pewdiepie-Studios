@@ -52,6 +52,7 @@ public:
 	Mix_Chunk*six = nullptr;
 	Mix_Chunk*seven = nullptr;
 	Mix_Chunk*you_win= nullptr;
+	Mix_Chunk*perfect = nullptr;
 	bool fighting;
 	bool rounding;
 	bool celebrating;
