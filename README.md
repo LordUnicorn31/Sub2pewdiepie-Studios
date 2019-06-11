@@ -2,6 +2,8 @@
 # STREET FIGHTER 2 [![](https://i.gyazo.com/7f26386cdf130dbfeff42523b5645310.png)](https://github.com/LordUnicorn31/Sub2pewdiepie-Studios/wiki)
 Version 0.5 || 28/04/2019
 
+![](https://media.discordapp.net/attachments/547341598720000011/556945077692530708/Logo.png)
+
 ## Index
 
   [**Introduction**](./README.md#introduction)
