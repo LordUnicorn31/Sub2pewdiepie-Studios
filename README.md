@@ -6,6 +6,8 @@ Version 0.5 || 28/04/2019
 
 We are a group of 4 students from CITM in Barcelona. We made a tribute to the game Street Fighter 2. In this release you can play a Zangief vs Zangief match in the Zangief stage. Please enjoy the game!
 
+![](https://media.discordapp.net/attachments/547341598720000011/556079167335038989/IMG-20190315-WA0001.jpg?width=767&height=384)
+
 
 ## Index
 
