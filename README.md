@@ -30,6 +30,11 @@ As the game is still a prototype, controls are limited and only one character ca
   - Start: Space
 - Debugging
   - Show Colliders: F5
+   - Player 1 Godmode On: F1
+  - Player 1 Godmode Off: F2
+  - Instant Win: Space
+  - Player 2 Godmode On: F3
+  - Player 2 Godmode Off: F4
 
 #### Player Control
 - Movement
@@ -38,20 +43,13 @@ As the game is still a prototype, controls are limited and only one character ca
   - Move left: LEFT button
   - Move right: RIGHT button
 - Combat
-  - Punch: 
-  - Fast Punch:
-  - Slow Punch:
-  - Kick:
-  - Fast Kick
-  - Slow Kick
-- Debugging
-  - Godmode On: F1
-  - Godmode Off: F2
-  - Instant Win: Space
-- Debugging
-  - Godmode On: F3
-  - Godmode Off: F4
-  - Instant Win: Space
+  - Low Punch: X
+  - Mid Punch: Y
+  - High Punch: LB
+  - Low Kick: A
+  - Mid Kick: B
+  - High Kick: RB
+
 
 To learn more about the original controls, click [here](https://github.com/LordUnicorn31/Sub2pewdiepie-Studios/wiki/Design#controls)
 
