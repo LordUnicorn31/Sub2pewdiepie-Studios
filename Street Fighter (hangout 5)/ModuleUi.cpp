@@ -177,7 +177,7 @@ update_status ModuleUi::Update()
 				stop_time = true;
 				seconds_winner++;
 				if (seconds_winner >= (60 * 2)) {
-					App->fonts->BlitText(170, 87, orange_font, "ZANGIEF WINS");
+					App->fonts->BlitText(160, 87, orange_font, "ZANGIEF WINS");
 				}
 				if (seconds_winner >= (60 * 5) && App->player2->matcheswon != 2) {
 					next_round = true;
@@ -197,7 +197,7 @@ update_status ModuleUi::Update()
 				stop_time = true;
 				seconds_winner++;
 				if (seconds_winner >= (60 * 2)) {
-					App->fonts->BlitText(170, 87, orange_font, "ZANGIEF WINS");
+					App->fonts->BlitText(160, 87, orange_font, "ZANGIEF WINS");
 				}
 				if (seconds_winner >= (60 * 5) && App->player->matcheswon != 2) {
 					next_round = true;
@@ -234,10 +234,10 @@ update_status ModuleUi::Update()
 					App->fonts->BlitText(179, 87, orange_font, "GAME");
 				}
 				if (App->player->life > App->player2->life) {
-					App->fonts->BlitText(179, 87, orange_font, "ZANGIEF WINS");
+					App->fonts->BlitText(170, 87, orange_font, "ZANGIEF WINS");
 				}
 				if (App->player->life < App->player2->life) {
-					App->fonts->BlitText(179, 87, orange_font, "ZANGIEF WINS");
+					App->fonts->BlitText(170, 87, orange_font, "ZANGIEF WINS");
 				}
 			}
 		}
@@ -253,10 +253,10 @@ update_status ModuleUi::Update()
 			App->render->Blit(uitext, 78, 11, &win_hand);
 		}
 		if (App->player2->matcheswon == 1|| App->player2->matcheswon == 2) {
-			App->render->Blit(uitext, 300, 11, &win_hand);
+			App->render->Blit(uitext, 312, 11, &win_hand);
 		}
 		if (App->player2->matcheswon == 2) {
-			App->render->Blit(uitext, 316, 11, &win_hand);
+			App->render->Blit(uitext, 296, 11, &win_hand);
 		}
 	}
 	return UPDATE_CONTINUE;

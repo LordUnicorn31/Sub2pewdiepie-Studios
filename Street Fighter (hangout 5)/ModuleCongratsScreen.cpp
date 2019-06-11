@@ -14,6 +14,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleInput.h"
 #include "ModuleAudio.h"
+#include "ModuleUi.h"
 // Reference at https://youtu.be/6OlenbCC4WI?t=382
 
 ModuleCongratsScreen::ModuleCongratsScreen()
@@ -50,6 +51,10 @@ bool ModuleCongratsScreen::CleanUp()
 	App->textures->Unload(graphics);
 	App->textures->Unload(graphics2);
 	App->audio->Unload(congratsmusic);
+	App->player->matcheswon = 0;
+	App->player2->matcheswon = 0;
+	App->ui->round_index = -1;
+	App->ui->current_round = 0;
 	return true;
 }
 
@@ -60,6 +65,12 @@ update_status ModuleCongratsScreen::Update()
 		App->render->Blit(graphics, 0, 0, &background, 0.75f);
 	else
 		App->render->Blit(graphics2, 0, 0, &background, 0.75f);*/
+	if (App->player->matcheswon > App->player2->matcheswon) {
+		App->render->Blit(graphics, 0, 0, &background);
+	}
+	else if (App->player->matcheswon < App->player2->matcheswon) {
+		App->render->Blit(graphics2, 0, 0, &background);
+	}
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
 		App->fade->FadeToBlack(App->congratsscreen, App->welcomescreen,1);
